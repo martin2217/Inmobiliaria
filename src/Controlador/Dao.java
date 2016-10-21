@@ -1,6 +1,6 @@
 
 
-package controlador;
+package Controlador;
 
 import Modelo.Cliente;
 import Modelo.Provincia;
@@ -18,10 +18,8 @@ public class Dao {
 
   
     
-     public void altaCliente(Cliente cli)
-             /* este ejemplo muestra como, cargar un cliente ocupa la interfaz principal y solo guarda el nombre*/
-    {
-        SessionFactory sesion = Controlador.NuevaConexionUtil.getSessionFactory();
+     public void altaCliente(Cliente cli){
+        SessionFactory sesion = ConexionUtil.getSessionFactory();
         Session session;
         session = sesion.openSession();
         Transaction tx = session.beginTransaction();

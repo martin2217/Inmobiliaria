@@ -6,7 +6,7 @@
 package interfaces;
 
 import Modelo.Cliente;
-import controlador.Dao;
+import Controlador.Dao;
 
 /**
  *
@@ -15,7 +15,7 @@ import controlador.Dao;
 public class principal extends javax.swing.JFrame {
 
     Dao gestor;
-    public principal() {
+    public principal(){
         initComponents();
         gestor = new Dao();
     }
@@ -67,7 +67,7 @@ public class principal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        Cliente cliente= new Cliente(2,jTextField1.getText());
+        Cliente cliente= new Cliente(7,jTextField1.getText());
         gestor.altaCliente(cliente);
 
     }//GEN-LAST:event_jButton1ActionPerformed

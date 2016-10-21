@@ -15,7 +15,7 @@ import org.hibernate.SessionFactory;
  *
  * @author Pc
  */
-public class NuevaConexionUtil {
+public class ConexionUtil{
 
     private static final SessionFactory sessionFactory;
     
