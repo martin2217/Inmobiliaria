@@ -2,6 +2,7 @@ package Modelo;
 // Generated 21-oct-2016 15:21:06 by Hibernate Tools 3.6.0
 
 
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +24,12 @@ public class Cliente  implements java.io.Serializable {
     public Cliente() {
     }
 
-	
+    public Cliente(int idCliente, String Nombre){
+    this.nombre=Nombre;
+    this.idCliente=idCliente;
+    
+    }
+    
     public Cliente(int idCliente) {
         this.idCliente = idCliente;
     }
