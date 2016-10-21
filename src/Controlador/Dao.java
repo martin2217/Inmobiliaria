@@ -19,7 +19,7 @@ public class Dao {
   
     
      public void altaCliente(Cliente cli)
-             /* este ejemplo muestra como cargar un cliente ocupa la interfaz principal y solo guarda el nombre*/
+             /* este ejemplo muestra como, cargar un cliente ocupa la interfaz principal y solo guarda el nombre*/
     {
         SessionFactory sesion = Controlador.NuevaConexionUtil.getSessionFactory();
         Session session;
