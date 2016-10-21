@@ -2,6 +2,7 @@
 
 package controlador;
 
+import Modelo.Cliente;
 import Modelo.Provincia;
 import java.util.Iterator;
 import java.util.List;
@@ -17,19 +18,20 @@ public class Dao {
 
   
     
-    /* public void altaProvincia(Provincia prov)
+     public void altaCliente(Cliente cli)
+             /* este ejemplo muestra como cargar un cliente ocupa la interfaz principal y solo guarda el nombre*/
     {
-        SessionFactory sesion = NuevaConexionUtil.getSessionFactory();
+        SessionFactory sesion = Controlador.NuevaConexionUtil.getSessionFactory();
         Session session;
         session = sesion.openSession();
         Transaction tx = session.beginTransaction();
-        session.save(prov);
+        session.save(cli);
         tx.commit();
         session.close();
         JOptionPane.showMessageDialog(null,"Insertado correctamente.");
     }
     
-         public DefaultListModel mostrarProvincias()
+         /*public DefaultListModel mostrarProvincias()
     {
         SessionFactory sesion = NuevaConexionUtil.getSessionFactory();
         Session session = sesion.openSession();
