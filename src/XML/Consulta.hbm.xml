@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 21-oct-2016 15:21:07 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="Modelo.Consulta" table="consulta" catalog="inmobiliaria">
+        <composite-id name="id" class="Modelo.ConsultaId">
+            <key-property name="idCliente" type="int">
+                <column name="id_cliente" />
+            </key-property>
+            <key-property name="idInmueble" type="int">
+                <column name="id_inmueble" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="cliente" class="Modelo.Cliente" update="false" insert="false" fetch="select">
+            <column name="id_cliente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="inmueble" class="Modelo.Inmueble" update="false" insert="false" fetch="select">
+            <column name="id_inmueble" not-null="true" />
+        </many-to-one>
+        <property name="fechaEmision" type="date">
+            <column name="fecha_emision" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

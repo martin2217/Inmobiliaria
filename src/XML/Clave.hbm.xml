@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 21-oct-2016 15:21:07 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="Modelo.Clave" table="clave" catalog="inmobiliaria">
+        <id name="idClave" type="int">
+            <column name="id_clave" />
+            <generator class="assigned" />
+        </id>
+        <property name="nick" type="string">
+            <column name="nick" length="30" />
+        </property>
+        <property name="pass" type="string">
+            <column name="pass" length="30" />
+        </property>
+        <set name="vendedors" table="vendedor" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_clave" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.Vendedor" />
+        </set>
+    </class>
+</hibernate-mapping>

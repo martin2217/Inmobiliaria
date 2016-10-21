@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 21-oct-2016 15:21:07 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="Modelo.Barrio" table="barrio" catalog="inmobiliaria">
+        <id name="idBarrio" type="int">
+            <column name="id_barrio" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="localidad" class="Modelo.Localidad" fetch="select">
+            <column name="id_localidad" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="30" />
+        </property>
+        <set name="vendedors" table="vendedor" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_barrio" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.Vendedor" />
+        </set>
+        <set name="inmuebles" table="inmueble" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_barrio" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.Inmueble" />
+        </set>
+    </class>
+</hibernate-mapping>

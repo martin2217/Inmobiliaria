@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 21-oct-2016 15:21:07 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="Modelo.Vendedor" table="vendedor" catalog="inmobiliaria">
+        <id name="idVendedor" type="int">
+            <column name="id_vendedor" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tipoDoc" class="Modelo.TipoDoc" fetch="select">
+            <column name="id_tipo_doc" not-null="true" />
+        </many-to-one>
+        <many-to-one name="barrio" class="Modelo.Barrio" fetch="select">
+            <column name="id_barrio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="clave" class="Modelo.Clave" fetch="select">
+            <column name="id_clave" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="30" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="apellido" length="30" />
+        </property>
+        <property name="telefono" type="java.lang.Integer">
+            <column name="telefono" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="30" />
+        </property>
+        <property name="nroDoc" type="java.lang.Integer">
+            <column name="nro_doc" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="30" />
+        </property>
+        <set name="clientes" table="cliente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_vendedor" />
+            </key>
+            <one-to-many class="Modelo.Cliente" />
+        </set>
+    </class>
+</hibernate-mapping>

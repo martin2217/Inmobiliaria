@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 21-oct-2016 15:21:07 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="Modelo.Edificio" table="edificio" catalog="inmobiliaria">
+        <id name="idEdificio" type="int">
+            <column name="id_edificio" />
+            <generator class="assigned" />
+        </id>
+        <property name="propiedadHorizontal" type="java.lang.Boolean">
+            <column name="propiedad_horizontal" />
+        </property>
+        <property name="antiguedad" type="java.lang.Integer">
+            <column name="antiguedad" />
+        </property>
+        <property name="superficie" type="java.lang.Integer">
+            <column name="superficie" />
+        </property>
+        <property name="banios" type="java.lang.Integer">
+            <column name="banios" />
+        </property>
+        <property name="garage" type="java.lang.Boolean">
+            <column name="garage" />
+        </property>
+        <property name="patio" type="java.lang.Boolean">
+            <column name="patio" />
+        </property>
+        <property name="aguaCorriente" type="java.lang.Boolean">
+            <column name="agua_corriente" />
+        </property>
+        <property name="piscina" type="java.lang.Boolean">
+            <column name="piscina" />
+        </property>
+        <property name="cloacas" type="java.lang.Boolean">
+            <column name="cloacas" />
+        </property>
+        <property name="gasNatural" type="java.lang.Boolean">
+            <column name="gas_natural" />
+        </property>
+        <property name="pavimento" type="java.lang.Boolean">
+            <column name="pavimento" />
+        </property>
+        <property name="lavadero" type="java.lang.Boolean">
+            <column name="lavadero" />
+        </property>
+        <property name="aguaCaliente" type="java.lang.Boolean">
+            <column name="agua_caliente" />
+        </property>
+        <property name="telefono" type="java.lang.Integer">
+            <column name="telefono" />
+        </property>
+        <set name="inmuebles" table="inmueble" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_edificio" />
+            </key>
+            <one-to-many class="Modelo.Inmueble" />
+        </set>
+    </class>
+</hibernate-mapping>

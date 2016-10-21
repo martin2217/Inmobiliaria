@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/inmobiliaria?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">root</property>
+    <mapping resource="XML/Vendedor.hbm.xml"/>
+    <mapping resource="XML/Consulta.hbm.xml"/>
+    <mapping resource="XML/TipoDoc.hbm.xml"/>
+    <mapping resource="XML/Clave.hbm.xml"/>
+    <mapping resource="XML/Propietario.hbm.xml"/>
+    <mapping resource="XML/Provincia.hbm.xml"/>
+    <mapping resource="XML/Barrio.hbm.xml"/>
+    <mapping resource="XML/Localidad.hbm.xml"/>
+    <mapping resource="XML/Cliente.hbm.xml"/>
+    <mapping resource="XML/Edificio.hbm.xml"/>
+    <mapping resource="XML/Inmueble.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

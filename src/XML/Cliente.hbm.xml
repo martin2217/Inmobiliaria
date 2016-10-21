@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 21-oct-2016 15:21:07 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="Modelo.Cliente" table="cliente" catalog="inmobiliaria">
+        <id name="idCliente" type="int">
+            <column name="id_cliente" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="vendedor" class="Modelo.Vendedor" fetch="select">
+            <column name="id_vendedor" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="30" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="apellido" length="30" />
+        </property>
+        <property name="telefono" type="java.lang.Integer">
+            <column name="telefono" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="30" />
+        </property>
+        <set name="inmuebles" table="inmueble" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cliente" />
+            </key>
+            <one-to-many class="Modelo.Inmueble" />
+        </set>
+        <set name="consultas" table="consulta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cliente" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.Consulta" />
+        </set>
+    </class>
+</hibernate-mapping>

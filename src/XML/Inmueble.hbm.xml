@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 21-oct-2016 15:21:07 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="Modelo.Inmueble" table="inmueble" catalog="inmobiliaria">
+        <id name="idInmueble" type="int">
+            <column name="id_inmueble" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cliente" class="Modelo.Cliente" fetch="select">
+            <column name="id_cliente" />
+        </many-to-one>
+        <many-to-one name="propietario" class="Modelo.Propietario" fetch="select">
+            <column name="id_propietario" not-null="true" />
+        </many-to-one>
+        <many-to-one name="edificio" class="Modelo.Edificio" fetch="select">
+            <column name="id_edificio" />
+        </many-to-one>
+        <many-to-one name="barrio" class="Modelo.Barrio" fetch="select">
+            <column name="id_barrio" not-null="true" />
+        </many-to-one>
+        <property name="calle" type="string">
+            <column name="calle" length="30" />
+        </property>
+        <property name="nroCalle" type="java.lang.Integer">
+            <column name="nro_calle" />
+        </property>
+        <property name="piso" type="java.lang.Integer">
+            <column name="piso" />
+        </property>
+        <property name="depto" type="java.lang.Integer">
+            <column name="depto" />
+        </property>
+        <property name="tipoInmueble" type="string">
+            <column name="tipo_inmueble" length="30" />
+        </property>
+        <property name="precio" type="java.lang.Float">
+            <column name="precio" precision="12" scale="0" />
+        </property>
+        <property name="orientacion" type="java.lang.Integer">
+            <column name="orientacion" />
+        </property>
+        <property name="frente" type="java.lang.Integer">
+            <column name="frente" />
+        </property>
+        <property name="fondo" type="java.lang.Integer">
+            <column name="fondo" />
+        </property>
+        <property name="superficie" type="java.lang.Integer">
+            <column name="superficie" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="30" />
+        </property>
+        <property name="montoReserva" type="java.lang.Integer">
+            <column name="monto_reserva" />
+        </property>
+        <property name="vigenciaReserva" type="java.lang.Integer">
+            <column name="vigencia_reserva" />
+        </property>
+        <property name="montoVenta" type="java.lang.Integer">
+            <column name="monto_venta" />
+        </property>
+        <property name="fechaAlta" type="date">
+            <column name="fecha_alta" length="10" />
+        </property>
+        <set name="consultas" table="consulta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_inmueble" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.Consulta" />
+        </set>
+    </class>
+</hibernate-mapping>
