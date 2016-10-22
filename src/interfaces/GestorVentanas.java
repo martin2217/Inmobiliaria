@@ -35,12 +35,9 @@ public class GestorVentanas extends javax.swing.JFrame {
     }
     
     private JPanel menu;
-    private JPanel consulta;
-    private JPanel verComp;
+    private JPanel consultaInmueble;
+    private JPanel altaInmueble;
     private JPanel aux;
-    private JPanel aux2;
-    private JPanel aux3;
-    private JPanel integrantesAux;
     
     
     // No usado aún
@@ -63,6 +60,20 @@ public class GestorVentanas extends javax.swing.JFrame {
     
     public void salir(){
         System.exit(0);
+    }
+    
+    public void altaInmueble(){
+        altaInmueble= new Alta();
+        add(altaInmueble);
+        revalidate();
+        repaint();
+    }
+    
+    public void consultaInmueble(){
+        consultaInmueble= new Consulta();
+        add(consultaInmueble);
+        revalidate();
+        repaint();
     }
     
     /*
@@ -235,6 +246,7 @@ public class GestorVentanas extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(800, 630));
         setResizable(false);
         setLocationRelativeTo(null);
+        setTitle("Inmobiliaria");
         
         
         menu=new Menu();
@@ -253,15 +265,9 @@ public class GestorVentanas extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new GestorVentanas().get().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            get().setVisible(true);
         });
     }
-
-    // Variables declaration - do not modify
     
-    // End of variables declaration                   
 }

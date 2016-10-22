@@ -5,7 +5,6 @@
  */
 package interfaces;
 
-import interfaces.GestorVentanas;
 
 /**
  *
@@ -92,10 +91,14 @@ public class Menu extends javax.swing.JPanel {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // Ir al alta de inmueble
+        this.setVisible(false);
+        GestorVentanas.get().altaInmueble();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // Ir a la consulta de inmueble
+        this.setVisible(false);
+        GestorVentanas.get().consultaInmueble();
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

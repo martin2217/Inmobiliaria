@@ -5,8 +5,6 @@
  */
 package interfaces;
 
-import interfaces.GestorVentanas;
-
 /**
  *
  * @author Martin
