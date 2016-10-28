@@ -7,6 +7,14 @@ package interfaces;
 
 //import javax.swing.JPanel;
 
+import Controlador.ConexionUtil;
+import Modelo.Provincia;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+
+
 /**
  *
  * @author germa
@@ -20,6 +28,7 @@ public class Alta extends javax.swing.JPanel {
      */
     public Alta() {
         initComponents();
+        llenarCombo();
     }
 
     /**
@@ -436,7 +445,7 @@ public class Alta extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12)
                             .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(15, 15, 15)
@@ -534,7 +543,21 @@ public class Alta extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+   private void llenarCombo() {                                      
+        // TODO add your handling code here:
+            Controlador.ConexionUtil st=new ConexionUtil();
+            //DefaultComboBoxModel modelocombo=new DefaultComboBoxModel();
+            Session sess;
+            sess=ConexionUtil.getSessionFactory().openSession();
+            Criteria crit = sess.createCriteria(Provincia.class);
+            crit.setMaxResults(50);
+            List<Provincia> cats = crit.list();
 
+            jComboBox1.removeAllItems();
+            for(Provincia prov:cats){
+            jComboBox1.addItem(""+prov.getNombre());
+            }
+   }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
