@@ -7,6 +7,18 @@ package interfaces;
 
 //import javax.swing.JPanel;
 
+import Controlador.ConexionUtil;
+import Modelo.Provincia;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+
+
 /**
  *
  * @author germa
@@ -652,6 +664,24 @@ public class Modificacion extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox4ActionPerformed
 
+    private void llenarCombo() {                                      
+        // TODO add your handling code here:
+            Controlador.ConexionUtil st=new ConexionUtil();
+            DefaultComboBoxModel modelocombo=new DefaultComboBoxModel();
+            Session sess=null;
+            sess=ConexionUtil.getSessionFactory().openSession();
+            Criteria crit = sess.createCriteria(Provincia.class);
+            crit.setMaxResults(50);
+            List<Provincia> cats = crit.list();
+
+            jComboBox1.removeAllItems();
+            for(Provincia prov:cats){
+            jComboBox1.addItem(""+prov.getNombre());
+            }
+          
+          
+          
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -710,4 +740,5 @@ public class Modificacion extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
+
 }
