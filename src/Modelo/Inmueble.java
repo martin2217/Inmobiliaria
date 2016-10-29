@@ -66,6 +66,30 @@ public class Inmueble  implements java.io.Serializable {
        this.fechaAlta = fechaAlta;
        this.consultas = consultas;
     }
+    
+    // ESTE ES EL QUE USAMOS
+    public Inmueble(int idInmueble, Cliente cliente, Propietario propietario, Edificio edificio, Barrio barrio, String calle, Integer nroCalle, Integer piso, Integer depto, String tipoInmueble, Float precio, Integer orientacion, Integer frente, Integer fondo, Integer superficie, String estado, Integer montoReserva, Integer vigenciaReserva, Integer montoVenta, Date fechaAlta) {
+       this.idInmueble = idInmueble;
+       this.cliente = cliente;
+       this.propietario = propietario;
+       this.edificio = edificio;
+       this.barrio = barrio;
+       this.calle = calle;
+       this.nroCalle = nroCalle;
+       this.piso = piso;
+       this.depto = depto;
+       this.tipoInmueble = tipoInmueble;
+       this.precio = precio;
+       this.orientacion = orientacion;
+       this.frente = frente;
+       this.fondo = fondo;
+       this.superficie = superficie;
+       this.estado = estado;
+       this.montoReserva = montoReserva;
+       this.vigenciaReserva = vigenciaReserva;
+       this.montoVenta = montoVenta;
+       this.fechaAlta = fechaAlta;
+    }
    
     public int getIdInmueble() {
         return this.idInmueble;

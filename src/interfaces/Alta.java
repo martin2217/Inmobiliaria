@@ -7,19 +7,34 @@ package interfaces;
 
 //import javax.swing.JPanel;
 
+import Controlador.OpeAlta;
 import Controlador.ConexionUtil;
+import Modelo.Barrio;
+import Modelo.Cliente;
+import Modelo.Inmueble;
+import Modelo.Localidad;
 import Modelo.Provincia;
+import static java.sql.JDBCType.NULL;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
+import static javassist.CtMethod.ConstParameter.integer;
+//import javax.swing.DefaultComboBoxModel;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
+import junit.framework.TestCase;
+import org.hibernate.criterion.Restrictions;
+//import junit.*;
 
 
 /**
  *
  * @author germa
  */
+@SuppressWarnings("unchecked")
 public class Alta extends javax.swing.JPanel {
+    OpeAlta oper;
     
     //private JPanel menu;
 
@@ -27,8 +42,15 @@ public class Alta extends javax.swing.JPanel {
      * Creates new form Alta
      */
     public Alta() {
+        
         initComponents();
-        llenarCombo();
+        llenarComboProvincia();
+        llenarComboLocalidad();
+        llenarComboBarrio();
+        
+        jLabel3.setText(Integer.toString(maximoId()));
+        //jLabel3.setText("2");
+        
     }
 
     /**
@@ -541,11 +563,37 @@ public class Alta extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        // 
+        //Cliente auxCliente = new Cliente(1,"German");
+        Inmueble auxInmueble = new Inmueble();
+        oper.altaInmueble(auxInmueble);        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
-   private void llenarCombo() {                                      
+     
+    
+    private int maximoId (){
+        Session session;
+        session=ConexionUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(Inmueble.class);
+        criteria.add(Restrictions.isNotNull("idInmueble"));
+        criteria.setProjection(
+            Projections.projectionList()
+                .add(Projections.max("idInmueble")
+                )
+        );
+                
+        if (criteria.list().get(0) != null){               
+            return  (int) criteria.list().get(0) + 1; 
+        }
+        else            
+            return 1;   
+        
+        
+    }
+    
+    private void llenarComboProvincia() {                                      
         // TODO add your handling code here:
-            Controlador.ConexionUtil st=new ConexionUtil();
+            //Controlador.ConexionUtil st=new ConexionUtil();
             //DefaultComboBoxModel modelocombo=new DefaultComboBoxModel();
             Session sess;
             sess=ConexionUtil.getSessionFactory().openSession();
@@ -554,9 +602,42 @@ public class Alta extends javax.swing.JPanel {
             List<Provincia> cats = crit.list();
 
             jComboBox1.removeAllItems();
-            for(Provincia prov:cats){
-            jComboBox1.addItem(""+prov.getNombre());
-            }
+            cats.stream().forEach((prov) -> {
+                jComboBox1.addItem(""+prov.getNombre());
+        });
+   }
+   
+   
+      private void llenarComboLocalidad() {                                      
+        // TODO add your handling code here:
+            //Controlador.ConexionUtil st=new ConexionUtil();
+            //DefaultComboBoxModel modelocombo=new DefaultComboBoxModel();
+            Session sess;
+            sess=ConexionUtil.getSessionFactory().openSession();
+            Criteria crit = sess.createCriteria(Localidad.class);
+            crit.setMaxResults(50);
+            List<Localidad> cats = crit.list();
+
+            jComboBox2.removeAllItems();
+            cats.stream().forEach((local) -> {
+                jComboBox2.addItem(""+local.getNombre());
+        });
+   }
+      
+            private void llenarComboBarrio() {                                      
+        // TODO add your handling code here:
+            //Controlador.ConexionUtil st=new ConexionUtil();
+            //DefaultComboBoxModel modelocombo=new DefaultComboBoxModel();
+            Session sess;
+            sess=ConexionUtil.getSessionFactory().openSession();
+            Criteria crit = sess.createCriteria(Barrio.class);
+            crit.setMaxResults(50);
+            List<Barrio> cats = crit.list();
+
+            jComboBox3.removeAllItems();
+            cats.stream().forEach((barr) -> {
+                jComboBox3.addItem(""+barr.getNombre());                
+        });
    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
