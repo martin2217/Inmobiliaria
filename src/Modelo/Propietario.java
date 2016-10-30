@@ -32,6 +32,11 @@ public class Propietario  implements java.io.Serializable {
         this.idPropietario = idPropietario;
         this.tipoDoc = tipoDoc;
     }
+    
+    public Propietario(int idPropietario) {
+        this.idPropietario = idPropietario;    
+    }
+    
     public Propietario(int idPropietario, TipoDoc tipoDoc, String nombre, String apellido, Integer telefono, String email, Integer nroDoc, String calle, Integer nroCalle, Date fechaNacimiento, Set inmuebles) {
        this.idPropietario = idPropietario;
        this.tipoDoc = tipoDoc;

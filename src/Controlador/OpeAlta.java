@@ -6,7 +6,6 @@
 package Controlador;
 
 import Modelo.Inmueble;
-import Controlador.OpeAlta;
 import javax.swing.JOptionPane;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,8 +19,7 @@ public class OpeAlta {
     
 
     public void altaInmueble (Inmueble casa)
-    {
-        // aca tendria que generar el autoincremental
+    {                
         SessionFactory sesion = ConexionUtil.getSessionFactory();                
         Session session;
         session = sesion.openSession();
@@ -32,5 +30,8 @@ public class OpeAlta {
         JOptionPane.showMessageDialog(null,"Alta Inmueble correctamente.");
     }
     
-         
+     
+
+        
+
 }

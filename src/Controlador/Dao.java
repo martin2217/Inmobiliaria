@@ -3,6 +3,7 @@
 package Controlador;
 
 import Modelo.Cliente;
+import Modelo.Inmueble;
 import Modelo.Provincia;
 import java.util.Iterator;
 import java.util.List;
@@ -29,6 +30,18 @@ public class Dao {
         JOptionPane.showMessageDialog(null,"Insertado correctamente.");
     }
     
+     
+    public void altaInmueble (Inmueble casa)
+    {                
+        SessionFactory sesion = ConexionUtil.getSessionFactory();                
+        Session session;
+        session = sesion.openSession();
+        Transaction tx = session.beginTransaction();
+        session.save(casa);
+        tx.commit();
+        session.close();
+        JOptionPane.showMessageDialog(null,"Alta Inmueble correctamente.");
+    }
          /*public DefaultListModel mostrarProvincias()
     {
         SessionFactory sesion = NuevaConexionUtil.getSessionFactory();

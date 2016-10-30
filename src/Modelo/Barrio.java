@@ -25,6 +25,11 @@ public class Barrio  implements java.io.Serializable {
         this.idBarrio = idBarrio;
         this.localidad = localidad;
     }
+    
+    public Barrio(int idBarrio) {
+        this.idBarrio = idBarrio;      
+    }
+    
     public Barrio(int idBarrio, Localidad localidad, String nombre, Set vendedors, Set inmuebles) {
        this.idBarrio = idBarrio;
        this.localidad = localidad;
