@@ -9,7 +9,6 @@ package interfaces;
 
 import Controlador.OpeAlta;
 import Controlador.ConexionUtil;
-import Controlador.Dao;
 import Modelo.Barrio;
 import Modelo.Cliente;
 import Modelo.Edificio;
@@ -17,12 +16,14 @@ import Modelo.Inmueble;
 import Modelo.Localidad;
 import Modelo.Propietario;
 import Modelo.Provincia;
+import java.awt.Component;
 import static java.sql.JDBCType.NULL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import static javassist.CtMethod.ConstParameter.integer;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
 //import javax.swing.DefaultComboBoxModel;
 import org.hibernate.Criteria;
@@ -43,10 +44,6 @@ import org.hibernate.criterion.Restrictions;
  */
 
 public class Alta extends javax.swing.JPanel {
-    OpeAlta oper;
-    Dao operaciones;
-    
-    //private JPanel menu;
 
     /**
      * Creates new form Alta
@@ -251,6 +248,7 @@ public class Alta extends javax.swing.JPanel {
         jPanel3.setMinimumSize(new java.awt.Dimension(725, 235));
 
         jTextPrecioVenta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextPrecioVenta.setName("Precio de Venta"); // NOI18N
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Orientación:");
@@ -262,16 +260,19 @@ public class Alta extends javax.swing.JPanel {
         jLabel14.setText("Frente:");
 
         jTextFrente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFrente.setName("Frente"); // NOI18N
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel15.setText("Superficie:");
 
         jTextSuperficie.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextSuperficie.setName("Superficie"); // NOI18N
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setText("Antigüedad:");
 
         jTextAntiguedad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextAntiguedad.setName("Antigüedad"); // NOI18N
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel17.setText("Fondo:");
@@ -280,6 +281,7 @@ public class Alta extends javax.swing.JPanel {
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jTextFondo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFondo.setName("Fondo"); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Calle:");
@@ -288,6 +290,7 @@ public class Alta extends javax.swing.JPanel {
         jLabel18.setText("Dormitorios:");
 
         jTextCalle.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextCalle.setName("Calle"); // NOI18N
         jTextCalle.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTextCalleFocusLost(evt);
@@ -295,6 +298,7 @@ public class Alta extends javax.swing.JPanel {
         });
 
         jTextDormitorio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextDormitorio.setName("Dormitorios"); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Número:");
@@ -303,6 +307,7 @@ public class Alta extends javax.swing.JPanel {
         jLabel19.setText("Baños:");
 
         jTextNumero.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextNumero.setName("Numero de Calle"); // NOI18N
         jTextNumero.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextNumeroKeyTyped(evt);
@@ -310,8 +315,10 @@ public class Alta extends javax.swing.JPanel {
         });
 
         jTextBanio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextBanio.setName("Baños"); // NOI18N
 
         jTextPiso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextPiso.setName("Piso"); // NOI18N
         jTextPiso.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextPisoKeyTyped(evt);
@@ -325,6 +332,7 @@ public class Alta extends javax.swing.JPanel {
         jLabel10.setText("Departamento:");
 
         jTextDepartamento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextDepartamento.setName("Numero de Departamento"); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Tipo de inmueble:");
@@ -352,6 +360,7 @@ public class Alta extends javax.swing.JPanel {
 
         jTextObservaciones.setColumns(20);
         jTextObservaciones.setRows(5);
+        jTextObservaciones.setName("Observaciones"); // NOI18N
         jScrollPane1.setViewportView(jTextObservaciones);
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -379,11 +388,13 @@ public class Alta extends javax.swing.JPanel {
         );
 
         jTextMontoReserva.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextMontoReserva.setName("Monto de la Reserva"); // NOI18N
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel21.setText("Monto de Reserva");
 
         jTextVigencia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextVigencia.setName("Vigencia de la Reserva"); // NOI18N
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel22.setText("Vigencia de la Reserva");
@@ -604,8 +615,7 @@ public class Alta extends javax.swing.JPanel {
         GestorVentanas.get().menuVolver();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //        
+    private void alta (){
         Cliente cli = new Cliente(1);
         Propietario prop = new Propietario(1);
         Barrio barri = new Barrio(101);
@@ -634,7 +644,7 @@ public class Alta extends javax.swing.JPanel {
         */
         Inmueble aux = new Inmueble(
                 maxIdInmobiliaria(), 
-                null, 
+                cli, 
                 prop, 
                 null, 
                 barri, 
@@ -645,13 +655,39 @@ public class Alta extends javax.swing.JPanel {
                 null, 
                 null, 
                 null, 
+                null, 
                 null, null, null, null, 
                 null, null, null, null);
-              
-        altaInmueble(aux);        
-        //operaciones.altaInmueble(aux);
         
+        OpeAlta.altaInmueble(aux);        
+    }
+    
+    private boolean validarTextFields (){
+        Component [] arrayCompo = jPanel3.getComponents();
+        boolean vacio = false;
+        StringBuilder textoValidado = new StringBuilder();
+        
+	for (Component component : arrayCompo) {
+		if(component instanceof  JTextField){
+                    if ("".equals(((JTextField) component).getText().trim())){
+                       vacio = true;                        
+                       String aux = "El campo "+((JTextField) component).getName().toString()+" es requerido. "+" \n";
+                       textoValidado.append(aux);
+                    }
+                }                
+	}
+        textoValidado.append(">> No deben ser vacios!");
+        JOptionPane.showMessageDialog(null,textoValidado);
+        return vacio;
+    }
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (validarTextFields())
+            jTextCalle.requestFocus();    
+        else
+            alta();
     }//GEN-LAST:event_jButton1ActionPerformed
+
 
     private void noVacio (java.awt.event.FocusEvent evt){
         final JTextComponent c = (JTextComponent) evt.getSource();
@@ -700,6 +736,7 @@ public class Alta extends javax.swing.JPanel {
         session.close();
         JOptionPane.showMessageDialog(null,"Alta Inmueble correctamente.");
     }
+
         
     private int maxIdInmobiliaria (){
         Session session;
