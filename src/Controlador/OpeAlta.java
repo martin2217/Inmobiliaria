@@ -18,7 +18,7 @@ import org.hibernate.Transaction;
 public class OpeAlta {
     
 
-    public void altaInmueble (Inmueble casa)
+    public static void altaInmueble (Inmueble casa)
     {                
         SessionFactory sesion = ConexionUtil.getSessionFactory();                
         Session session;

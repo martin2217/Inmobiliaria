@@ -9,7 +9,6 @@ package interfaces;
 
 import Controlador.OpeAlta;
 import Controlador.ConexionUtil;
-import Controlador.Dao;
 import Modelo.Barrio;
 import Modelo.Cliente;
 import Modelo.Edificio;
@@ -42,10 +41,6 @@ import org.hibernate.criterion.Restrictions;
  */
 
 public class Alta extends javax.swing.JPanel {
-    OpeAlta oper;
-    Dao operaciones;
-    
-    //private JPanel menu;
 
     /**
      * Creates new form Alta
@@ -615,7 +610,7 @@ public class Alta extends javax.swing.JPanel {
                 );
         */
         Inmueble aux = new Inmueble(
-                12, 
+                13, 
                 null, 
                 prop, 
                 null, 
@@ -629,23 +624,11 @@ public class Alta extends javax.swing.JPanel {
                 null, 
                 null, null, null, null, 
                 null, null, null, null);
-              
-        altaInmueble(aux);        
-        //operaciones.altaInmueble(aux);
+        
+        OpeAlta.altaInmueble(aux);
         
     }//GEN-LAST:event_jButton1ActionPerformed
-     
-    private void altaInmueble (Inmueble casa)
-    {                
-        SessionFactory sesion = ConexionUtil.getSessionFactory();                
-        Session session;
-        session = sesion.openSession();
-        Transaction tx = session.beginTransaction();
-        session.save(casa);
-        tx.commit();
-        session.close();
-        JOptionPane.showMessageDialog(null,"Alta Inmueble correctamente.");
-    }
+    
         
     private int maxIdInmobiliaria (){
         Session session;

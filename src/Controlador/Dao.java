@@ -19,7 +19,7 @@ public class Dao {
 
   
     
-     public void altaCliente(Cliente cli){
+     public static void altaCliente(Cliente cli){
         SessionFactory sesion = ConexionUtil.getSessionFactory();
         Session session;
         session = sesion.openSession();
@@ -31,17 +31,6 @@ public class Dao {
     }
     
      
-    public void altaInmueble (Inmueble casa)
-    {                
-        SessionFactory sesion = ConexionUtil.getSessionFactory();                
-        Session session;
-        session = sesion.openSession();
-        Transaction tx = session.beginTransaction();
-        session.save(casa);
-        tx.commit();
-        session.close();
-        JOptionPane.showMessageDialog(null,"Alta Inmueble correctamente.");
-    }
          /*public DefaultListModel mostrarProvincias()
     {
         SessionFactory sesion = NuevaConexionUtil.getSessionFactory();
