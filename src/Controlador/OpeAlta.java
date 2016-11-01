@@ -30,7 +30,10 @@ public class OpeAlta {
         JOptionPane.showMessageDialog(null,"Alta Inmueble correctamente.");
     }
     
-     
+     public String retornarStrign (){
+         
+         return "no me rompas";
+     }
 
         
 

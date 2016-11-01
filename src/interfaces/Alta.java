@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.List;
 import static javassist.CtMethod.ConstParameter.integer;
 import javax.swing.JOptionPane;
+import javax.swing.text.JTextComponent;
 //import javax.swing.DefaultComboBoxModel;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -57,6 +58,8 @@ public class Alta extends javax.swing.JPanel {
         llenarComboLocalidad();
         llenarComboBarrio();                        
         jLabel3.setText(Integer.toString(maxIdInmobiliaria()));
+        //jTextCalle.setText(oper.retornarStrign());
+        
     }
 
     /**
@@ -285,6 +288,11 @@ public class Alta extends javax.swing.JPanel {
         jLabel18.setText("Dormitorios:");
 
         jTextCalle.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextCalle.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextCalleFocusLost(evt);
+            }
+        });
 
         jTextDormitorio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -295,10 +303,20 @@ public class Alta extends javax.swing.JPanel {
         jLabel19.setText("Baños:");
 
         jTextNumero.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextNumero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextNumeroKeyTyped(evt);
+            }
+        });
 
         jTextBanio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jTextPiso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextPiso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextPisoKeyTyped(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Piso:");
@@ -615,7 +633,7 @@ public class Alta extends javax.swing.JPanel {
                 );
         */
         Inmueble aux = new Inmueble(
-                12, 
+                maxIdInmobiliaria(), 
                 null, 
                 prop, 
                 null, 
@@ -634,6 +652,42 @@ public class Alta extends javax.swing.JPanel {
         //operaciones.altaInmueble(aux);
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void noVacio (java.awt.event.FocusEvent evt){
+        final JTextComponent c = (JTextComponent) evt.getSource();
+        String s = c.getText().trim();
+        //texto=texto.replaceAll(" ", "")
+        if (evt.isTemporary()) {
+            return;
+        }                
+        if(s.isEmpty() || (s.length() == 0)) { 
+              getToolkit().beep();                              
+              JOptionPane.showMessageDialog(null,"No debe ser vacio");  
+          }    
+              
+    }
+    
+    private void validarSoloNumeros (java.awt.event.KeyEvent evt){
+        char c=evt.getKeyChar(); 
+                      
+          if(Character.isLetter(c)) { 
+              getToolkit().beep();                
+              evt.consume();                
+              JOptionPane.showMessageDialog(null,"Ingresa Solo Numeros");                
+          } 
+    }
+    private void jTextNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNumeroKeyTyped
+
+        validarSoloNumeros(evt);
+    }//GEN-LAST:event_jTextNumeroKeyTyped
+
+    private void jTextPisoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPisoKeyTyped
+        validarSoloNumeros(evt);
+    }//GEN-LAST:event_jTextPisoKeyTyped
+
+    private void jTextCalleFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextCalleFocusLost
+        noVacio(evt);
+    }//GEN-LAST:event_jTextCalleFocusLost
      
     private void altaInmueble (Inmueble casa)
     {                
@@ -685,6 +739,24 @@ public class Alta extends javax.swing.JPanel {
         else            
             return 1;                   
     }  
+    
+        private int maxIdCliente (){
+        Session session;
+        session=ConexionUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(Cliente.class);
+        criteria.add(Restrictions.isNotNull("idCliente"));
+        criteria.setProjection(
+            Projections.projectionList()
+                .add(Projections.max("idCliente")
+                )
+        );
+                
+        if (criteria.list().get(0) != null){               
+            return  (int) criteria.list().get(0) + 1; 
+        }
+        else            
+            return 1;                   
+    } 
     
     private void llenarComboProvincia() {                                      
         // TODO add your handling code here:
