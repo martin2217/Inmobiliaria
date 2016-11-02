@@ -6,7 +6,12 @@
 package interfaces;
 
 import Controlador.ConexionUtil;
+import Gestor.GestorBarrio;
+import Gestor.GestorInmueble;
+import Gestor.GestorLocalidad;
+import Gestor.GestorProvincia;
 import Modelo.Barrio;
+import Modelo.Inmueble;
 import Modelo.Localidad;
 import Modelo.Provincia;
 import java.awt.event.ItemEvent;
@@ -15,6 +20,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -33,6 +39,12 @@ public class Consulta extends javax.swing.JPanel {
     boolean banderaMax=false;
     List<Provincia> provincias;
     
+    DefaultTableModel modelo;
+    GestorInmueble gestor_inmueble;
+    GestorProvincia gestor_provincia;
+    GestorBarrio gestor_barrio;
+    GestorLocalidad gestor_localidad;
+    
     /**
      * Creates new form Alta
      */
@@ -41,6 +53,18 @@ public class Consulta extends javax.swing.JPanel {
         esconderColumnaId();
         getProvincias();
         inicializarCombos();
+        gestor_provincia= new GestorProvincia();
+       
+        gestor_barrio= new GestorBarrio();
+        gestor_localidad= new GestorLocalidad();
+        initComponents();
+        
+        gestor_inmueble= new GestorInmueble();
+        modelo= (DefaultTableModel)jTable1.getModel();
+        
+      
+        
+        
         
     }
     
@@ -67,21 +91,21 @@ public class Consulta extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         labelId = new javax.swing.JLabel();
         textFieldDormitorios = new javax.swing.JTextField();
-        comboBoxProvincia = new javax.swing.JComboBox();
-        comboBoxCiudad = new javax.swing.JComboBox();
-        comboBoxBarrio = new javax.swing.JComboBox();
+        comboBox_provincia = new javax.swing.JComboBox();
+        comboBox_ciudad = new javax.swing.JComboBox();
+        comboBox_barrio = new javax.swing.JComboBox();
         label3 = new javax.swing.JLabel();
         label2 = new javax.swing.JLabel();
         label1 = new javax.swing.JLabel();
         jButtonBuscar = new javax.swing.JButton();
-        comboBoxTipo = new javax.swing.JComboBox();
+        comboBox_tipo = new javax.swing.JComboBox();
         label4 = new javax.swing.JLabel();
         labelId1 = new javax.swing.JLabel();
-        textFieldIdPrecioMin = new javax.swing.JTextField();
+        textField_precio_minimo = new javax.swing.JTextField();
         textFieldIdPrecioMax = new javax.swing.JTextField();
         labelId2 = new javax.swing.JLabel();
         labelId3 = new javax.swing.JLabel();
-        comboBoxEstado = new javax.swing.JComboBox();
+        comboBox_estado = new javax.swing.JComboBox();
         label5 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(800, 600));
@@ -157,14 +181,24 @@ public class Consulta extends javax.swing.JPanel {
             listaND[j+1]=listaNombresDeportes[j];
         }
         Arrays.sort(listaND);*/
-        comboBoxProvincia.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        comboBoxProvincia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1", "En 2", "3" }));
+        comboBox_provincia.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        comboBox_provincia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1", "En 2", "3" }));
+        comboBox_provincia.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboBox_provinciaItemStateChanged(evt);
+            }
+        });
 
-        comboBoxCiudad.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        comboBoxCiudad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Creada", "Planificada", "En disputa", "Finalizada" }));
+        comboBox_ciudad.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        comboBox_ciudad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Creada", "Planificada", "En disputa", "Finalizada" }));
+        comboBox_ciudad.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboBox_ciudadItemStateChanged(evt);
+            }
+        });
 
-        comboBoxBarrio.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        comboBoxBarrio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1", "3" }));
+        comboBox_barrio.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        comboBox_barrio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1", "3" }));
 
         label3.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         label3.setText("Barrio");
@@ -183,8 +217,8 @@ public class Consulta extends javax.swing.JPanel {
             }
         });
 
-        comboBoxTipo.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        comboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1", "3" }));
+        comboBox_tipo.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        comboBox_tipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1", "3" }));
 
         label4.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         label4.setText("Tipo");
@@ -192,9 +226,9 @@ public class Consulta extends javax.swing.JPanel {
         labelId1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         labelId1.setText("Min");
 
-        textFieldIdPrecioMin.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        textFieldIdPrecioMin.setToolTipText("");
-        ((AbstractDocument)textFieldIdPrecioMin.getDocument()).setDocumentFilter(new LimitadorTextField(15));
+        textField_precio_minimo.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        textField_precio_minimo.setToolTipText("");
+        ((AbstractDocument)textField_precio_minimo.getDocument()).setDocumentFilter(new LimitadorTextField(15));
 
         textFieldIdPrecioMax.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         textFieldIdPrecioMax.setToolTipText("");
@@ -206,8 +240,8 @@ public class Consulta extends javax.swing.JPanel {
         labelId3.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         labelId3.setText("Max");
 
-        comboBoxEstado.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        comboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1", "3" }));
+        comboBox_estado.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        comboBox_estado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1", "3" }));
 
         label5.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         label5.setText("Estado");
@@ -222,15 +256,15 @@ public class Consulta extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(label4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(comboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(comboBox_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(label2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(comboBoxCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(comboBox_ciudad, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(label3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(comboBoxBarrio, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(comboBox_barrio, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(labelId)
                         .addGap(18, 18, Short.MAX_VALUE)
@@ -239,11 +273,11 @@ public class Consulta extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(label5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(comboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(comboBox_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(labelId1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textFieldIdPrecioMin, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textField_precio_minimo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(labelId3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -253,7 +287,7 @@ public class Consulta extends javax.swing.JPanel {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(label1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(comboBoxProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(comboBox_provincia, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(labelId2))
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -267,18 +301,18 @@ public class Consulta extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label1)
-                    .addComponent(comboBoxProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBox_provincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label2)
-                    .addComponent(comboBoxCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBox_ciudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboBoxBarrio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBox_barrio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBox_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -289,12 +323,12 @@ public class Consulta extends javax.swing.JPanel {
                 .addGap(2, 2, 2)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textFieldIdPrecioMax, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textFieldIdPrecioMin, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textField_precio_minimo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelId3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelId1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBox_estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label5))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonBuscar)
@@ -311,7 +345,7 @@ public class Consulta extends javax.swing.JPanel {
                 }
             }
         });
-        textFieldIdPrecioMin.addKeyListener(new KeyAdapter() {
+        textField_precio_minimo.addKeyListener(new KeyAdapter() {
 
             public void keyTyped(KeyEvent e) {
                 char tecla = e.getKeyChar();
@@ -416,6 +450,15 @@ public class Consulta extends javax.swing.JPanel {
     
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         
+         LimpiarTabla();
+        
+            
+             
+         gestor_inmueble.buscarInmuebles(comboBox_provincia.getSelectedItem().toString(),comboBox_ciudad.getSelectedItem().toString(),comboBox_barrio.getSelectedItem().toString(),null,textField_precio_minimo.getText(),null,null).stream().forEach((inmuebles) -> {
+            modelo.addRow(new Object[]{Integer.toString(inmuebles.getIdInmueble()),false,inmuebles.getPropietario().getNombre(),inmuebles.getBarrio().getLocalidad().getNombre(),inmuebles.getDireccion(),Integer.toString(inmuebles.getSuperficie()),Float.toString(inmuebles.getPrecio())});
+        });
+        
+        
         // Se extraen los filtros
         /*String provincia, ciudad, barrio, tipo, dormitorios, precioMin, precioMax, estado;
         provincia=comboBoxProvincia.getSelectedItem().toString();
@@ -462,6 +505,34 @@ public class Consulta extends javax.swing.JPanel {
         }*/
         
     }//GEN-LAST:event_jButtonBuscarActionPerformed
+
+    private void comboBox_provinciaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBox_provinciaItemStateChanged
+        
+        if(evt.getStateChange()== ItemEvent.SELECTED){
+        if(comboBox_provincia.getSelectedIndex()>0){
+         comboBox_barrio.setModel(new DefaultComboBoxModel());
+        comboBox_ciudad.setModel(new DefaultComboBoxModel(gestor_localidad.buscarLocalidadesPorProvincia(comboBox_provincia.getSelectedItem().toString())));
+        
+        }
+        else{
+        comboBox_ciudad.setModel(new DefaultComboBoxModel());
+         comboBox_barrio.setModel(new DefaultComboBoxModel());
+        }
+        }
+        
+    }//GEN-LAST:event_comboBox_provinciaItemStateChanged
+
+    private void comboBox_ciudadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBox_ciudadItemStateChanged
+       
+             if(evt.getStateChange()== ItemEvent.SELECTED){
+        if(comboBox_ciudad.getSelectedIndex()>0){
+        comboBox_barrio.setModel(new DefaultComboBoxModel(gestor_barrio.buscarBarrioPorCiudad(comboBox_ciudad.getSelectedItem().toString())));
+        }
+        else{
+        comboBox_barrio.setModel(new DefaultComboBoxModel());
+        }
+        }
+    }//GEN-LAST:event_comboBox_ciudadItemStateChanged
     
     private void getProvincias() {
         Session sess;
@@ -473,14 +544,14 @@ public class Consulta extends javax.swing.JPanel {
     }
     private void inicializarCombos(){
         vaciarCombos();
-        comboBoxProvincia.addItem("");
+        comboBox_provincia.addItem("");
         provincias.stream().forEach((prov) -> {
-            comboBoxProvincia.addItem(""+prov.getNombre());
+            comboBox_provincia.addItem(""+prov.getNombre());
         });
-        comboBoxProvincia.addItemListener(new ItemListener(){
+        comboBox_provincia.addItemListener(new ItemListener(){
             @Override
             public void itemStateChanged(ItemEvent e) {
-                switch (comboBoxProvincia.getSelectedIndex()){
+                switch (comboBox_provincia.getSelectedIndex()){
                     case -1:
                         vaciarCiudades();
                         break;
@@ -488,7 +559,7 @@ public class Consulta extends javax.swing.JPanel {
                         vaciarCiudades();
                         break;
                     default:
-                        llenarCiudades(comboBoxProvincia.getSelectedIndex());
+                        llenarCiudades(comboBox_provincia.getSelectedIndex());
                         break;
                 }
             }
@@ -497,34 +568,40 @@ public class Consulta extends javax.swing.JPanel {
                 
     }
     private void vaciarCombos(){
-        comboBoxProvincia.removeAllItems();
+        comboBox_provincia.removeAllItems();
         vaciarCiudades();
     }
     private void vaciarCiudades(){
-        comboBoxCiudad.removeAllItems();
+        comboBox_ciudad.removeAllItems();
         vaciarBarrios();
     }
     private void vaciarBarrios(){
-        comboBoxBarrio.removeAllItems();
+        comboBox_barrio.removeAllItems();
     }
     private void llenarCiudades(int indice){
         vaciarCiudades();
-        comboBoxCiudad.addItem("");
+        comboBox_ciudad.addItem("");
         List<Localidad> localidades= new ArrayList<>();
         // Se obtienen las localidades de esa provincia
         localidades.addAll(provincias.get(indice-1).getLocalidads());
         localidades.stream().forEach((loc) -> {
-            comboBoxCiudad.addItem(""+loc.getNombre());
+            comboBox_ciudad.addItem(""+loc.getNombre());
         });
     }
+     private void LimpiarTabla(){
+       for (int i = 0; i < jTable1.getRowCount(); i++) {
+           modelo.removeRow(i);
+           i-=1;
+       }
+   }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox comboBoxBarrio;
-    private javax.swing.JComboBox comboBoxCiudad;
-    private javax.swing.JComboBox comboBoxEstado;
-    private javax.swing.JComboBox comboBoxProvincia;
-    private javax.swing.JComboBox comboBoxTipo;
+    private javax.swing.JComboBox comboBox_barrio;
+    private javax.swing.JComboBox comboBox_ciudad;
+    private javax.swing.JComboBox comboBox_estado;
+    private javax.swing.JComboBox comboBox_provincia;
+    private javax.swing.JComboBox comboBox_tipo;
     private javax.swing.JButton jButtonAtras;
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonEliminar;
@@ -543,6 +620,6 @@ public class Consulta extends javax.swing.JPanel {
     private javax.swing.JLabel labelId3;
     private javax.swing.JTextField textFieldDormitorios;
     private javax.swing.JTextField textFieldIdPrecioMax;
-    private javax.swing.JTextField textFieldIdPrecioMin;
+    private javax.swing.JTextField textField_precio_minimo;
     // End of variables declaration//GEN-END:variables
 }

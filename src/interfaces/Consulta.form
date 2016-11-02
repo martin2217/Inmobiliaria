@@ -156,17 +156,17 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="label4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="comboBoxTipo" min="-2" pref="136" max="-2" attributes="0"/>
+                          <Component id="comboBox_tipo" min="-2" pref="136" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="label2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="comboBoxCiudad" min="-2" pref="136" max="-2" attributes="0"/>
+                          <Component id="comboBox_ciudad" min="-2" pref="136" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="label3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="comboBoxBarrio" min="-2" pref="136" max="-2" attributes="0"/>
+                          <Component id="comboBox_barrio" min="-2" pref="136" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="labelId" min="-2" max="-2" attributes="0"/>
@@ -177,12 +177,12 @@
                       <Group type="102" attributes="0">
                           <Component id="label5" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="comboBoxEstado" min="-2" pref="136" max="-2" attributes="0"/>
+                          <Component id="comboBox_estado" min="-2" pref="136" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="labelId1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="textFieldIdPrecioMin" min="-2" pref="65" max="-2" attributes="0"/>
+                          <Component id="textField_precio_minimo" min="-2" pref="65" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="labelId3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -193,7 +193,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="label1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="comboBoxProvincia" min="-2" pref="136" max="-2" attributes="0"/>
+                                  <Component id="comboBox_provincia" min="-2" pref="136" max="-2" attributes="0"/>
                               </Group>
                               <Component id="labelId2" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -214,21 +214,21 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="label1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="comboBoxProvincia" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="comboBox_provincia" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="label2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="comboBoxCiudad" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="comboBox_ciudad" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="comboBoxBarrio" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="comboBox_barrio" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="label3" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="comboBoxTipo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="comboBox_tipo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="label4" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -241,13 +241,13 @@
                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="textFieldIdPrecioMax" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="textFieldIdPrecioMin" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="textField_precio_minimo" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="labelId3" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="labelId1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="comboBoxEstado" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="comboBox_estado" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="label5" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -278,7 +278,7 @@
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="((AbstractDocument)textFieldDormitorios.getDocument()).setDocumentFilter(new LimitadorTextField(2));"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="comboBoxProvincia">
+        <Component class="javax.swing.JComboBox" name="comboBox_provincia">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Agency FB" size="18" style="1"/>
@@ -287,11 +287,14 @@
               <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;&quot;, &quot;1&quot;, &quot;En 2&quot;, &quot;3&quot; })" type="code"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboBox_provinciaItemStateChanged"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="/*String[] listaNombresDeportes = gestor.GestorCD.getListaDeportes();&#xa;String[] listaND= new String[listaNombresDeportes.length+1];&#xa;listaND[0]=&quot;&quot;;&#xa;for(int j=0; j&lt;listaNombresDeportes.length; j++){&#xa;    listaND[j+1]=listaNombresDeportes[j];&#xa;}&#xa;Arrays.sort(listaND);*/"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="comboBoxCiudad">
+        <Component class="javax.swing.JComboBox" name="comboBox_ciudad">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Agency FB" size="18" style="1"/>
@@ -300,8 +303,11 @@
               <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;&quot;, &quot;Creada&quot;, &quot;Planificada&quot;, &quot;En disputa&quot;, &quot;Finalizada&quot; })" type="code"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboBox_ciudadItemStateChanged"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JComboBox" name="comboBoxBarrio">
+        <Component class="javax.swing.JComboBox" name="comboBox_barrio">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Agency FB" size="18" style="1"/>
@@ -346,7 +352,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBuscarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JComboBox" name="comboBoxTipo">
+        <Component class="javax.swing.JComboBox" name="comboBox_tipo">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Agency FB" size="18" style="1"/>
@@ -372,7 +378,7 @@
             <Property name="text" type="java.lang.String" value="Min"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="textFieldIdPrecioMin">
+        <Component class="javax.swing.JTextField" name="textField_precio_minimo">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="13" style="0"/>
@@ -380,8 +386,8 @@
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="textFieldIdPrecioMin.addKeyListener(new KeyAdapter() {&#xa;&#xa;  public void keyTyped(KeyEvent e) {&#xa;    char tecla = e.getKeyChar();&#xa;    &#xa;    if (!Character.isDigit(tecla)) {&#xa;        if (&apos;.&apos;==tecla){ // VER PUNTO&#xa;            if (banderaMin){&#xa;                getToolkit().beep();&#xa;                e.consume();&#xa;            }&#xa;            else banderaMin=true;&#xa;        }&#xa;        else{&#xa;            getToolkit().beep();&#xa;            e.consume();&#xa;        }&#xa;    }&#xa;    // Buscar en la cadena al eliminar&#xa;  }&#xa;});"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="((AbstractDocument)textFieldIdPrecioMin.getDocument()).setDocumentFilter(new LimitadorTextField(15));"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="textField_precio_minimo.addKeyListener(new KeyAdapter() {&#xa;&#xa;  public void keyTyped(KeyEvent e) {&#xa;    char tecla = e.getKeyChar();&#xa;    &#xa;    if (!Character.isDigit(tecla)) {&#xa;        if (&apos;.&apos;==tecla){ // VER PUNTO&#xa;            if (banderaMin){&#xa;                getToolkit().beep();&#xa;                e.consume();&#xa;            }&#xa;            else banderaMin=true;&#xa;        }&#xa;        else{&#xa;            getToolkit().beep();&#xa;            e.consume();&#xa;        }&#xa;    }&#xa;    // Buscar en la cadena al eliminar&#xa;  }&#xa;});"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="((AbstractDocument)textField_precio_minimo.getDocument()).setDocumentFilter(new LimitadorTextField(15));"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="textFieldIdPrecioMax">
@@ -412,7 +418,7 @@
             <Property name="text" type="java.lang.String" value="Max"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="comboBoxEstado">
+        <Component class="javax.swing.JComboBox" name="comboBox_estado">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Agency FB" size="18" style="1"/>
