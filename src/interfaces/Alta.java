@@ -478,18 +478,14 @@ public class Alta extends javax.swing.JPanel {
                             .addComponent(jLabel12)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jTextPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                    .addGap(263, 263, 263)
-                                    .addComponent(jLabel19)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jTextBanio, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jLabel16)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextAntiguedad, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(0, 0, Short.MAX_VALUE))))))
+                            .addGap(29, 29, 29)
+                            .addComponent(jLabel16)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jTextAntiguedad, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel19)
+                            .addGap(18, 18, 18)
+                            .addComponent(jTextBanio, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -810,7 +806,7 @@ public class Alta extends javax.swing.JPanel {
                 jComboBox1.addItem(""+prov.getNombre());
         });
    }
-   
+    
    
       private void llenarComboLocalidad() {                                      
         // TODO add your handling code here:
