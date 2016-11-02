@@ -31,7 +31,6 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
-import junit.framework.TestCase;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -729,7 +728,17 @@ public class Alta extends javax.swing.JPanel {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (validarTextFields())
-            jTextCalle.requestFocus();    
+            jTextCalle.requestFocus();
+        // Hay que hacer bien esta implementacion de validacion y agregar que la vigencia no sea igual a 0.
+        /* No hay que poner para todo option pane, sino hay que hacer una funcion que valla sumando errores y luego imprima un option pane con
+        todos los errores juntos, sino es ultra denso. Ademas el OptionPane tirarlo solamente en el OnClick de Guardar, si se quiere avisar antes
+        se debe decir de otra manera.*/
+        /*hay una funcion "NoVacio" y otra "ValidarTextFields" que las dos hacen lo mismo. Aunque la idea de ir haciendo append a una string
+        llamada "textovalidado" es la correcta.*/
+        /*Modificar BDD para que funcione todo de una.*/
+        /* En consulta hay que terminar de ver los combobox, lo mismo que aca, ver que funcionen bien.*/
+        /* el identificador de inmueble esta como defaault 00000000001 eso deberia cambiar a una consulta a la BDD que diga el ID mas grande y muestre el siguiente
+        o volar eso al carajo (lo cual me parece mejor).*/
         else
             alta();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -885,7 +894,7 @@ public class Alta extends javax.swing.JPanel {
                 jComboBox1.addItem(""+prov.getNombre());
         });
    }
-   
+    
    
       private void llenarComboLocalidad() {                                      
         // TODO add your handling code here:

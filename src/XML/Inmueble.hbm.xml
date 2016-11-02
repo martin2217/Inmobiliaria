@@ -72,4 +72,165 @@
             <one-to-many class="Modelo.Consulta" />
         </set>
     </class>
+    
+    <query name="TodosLosFiltrosSeleccionados"><![CDATA[
+
+         SELECT inm FROM Inmueble inm
+         WHERE inm.barrio.nombre=? 
+         AND inm.barrio.localidad.nombre=?
+         AND inm.barrio.localidad.provincia.nombre=?
+         AND inm.tipoInmueble=?
+         AND inm.precio BETWEEN ? AND ?
+         AND inm.estado=?
+  
+  ]]></query>
+  
+   <query name="TodosLosFiltrosSeleccionadosMenosEstado"><![CDATA[
+
+         SELECT inm FROM Inmueble inm
+         WHERE inm.barrio.nombre=? 
+         AND inm.barrio.localidad.nombre=?
+         AND inm.barrio.localidad.provincia.nombre=?
+         AND inm.tipoInmueble=?
+         AND inm.precio BETWEEN ? AND ?
+         
+  ]]></query>
+  
+  <query name="TodosLosFiltrosSeleccionadosMenosTipoInmueble"><![CDATA[
+
+         SELECT inm FROM Inmueble inm
+         WHERE inm.barrio.nombre=? 
+         AND inm.barrio.localidad.nombre=?
+         AND inm.barrio.localidad.provincia.nombre=?   
+         AND inm.precio BETWEEN ? AND ?
+         AND inm.estado=?
+  
+  ]]></query>
+  
+   <query name="TodosLosFiltrosSeleccionadosMenosTipoInmuebleYEstado"><![CDATA[
+
+         SELECT inm FROM Inmueble inm
+         WHERE inm.barrio.nombre=? 
+         AND inm.barrio.localidad.nombre=?
+         AND inm.barrio.localidad.provincia.nombre=?   
+         AND inm.precio BETWEEN ? AND ?
+         
+  ]]></query>
+    
+    
+    <query name="TodosLosFiltrosSeleccionadosMenosBarrio"><![CDATA[
+
+         SELECT inm FROM Inmueble inm
+         WHERE inm.barrio.localidad.nombre=?
+         AND inm.barrio.localidad.provincia.nombre=?
+         AND inm.tipoInmueble=?
+         AND inm.precio BETWEEN ? AND ?
+         AND inm.estado=?
+  
+  ]]></query>
+  
+  
+   <query name="TodosLosFiltrosSeleccionadosMenosBarrioYEstado"><![CDATA[
+
+         SELECT inm FROM Inmueble inm
+         WHERE inm.barrio.localidad.nombre=?
+         AND inm.barrio.localidad.provincia.nombre=?
+         AND inm.tipoInmueble=?
+         AND inm.precio BETWEEN ? AND ?
+         
+ 
+  ]]></query>
+    
+      <query name="TodosLosFiltrosSeleccionadosMenosBarrioYTipoDepartamento"><![CDATA[
+
+         SELECT inm FROM Inmueble inm
+         WHERE inm.barrio.localidad.nombre=?
+         AND inm.barrio.localidad.provincia.nombre=?
+         AND inm.precio BETWEEN ? AND ?
+         AND inm.estado=?
+  
+
+  ]]></query>
+  
+  <query name="TodosLosFiltrosSeleccionadosMenosBarrioYTipoDepartamentoYEstado"><![CDATA[
+
+         SELECT inm FROM Inmueble inm
+         WHERE inm.barrio.localidad.nombre=?
+         AND inm.barrio.localidad.provincia.nombre=?
+         AND inm.precio BETWEEN ? AND ?
+          
+  
+  ]]></query>
+    
+     <query name="TodosLosFiltrosSeleccionadosMenosLocalidadETC"><![CDATA[
+
+         SELECT inm FROM Inmueble inm
+         WHERE inm.barrio.localidad.provincia.nombre=?
+         AND inm.tipoInmueble=?
+         AND inm.precio BETWEEN ? AND ?
+         AND inm.estado=?
+  
+  ]]></query>
+      
+       <query name="TodosLosFiltrosSeleccionadosMenosLocalidadETCYEstado"><![CDATA[
+
+         SELECT inm FROM Inmueble inm
+         WHERE inm.barrio.localidad.provincia.nombre=?
+         AND inm.tipoInmueble=?
+         AND inm.precio BETWEEN ? AND ?
+ 
+  ]]></query>
+    
+      <query name="TodosLosFiltrosSeleccionadosMenosLocalidadETCYTipoDepartamento"><![CDATA[
+
+         SELECT inm FROM Inmueble inm
+         WHERE inm.barrio.localidad.provincia.nombre=?
+         AND inm.precio BETWEEN ? AND ?
+         AND inm.estado=?
+
+  ]]></query>
+    
+     <query name="TodosLosFiltrosSeleccionadosMenosLocalidadETCYTipoDepartamentoYEstado"><![CDATA[
+
+         SELECT inm FROM Inmueble inm
+         WHERE inm.barrio.localidad.provincia.nombre=?
+         AND inm.precio BETWEEN ? AND ?
+       
+
+  ]]></query>
+    
+    <query name="TodosLosFiltrosSeleccionadosMenosProvinciaETC"><![CDATA[
+
+         SELECT inm FROM Inmueble inm
+         WHERE  inm.tipoInmueble=?
+         AND inm.precio BETWEEN ? AND ?
+         AND inm.estado=?
+  
+
+  ]]></query>
+    
+     <query name="TodosLosFiltrosSeleccionadosMenosProvinciaETCYTipoDepartamento"><![CDATA[
+
+         SELECT inm FROM Inmueble inm
+         WHERE inm.precio BETWEEN ? AND ?
+         AND inm.estado=?
+
+  ]]></query>
+    
+     <query name="TodosLosFiltrosSeleccionadosMenosProvinciaETCYEstado"><![CDATA[
+
+         SELECT inm FROM Inmueble inm
+         WHERE  inm.tipoInmueble=?
+         AND inm.precio BETWEEN ? AND ?
+
+  ]]></query>
+  
+     <query name="TodosLosFiltrosSeleccionadosMenosProvinciaETCYTipoDepartamentoYEstado"><![CDATA[
+
+         SELECT inm FROM Inmueble inm
+         WHERE inm.precio BETWEEN ? AND ?
+ 
+  ]]></query>
+    
+    
 </hibernate-mapping>

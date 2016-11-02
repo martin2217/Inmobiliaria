@@ -17,9 +17,37 @@ import org.hibernate.Transaction;
 
 public class Dao {
 
+    
+    private final  SessionFactory sesion;
+    
+    
+    
+    public Dao(){
+    
+
+    // creo y abro la sesion 
+        sesion= ConexionUtil.getSessionFactory();
+         
+    }
+
+    public Session getSesion() {
+        return sesion.openSession();
+    }
   
     
-     public static void altaCliente(Cliente cli){
+    public void cerrarConexion(Session sesion_a_cerrar ){
+        
+        sesion_a_cerrar.close();
+    
+    }
+    
+    
+    
+    
+    
+    
+    
+     public void altaCliente(Cliente cli){
         SessionFactory sesion = ConexionUtil.getSessionFactory();
         Session session;
         session = sesion.openSession();
@@ -31,6 +59,17 @@ public class Dao {
     }
     
      
+    public void altaInmueble (Inmueble casa)
+    {                
+        SessionFactory sesion = ConexionUtil.getSessionFactory();                
+        Session session;
+        session = sesion.openSession();
+        Transaction tx = session.beginTransaction();
+        session.save(casa);
+        tx.commit();
+        session.close();
+        JOptionPane.showMessageDialog(null,"Alta Inmueble correctamente.");
+    }
          /*public DefaultListModel mostrarProvincias()
     {
         SessionFactory sesion = NuevaConexionUtil.getSessionFactory();

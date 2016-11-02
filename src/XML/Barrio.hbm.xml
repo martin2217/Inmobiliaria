@@ -27,4 +27,15 @@
             <one-to-many class="Modelo.Inmueble" />
         </set>
     </class>
+    
+     <query name="LocalidadesDeUnaLocalidad"><![CDATA[
+
+         SELECT bar FROM Barrio bar
+         WHERE bar.localidad.nombre=?
+ 
+  ]]></query>
+    
+    
+    
+    
 </hibernate-mapping>
