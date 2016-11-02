@@ -52,8 +52,11 @@ public class Alta extends javax.swing.JPanel {
         
         initComponents();
         llenarComboProvincia();
-        llenarComboLocalidad();
-        llenarComboBarrio();                        
+        //JComboBox2.insertItemAt("", 0);
+        jComboBox2.removeAllItems();
+        jComboBox3.removeAllItems();
+        //llenarComboLocalidad();
+        //llenarComboBarrio();                        
         jLabel3.setText(Integer.toString(maxIdInmobiliaria()));
         //jTextCalle.setText(oper.retornarStrign());
         
