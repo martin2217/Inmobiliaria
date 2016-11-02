@@ -483,13 +483,9 @@ public class Consulta extends javax.swing.JPanel {
                 switch (comboBoxProvincia.getSelectedIndex()){
                     case -1:
                         vaciarCiudades();
-                        JOptionPane.showMessageDialog(null,"Indice 0",
-                                "Error", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     case 0:
                         vaciarCiudades();
-                        JOptionPane.showMessageDialog(null,"Indice 0",
-                                "Error", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     default:
                         llenarCiudades(comboBoxProvincia.getSelectedIndex());
