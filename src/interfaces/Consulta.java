@@ -5,11 +5,22 @@
  */
 package interfaces;
 
+import Controlador.ConexionUtil;
+import Modelo.Barrio;
+import Modelo.Localidad;
+import Modelo.Provincia;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.text.AbstractDocument;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
 
 /**
  *
@@ -20,19 +31,25 @@ public class Consulta extends javax.swing.JPanel {
     
     boolean banderaMin=false;
     boolean banderaMax=false;
+    List<Provincia> provincias;
     
     /**
      * Creates new form Alta
      */
     public Consulta() {
         initComponents();
+        esconderColumnaId();
+        getProvincias();
+        inicializarCombos();
+        
+    }
+    
+    private void esconderColumnaId(){
         TableColumn columna = jTable1.getColumnModel().getColumn(0);
         columna.setMaxWidth(0);
         columna.setMinWidth(0);
         columna.setPreferredWidth(0);
-        
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,40 +59,40 @@ public class Consulta extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButtonModificarInmueble = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButtonAltaInmueble = new javax.swing.JButton();
+        jButtonEliminar = new javax.swing.JButton();
         jButtonAtras = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         labelId = new javax.swing.JLabel();
-        textFieldId = new javax.swing.JTextField();
-        comboBox1 = new javax.swing.JComboBox();
-        comboBox2 = new javax.swing.JComboBox();
-        comboBox3 = new javax.swing.JComboBox();
+        textFieldDormitorios = new javax.swing.JTextField();
+        comboBoxProvincia = new javax.swing.JComboBox();
+        comboBoxCiudad = new javax.swing.JComboBox();
+        comboBoxBarrio = new javax.swing.JComboBox();
         label3 = new javax.swing.JLabel();
         label2 = new javax.swing.JLabel();
         label1 = new javax.swing.JLabel();
         jButtonBuscar = new javax.swing.JButton();
-        comboBox4 = new javax.swing.JComboBox();
+        comboBoxTipo = new javax.swing.JComboBox();
         label4 = new javax.swing.JLabel();
         labelId1 = new javax.swing.JLabel();
-        textFieldId2 = new javax.swing.JTextField();
-        textFieldId3 = new javax.swing.JTextField();
+        textFieldIdPrecioMin = new javax.swing.JTextField();
+        textFieldIdPrecioMax = new javax.swing.JTextField();
         labelId2 = new javax.swing.JLabel();
         labelId3 = new javax.swing.JLabel();
-        comboBox5 = new javax.swing.JComboBox();
+        comboBoxEstado = new javax.swing.JComboBox();
         label5 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setPreferredSize(new java.awt.Dimension(800, 600));
 
-        jButtonModificarInmueble.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
-        jButtonModificarInmueble.setText("Modificar");
-        jButtonModificarInmueble.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModificar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonModificarInmuebleActionPerformed(evt);
+                jButtonModificarActionPerformed(evt);
             }
         });
 
@@ -112,10 +129,10 @@ public class Consulta extends javax.swing.JPanel {
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
-        jButtonAltaInmueble.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
-        jButtonAltaInmueble.setText("Eliminar");
+        jButtonEliminar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jButtonEliminar.setText("Eliminar");
 
-        jButtonAtras.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
+        jButtonAtras.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jButtonAtras.setText("Atras");
         jButtonAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,12 +143,12 @@ public class Consulta extends javax.swing.JPanel {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filtros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 0, 18))); // NOI18N
         jPanel2.setMaximumSize(new java.awt.Dimension(218, 456));
 
-        labelId.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
+        labelId.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         labelId.setText("Cantidad de dormitorios");
 
-        textFieldId.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
-        textFieldId.setToolTipText("Ingrese solo números");
-        ((AbstractDocument)textFieldId.getDocument()).setDocumentFilter(new LimitadorTextField(2));
+        textFieldDormitorios.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        textFieldDormitorios.setToolTipText("Ingrese solo números");
+        ((AbstractDocument)textFieldDormitorios.getDocument()).setDocumentFilter(new LimitadorTextField(2));
 
         /*String[] listaNombresDeportes = gestor.GestorCD.getListaDeportes();
         String[] listaND= new String[listaNombresDeportes.length+1];
@@ -140,25 +157,25 @@ public class Consulta extends javax.swing.JPanel {
             listaND[j+1]=listaNombresDeportes[j];
         }
         Arrays.sort(listaND);*/
-        comboBox1.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        comboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1", "En 2", "3" }));
+        comboBoxProvincia.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        comboBoxProvincia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1", "En 2", "3" }));
 
-        comboBox2.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        comboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Creada", "Planificada", "En disputa", "Finalizada" }));
+        comboBoxCiudad.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        comboBoxCiudad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Creada", "Planificada", "En disputa", "Finalizada" }));
 
-        comboBox3.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        comboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1", "3" }));
+        comboBoxBarrio.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        comboBoxBarrio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1", "3" }));
 
-        label3.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
+        label3.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         label3.setText("Barrio");
 
-        label2.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
+        label2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         label2.setText("Ciudad");
 
-        label1.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
+        label1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         label1.setText("Provincia");
 
-        jButtonBuscar.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
+        jButtonBuscar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jButtonBuscar.setText("Buscar");
         jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,33 +183,33 @@ public class Consulta extends javax.swing.JPanel {
             }
         });
 
-        comboBox4.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        comboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1", "3" }));
+        comboBoxTipo.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        comboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1", "3" }));
 
-        label4.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
+        label4.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         label4.setText("Tipo");
 
-        labelId1.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
+        labelId1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         labelId1.setText("Min");
 
-        textFieldId2.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
-        textFieldId2.setToolTipText("");
-        ((AbstractDocument)textFieldId2.getDocument()).setDocumentFilter(new LimitadorTextField(15));
+        textFieldIdPrecioMin.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        textFieldIdPrecioMin.setToolTipText("");
+        ((AbstractDocument)textFieldIdPrecioMin.getDocument()).setDocumentFilter(new LimitadorTextField(15));
 
-        textFieldId3.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
-        textFieldId3.setToolTipText("");
-        ((AbstractDocument)textFieldId3.getDocument()).setDocumentFilter(new LimitadorTextField(15));
+        textFieldIdPrecioMax.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        textFieldIdPrecioMax.setToolTipText("");
+        ((AbstractDocument)textFieldIdPrecioMax.getDocument()).setDocumentFilter(new LimitadorTextField(15));
 
-        labelId2.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
-        labelId2.setText("Precio");
+        labelId2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        labelId2.setText("Precio ($)");
 
-        labelId3.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
+        labelId3.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         labelId3.setText("Max");
 
-        comboBox5.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        comboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1", "3" }));
+        comboBoxEstado.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        comboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1", "3" }));
 
-        label5.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
+        label5.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         label5.setText("Estado");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -202,56 +219,47 @@ public class Consulta extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(label2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(comboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(label3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(comboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(labelId)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(label1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(comboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(77, 77, 77)
-                                        .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(0, 10, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(label4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(comboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(label2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(comboBoxCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(label3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(comboBoxBarrio, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(labelId)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(textFieldDormitorios, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(label5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(comboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(labelId1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textFieldIdPrecioMin, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelId3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textFieldIdPrecioMax, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(labelId1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textFieldId2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(labelId3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textFieldId3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(labelId2)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(label5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(comboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                                .addComponent(label1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(comboBoxProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(labelId2))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,42 +267,41 @@ public class Consulta extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label1)
-                    .addComponent(comboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBoxProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label2)
-                    .addComponent(comboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label3)
-                    .addComponent(comboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBoxCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBoxBarrio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label3))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label4))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(textFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelId, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelId, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textFieldDormitorios, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(labelId2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(textFieldId3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(textFieldId2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(labelId3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textFieldIdPrecioMax, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textFieldIdPrecioMin, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelId3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelId1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonBuscar)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
-        textFieldId.addKeyListener(new KeyAdapter() {
+        textFieldDormitorios.addKeyListener(new KeyAdapter() {
 
             public void keyTyped(KeyEvent e) {
                 char keyChar = e.getKeyChar();
@@ -304,7 +311,7 @@ public class Consulta extends javax.swing.JPanel {
                 }
             }
         });
-        textFieldId2.addKeyListener(new KeyAdapter() {
+        textFieldIdPrecioMin.addKeyListener(new KeyAdapter() {
 
             public void keyTyped(KeyEvent e) {
                 char tecla = e.getKeyChar();
@@ -325,7 +332,7 @@ public class Consulta extends javax.swing.JPanel {
                 // Buscar en la cadena al eliminar
             }
         });
-        textFieldId3.addKeyListener(new KeyAdapter() {
+        textFieldIdPrecioMax.addKeyListener(new KeyAdapter() {
 
             public void keyTyped(KeyEvent e) {
                 char keyChar = e.getKeyChar();
@@ -351,15 +358,15 @@ public class Consulta extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(167, 167, 167)
-                        .addComponent(jButtonAltaInmueble, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonModificarInmueble, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                        .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(72, Short.MAX_VALUE)
+                .addContainerGap(77, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -367,16 +374,14 @@ public class Consulta extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonAtras)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButtonModificarInmueble)
-                                .addComponent(jButtonAltaInmueble))))
+                                .addComponent(jButtonModificar)
+                                .addComponent(jButtonEliminar))))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(72, 72, 72))
         );
-
-        jPanel2.getAccessibleContext().setAccessibleName("Filtros");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonModificarInmuebleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarInmuebleActionPerformed
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
 
         int row = jTable1.getSelectedRow();
 
@@ -402,88 +407,132 @@ public class Consulta extends javax.swing.JPanel {
             GestorVentanas.get().verCompetencia(compAux);*/
         }
 
-    }//GEN-LAST:event_jButtonModificarInmuebleActionPerformed
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
     private void jButtonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtrasActionPerformed
         GestorVentanas.get().remove(this);
         GestorVentanas.get().menuVolver();
     }//GEN-LAST:event_jButtonAtrasActionPerformed
-
+    
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
-        if(comboBox1.getSelectedIndex()==0 && comboBox3.getSelectedIndex()==0 &&
-            comboBox2.getSelectedIndex()==0 && textFieldId.getText().isEmpty()){
-            errorFiltros();
+        
+        // Se extraen los filtros
+        String provincia, ciudad, barrio, tipo, dormitorios, precioMin, precioMax, estado;
+        provincia=comboBoxProvincia.getSelectedItem().toString();
+        ciudad=comboBoxCiudad.getSelectedItem().toString();
+        barrio=comboBoxBarrio.getSelectedItem().toString();
+        tipo=comboBoxTipo.getSelectedItem().toString();
+        estado=String.valueOf(comboBoxEstado.getSelectedItem()); // Alternativa
+        dormitorios=textFieldDormitorios.getText();
+        precioMin=textFieldIdPrecioMin.getText();
+        precioMax=textFieldIdPrecioMax.getText();
+        
+        // Llamar a la función de busqueda, que devuelve la lista (matriz) de elementos
+        // Elementos vacios pasar como "" o como null?
+        
+        
+        // Eliminación de la tabla actual
+        DefaultTableModel modelo=(DefaultTableModel) jTable1.getModel();
+        int filas=jTable1.getRowCount();
+        for (int i=0;filas>i; i++) {
+            modelo.removeRow(0);
         }
-        else{
-            // Llamar a la funcion para rellenar la tabla (devuelve matriz)
-            /*Object estado = comboBoxEstado.getSelectedItem();
-            String textEstado = String.valueOf(estado);
-            Object deporte = comboBoxDeporte.getSelectedItem();
-            String textDeporte= String.valueOf(deporte);
-            Object modalidad = comboBoxModalidad.getSelectedItem();
-            String textModalidad= String.valueOf(modalidad);
-
-            String nombre=textFieldCompetencia.getText();
-
-            if("".equals(textDeporte)){textDeporte=null;}
-            if("".equals(textEstado)){textEstado=null;}
-            if("".equals(textModalidad)){textModalidad=null;}
-
-            if("".equals(textFieldCompetencia.getText())){
-                nombre=null;
-            }
-
-            // Se recuperan las competenciasAux de la base de datos
-            listaprueba = GestorCD.listarCD(nombre, textDeporte,textModalidad,textEstado);
-
-            // Eliminacion de la tabla actual
-            DefaultTableModel modelo=(DefaultTableModel) jTable1.getModel();
-            int filas=jTable1.getRowCount();
-            int i;
-            for (i=0;filas>i; i++) {
-                modelo.removeRow(0);
-            }
-
-            // Se le asignan las competencias recuperadas
-            for(i=0;i < listaprueba.size();i++){
-
-                CompetenciaAux elem=listaprueba.get(i);
-
-                String fila[]=new String[4];
-
-                fila[0]= elem.getNombre();
-                fila[1]= elem.getDeporte();
-                fila[2]= elem.getModalidad();
-                fila[3]= elem.getEstado();
-
-                modelo.addRow(fila);
-            }
-            jTable1.setModel(modelo);
-
-            if(jTable1.getRowCount()==0){
-                JOptionPane.showMessageDialog(null,"No se han encontrado resultados.",
+        
+        // Rellenar la tabla
+        // Se le asignan las competencias recuperadas
+        /*for(int i=0; i<lista.size(); i++){
+            
+            String fila[]=new String[7];
+            
+            fila[0]= ;
+            fila[1]= ;
+            fila[2]= ;
+            fila[3]= ;
+            fila[4]= ;
+            fila[5]= ;
+            fila[6]= ;
+            
+            modelo.addRow(fila);
+        }
+        jTable1.setModel(modelo);
+        
+        if(jTable1.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"No se han encontrado resultados.",
                     "Error", JOptionPane.INFORMATION_MESSAGE);
-            }*/
-        }
+        }*/
+        
     }//GEN-LAST:event_jButtonBuscarActionPerformed
-
     
-    private void errorFiltros(){
-        JOptionPane.showMessageDialog(null, "Ingrese un filtro de busqueda", "", JOptionPane.INFORMATION_MESSAGE);
+    private void getProvincias() {
+        Session sess;
+        sess=ConexionUtil.getSessionFactory().openSession();
+        Criteria crit = sess.createCriteria(Provincia.class);
+        crit.setMaxResults(50);
+        provincias = crit.list();
+        //provincias.get(0); Ejemplo de obtención
     }
-    
+    private void inicializarCombos(){
+        vaciarCombos();
+        comboBoxProvincia.addItem("");
+        provincias.stream().forEach((prov) -> {
+            comboBoxProvincia.addItem(""+prov.getNombre());
+        });
+        comboBoxProvincia.addItemListener(new ItemListener(){
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                switch (comboBoxProvincia.getSelectedIndex()){
+                    case -1:
+                        vaciarCiudades();
+                        JOptionPane.showMessageDialog(null,"Indice 0",
+                                "Error", JOptionPane.INFORMATION_MESSAGE);
+                        break;
+                    case 0:
+                        vaciarCiudades();
+                        JOptionPane.showMessageDialog(null,"Indice 0",
+                                "Error", JOptionPane.INFORMATION_MESSAGE);
+                        break;
+                    default:
+                        llenarCiudades(comboBoxProvincia.getSelectedIndex());
+                        break;
+                }
+            }
+        });
+        //comboBoxCiudad.addItemListener(listenerCiudad);
+                
+    }
+    private void vaciarCombos(){
+        comboBoxProvincia.removeAllItems();
+        vaciarCiudades();
+    }
+    private void vaciarCiudades(){
+        comboBoxCiudad.removeAllItems();
+        vaciarBarrios();
+    }
+    private void vaciarBarrios(){
+        comboBoxBarrio.removeAllItems();
+    }
+    private void llenarCiudades(int indice){
+        vaciarCiudades();
+        comboBoxCiudad.addItem("");
+        List<Localidad> localidades= new ArrayList<>();
+        // Se obtienen las localidades de esa provincia
+        localidades.addAll(provincias.get(indice-1).getLocalidads());
+        localidades.stream().forEach((loc) -> {
+            comboBoxCiudad.addItem(""+loc.getNombre());
+        });
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox comboBox1;
-    private javax.swing.JComboBox comboBox2;
-    private javax.swing.JComboBox comboBox3;
-    private javax.swing.JComboBox comboBox4;
-    private javax.swing.JComboBox comboBox5;
-    private javax.swing.JButton jButtonAltaInmueble;
+    private javax.swing.JComboBox comboBoxBarrio;
+    private javax.swing.JComboBox comboBoxCiudad;
+    private javax.swing.JComboBox comboBoxEstado;
+    private javax.swing.JComboBox comboBoxProvincia;
+    private javax.swing.JComboBox comboBoxTipo;
     private javax.swing.JButton jButtonAtras;
     private javax.swing.JButton jButtonBuscar;
-    private javax.swing.JButton jButtonModificarInmueble;
+    private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonModificar;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
@@ -496,8 +545,8 @@ public class Consulta extends javax.swing.JPanel {
     private javax.swing.JLabel labelId1;
     private javax.swing.JLabel labelId2;
     private javax.swing.JLabel labelId3;
-    private javax.swing.JTextField textFieldId;
-    private javax.swing.JTextField textFieldId2;
-    private javax.swing.JTextField textFieldId3;
+    private javax.swing.JTextField textFieldDormitorios;
+    private javax.swing.JTextField textFieldIdPrecioMax;
+    private javax.swing.JTextField textFieldIdPrecioMin;
     // End of variables declaration//GEN-END:variables
 }
