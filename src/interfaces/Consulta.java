@@ -417,7 +417,7 @@ public class Consulta extends javax.swing.JPanel {
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         
         // Se extraen los filtros
-        String provincia, ciudad, barrio, tipo, dormitorios, precioMin, precioMax, estado;
+        /*String provincia, ciudad, barrio, tipo, dormitorios, precioMin, precioMax, estado;
         provincia=comboBoxProvincia.getSelectedItem().toString();
         ciudad=comboBoxCiudad.getSelectedItem().toString();
         barrio=comboBoxBarrio.getSelectedItem().toString();
@@ -425,18 +425,18 @@ public class Consulta extends javax.swing.JPanel {
         estado=String.valueOf(comboBoxEstado.getSelectedItem()); // Alternativa
         dormitorios=textFieldDormitorios.getText();
         precioMin=textFieldIdPrecioMin.getText();
-        precioMax=textFieldIdPrecioMax.getText();
+        precioMax=textFieldIdPrecioMax.getText();*/
         
         // Llamar a la función de busqueda, que devuelve la lista (matriz) de elementos
         // Elementos vacios pasar como "" o como null?
         
         
         // Eliminación de la tabla actual
-        DefaultTableModel modelo=(DefaultTableModel) jTable1.getModel();
+        /*DefaultTableModel modelo=(DefaultTableModel) jTable1.getModel();
         int filas=jTable1.getRowCount();
         for (int i=0;filas>i; i++) {
             modelo.removeRow(0);
-        }
+        }*/
         
         // Rellenar la tabla
         // Se le asignan las competencias recuperadas
