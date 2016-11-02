@@ -90,6 +90,10 @@ public class Inmueble  implements java.io.Serializable {
        this.montoVenta = montoVenta;
        this.fechaAlta = fechaAlta;
     }
+    public String getDireccion(){ 
+    return this.getCalle()+this.getNroCalle();
+    }
+   
    
     public int getIdInmueble() {
         return this.idInmueble;
