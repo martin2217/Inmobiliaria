@@ -17,9 +17,21 @@ import Modelo.Localidad;
 import Modelo.Propietario;
 import Modelo.Provincia;
 import java.awt.Component;
+import java.awt.Image;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.JTextComponent;
 //import javax.swing.DefaultComboBoxModel;
 import org.hibernate.Criteria;
@@ -41,6 +53,7 @@ public class Alta extends javax.swing.JPanel {
     /**
      * Creates new form Alta
      */
+    List<File> archivos = new ArrayList<File>();
     public Alta() {
         
         initComponents();
@@ -124,6 +137,8 @@ public class Alta extends javax.swing.JPanel {
         jLabel22 = new javax.swing.JLabel();
         jFtfMontoReserva = new javax.swing.JFormattedTextField();
         jPanel4 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jLabel23 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
@@ -591,16 +606,37 @@ public class Alta extends javax.swing.JPanel {
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel23.setText("jLabel23");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 206, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 106, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2))
         );
+
+        jButton2.getAccessibleContext().setAccessibleName("Cargar Foto");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -802,6 +838,42 @@ public class Alta extends javax.swing.JPanel {
         // TODO add your handling code here:
         validarSoloNumeros(evt);
     }//GEN-LAST:event_jTextBanioKeyTyped
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+           int resultado;
+
+
+CargarFoto ventana = new CargarFoto();
+
+FileNameExtensionFilter filtro = new FileNameExtensionFilter("JPG y PNG","jpg","png");
+
+ventana.jFCFoto.setFileFilter(filtro);
+
+resultado= ventana.jFCFoto.showOpenDialog(null);
+
+
+if (JFileChooser.APPROVE_OPTION == resultado){
+File aux;
+       aux=ventana.jFCFoto.getSelectedFile();
+       String a=aux.getPath();
+       int i=0;
+       archivos.add(aux);
+       try{
+                
+                ImageIcon icon = new ImageIcon(aux.toString());
+                
+                Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel23.getWidth(),
+                        jLabel23.getHeight(), Image.SCALE_DEFAULT));
+                
+                jLabel23.setIcon(icono);
+                
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null, "Error abriendo la imagen "+ ex);
+            }
+            
+    }                                        
+    }//GEN-LAST:event_jButton2ActionPerformed
      
     private void altaInmueble (Inmueble casa)
     {                
@@ -813,6 +885,10 @@ public class Alta extends javax.swing.JPanel {
         tx.commit();
         session.close();
         JOptionPane.showMessageDialog(null,"Alta Inmueble correctamente.");
+        for(int i=0; i<archivos.size();i++){
+            guardarimagen(jLabel3.getText().trim(), i);
+        }
+        archivos.clear();
     }
 
         
@@ -921,9 +997,37 @@ public class Alta extends javax.swing.JPanel {
                 jComboBox3.addItem(""+barr.getNombre());                
         });
    }
+ private void guardarimagen(String id,int index){
+                String ruta="C:\\imagenes\\"+id+"_0.jpg";
+               File f = new File(ruta);
+               int i=1;
+                    while(f.exists()) {//ver si existe la ruta 
+                        ruta="C:\\imagenes\\"+id+"_"+i+".jpg";
+                        f=new File(ruta);
+                        i++;
+                    }
+                try{
+                    File destino = new File(ruta);
+                     InputStream in = new FileInputStream(archivos.get(index).getPath());
+                        OutputStream out = new FileOutputStream(destino);
+                                
+                        byte[] buf = new byte[1024];
+                        int len;
 
+                        while ((len = in.read(buf)) > 0) {
+                                out.write(buf, 0, len);
+                        }
+                
+                        in.close();
+                        out.close();
+                } catch (IOException ioe){
+                        ioe.printStackTrace();
+                }
+ 
+            }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox10;
@@ -957,6 +1061,7 @@ public class Alta extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
