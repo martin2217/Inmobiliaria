@@ -51,8 +51,11 @@ public class Alta extends javax.swing.JPanel {
         
         initComponents();
         llenarComboProvincia();
-        llenarComboLocalidad();
-        llenarComboBarrio();                        
+        //JComboBox2.insertItemAt("", 0);
+        jComboBox2.removeAllItems();
+        jComboBox3.removeAllItems();
+        //llenarComboLocalidad();
+        //llenarComboBarrio();                        
         jLabel3.setText(Integer.toString(maxIdInmobiliaria()));
         //jTextCalle.setText(oper.retornarStrign());
         
@@ -125,6 +128,7 @@ public class Alta extends javax.swing.JPanel {
         jLabel21 = new javax.swing.JLabel();
         jTextVigencia = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
+        jFtfMontoReserva = new javax.swing.JFormattedTextField();
         jPanel4 = new javax.swing.JPanel();
 
         setMaximumSize(new java.awt.Dimension(800, 600));
@@ -260,18 +264,33 @@ public class Alta extends javax.swing.JPanel {
 
         jTextFrente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextFrente.setName("Frente"); // NOI18N
+        jTextFrente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFrenteKeyTyped(evt);
+            }
+        });
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel15.setText("Superficie:");
 
         jTextSuperficie.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextSuperficie.setName("Superficie"); // NOI18N
+        jTextSuperficie.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextSuperficieKeyTyped(evt);
+            }
+        });
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setText("Antigüedad:");
 
         jTextAntiguedad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextAntiguedad.setName("Antigüedad"); // NOI18N
+        jTextAntiguedad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextAntiguedadKeyTyped(evt);
+            }
+        });
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel17.setText("Fondo:");
@@ -281,6 +300,11 @@ public class Alta extends javax.swing.JPanel {
 
         jTextFondo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextFondo.setName("Fondo"); // NOI18N
+        jTextFondo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFondoKeyTyped(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Calle:");
@@ -298,6 +322,11 @@ public class Alta extends javax.swing.JPanel {
 
         jTextDormitorio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextDormitorio.setName("Dormitorios"); // NOI18N
+        jTextDormitorio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextDormitorioKeyTyped(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Número:");
@@ -315,6 +344,11 @@ public class Alta extends javax.swing.JPanel {
 
         jTextBanio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextBanio.setName("Baños"); // NOI18N
+        jTextBanio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextBanioKeyTyped(evt);
+            }
+        });
 
         jTextPiso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextPiso.setName("Piso"); // NOI18N
@@ -394,9 +428,16 @@ public class Alta extends javax.swing.JPanel {
 
         jTextVigencia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextVigencia.setName("Vigencia de la Reserva"); // NOI18N
+        jTextVigencia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextVigenciaKeyTyped(evt);
+            }
+        });
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel22.setText("Vigencia de la Reserva");
+
+        jFtfMontoReserva.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -440,14 +481,6 @@ public class Alta extends javax.swing.JPanel {
                                 .addComponent(jTextFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel22)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextVigencia, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel21)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextMontoReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                             .addComponent(jLabel7)
@@ -465,26 +498,42 @@ public class Alta extends javax.swing.JPanel {
                             .addComponent(jLabel10)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jTextDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel11)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(46, 46, 46)
-                            .addComponent(jLabel13)
-                            .addGap(18, 18, 18)
-                            .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addComponent(jLabel12)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jTextPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(29, 29, 29)
-                            .addComponent(jLabel16)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jTextAntiguedad, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel19)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                    .addGap(263, 263, 263)
+                                    .addComponent(jLabel19)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jTextBanio, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel16)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jTextAntiguedad, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel22)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextVigencia, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel21)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextMontoReserva))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel11)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(46, 46, 46)
+                                    .addComponent(jLabel13)))
                             .addGap(18, 18, 18)
-                            .addComponent(jTextBanio, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jFtfMontoReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -525,11 +574,12 @@ public class Alta extends javax.swing.JPanel {
                         .addComponent(jLabel12)
                         .addComponent(jTextPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel22)
-                    .addComponent(jTextVigencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextVigencia, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel21)
-                    .addComponent(jTextMontoReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextMontoReserva, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jFtfMontoReserva, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -694,7 +744,7 @@ public class Alta extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
-    private void noVacio (java.awt.event.FocusEvent evt){
+    private void validarNoVacio (java.awt.event.FocusEvent evt){
         final JTextComponent c = (JTextComponent) evt.getSource();
         String s = c.getText().trim();
         //texto=texto.replaceAll(" ", "")
@@ -710,15 +760,13 @@ public class Alta extends javax.swing.JPanel {
     
     private void validarSoloNumeros (java.awt.event.KeyEvent evt){
         char c=evt.getKeyChar(); 
-                      
-          if(Character.isLetter(c)) { 
+        if(Character.isLetter(c)) { 
               getToolkit().beep();                
               evt.consume();                
               JOptionPane.showMessageDialog(null,"Ingresa Solo Numeros");                
           } 
     }
     private void jTextNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNumeroKeyTyped
-
         validarSoloNumeros(evt);
     }//GEN-LAST:event_jTextNumeroKeyTyped
 
@@ -727,8 +775,39 @@ public class Alta extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextPisoKeyTyped
 
     private void jTextCalleFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextCalleFocusLost
-        noVacio(evt);
+        validarNoVacio(evt);
     }//GEN-LAST:event_jTextCalleFocusLost
+
+    private void jTextFrenteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFrenteKeyTyped
+        validarSoloNumeros(evt);
+    }//GEN-LAST:event_jTextFrenteKeyTyped
+
+    private void jTextSuperficieKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextSuperficieKeyTyped
+        validarSoloNumeros(evt);        
+    }//GEN-LAST:event_jTextSuperficieKeyTyped
+
+    private void jTextFondoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFondoKeyTyped
+        validarSoloNumeros(evt);
+    }//GEN-LAST:event_jTextFondoKeyTyped
+
+    private void jTextDormitorioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextDormitorioKeyTyped
+        validarSoloNumeros(evt);        
+    }//GEN-LAST:event_jTextDormitorioKeyTyped
+
+    private void jTextVigenciaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextVigenciaKeyTyped
+        // TODO add your handling code here:
+        validarSoloNumeros(evt);
+    }//GEN-LAST:event_jTextVigenciaKeyTyped
+
+    private void jTextAntiguedadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextAntiguedadKeyTyped
+        // TODO add your handling code here:
+        validarSoloNumeros(evt);
+    }//GEN-LAST:event_jTextAntiguedadKeyTyped
+
+    private void jTextBanioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextBanioKeyTyped
+        // TODO add your handling code here:
+        validarSoloNumeros(evt);
+    }//GEN-LAST:event_jTextBanioKeyTyped
      
     private void altaInmueble (Inmueble casa)
     {                
@@ -868,6 +947,7 @@ public class Alta extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
+    private javax.swing.JFormattedTextField jFtfMontoReserva;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
