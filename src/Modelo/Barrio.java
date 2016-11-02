@@ -74,6 +74,11 @@ public class Barrio  implements java.io.Serializable {
         this.inmuebles = inmuebles;
     }
 
+    @Override
+    public String toString() {
+        return nombre; //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 
 

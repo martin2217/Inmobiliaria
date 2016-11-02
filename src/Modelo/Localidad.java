@@ -60,6 +60,11 @@ public class Localidad  implements java.io.Serializable {
         this.barrios = barrios;
     }
 
+    @Override
+    public String toString() {
+        return nombre; //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 
 

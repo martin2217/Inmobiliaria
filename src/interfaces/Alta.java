@@ -17,7 +17,10 @@ import Modelo.Localidad;
 import Modelo.Propietario;
 import Modelo.Provincia;
 import java.awt.Component;
+import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
@@ -44,15 +47,10 @@ public class Alta extends javax.swing.JPanel {
     public Alta() {
         
         initComponents();
-        llenarComboProvincia();
-        //JComboBox2.insertItemAt("", 0);
-        jComboBox2.removeAllItems();
-        jComboBox3.removeAllItems();
-        //llenarComboLocalidad();
-        //llenarComboBarrio();                        
         jLabel3.setText(Integer.toString(maxIdInmobiliaria()));
-        //jTextCalle.setText(oper.retornarStrign());
-        
+        llenarComboProvincia();        
+        jComboBox2.removeAllItems();
+        jComboBox3.removeAllItems();        
     }
 
     /**
@@ -154,6 +152,8 @@ public class Alta extends javax.swing.JPanel {
             }
         });
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Caracteristicas edilicias"));
+
         jCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox3.setText("Lavadero");
 
@@ -241,6 +241,7 @@ public class Alta extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos edilicios"));
         jPanel3.setMaximumSize(new java.awt.Dimension(725, 235));
         jPanel3.setMinimumSize(new java.awt.Dimension(725, 235));
 
@@ -290,7 +291,6 @@ public class Alta extends javax.swing.JPanel {
         jLabel17.setText("Fondo:");
 
         jComboBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jTextFondo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextFondo.setName("Fondo"); // NOI18N
@@ -374,10 +374,18 @@ public class Alta extends javax.swing.JPanel {
         jLabel6.setText("Barrio");
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         jComboBox4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "L/local-oficina", "C/casa", "D/departamento", "T/terreno", "Q/quinta", "G/galpón" }));
@@ -609,11 +617,6 @@ public class Alta extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
@@ -623,7 +626,13 @@ public class Alta extends javax.swing.JPanel {
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(27, 83, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -641,11 +650,11 @@ public class Alta extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -710,7 +719,7 @@ public class Alta extends javax.swing.JPanel {
 		if(component instanceof  JTextField){
                     if ("".equals(((JTextField) component).getText().trim())){
                        vacio = true;                        
-                       String aux = "El campo "+((JTextField) component).getName().toString()+" es requerido. "+" \n";
+                       String aux = "El campo "+((JTextField) component).getName()+" es requerido. "+" \n";
                        textoValidado.append(aux);
                     }
                 }                
@@ -760,6 +769,7 @@ public class Alta extends javax.swing.JPanel {
               JOptionPane.showMessageDialog(null,"Ingresa Solo Numeros");                
           } 
     }
+    
     private void jTextNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNumeroKeyTyped
         validarSoloNumeros(evt);
     }//GEN-LAST:event_jTextNumeroKeyTyped
@@ -802,20 +812,17 @@ public class Alta extends javax.swing.JPanel {
         // TODO add your handling code here:
         validarSoloNumeros(evt);
     }//GEN-LAST:event_jTextBanioKeyTyped
-     
-    private void altaInmueble (Inmueble casa)
-    {                
-        SessionFactory sesion = ConexionUtil.getSessionFactory();                
-        Session session;
-        session = sesion.openSession();
-        Transaction tx = session.beginTransaction();
-        session.save(casa);
-        tx.commit();
-        session.close();
-        JOptionPane.showMessageDialog(null,"Alta Inmueble correctamente.");
-    }
 
-        
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        llenarComboLocalidad();        
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // Carga los barrios en funcion de lo que se elija 
+        // en el combo de localidad
+        llenarComboBarrio();
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+            
     private int maxIdInmobiliaria (){
         Session session;
         session=ConexionUtil.getSessionFactory().openSession();
@@ -835,8 +842,7 @@ public class Alta extends javax.swing.JPanel {
         
         
     }
-    
-    
+        
     private int maxIdEdificio (){
         Session session;
         session=ConexionUtil.getSessionFactory().openSession();
@@ -855,7 +861,7 @@ public class Alta extends javax.swing.JPanel {
             return 1;                   
     }  
     
-        private int maxIdCliente (){
+    private int maxIdCliente (){
         Session session;
         session=ConexionUtil.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(Cliente.class);
@@ -873,53 +879,43 @@ public class Alta extends javax.swing.JPanel {
             return 1;                   
     } 
     
+    
     private void llenarComboProvincia() {                                      
-        // TODO add your handling code here:
-            //Controlador.ConexionUtil st=new ConexionUtil();
-            //DefaultComboBoxModel modelocombo=new DefaultComboBoxModel();
             Session sess;
             sess=ConexionUtil.getSessionFactory().openSession();
             Criteria crit = sess.createCriteria(Provincia.class);
-            crit.setMaxResults(50);
             List<Provincia> cats = crit.list();
-
             jComboBox1.removeAllItems();
-            cats.stream().forEach((prov) -> {
-                jComboBox1.addItem(""+prov.getNombre());
-        });
+            DefaultComboBoxModel model = new DefaultComboBoxModel(cats.toArray());
+            this.jComboBox1.setModel(model);
+            sess.close();
    }
-    
-   
-      private void llenarComboLocalidad() {                                      
-        // TODO add your handling code here:
-            //Controlador.ConexionUtil st=new ConexionUtil();
-            //DefaultComboBoxModel modelocombo=new DefaultComboBoxModel();
-            Session sess;
-            sess=ConexionUtil.getSessionFactory().openSession();
-            Criteria crit = sess.createCriteria(Localidad.class);
-            crit.setMaxResults(50);
-            List<Localidad> cats = crit.list();
-
-            jComboBox2.removeAllItems();
-            cats.stream().forEach((local) -> {
-                jComboBox2.addItem(""+local.getNombre());
-        });
-   }
-      
-            private void llenarComboBarrio() {                                      
-        // TODO add your handling code here:
-            //Controlador.ConexionUtil st=new ConexionUtil();
-            //DefaultComboBoxModel modelocombo=new DefaultComboBoxModel();
-            Session sess;
-            sess=ConexionUtil.getSessionFactory().openSession();
-            Criteria crit = sess.createCriteria(Barrio.class);
-            crit.setMaxResults(50);
-            List<Barrio> cats = crit.list();
-
+       
+    private void llenarComboLocalidad() {                                      
+        jComboBox2.removeAllItems();            
+        Provincia prov = (Provincia)jComboBox1.getSelectedItem();            
+        Session sess;
+        sess=ConexionUtil.getSessionFactory().openSession();            
+        Criteria crit = sess.createCriteria(Localidad.class)            
+            .add(Restrictions.eq("provincia", prov)
+            );                                                        
+        List<Localidad> cats = crit.list();            
+        DefaultComboBoxModel model = new DefaultComboBoxModel(cats.toArray());
+        this.jComboBox2.setModel(model);            
+        sess.close();
+   }      
+        private void llenarComboBarrio() {  
             jComboBox3.removeAllItems();
-            cats.stream().forEach((barr) -> {
-                jComboBox3.addItem(""+barr.getNombre());                
-        });
+            Localidad loc = (Localidad) jComboBox2.getSelectedItem();
+            Session sess;
+            sess=ConexionUtil.getSessionFactory().openSession();
+            Criteria crit = sess.createCriteria(Barrio.class)
+                    .add(Restrictions.eq("localidad", loc)
+                    );            
+            List<Barrio> cats = crit.list();
+            DefaultComboBoxModel model = new DefaultComboBoxModel(cats.toArray());
+            this.jComboBox3.setModel(model);
+            sess.close();
    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

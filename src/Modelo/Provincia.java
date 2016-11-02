@@ -50,6 +50,11 @@ public class Provincia  implements java.io.Serializable {
         this.localidads = localidads;
     }
 
+    @Override
+    public String toString() {
+        return nombre; //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 
 
