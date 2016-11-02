@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controlador;
+package Gestor;
 
+import Controlador.ConexionUtil;
 import Modelo.Inmueble;
 import javax.swing.JOptionPane;
 import org.hibernate.Session;
@@ -15,9 +16,8 @@ import org.hibernate.Transaction;
  *
  * @author germa
  */
-public class OpeAlta {
-    
-
+public class GestorAlta {
+ 
     public static void altaInmueble (Inmueble casa)
     {                
         SessionFactory sesion = ConexionUtil.getSessionFactory();                
@@ -30,11 +30,4 @@ public class OpeAlta {
         JOptionPane.showMessageDialog(null,"Alta Inmueble correctamente.");
     }
     
-     public String retornarStrign (){
-         
-         return "no me rompas";
-     }
-
-        
-
 }

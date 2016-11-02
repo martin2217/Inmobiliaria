@@ -7,7 +7,7 @@ package interfaces;
 
 //import javax.swing.JPanel;
 
-import Controlador.OpeAlta;
+import Gestor.GestorAlta;
 import Controlador.ConexionUtil;
 import Modelo.Barrio;
 import Modelo.Cliente;
@@ -17,19 +17,13 @@ import Modelo.Localidad;
 import Modelo.Propietario;
 import Modelo.Provincia;
 import java.awt.Component;
-import static java.sql.JDBCType.NULL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import static javassist.CtMethod.ConstParameter.integer;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
 //import javax.swing.DefaultComboBoxModel;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -704,7 +698,7 @@ public class Alta extends javax.swing.JPanel {
                 null, null, null, null, 
                 null, null, null, null);
         
-        OpeAlta.altaInmueble(aux);        
+        GestorAlta.altaInmueble(aux);        
     }
     
     private boolean validarTextFields (){
