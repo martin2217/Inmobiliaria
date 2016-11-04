@@ -39,7 +39,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jButtonAtras" min="-2" pref="90" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
-                      <Component id="jButtonAltaInmueble" min="-2" pref="116" max="-2" attributes="0"/>
+                      <Component id="jButtonBajaInmueble" min="-2" pref="116" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButtonModificarInmueble" min="-2" pref="114" max="-2" attributes="0"/>
                   </Group>
@@ -60,7 +60,7 @@
                           <Component id="jButtonAtras" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jButtonModificarInmueble" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButtonAltaInmueble" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButtonBajaInmueble" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -153,7 +153,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButtonAltaInmueble">
+    <Component class="javax.swing.JButton" name="jButtonBajaInmueble">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Agency FB" size="18" style="0"/>
@@ -161,7 +161,7 @@
         <Property name="text" type="java.lang.String" value="Eliminar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAltaInmuebleActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBajaInmuebleActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonAtras">
@@ -210,7 +210,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="labelId" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="textFieldId" min="-2" pref="46" max="-2" attributes="0"/>
+                                  <Component id="textField_dormitorio" min="-2" pref="46" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -244,7 +244,7 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="labelId3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="textFieldId3" min="-2" pref="40" max="-2" attributes="0"/>
+                                  <Component id="textField_precio_maximo" min="-2" pref="40" max="-2" attributes="0"/>
                               </Group>
                               <Component id="labelId2" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -285,7 +285,7 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="textFieldId" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="textField_dormitorio" min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="labelId" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -293,7 +293,7 @@
                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="textFieldId3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="textField_precio_maximo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="textField_precio_minimo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="labelId3" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
@@ -320,7 +320,7 @@
             <Property name="text" type="java.lang.String" value="Cantidad de dormitorios"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="textFieldId">
+        <Component class="javax.swing.JTextField" name="textField_dormitorio">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Agency FB" size="18" style="0"/>
@@ -328,8 +328,8 @@
             <Property name="toolTipText" type="java.lang.String" value="Ingrese solo n&#xfa;meros"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="textFieldId.addKeyListener(new KeyAdapter() {&#xa;&#xa;  public void keyTyped(KeyEvent e) {&#xa;    char keyChar = e.getKeyChar();&#xa;    if (!Character.isDigit(keyChar)) {&#xa;        getToolkit().beep();&#xa;        e.consume();&#xa;    }&#xa;  }&#xa;});"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="((AbstractDocument)textFieldId.getDocument()).setDocumentFilter(new LimitadorTextField(2));"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="textField_dormitorio.addKeyListener(new KeyAdapter() {&#xa;&#xa;  public void keyTyped(KeyEvent e) {&#xa;    char keyChar = e.getKeyChar();&#xa;    if (!Character.isDigit(keyChar)) {&#xa;        getToolkit().beep();&#xa;        e.consume();&#xa;    }&#xa;  }&#xa;});"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="((AbstractDocument)textField_dormitorio.getDocument()).setDocumentFilter(new LimitadorTextField(2));"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JComboBox" name="comboBox_provincia">
@@ -343,7 +343,6 @@
           </Properties>
           <Events>
             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboBox_provinciaItemStateChanged"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboBox_provinciaActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox()"/>
@@ -419,7 +418,7 @@
               <Font name="Agency FB" size="18" style="1"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.DefaultComboBoxModel(new String[] {&quot;&quot;})" type="code"/>
+              <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;&quot;, &quot;Local&quot;, &quot;Casa&quot;, &quot;Departamento&quot;, &quot;Terreno&quot;, &quot;Quinta&quot;, &quot;Galp&#xf3;n&quot; })" type="code"/>
             </Property>
           </Properties>
           <Events>
@@ -454,7 +453,7 @@
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="((AbstractDocument)textField_precio_minimo.getDocument()).setDocumentFilter(new LimitadorTextField(15));"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="textFieldId3">
+        <Component class="javax.swing.JTextField" name="textField_precio_maximo">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Agency FB" size="18" style="0"/>
@@ -462,8 +461,8 @@
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="textFieldId3.addKeyListener(new KeyAdapter() {&#xa;&#xa;  public void keyTyped(KeyEvent e) {&#xa;    char keyChar = e.getKeyChar();&#xa;    if (!Character.isDigit(keyChar)) {&#xa;        getToolkit().beep();&#xa;        e.consume();&#xa;    }&#xa;  }&#xa;});"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="((AbstractDocument)textFieldId3.getDocument()).setDocumentFilter(new LimitadorTextField(15));"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="textField_precio_maximo.addKeyListener(new KeyAdapter() {&#xa;&#xa;  public void keyTyped(KeyEvent e) {&#xa;    char keyChar = e.getKeyChar();&#xa;    if (!Character.isDigit(keyChar)) {&#xa;        getToolkit().beep();&#xa;        e.consume();&#xa;    }&#xa;  }&#xa;});"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="((AbstractDocument)textField_precio_maximo.getDocument()).setDocumentFilter(new LimitadorTextField(15));"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="labelId2">
@@ -488,7 +487,7 @@
               <Font name="Agency FB" size="18" style="1"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.DefaultComboBoxModel(new String[] {&quot;&quot;})" type="code"/>
+              <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;&quot;, &quot;Alta&quot;, &quot;Reservado&quot;,&quot;Vendido&quot;})" type="code"/>
             </Property>
           </Properties>
         </Component>

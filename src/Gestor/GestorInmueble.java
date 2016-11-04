@@ -21,24 +21,25 @@ public GestorInmueble() {
 }
     
     
-    public List<Inmueble> buscarInmuebles( String provincia, String localidad, String barrio, String tipo_departamento /*, String cantidad_dormitorio*/ ,String precio_minimo, String precio_maximo, String estado ){
+    public List<Inmueble> buscarInmuebles( String provincia, String localidad, String barrio,String tipo_departamento
+            , String cantidad_dormitorio ,String precio_minimo, String precio_maximo, String estado ){
     // cantidad de dormitorios no existe en ningun ladoooooooooooooooooooooooooooooooooooooooooooooooo
     
         Query query;
      List<Inmueble> retorno_inmueble ;   
      Float pre_min_query;
      Float pre_max_query;
-     if(precio_minimo==null) pre_min_query= 0.0F;
+     if(precio_minimo.equals("")) pre_min_query= 0.0F;
      else pre_min_query= Float.parseFloat(precio_minimo);
-     if(precio_maximo==null) pre_max_query=99999999999.2F;
+     if(precio_maximo.equals("")) pre_max_query=99999999999.2F;
      else pre_max_query= Float.parseFloat(precio_maximo);
      
      
-        if(provincia!=null){
-            if(localidad!=null){
-                if(barrio!=null){
-                    if(tipo_departamento!=null){
-                       if(estado!=null){
+        if(!provincia.equals("")){
+            if(!localidad.equals("")){
+                if(!barrio.equals("")){
+                    if(!tipo_departamento.equals("")){
+                       if(!estado.equals("")){
                            query= dao.getSesion().getNamedQuery("TodosLosFiltrosSeleccionados");
                             query.setParameter("tipoInmueble", tipo_departamento);
                            query.setParameter("nombreProvincia",provincia);
@@ -64,7 +65,7 @@ public GestorInmueble() {
                        }
                     }
                     else{
-                        if(estado!=null){
+                        if(!estado.equals("")){
                          query= dao.getSesion().getNamedQuery("TodosLosFiltrosSeleccionadosMenosTipoInmueble");  
                            query.setParameter("nombreProvincia",provincia);
                             query.setParameter("nombreBarrio", barrio);
@@ -90,9 +91,9 @@ public GestorInmueble() {
                    
                 }
                 else{ // este else es si no selecciono un barrio
-                    if((tipo_departamento!=null)&&(estado!=null)){
+                    if((!tipo_departamento.equals(""))&&(!estado.equals(""))){
                     query= dao.getSesion().getNamedQuery("TodosLosFiltrosSeleccionadosMenosBarrio");
-                            query.setString("tipoInmueble", tipo_departamento);
+                            query.setParameter("tipoInmueble", tipo_departamento);
                            query.setParameter("nobmreProvincia",provincia);          
                             query.setParameter("nombreLocalidad", localidad);
                            query.setParameter("estado",estado);
@@ -100,7 +101,7 @@ public GestorInmueble() {
                            query.setParameter("precioMax", pre_max_query);
                            retorno_inmueble=query.list();
                     }
-                    else if(tipo_departamento!=null){
+                    else if(!tipo_departamento.equals("")){
                         query= dao.getSesion().getNamedQuery("TodosLosFiltrosSeleccionadosMenosBarrioYEstado");
                             query.setParameter("tipoInmueble", tipo_departamento);
                            query.setParameter("nombreProvincia",provincia);          
@@ -110,7 +111,7 @@ public GestorInmueble() {
                            retorno_inmueble=query.list();
                     
                     }
-                    else if(estado!=null){
+                    else if(!estado.equals("")){
                     query= dao.getSesion().getNamedQuery("TodosLosFiltrosSeleccionadosMenosBarrioYTipoDepartamento");
                             
                            query.setParameter("nombreProvincia",provincia);          
@@ -135,7 +136,7 @@ public GestorInmueble() {
             }
             else{ //este else es si no selecciono una localidad por lo tanto no podra seleccionar un barrio
                 
-                if((tipo_departamento!=null)&&(estado!=null)){
+                if((!tipo_departamento.equals(""))&&(!estado.equals(""))){
                     query= dao.getSesion().getNamedQuery("TodosLosFiltrosSeleccionadosMenosLocalidadETC");
                             query.setParameter("tipoInmueble", tipo_departamento);
                            query.setParameter("nombreProvincia",provincia);          
@@ -144,7 +145,7 @@ public GestorInmueble() {
                            query.setParameter("precioMax", pre_max_query);
                            retorno_inmueble=query.list();
                     }
-                    else if(tipo_departamento!=null){
+                    else if(!tipo_departamento.equals("")){
                         query= dao.getSesion().getNamedQuery("TodosLosFiltrosSeleccionadosMenosLocalidadETCYEstado");
                             query.setParameter("tipoInmueble", tipo_departamento);
                            query.setParameter("nombreProvincia",provincia);          
@@ -153,11 +154,11 @@ public GestorInmueble() {
                            retorno_inmueble=query.list();
                     
                     }
-                    else if(estado!=null){
+                    else if(!estado.equals("")){
                     query= dao.getSesion().getNamedQuery("TodosLosFiltrosSeleccionadosMenosLocalidadETCYTipoDepartamento");
                             
                            query.setParameter("nombreProvincia",provincia);
-                           query.setParameter("estadp",estado);
+                           query.setParameter("estado",estado);
                            query.setParameter("precioMin", pre_min_query);
                            query.setParameter("precioMax", pre_max_query);
                            retorno_inmueble=query.list();
@@ -165,7 +166,7 @@ public GestorInmueble() {
                     
                     else{
                            query= dao.getSesion().getNamedQuery("TodosLosFiltrosSeleccionadosMenosLocalidadETCYTipoDepartamentoYEstado");   
-                           query.setString("nombreProvincia",provincia);       
+                           query.setParameter("nombreProvincia",provincia);       
                            query.setParameter("precioMin", pre_min_query);
                            query.setParameter("precioMax", pre_max_query);
                            retorno_inmueble=query.list();
@@ -176,7 +177,7 @@ public GestorInmueble() {
         }
         else{ // este es si no selecciona una provincia por lo tanto no podra seleccionar localidad ni barrio
             
-             if((tipo_departamento!=null)&&(estado!=null)){
+             if((!tipo_departamento.equals(""))&&(!estado.equals(""))){
                     query= dao.getSesion().getNamedQuery("TodosLosFiltrosSeleccionadosMenosProvinciaETC");
                             query.setParameter("tipoInmueble", tipo_departamento);
                            query.setParameter("estado",estado);
@@ -184,7 +185,7 @@ public GestorInmueble() {
                            query.setParameter("precioMax", pre_max_query);
                            retorno_inmueble=query.list();
                     }
-                    else if(tipo_departamento!=null){
+                    else if(!tipo_departamento.equals("")){
                         query= dao.getSesion().getNamedQuery("TodosLosFiltrosSeleccionadosMenosProvinciaETCYEstado");
                             query.setParameter("tipoInmueble", tipo_departamento);
                            query.setParameter("precioMin", pre_min_query);
@@ -192,7 +193,7 @@ public GestorInmueble() {
                            retorno_inmueble=query.list();
                     
                     }
-                    else if(estado!=null){
+                    else if(!estado.equals("")){
                     query= dao.getSesion().getNamedQuery("TodosLosFiltrosSeleccionadosMenosProvinciaETCYTipoDepartamento");
                             
                            query.setParameter("estado",estado);

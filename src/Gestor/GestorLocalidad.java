@@ -24,7 +24,7 @@ Dao dao;
         List<Localidad> localidades=  query.list();
           dao.cerrarConexion(dao.getSesion());
           String[] retorno= new String[localidades.size()+1];
-            retorno[0]= " ";
+            retorno[0]= "";
           int i=1;
           for(Localidad loc: localidades){
           retorno[i]= loc.getNombre();
