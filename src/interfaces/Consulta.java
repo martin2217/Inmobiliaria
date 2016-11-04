@@ -6,17 +6,13 @@
 package interfaces;
 
 import Gestor.*;
-import Modelo.Barrio;
-import Modelo.Inmueble;
-import Modelo.Localidad;
+
 import Modelo.Provincia;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.List;
-import javax.swing.ComboBoxModel;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -487,69 +483,9 @@ public class Consulta extends javax.swing.JPanel {
         else{
             
              
-              for(Inmueble inmuebles : gestor_inmueble.buscarInmuebles(comboBox_provincia.getSelectedItem().toString(),comboBox_ciudad.getSelectedItem().toString(),comboBox_barrio.getSelectedItem().toString(),null,textField_precio_minimo.getText(),null,null)){ 
-           //System.out.print(inmuebles.getBarrio().getLocalidad().getNombre());
-        modelo.addRow(new Object[]{Integer.toString(inmuebles.getIdInmueble()),false,inmuebles.getPropietario().getNombre(),inmuebles.getBarrio().getLocalidad().getNombre(),inmuebles.getDireccion(),Integer.toString(inmuebles.getSuperficie()),Float.toString(inmuebles.getPrecio())});
-        }
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // Llamar a la funcion para rellenar la tabla (devuelve matriz)
-            /*Object estado = comboBoxEstado.getSelectedItem();
-            String textEstado = String.valueOf(estado);
-            Object deporte = comboBoxDeporte.getSelectedItem();
-            String textDeporte= String.valueOf(deporte);
-            Object modalidad = comboBoxModalidad.getSelectedItem();
-            String textModalidad= String.valueOf(modalidad);
-
-            String nombre=textFieldCompetencia.getText();
-
-            if("".equals(textDeporte)){textDeporte=null;}
-            if("".equals(textEstado)){textEstado=null;}
-            if("".equals(textModalidad)){textModalidad=null;}
-
-            if("".equals(textFieldCompetencia.getText())){
-                nombre=null;
-            }
-
-            // Se recuperan las competenciasAux de la base de datos
-            listaprueba = GestorCD.listarCD(nombre, textDeporte,textModalidad,textEstado);
-
-            // Eliminacion de la tabla actual
-            DefaultTableModel modelo=(DefaultTableModel) jTable1.getModel();
-            int filas=jTable1.getRowCount();
-            int i;
-            for (i=0;filas>i; i++) {
-                modelo.removeRow(0);
-            }
-
-            // Se le asignan las competencias recuperadas
-            for(i=0;i < listaprueba.size();i++){
-
-                CompetenciaAux elem=listaprueba.get(i);
-
-                String fila[]=new String[4];
-
-                fila[0]= elem.getNombre();
-                fila[1]= elem.getDeporte();
-                fila[2]= elem.getModalidad();
-                fila[3]= elem.getEstado();
-
-                modelo.addRow(fila);
-            }
-            jTable1.setModel(modelo);
-
-            if(jTable1.getRowCount()==0){
-                JOptionPane.showMessageDialog(null,"No se han encontrado resultados.",
-                    "Error", JOptionPane.INFORMATION_MESSAGE);
-            }*/
+            gestor_inmueble.buscarInmuebles(comboBox_provincia.getSelectedItem().toString(),comboBox_ciudad.getSelectedItem().toString(),comboBox_barrio.getSelectedItem().toString(),null,textField_precio_minimo.getText(),null,null).stream().forEach((inmuebles) -> {
+                modelo.addRow(new Object[]{Integer.toString(inmuebles.getIdInmueble()),false,inmuebles.getPropietario().getNombre(),inmuebles.getBarrio().getLocalidad().getNombre(),inmuebles.getDireccion(),Integer.toString(inmuebles.getSuperficie()),Float.toString(inmuebles.getPrecio())});
+            });
         }
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 

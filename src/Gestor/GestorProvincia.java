@@ -7,13 +7,10 @@
 package Gestor;
 
 import Controlador.Dao;
-import Modelo.Barrio;
-import Modelo.Localidad;
+
 import Modelo.Provincia;
 import java.util.List;
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Example;
-import org.hibernate.criterion.Restrictions;
+
 
 /**
  *
@@ -22,7 +19,7 @@ import org.hibernate.criterion.Restrictions;
 public class GestorProvincia {
 Dao dao;
     public GestorProvincia() {
-    dao= new Dao();
+    dao = new Dao();
     }
     
     public List<Provincia> buscarProvincia(){

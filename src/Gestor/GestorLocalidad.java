@@ -11,16 +11,16 @@ import org.hibernate.Query;
  *
  * @author Pc
  */
-public class GestorLocalidad {
+public final class GestorLocalidad {
 Dao dao;
     public GestorLocalidad() {
+     
     dao= new Dao();
-    
     }
      public String[] buscarLocalidadesPorProvincia(String provincia){
          
         Query query= dao.getSesion().getNamedQuery("LocalidadesDeUnaProvincia");
-        query.setString(0, provincia);
+        query.setParameter("nombreLocalidad", provincia);
         List<Localidad> localidades=  query.list();
           dao.cerrarConexion(dao.getSesion());
           String[] retorno= new String[localidades.size()+1];
