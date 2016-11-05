@@ -5,6 +5,7 @@
  */
 package interfaces;
 
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.net.URL;
@@ -32,6 +33,8 @@ public class GestorVentanas extends javax.swing.JFrame {
      */
     private GestorVentanas() {
         initComponents();
+        this.setSize(new Dimension(800,620));
+        this.setMinimumSize(new Dimension(800,620));
     }
     
     private JPanel menu;
@@ -39,6 +42,12 @@ public class GestorVentanas extends javax.swing.JFrame {
     private JPanel altaInmueble;
     private JPanel aux;
     
+    
+    //redimensiona la ventana
+    private void redimensiona_menu (){
+        this.setSize(new Dimension(800,620));        
+        this.setLocationRelativeTo(null);
+    } 
     
     // No usado aún
     public void limpiar(){
@@ -53,6 +62,7 @@ public class GestorVentanas extends javax.swing.JFrame {
         repaint();
     }
     public void menuVolver(){
+        redimensiona_menu();
         menu.setVisible(true);
         revalidate();
         repaint();
@@ -63,10 +73,12 @@ public class GestorVentanas extends javax.swing.JFrame {
     }
     
     public void altaInmueble(){
+        this.setSize(new Dimension(1100,620));
+        this.setLocationRelativeTo(null);
         altaInmueble= new Alta();
-        add(altaInmueble);
+        add(altaInmueble);        
         revalidate();
-        repaint();
+        repaint();        
     }
     
     public void consultaInmueble(){
