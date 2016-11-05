@@ -4,25 +4,22 @@ package Controlador;
 
 import Modelo.Cliente;
 import Modelo.Inmueble;
-import Modelo.Provincia;
-import java.util.Iterator;
-import java.util.List;
-import javax.swing.DefaultListModel;
+
 import javax.swing.JOptionPane;
-import org.hibernate.Query;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-
-public class Dao {
+ 
+public  final class Dao {
 
     
     private final  SessionFactory sesion;
     
     
     
-    public Dao(){
+    public  Dao(){
     
 
     // creo y abro la sesion 

@@ -15,35 +15,35 @@ import org.hibernate.Query;
  *
  * @author Pc
  */
-public class GestorBarrio {
+public   class GestorBarrio {
 Dao dao;
     public GestorBarrio() {
+  
     dao= new Dao();
-    
     }
     
     
-     public String[] buscarBarrioPorCiudad(String localidad){
-    
-      Query query= dao.getSesion().getNamedQuery("LocalidadesDeUnaLocalidad");
-        query.setString(0, localidad);
+    public String[] buscarBarrioPorCiudad(String localidad){
+        
+        Query query= dao.getSesion().getNamedQuery("LocalidadesDeUnaLocalidad");
+        query.setParameter("nombreBarrio", localidad);
         List<Barrio> barrios=  query.list();
-          dao.cerrarConexion(dao.getSesion());
-          String[] retorno= new String[barrios.size()+1];
-            retorno[0]= " ";
-          int i=1;
-          for(Barrio bar: barrios){
-          retorno[i]= bar.getNombre();
-          i++;
-          }
-          
-          
-          return retorno;
-       
-         
-         
-         
-         
+        dao.cerrarConexion(dao.getSesion());
+        String[] retorno= new String[barrios.size()+1];
+        retorno[0]= "";
+        int i=1;
+        for(Barrio bar: barrios){
+            retorno[i]= bar.getNombre();
+            i++;
+        }
+        
+        
+        return retorno;
+        
+        
+        
+        
+        
     }
     
     

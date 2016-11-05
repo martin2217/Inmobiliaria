@@ -28,10 +28,10 @@
         </set>
     </class>
     
-     <query name="LocalidadesDeUnaLocalidad"><![CDATA[
+    <query name="LocalidadesDeUnaLocalidad"><![CDATA[
 
          SELECT bar FROM Barrio bar
-         WHERE bar.localidad.nombre=?
+         WHERE bar.localidad.nombre= :nombreBarrio
  
   ]]></query>
     

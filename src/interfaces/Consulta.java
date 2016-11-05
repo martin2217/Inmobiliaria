@@ -6,17 +6,15 @@
 package interfaces;
 
 import Gestor.*;
-import Modelo.Barrio;
 import Modelo.Inmueble;
-import Modelo.Localidad;
+
 import Modelo.Provincia;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
-import javax.swing.ComboBoxModel;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -77,11 +75,11 @@ public class Consulta extends javax.swing.JPanel {
         jButtonModificarInmueble = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButtonAltaInmueble = new javax.swing.JButton();
+        jButtonBajaInmueble = new javax.swing.JButton();
         jButtonAtras = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         labelId = new javax.swing.JLabel();
-        textFieldId = new javax.swing.JTextField();
+        textField_dormitorio = new javax.swing.JTextField();
         comboBox_provincia = new javax.swing.JComboBox();
         comboBox_ciudad = new javax.swing.JComboBox();
         comboBox_barrio = new javax.swing.JComboBox();
@@ -93,7 +91,7 @@ public class Consulta extends javax.swing.JPanel {
         label4 = new javax.swing.JLabel();
         labelId1 = new javax.swing.JLabel();
         textField_precio_minimo = new javax.swing.JTextField();
-        textFieldId3 = new javax.swing.JTextField();
+        textField_precio_maximo = new javax.swing.JTextField();
         labelId2 = new javax.swing.JLabel();
         labelId3 = new javax.swing.JLabel();
         comboBox_estado = new javax.swing.JComboBox();
@@ -144,11 +142,11 @@ public class Consulta extends javax.swing.JPanel {
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
-        jButtonAltaInmueble.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
-        jButtonAltaInmueble.setText("Eliminar");
-        jButtonAltaInmueble.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBajaInmueble.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
+        jButtonBajaInmueble.setText("Eliminar");
+        jButtonBajaInmueble.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAltaInmuebleActionPerformed(evt);
+                jButtonBajaInmuebleActionPerformed(evt);
             }
         });
 
@@ -166,9 +164,9 @@ public class Consulta extends javax.swing.JPanel {
         labelId.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         labelId.setText("Cantidad de dormitorios");
 
-        textFieldId.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
-        textFieldId.setToolTipText("Ingrese solo números");
-        ((AbstractDocument)textFieldId.getDocument()).setDocumentFilter(new LimitadorTextField(2));
+        textField_dormitorio.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
+        textField_dormitorio.setToolTipText("Ingrese solo números");
+        ((AbstractDocument)textField_dormitorio.getDocument()).setDocumentFilter(new LimitadorTextField(2));
 
         /*String[] listaNombresDeportes = gestor.GestorCD.getListaDeportes();
         String[] listaND= new String[listaNombresDeportes.length+1];
@@ -185,11 +183,6 @@ public class Consulta extends javax.swing.JPanel {
         comboBox_provincia.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBox_provinciaItemStateChanged(evt);
-            }
-        });
-        comboBox_provincia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBox_provinciaActionPerformed(evt);
             }
         });
 
@@ -232,7 +225,7 @@ public class Consulta extends javax.swing.JPanel {
         });
 
         comboBox_tipo_depto.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        comboBox_tipo_depto.setModel(new javax.swing.DefaultComboBoxModel(new String[] {""}));
+        comboBox_tipo_depto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Local", "Casa", "Departamento", "Terreno", "Quinta", "Galpón" }));
         comboBox_tipo_depto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBox_tipo_deptoActionPerformed(evt);
@@ -249,9 +242,9 @@ public class Consulta extends javax.swing.JPanel {
         textField_precio_minimo.setToolTipText("");
         ((AbstractDocument)textField_precio_minimo.getDocument()).setDocumentFilter(new LimitadorTextField(15));
 
-        textFieldId3.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
-        textFieldId3.setToolTipText("");
-        ((AbstractDocument)textFieldId3.getDocument()).setDocumentFilter(new LimitadorTextField(15));
+        textField_precio_maximo.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
+        textField_precio_maximo.setToolTipText("");
+        ((AbstractDocument)textField_precio_maximo.getDocument()).setDocumentFilter(new LimitadorTextField(15));
 
         labelId2.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         labelId2.setText("Precio");
@@ -260,7 +253,7 @@ public class Consulta extends javax.swing.JPanel {
         labelId3.setText("Max");
 
         comboBox_estado.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        comboBox_estado.setModel(new javax.swing.DefaultComboBoxModel(new String[] {""}));
+        comboBox_estado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Alta", "Reservado","Vendido"}));
 
         label5.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         label5.setText("Estado");
@@ -285,7 +278,7 @@ public class Consulta extends javax.swing.JPanel {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(labelId)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(textField_dormitorio, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -311,7 +304,7 @@ public class Consulta extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(labelId3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textFieldId3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(textField_precio_maximo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(labelId2))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -341,14 +334,14 @@ public class Consulta extends javax.swing.JPanel {
                     .addComponent(label4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(textFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textField_dormitorio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelId, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(labelId2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(textFieldId3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textField_precio_maximo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(textField_precio_minimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(labelId3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(labelId1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -361,7 +354,7 @@ public class Consulta extends javax.swing.JPanel {
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        textFieldId.addKeyListener(new KeyAdapter() {
+        textField_dormitorio.addKeyListener(new KeyAdapter() {
 
             public void keyTyped(KeyEvent e) {
                 char keyChar = e.getKeyChar();
@@ -392,7 +385,7 @@ public class Consulta extends javax.swing.JPanel {
                 // Buscar en la cadena al eliminar
             }
         });
-        textFieldId3.addKeyListener(new KeyAdapter() {
+        textField_precio_maximo.addKeyListener(new KeyAdapter() {
 
             public void keyTyped(KeyEvent e) {
                 char keyChar = e.getKeyChar();
@@ -418,7 +411,7 @@ public class Consulta extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(167, 167, 167)
-                        .addComponent(jButtonAltaInmueble, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonBajaInmueble, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonModificarInmueble, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(27, Short.MAX_VALUE))
@@ -435,7 +428,7 @@ public class Consulta extends javax.swing.JPanel {
                             .addComponent(jButtonAtras)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jButtonModificarInmueble)
-                                .addComponent(jButtonAltaInmueble))))
+                                .addComponent(jButtonBajaInmueble))))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(72, 72, 72))
         );
@@ -455,20 +448,7 @@ public class Consulta extends javax.swing.JPanel {
         }
 
         else{
-
-            String nombre=jTable1.getValueAt(row, 0).toString();
-            String deporte=jTable1.getValueAt(row, 1).toString();
-            String modalidad=jTable1.getValueAt(row, 2).toString();
-            String estado=jTable1.getValueAt(row, 3).toString();
-            
-            /*
-            int idComp=GestorCD.obtenerIDCD(nombre);
-
-            CompetenciaAux elem=listaprueba.get(row);
-
-            CompetenciaAux compAux= new CompetenciaAux(estado, deporte, modalidad,
-                nombre, elem.getFormaPuntuacion(), idComp);
-            GestorVentanas.get().verCompetencia(compAux);*/
+            // Ir a la pantalla de modificar
         }
 
     }//GEN-LAST:event_jButtonModificarInmuebleActionPerformed
@@ -480,95 +460,42 @@ public class Consulta extends javax.swing.JPanel {
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         LimpiarTabla();
-        if(comboBox_provincia.getSelectedIndex()==0 && comboBox_barrio.getSelectedIndex()==0 &&
-            comboBox_ciudad.getSelectedIndex()==0 && textFieldId.getText().isEmpty()){
-            errorFiltros();
-        }
-        else{
-            
-             
-              for(Inmueble inmuebles : gestor_inmueble.buscarInmuebles(comboBox_provincia.getSelectedItem().toString(),comboBox_ciudad.getSelectedItem().toString(),comboBox_barrio.getSelectedItem().toString(),null,textField_precio_minimo.getText(),null,null)){ 
-           //System.out.print(inmuebles.getBarrio().getLocalidad().getNombre());
-        modelo.addRow(new Object[]{Integer.toString(inmuebles.getIdInmueble()),false,inmuebles.getPropietario().getNombre(),inmuebles.getBarrio().getLocalidad().getNombre(),inmuebles.getDireccion(),Integer.toString(inmuebles.getSuperficie()),Float.toString(inmuebles.getPrecio())});
-        }
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // Llamar a la funcion para rellenar la tabla (devuelve matriz)
-            /*Object estado = comboBoxEstado.getSelectedItem();
-            String textEstado = String.valueOf(estado);
-            Object deporte = comboBoxDeporte.getSelectedItem();
-            String textDeporte= String.valueOf(deporte);
-            Object modalidad = comboBoxModalidad.getSelectedItem();
-            String textModalidad= String.valueOf(modalidad);
-
-            String nombre=textFieldCompetencia.getText();
-
-            if("".equals(textDeporte)){textDeporte=null;}
-            if("".equals(textEstado)){textEstado=null;}
-            if("".equals(textModalidad)){textModalidad=null;}
-
-            if("".equals(textFieldCompetencia.getText())){
-                nombre=null;
-            }
-
-            // Se recuperan las competenciasAux de la base de datos
-            listaprueba = GestorCD.listarCD(nombre, textDeporte,textModalidad,textEstado);
-
-            // Eliminacion de la tabla actual
-            DefaultTableModel modelo=(DefaultTableModel) jTable1.getModel();
-            int filas=jTable1.getRowCount();
-            int i;
-            for (i=0;filas>i; i++) {
-                modelo.removeRow(0);
-            }
-
-            // Se le asignan las competencias recuperadas
-            for(i=0;i < listaprueba.size();i++){
-
-                CompetenciaAux elem=listaprueba.get(i);
-
-                String fila[]=new String[4];
-
-                fila[0]= elem.getNombre();
-                fila[1]= elem.getDeporte();
-                fila[2]= elem.getModalidad();
-                fila[3]= elem.getEstado();
-
-                modelo.addRow(fila);
-            }
-            jTable1.setModel(modelo);
-
-            if(jTable1.getRowCount()==0){
-                JOptionPane.showMessageDialog(null,"No se han encontrado resultados.",
-                    "Error", JOptionPane.INFORMATION_MESSAGE);
-            }*/
-        }
+        
+        List<Inmueble> lista= gestor_inmueble.buscarInmuebles(comboBox_provincia.getSelectedItem().toString(),
+                comboBox_ciudad.getSelectedItem().toString(),comboBox_barrio.getSelectedItem().toString(),
+                comboBox_tipo_depto.getSelectedItem().toString(), textField_dormitorio.getText(),
+                textField_precio_minimo.getText(), textField_precio_maximo.getText(),comboBox_estado.getSelectedItem().toString());
+        lista.stream().forEach((inmuebles) -> {modelo.addRow(
+                        new Object[]{Integer.toString(inmuebles.getIdInmueble()),false,
+                            inmuebles.getPropietario().getNombre(),inmuebles.getBarrio().getLocalidad().getNombre(),
+                            inmuebles.getDireccion(),Integer.toString(inmuebles.getSuperficie()),Float.toString(inmuebles.getPrecio())});
+                });
+        
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
-    private void jButtonAltaInmuebleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaInmuebleActionPerformed
+    private void jButtonBajaInmuebleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajaInmuebleActionPerformed
       
         // aca elimino todos los seleccionados del modelo y de la base de datos
         
-         modelo = (DefaultTableModel)jTable1.getModel();  
-          for(int i=0; i<modelo.getRowCount(); i++){
-            
-          if((Boolean)modelo.getValueAt(i, 1).equals(Boolean.TRUE)){
-          
-              gestor_inmueble.borrarInmueble(Integer.valueOf(modelo.getValueAt(i, 0).toString()));
-               modelo.removeRow(i);
-               i--;
-             }
+        int row = jTable1.getSelectedRow();
+
+        if(row == -1){
+            JOptionPane.showMessageDialog(null,"Debe seleccionar un inmueble",
+                "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else {
+            modelo = (DefaultTableModel)jTable1.getModel();
+            for(int i=0; i<modelo.getRowCount(); i++){
+                
+                if((Boolean)modelo.getValueAt(i, 1).equals(Boolean.TRUE)){
+                    gestor_inmueble.borrarInmueble(Integer.valueOf(modelo.getValueAt(i, 0).toString()));
+                    modelo.removeRow(i);
+                    i--;
                 }
+            }
+        }
         
-    }//GEN-LAST:event_jButtonAltaInmuebleActionPerformed
+    }//GEN-LAST:event_jButtonBajaInmuebleActionPerformed
 
     private void comboBox_tipo_deptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_tipo_deptoActionPerformed
         // TODO add your handling code here:
@@ -578,22 +505,17 @@ public class Consulta extends javax.swing.JPanel {
    
     }//GEN-LAST:event_comboBox_ciudadActionPerformed
 
-    private void comboBox_provinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_provinciaActionPerformed
-   
-        
-    }//GEN-LAST:event_comboBox_provinciaActionPerformed
-
     private void comboBox_provinciaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBox_provinciaItemStateChanged
         if(evt.getStateChange()== ItemEvent.SELECTED){
-        if(comboBox_provincia.getSelectedIndex()>0){
-         comboBox_barrio.setModel(new DefaultComboBoxModel());
-        comboBox_ciudad.setModel(new DefaultComboBoxModel(gestor_localidad.buscarLocalidadesPorProvincia(comboBox_provincia.getSelectedItem().toString())));
-        
-        }
-        else{
-        comboBox_ciudad.setModel(new DefaultComboBoxModel());
-         comboBox_barrio.setModel(new DefaultComboBoxModel());
-        }
+            if(comboBox_provincia.getSelectedIndex()>0){
+                comboBox_barrio.setModel(new DefaultComboBoxModel(new String[]{""}));
+                comboBox_ciudad.setModel(new DefaultComboBoxModel(gestor_localidad.buscarLocalidadesPorProvincia(comboBox_provincia.getSelectedItem().toString())));
+                
+            }
+            else{
+                comboBox_ciudad.setModel(new DefaultComboBoxModel(new String[]{""}));
+                comboBox_barrio.setModel(new DefaultComboBoxModel(new String[]{""}));
+            }
         }
     }//GEN-LAST:event_comboBox_provinciaItemStateChanged
 
@@ -603,20 +525,17 @@ public class Consulta extends javax.swing.JPanel {
 
     private void comboBox_ciudadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBox_ciudadItemStateChanged
       
-           if(evt.getStateChange()== ItemEvent.SELECTED){
-        if(comboBox_ciudad.getSelectedIndex()>0){
-        comboBox_barrio.setModel(new DefaultComboBoxModel(gestor_barrio.buscarBarrioPorCiudad(comboBox_ciudad.getSelectedItem().toString())));
+        if(evt.getStateChange()== ItemEvent.SELECTED){
+            if(comboBox_ciudad.getSelectedIndex()>0){
+                comboBox_barrio.setModel(new DefaultComboBoxModel(gestor_barrio.buscarBarrioPorCiudad(comboBox_ciudad.getSelectedItem().toString())));
+            }
+            else{
+                comboBox_barrio.setModel(new DefaultComboBoxModel(new String[]{""}));
+            }
         }
-        else{
-        comboBox_barrio.setModel(new DefaultComboBoxModel());
-        }
-        }
-        
         
     }//GEN-LAST:event_comboBox_ciudadItemStateChanged
 
-    
-    
     
     
     private void errorFiltros(){
@@ -636,8 +555,8 @@ public class Consulta extends javax.swing.JPanel {
     private javax.swing.JComboBox comboBox_estado;
     private javax.swing.JComboBox comboBox_provincia;
     private javax.swing.JComboBox comboBox_tipo_depto;
-    private javax.swing.JButton jButtonAltaInmueble;
     private javax.swing.JButton jButtonAtras;
+    private javax.swing.JButton jButtonBajaInmueble;
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonModificarInmueble;
     private javax.swing.JPanel jPanel2;
@@ -652,8 +571,8 @@ public class Consulta extends javax.swing.JPanel {
     private javax.swing.JLabel labelId1;
     private javax.swing.JLabel labelId2;
     private javax.swing.JLabel labelId3;
-    private javax.swing.JTextField textFieldId;
-    private javax.swing.JTextField textFieldId3;
+    private javax.swing.JTextField textField_dormitorio;
+    private javax.swing.JTextField textField_precio_maximo;
     private javax.swing.JTextField textField_precio_minimo;
     // End of variables declaration//GEN-END:variables
 }

@@ -76,44 +76,44 @@
     <query name="TodosLosFiltrosSeleccionados"><![CDATA[
 
          SELECT inm FROM Inmueble inm
-         WHERE inm.barrio.nombre=? 
-         AND inm.barrio.localidad.nombre=?
-         AND inm.barrio.localidad.provincia.nombre=?
-         AND inm.tipoInmueble=?
-         AND inm.precio BETWEEN ? AND ?
-         AND inm.estado=?
+         WHERE inm.barrio.nombre= :nombreBarrio
+         AND inm.barrio.localidad.nombre= :nombreLocalidad
+         AND inm.barrio.localidad.provincia.nombre= :nombreProvincia
+         AND inm.tipoInmueble= :tipoInmueble
+         AND inm.precio BETWEEN :precioMin AND :precioMax
+         AND inm.estado= :estado
   
   ]]></query>
   
    <query name="TodosLosFiltrosSeleccionadosMenosEstado"><![CDATA[
 
          SELECT inm FROM Inmueble inm
-         WHERE inm.barrio.nombre=? 
-         AND inm.barrio.localidad.nombre=?
-         AND inm.barrio.localidad.provincia.nombre=?
-         AND inm.tipoInmueble=?
-         AND inm.precio BETWEEN ? AND ?
+         WHERE inm.barrio.nombre= :nombreBarrio 
+         AND inm.barrio.localidad.nombre= :nombreLocalidad
+         AND inm.barrio.localidad.provincia.nombre= :nombreProvincia
+         AND inm.tipoInmueble= :tipoInmueble
+         AND inm.precio BETWEEN :precioMin AND :precioMax
          
   ]]></query>
   
   <query name="TodosLosFiltrosSeleccionadosMenosTipoInmueble"><![CDATA[
 
          SELECT inm FROM Inmueble inm
-         WHERE inm.barrio.nombre=? 
-         AND inm.barrio.localidad.nombre=?
-         AND inm.barrio.localidad.provincia.nombre=?   
-         AND inm.precio BETWEEN ? AND ?
-         AND inm.estado=?
+         WHERE inm.barrio.nombre= :nombreBarrio
+         AND inm.barrio.localidad.nombre= :nombreLocalidad
+         AND inm.barrio.localidad.provincia.nombre= :nombreProvincia
+         AND inm.precio BETWEEN :precioMin AND :precioMax
+         AND inm.estado= :estado
   
   ]]></query>
   
    <query name="TodosLosFiltrosSeleccionadosMenosTipoInmuebleYEstado"><![CDATA[
 
          SELECT inm FROM Inmueble inm
-         WHERE inm.barrio.nombre=? 
-         AND inm.barrio.localidad.nombre=?
-         AND inm.barrio.localidad.provincia.nombre=?   
-         AND inm.precio BETWEEN ? AND ?
+         WHERE inm.barrio.nombre= :nombreBarrio
+         AND inm.barrio.localidad.nombre= :nombreLocalidad
+         AND inm.barrio.localidad.provincia.nombre= :nombreProvincia
+         AND inm.precio BETWEEN :precioMin AND :precioMax
          
   ]]></query>
     
@@ -121,11 +121,11 @@
     <query name="TodosLosFiltrosSeleccionadosMenosBarrio"><![CDATA[
 
          SELECT inm FROM Inmueble inm
-         WHERE inm.barrio.localidad.nombre=?
-         AND inm.barrio.localidad.provincia.nombre=?
-         AND inm.tipoInmueble=?
-         AND inm.precio BETWEEN ? AND ?
-         AND inm.estado=?
+         WHERE inm.barrio.localidad.nombre= :nombreLocalidad
+         AND inm.barrio.localidad.provincia.nombre= :nombreProvincia
+         AND inm.tipoInmueble= :tipoInmueble
+         AND inm.precio BETWEEN :precioMin AND :precioMax
+         AND inm.estado= :estado
   
   ]]></query>
   
@@ -133,10 +133,10 @@
    <query name="TodosLosFiltrosSeleccionadosMenosBarrioYEstado"><![CDATA[
 
          SELECT inm FROM Inmueble inm
-         WHERE inm.barrio.localidad.nombre=?
-         AND inm.barrio.localidad.provincia.nombre=?
-         AND inm.tipoInmueble=?
-         AND inm.precio BETWEEN ? AND ?
+         WHERE inm.barrio.localidad.nombre= :nombreLocalidad
+         AND inm.barrio.localidad.provincia.nombre= :nombreProvincia
+         AND inm.tipoInmueble= :tipoInmueble
+         AND inm.precio BETWEEN :precioMin AND :precioMax
          
  
   ]]></query>
@@ -144,10 +144,10 @@
       <query name="TodosLosFiltrosSeleccionadosMenosBarrioYTipoDepartamento"><![CDATA[
 
          SELECT inm FROM Inmueble inm
-         WHERE inm.barrio.localidad.nombre=?
-         AND inm.barrio.localidad.provincia.nombre=?
-         AND inm.precio BETWEEN ? AND ?
-         AND inm.estado=?
+         WHERE inm.barrio.localidad.nombre= :nombreLocalidad
+         AND inm.barrio.localidad.provincia.nombre= :nombreProvincia
+         AND inm.precio BETWEEN :precioMin AND :precioMax
+         AND inm.estado= :estado
   
 
   ]]></query>
@@ -155,9 +155,9 @@
   <query name="TodosLosFiltrosSeleccionadosMenosBarrioYTipoDepartamentoYEstado"><![CDATA[
 
          SELECT inm FROM Inmueble inm
-         WHERE inm.barrio.localidad.nombre=?
-         AND inm.barrio.localidad.provincia.nombre=?
-         AND inm.precio BETWEEN ? AND ?
+         WHERE inm.barrio.localidad.nombre= :nombreLocalidad
+         AND inm.barrio.localidad.provincia.nombre= :nombreProvincia
+         AND inm.precio BETWEEN :precioMin AND :precioMax
           
   
   ]]></query>
@@ -165,36 +165,36 @@
      <query name="TodosLosFiltrosSeleccionadosMenosLocalidadETC"><![CDATA[
 
          SELECT inm FROM Inmueble inm
-         WHERE inm.barrio.localidad.provincia.nombre=?
-         AND inm.tipoInmueble=?
-         AND inm.precio BETWEEN ? AND ?
-         AND inm.estado=?
+         WHERE inm.barrio.localidad.provincia.nombre= :nombreProvincia
+         AND inm.tipoInmueble= :tipoInmueble
+         AND inm.precio BETWEEN :precioMin AND :precioMax
+         AND inm.estado= :estado
   
   ]]></query>
       
        <query name="TodosLosFiltrosSeleccionadosMenosLocalidadETCYEstado"><![CDATA[
 
          SELECT inm FROM Inmueble inm
-         WHERE inm.barrio.localidad.provincia.nombre=?
-         AND inm.tipoInmueble=?
-         AND inm.precio BETWEEN ? AND ?
+         WHERE inm.barrio.localidad.provincia.nombre= :nombreProvincia
+         AND inm.tipoInmueble= :tipoInmueble
+         AND inm.precio BETWEEN :precioMin AND :precioMax
  
   ]]></query>
     
       <query name="TodosLosFiltrosSeleccionadosMenosLocalidadETCYTipoDepartamento"><![CDATA[
 
          SELECT inm FROM Inmueble inm
-         WHERE inm.barrio.localidad.provincia.nombre=?
-         AND inm.precio BETWEEN ? AND ?
-         AND inm.estado=?
+         WHERE inm.barrio.localidad.provincia.nombre= :nombreProvincia
+         AND inm.precio BETWEEN :precioMin AND :precioMax
+         AND inm.estado= :estado
 
   ]]></query>
     
      <query name="TodosLosFiltrosSeleccionadosMenosLocalidadETCYTipoDepartamentoYEstado"><![CDATA[
 
          SELECT inm FROM Inmueble inm
-         WHERE inm.barrio.localidad.provincia.nombre=?
-         AND inm.precio BETWEEN ? AND ?
+         WHERE inm.barrio.localidad.provincia.nombre= :nombreProvincia
+         AND inm.precio BETWEEN :precioMin AND :precioMax
        
 
   ]]></query>
@@ -202,9 +202,9 @@
     <query name="TodosLosFiltrosSeleccionadosMenosProvinciaETC"><![CDATA[
 
          SELECT inm FROM Inmueble inm
-         WHERE  inm.tipoInmueble=?
-         AND inm.precio BETWEEN ? AND ?
-         AND inm.estado=?
+         WHERE  inm.tipoInmueble= :tipoInmueble
+         AND inm.precio BETWEEN :precioMin AND :precioMax
+         AND inm.estado= :estado
   
 
   ]]></query>
@@ -212,23 +212,23 @@
      <query name="TodosLosFiltrosSeleccionadosMenosProvinciaETCYTipoDepartamento"><![CDATA[
 
          SELECT inm FROM Inmueble inm
-         WHERE inm.precio BETWEEN ? AND ?
-         AND inm.estado=?
+         WHERE inm.precio BETWEEN :precioMin AND :precioMax
+         AND inm.estado= :estado
 
   ]]></query>
     
      <query name="TodosLosFiltrosSeleccionadosMenosProvinciaETCYEstado"><![CDATA[
 
          SELECT inm FROM Inmueble inm
-         WHERE  inm.tipoInmueble=?
-         AND inm.precio BETWEEN ? AND ?
+         WHERE  inm.tipoInmueble= :tipoInmueble
+         AND inm.precio BETWEEN :precioMin AND :precioMax
 
   ]]></query>
   
      <query name="TodosLosFiltrosSeleccionadosMenosProvinciaETCYTipoDepartamentoYEstado"><![CDATA[
 
          SELECT inm FROM Inmueble inm
-         WHERE inm.precio BETWEEN ? AND ?
+         WHERE inm.precio BETWEEN :precioMin AND :precioMax
  
   ]]></query>
     
