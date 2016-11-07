@@ -768,6 +768,7 @@ public class Alta extends javax.swing.JPanel {
         else{
             alta();
             JOptionPane.showMessageDialog(null, "Operacion realizada exitosamente.", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+            /* ver si poner una ventana volver*/
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
