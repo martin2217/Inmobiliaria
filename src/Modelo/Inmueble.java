@@ -15,7 +15,7 @@ public class Inmueble  implements java.io.Serializable {
      private int idInmueble;
      private Cliente cliente;
      private Propietario propietario;
-     private Edificio edificio;
+
      private Barrio barrio;
      private String calle;
      private Integer nroCalle;
@@ -23,7 +23,7 @@ public class Inmueble  implements java.io.Serializable {
      private Integer depto;
      private String tipoInmueble;
      private Float precio;
-     private Integer orientacion;
+     private String orientacion;
      private Integer frente;
      private Integer fondo;
      private Integer superficie;
@@ -33,6 +33,33 @@ public class Inmueble  implements java.io.Serializable {
      private Integer montoVenta;
      private Date fechaAlta;
      private Set consultas = new HashSet(0);
+     
+    // estas dos propiedades faltaban y aca las agrego
+     private Boolean estado_vendido;
+     private Integer cant_dormitorios;
+
+   
+     
+     // estas son las propiedades agregadas de edificio a inmueble
+     private Boolean propiedadHorizontal;
+     private Float antiguedad;
+     // no va esta repetida private Integer superficie;
+     private Integer banios;
+     private Boolean garage;
+     private Boolean patio;
+     private Boolean aguaCorriente;
+     private Boolean piscina;
+     private Boolean cloacas;
+     private Boolean gasNatural;
+     private Boolean pavimento;
+     private Boolean lavadero;
+     private Boolean aguaCaliente;
+     private String telefono;
+     
+     
+
+    
+     
 
     public Inmueble() {
     }
@@ -43,11 +70,11 @@ public class Inmueble  implements java.io.Serializable {
         this.propietario = propietario;
         this.barrio = barrio;
     }
-    public Inmueble(int idInmueble, Cliente cliente, Propietario propietario, Edificio edificio, Barrio barrio, String calle, Integer nroCalle, Integer piso, Integer depto, String tipoInmueble, Float precio, Integer orientacion, Integer frente, Integer fondo, Integer superficie, String estado, Integer montoReserva, Integer vigenciaReserva, Integer montoVenta, Date fechaAlta, Set consultas) {
+    public Inmueble(int idInmueble, Cliente cliente, Propietario propietario,  Barrio barrio, String calle, Integer nroCalle, Integer piso, Integer depto, String tipoInmueble, Float precio, String orientacion, Integer frente, Integer fondo, Integer superficie, String estado, Integer montoReserva, Integer vigenciaReserva, Integer montoVenta, Date fechaAlta, Set consultas) {
        this.idInmueble = idInmueble;
        this.cliente = cliente;
        this.propietario = propietario;
-       this.edificio = edificio;
+        
        this.barrio = barrio;
        this.calle = calle;
        this.nroCalle = nroCalle;
@@ -68,11 +95,11 @@ public class Inmueble  implements java.io.Serializable {
     }
     
     // ESTE ES EL QUE USAMOS
-    public Inmueble(int idInmueble, Cliente cliente, Propietario propietario, Edificio edificio, Barrio barrio, String calle, Integer nroCalle, Integer piso, Integer depto, String tipoInmueble, Float precio, Integer orientacion, Integer frente, Integer fondo, Integer superficie, String estado, Integer montoReserva, Integer vigenciaReserva, Integer montoVenta, Date fechaAlta) {
+    public Inmueble(int idInmueble, Cliente cliente, Propietario propietario, Barrio barrio, String calle, Integer nroCalle, Integer piso, Integer depto, String tipoInmueble, Float precio, String orientacion, Integer frente, Integer fondo, Integer superficie, String estado, Integer montoReserva, Integer vigenciaReserva, Integer montoVenta, Date fechaAlta) {
        this.idInmueble = idInmueble;
        this.cliente = cliente;
        this.propietario = propietario;
-       this.edificio = edificio;
+       
        this.barrio = barrio;
        this.calle = calle;
        this.nroCalle = nroCalle;
@@ -92,6 +119,14 @@ public class Inmueble  implements java.io.Serializable {
     }
     public String getDireccion(){ 
     return this.getCalle()+this.getNroCalle();
+    }
+
+    public Boolean isEstado_vendido() {
+        return estado_vendido;
+    }
+
+    public void setEstado_vendido(Boolean estado_vendido) {
+        this.estado_vendido = estado_vendido;
     }
    
    
@@ -116,13 +151,7 @@ public class Inmueble  implements java.io.Serializable {
     public void setPropietario(Propietario propietario) {
         this.propietario = propietario;
     }
-    public Edificio getEdificio() {
-        return this.edificio;
-    }
-    
-    public void setEdificio(Edificio edificio) {
-        this.edificio = edificio;
-    }
+  
     public Barrio getBarrio() {
         return this.barrio;
     }
@@ -172,11 +201,11 @@ public class Inmueble  implements java.io.Serializable {
     public void setPrecio(Float precio) {
         this.precio = precio;
     }
-    public Integer getOrientacion() {
+    public String getOrientacion() {
         return this.orientacion;
     }
     
-    public void setOrientacion(Integer orientacion) {
+    public void setOrientacion(String orientacion) {
         this.orientacion = orientacion;
     }
     public Integer getFrente() {
@@ -243,7 +272,122 @@ public class Inmueble  implements java.io.Serializable {
         this.consultas = consultas;
     }
 
+ public Boolean isPropiedadHorizontal() {
+        return propiedadHorizontal;
+    }
 
+    public void setPropiedadHorizontal(Boolean propiedadHorizontal) {
+        this.propiedadHorizontal = propiedadHorizontal;
+    }
+
+    public Float getAntiguedad() {
+        return antiguedad;
+    }
+
+    public void setAntiguedad(Float antiguedad) {
+        this.antiguedad = antiguedad;
+    }
+
+    public Integer getBanios() {
+        return banios;
+    }
+
+    public void setBanios(Integer banios) {
+        this.banios = banios;
+    }
+
+    public Boolean isGarage() {
+        return garage;
+    }
+
+    public void setGarage(Boolean garage) {
+        this.garage = garage;
+    }
+
+    public Boolean isPatio() {
+        return patio;
+    }
+
+    public void setPatio(Boolean patio) {
+        this.patio = patio;
+    }
+
+    public Boolean isAguaCorriente() {
+        return aguaCorriente;
+    }
+
+    public void setAguaCorriente(Boolean aguaCorriente) {
+        this.aguaCorriente = aguaCorriente;
+    }
+
+    public Boolean isPiscina() {
+        return piscina;
+    }
+
+    public void setPiscina(Boolean piscina) {
+        this.piscina = piscina;
+    }
+
+    public Boolean isCloacas() {
+        return cloacas;
+    }
+
+    public void setCloacas(Boolean cloacas) {
+        this.cloacas = cloacas;
+    }
+
+    public Boolean isGasNatural() {
+        return gasNatural;
+    }
+
+    public void setGasNatural(Boolean gasNatural) {
+        this.gasNatural = gasNatural;
+    }
+
+    public Boolean isPavimento() {
+        return pavimento;
+    }
+
+    public void setPavimento(Boolean pavimento) {
+        this.pavimento = pavimento;
+    }
+
+    public Boolean isLavadero() {
+        return lavadero;
+    }
+
+    public void setLavadero(Boolean lavadero) {
+        this.lavadero = lavadero;
+    }
+
+    public Boolean isAguaCaliente() {
+        return aguaCaliente;
+    }
+
+    public void setAguaCaliente(Boolean aguaCaliente) {
+        this.aguaCaliente = aguaCaliente;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+   
+
+    public void setEstado_vendido(boolean estado_vendido) {
+        this.estado_vendido = estado_vendido;
+    }
+
+    public Integer getCant_dormitorios() {
+        return cant_dormitorios;
+    }
+
+    public void setCant_dormitorios(Integer cant_dormitorios) {
+        this.cant_dormitorios = cant_dormitorios;
+    }
 
 
 }

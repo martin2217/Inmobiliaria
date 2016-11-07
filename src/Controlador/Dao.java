@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
  
 public  final class Dao {
@@ -28,7 +29,13 @@ public  final class Dao {
     }
 
     public Session getSesion() {
-        return sesion.openSession();
+           Session nueva=   sesion.openSession();
+        
+        Configuration con= new Configuration();
+        con.configure("hibernate.cfg.xml");
+        
+        
+        return nueva;
     }
   
     

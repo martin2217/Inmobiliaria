@@ -14,9 +14,7 @@
         <many-to-one name="propietario" class="Modelo.Propietario" fetch="select">
             <column name="id_propietario" not-null="true" />
         </many-to-one>
-        <many-to-one name="edificio" class="Modelo.Edificio" fetch="select">
-            <column name="id_edificio" />
-        </many-to-one>
+        
         <many-to-one name="barrio" class="Modelo.Barrio" fetch="select">
             <column name="id_barrio" not-null="true" />
         </many-to-one>
@@ -38,7 +36,7 @@
         <property name="precio" type="java.lang.Float">
             <column name="precio" precision="12" scale="0" />
         </property>
-        <property name="orientacion" type="java.lang.Integer">
+        <property name="orientacion" type="string">
             <column name="orientacion" />
         </property>
         <property name="frente" type="java.lang.Integer">
@@ -65,6 +63,62 @@
         <property name="fechaAlta" type="date">
             <column name="fecha_alta" length="10" />
         </property>
+        
+        
+        <property name="propiedadHorizontal" type="java.lang.Boolean">
+            <column name="propiedadHorizontal" />
+        </property>
+        <property name="antiguedad" type="java.lang.Float">
+            <column name="antiguedad" />
+        </property>
+        
+        <property name="banios" type="java.lang.Integer">
+            <column name="banios" />
+        </property>
+        <property name="garage" type="java.lang.Boolean">
+            <column name="garage" />
+        </property>
+        <property name="patio" type="java.lang.Boolean">
+            <column name="patio" />
+        </property>
+        <property name="aguaCorriente" type="java.lang.Boolean">
+            <column name="agua_corriente" />
+        </property>
+        <property name="piscina" type="java.lang.Boolean">
+            <column name="piscina" />
+        </property>
+        <property name="cloacas" type="java.lang.Boolean">
+            <column name="cloacas" />
+        </property>
+        <property name="gasNatural" type="java.lang.Boolean">
+            <column name="gas_natural" />
+        </property>
+        <property name="pavimento" type="java.lang.Boolean">
+            <column name="pavimento" />
+        </property>
+        <property name="lavadero" type="java.lang.Boolean">
+            <column name="lavadero" />
+        </property>
+        <property name="aguaCaliente" type="java.lang.Boolean">
+            <column name="agua_caliente" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" />
+        </property>
+        
+        
+        <property name="estado_vendido" type="java.lang.Boolean">
+            <column name="estado_vendido" />
+        </property>
+        <property name="cant_dormitorios" type="java.lang.Integer">
+            <column name="cant_dormitorios" />
+        </property>
+        
+        
+        
+        
+        
+        
         <set name="consultas" table="consulta" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_inmueble" not-null="true" />

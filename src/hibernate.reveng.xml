@@ -10,7 +10,7 @@
   <table-filter match-name="cliente"/>
   <table-filter match-name="inmueble"/>
   <table-filter match-name="propietario"/>
-  <table-filter match-name="edificio"/>
+ 
   <table-filter match-name="tipo_doc"/>
   <table-filter match-name="localidad"/>
 </hibernate-reverse-engineering>

@@ -5,7 +5,7 @@
  */
 package Controlador;
 
-import Modelo.Edificio;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;

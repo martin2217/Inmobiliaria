@@ -11,7 +11,7 @@ import Gestor.GestorAlta;
 import Controlador.ConexionUtil;
 import Modelo.Barrio;
 import Modelo.Cliente;
-import Modelo.Edificio;
+
 import Modelo.Inmueble;
 import Modelo.Localidad;
 import Modelo.Propietario;
@@ -687,8 +687,7 @@ public class Alta extends javax.swing.JPanel {
         Inmueble aux = new Inmueble(
                 maxIdInmobiliaria(), 
                 cli, 
-                prop, 
-                null, 
+                prop,                
                 barri, 
                 null, 
                 null, 
@@ -883,7 +882,7 @@ File aux;
         
     }
         
-    private int maxIdEdificio (){
+ /*   private int maxIdEdificio (){
         Session session;
         session=ConexionUtil.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(Edificio.class);
@@ -899,7 +898,7 @@ File aux;
         }
         else            
             return 1;                   
-    }  
+    }*/  
     
     private int maxIdCliente (){
         Session session;
