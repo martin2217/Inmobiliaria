@@ -765,10 +765,10 @@ public class Alta extends javax.swing.JPanel {
             getToolkit().beep();
             JOptionPane.showMessageDialog(null,cadenaError,"Error", JOptionPane.INFORMATION_MESSAGE);
         }
-        else{
+        if(cadenaError.length() == 0){
             alta();
             JOptionPane.showMessageDialog(null, "Operacion realizada exitosamente.", "Exito!", JOptionPane.INFORMATION_MESSAGE);
-            /* ver si poner una ventana volver*/
+            /* ver si poner un volver a otra ventana*/
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
