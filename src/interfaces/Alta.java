@@ -326,6 +326,11 @@ public class Alta extends javax.swing.JPanel {
 
         jTextVigencia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextVigencia.setName("Vigencia de la Reserva"); // NOI18N
+        jTextVigencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextVigenciaActionPerformed(evt);
+            }
+        });
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel22.setText("Vigencia de la Reserva");
@@ -370,19 +375,6 @@ public class Alta extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -452,32 +444,47 @@ public class Alta extends javax.swing.JPanel {
                                 .addGap(45, 45, 45)))
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(46, 46, 46)
-                                .addComponent(jLabel13))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(49, 49, 49)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(66, 66, 66)
+                                .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextCalle, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)
-                                .addComponent(jLabel8)
-                                .addGap(20, 20, 20)
-                                .addComponent(jTextNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextPiso, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(24, 24, 24)
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel11)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(46, 46, 46)
+                                        .addComponent(jLabel13))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextCalle, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(40, 40, 40)
+                                        .addComponent(jLabel8)
+                                        .addGap(20, 20, 20)
+                                        .addComponent(jTextNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextPiso, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(24, 24, 24)
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -697,44 +704,74 @@ public class Alta extends javax.swing.JPanel {
         GestorAlta.altaInmueble(aux);        
     }
     
-    private boolean validarTextFields (){
+    private boolean validarVacios (){
         Component [] arrayCompo = jPanel3.getComponents();
         boolean vacio = false;
-        StringBuilder textoValidado = new StringBuilder();
         
 	for (Component component : arrayCompo) {
 		if(component instanceof  JTextField){
-                    if ("".equals(((JTextField) component).getText().trim())){
-                       vacio = true;                        
-                       String aux = "El campo "+((JTextField) component).getName()+" es requerido. "+" \n";
-                       textoValidado.append(aux);
+                    if ( ( (JTextField) component).getText().trim().length() == 0 ){
+                       vacio = true;   
                     }
                 }                
 	}
-        textoValidado.append(">> No deben ser vacios!");
-        JOptionPane.showMessageDialog(null,textoValidado);
         return vacio;
     }
     
+    private boolean validarVigencia (){
+        int vigencia = Integer.parseInt(jTextVigencia.getText());
+        boolean mal = false;
+        
+        if(!(vigencia > 0)){
+            mal = true;
+        }
+        
+        return mal;
+    }
+    
+        private boolean validarPrecio (){
+        int precio = Integer.parseInt(jTextPrecioVenta.getText());
+        boolean mal = false;
+        
+        if(! (precio  > 0)){
+            mal = true;
+        }
+        
+        return mal;
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (validarTextFields())
-            jTextCalle.requestFocus();
-        // Hay que hacer bien esta implementacion de validacion y agregar que la vigencia no sea igual a 0.
-        /* No hay que poner para todo option pane, sino hay que hacer una funcion que valla sumando errores y luego imprima un option pane con
-        todos los errores juntos, sino es ultra denso. Ademas el OptionPane tirarlo solamente en el OnClick de Guardar, si se quiere avisar antes
-        se debe decir de otra manera.*/
-        /*hay una funcion "NoVacio" y otra "ValidarTextFields" que las dos hacen lo mismo. Aunque la idea de ir haciendo append a una string
-        llamada "textovalidado" es la correcta.*/
-        /*Modificar BDD para que funcione todo de una.*/
-        /* En consulta hay que terminar de ver los combobox, lo mismo que aca, ver que funcionen bien.*/
         /* el identificador de inmueble esta como defaault 00000000001 eso deberia cambiar a una consulta a la BDD que diga el ID mas grande y muestre el siguiente
-        o volar eso al carajo (lo cual me parece mejor).*/
+        o volar eso al carajo (lo cual me parece mejor).*/ /* <-- ver si ya se soluciono este comment */
+        
+        String cadenaError = "";
+        
+        /* ver si antiguedad == 0, monto == 0, */
+        /* seguro se puede pasar un switch, estoy haciendo retarded programming, despues lo transformo*/
+        
+        if (validarVacios()){
+            cadenaError += "No debe haber campos vacios.\n";
+        }
+        
+        if (validarVigencia()){
+            cadenaError += "La vigencia no debe ser 0 o negativa.\n";
+        }
+        
+        if (validarPrecio()){
+            cadenaError += "El precio no debe ser 0 o negativo.\n";
+        }
+        
+        if(cadenaError.length() != 0){
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null,cadenaError,"Error", JOptionPane.INFORMATION_MESSAGE);
+        }
         else
             alta();
+            JOptionPane.showMessageDialog(null, "Operacion realizada exitosamente.", "Exito!", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
-    private void validarNoVacio (java.awt.event.FocusEvent evt){
+    /*private void validarNoVacio (java.awt.event.FocusEvent evt){
         final JTextComponent c = (JTextComponent) evt.getSource();
         String s = c.getText().trim();
         //texto=texto.replaceAll(" ", "")
@@ -746,7 +783,7 @@ public class Alta extends javax.swing.JPanel {
               JOptionPane.showMessageDialog(null,"No debe ser vacio");  
           }    
               
-    }
+    }*/
     
     private void validarSoloNumeros (java.awt.event.KeyEvent evt){
         char c=evt.getKeyChar(); 
@@ -819,6 +856,10 @@ File aux;
     private void jTextFrenteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFrenteKeyTyped
         validarSoloNumeros(evt);
     }//GEN-LAST:event_jTextFrenteKeyTyped
+
+    private void jTextVigenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextVigenciaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextVigenciaActionPerformed
                  
     private int maxIdInmobiliaria (){
         Session session;
