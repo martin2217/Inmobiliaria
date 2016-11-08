@@ -16,11 +16,21 @@ import org.hibernate.cfg.Configuration;
 public  final class Dao {
 
     
+      // Forma de SINGLETON
+    private static final Dao SELF = new Dao();
+    //private V() {}
+    public static Dao get(){
+        
+          
+        return SELF;
+    }
+    
+    
     private final  SessionFactory sesion;
     
     
     
-    public  Dao(){
+    private  Dao(){
     
 
     // creo y abro la sesion 
@@ -29,9 +39,9 @@ public  final class Dao {
     }
 
     public Session getSesion() {
-           Session nueva=   sesion.openSession();
+          Session nueva=   sesion.openSession();
         
-        Configuration con= new Configuration();
+      Configuration con= new Configuration();
         con.configure("hibernate.cfg.xml");
         
         
@@ -52,7 +62,7 @@ public  final class Dao {
     
     
      public void altaCliente(Cliente cli){
-        SessionFactory sesion = ConexionUtil.getSessionFactory();
+        
         Session session;
         session = sesion.openSession();
         Transaction tx = session.beginTransaction();
@@ -65,7 +75,7 @@ public  final class Dao {
      
     public void altaInmueble (Inmueble casa)
     {                
-        SessionFactory sesion = ConexionUtil.getSessionFactory();                
+                      
         Session session;
         session = sesion.openSession();
         Transaction tx = session.beginTransaction();

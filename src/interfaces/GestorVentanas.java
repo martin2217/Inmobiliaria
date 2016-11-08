@@ -5,6 +5,7 @@
  */
 package interfaces;
 
+import Controlador.Dao;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -35,6 +36,7 @@ public class GestorVentanas extends javax.swing.JFrame {
         initComponents();
         this.setSize(new Dimension(800,620));
         this.setMinimumSize(new Dimension(800,620));
+          Dao.get().getSesion();
     }
     
     private JPanel menu;

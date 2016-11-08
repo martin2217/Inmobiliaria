@@ -16,19 +16,29 @@ import org.hibernate.Query;
  * @author Pc
  */
 public   class GestorBarrio {
-Dao dao;
+
+      // Forma de SINGLETON
+    private static final GestorBarrio SELF = new GestorBarrio();
+    //private V() {}
+    public static GestorBarrio get(){
+        
+          
+        return SELF;
+    }
+    
+    
     public GestorBarrio() {
   
-    dao= new Dao();
+    
     }
     
     
     public String[] buscarBarrioPorCiudad(String localidad){
         
-        Query query= dao.getSesion().getNamedQuery("LocalidadesDeUnaLocalidad");
+        Query query= Dao.get().getSesion().getNamedQuery("LocalidadesDeUnaLocalidad");
         query.setParameter("nombreBarrio", localidad);
         List<Barrio> barrios=  query.list();
-        dao.cerrarConexion(dao.getSesion());
+        Dao.get().cerrarConexion(Dao.get().getSesion());
         String[] retorno= new String[barrios.size()+1];
         retorno[0]= "";
         int i=1;

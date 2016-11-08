@@ -17,23 +17,30 @@ import java.util.List;
  * @author Pc
  */
 public class GestorProvincia {
-Dao dao;
+  // Forma de SINGLETON
+    private static final GestorProvincia SELF = new GestorProvincia();
+    //private V() {}
+    public static GestorProvincia get(){
+        
+          
+        return SELF;
+    }
     public GestorProvincia() {
-    dao = new Dao();
+    
     }
     
     public List<Provincia> buscarProvincia(){
     
-     List<Provincia> retorno_provincia= dao.getSesion().createCriteria(Provincia.class).list();
+     List<Provincia> retorno_provincia= Dao.get().getSesion().createCriteria(Provincia.class).list();
        
-        dao.cerrarConexion(dao.getSesion());
+        Dao.get().cerrarConexion(Dao.get().getSesion());
         return retorno_provincia;
     }
     
     /*public void pruebaCriteria(){
     List<Localidad> resultado;
         String nom= null;
-        Criteria c1= dao.getSesion().createCriteria(Localidad.class);
+        Criteria c1= Dao.get().getSesion().createCriteria(Localidad.class);
     if(nom!=null){
         
         Criteria c2= c1.createCriteria("barrios");
