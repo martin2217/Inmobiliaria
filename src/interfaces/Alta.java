@@ -21,6 +21,7 @@ import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -61,9 +62,27 @@ public class Alta extends javax.swing.JPanel {
         jLabel3.setText(Integer.toString(maxIdInmobiliaria()));
         llenarComboProvincia();        
         jComboBox2.removeAllItems();
-        jComboBox3.removeAllItems();        
+        jComboBox3.removeAllItems();   
+       try{ buscarimagenes("13");
+       }
+       catch(IOException ex){
+           
+       }
     }
-
+private void buscarimagenes(String id) throws IOException{
+     File ruta=new File("C:\\imagenes\\");
+     
+     FilenameFilter begin=new FilenameFilter() {
+         @Override
+         public boolean accept(File dir, String name) {
+             return name.startsWith(jLabel3.getText().trim());
+         }
+     };
+     File[] files=ruta.listFiles(begin);
+     for (File file :files){
+         System.out.println(file.getCanonicalPath());
+     }
+ }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -684,7 +703,7 @@ public class Alta extends javax.swing.JPanel {
                 null
                 );
         */
-        Inmueble aux = new Inmueble(
+         Inmueble aux = new Inmueble(
                 maxIdInmobiliaria(), 
                 cli, 
                 prop,                
@@ -699,7 +718,8 @@ public class Alta extends javax.swing.JPanel {
                 null, 
                 null, null, null, null, 
                 null, null, null, null);
-        
+    
+       
         GestorAlta.altaInmueble(aux);        
     }
     
