@@ -812,24 +812,38 @@ private void buscarimagenes(String id) throws IOException{
     }
     
     private boolean validarVigencia (){
-        int vigencia = Integer.parseInt(jTextVigencia.getText());
+        String jtextvigencia = jTextVigencia.getText();
+        
+        int vigencia = 0;
         boolean mal = false;
         
-        if(!(vigencia > 0)){
+        if (jtextvigencia.length() == 0){
             mal = true;
         }
-        
+        else{
+            vigencia = Integer.parseInt(jtextvigencia);
+            
+            if(!(vigencia > 0)){
+                mal = true;
+            }
+        }
         return mal;
     }
     
         private boolean validarPrecio (){
-        int precio = Integer.parseInt(jTextPrecioVenta.getText());
+        String jtextprecio = jTextPrecioVenta.getText();
         boolean mal = false;
+        int precio = 0;
         
-        if(! (precio  > 0)){
+        if (jtextprecio.length() == 0){
             mal = true;
         }
-        
+        else{
+            precio = Integer.parseInt(jtextprecio);
+            if(! (precio  > 0)){
+                mal = true;
+            }
+        }
         return mal;
     }
     
@@ -847,11 +861,11 @@ private void buscarimagenes(String id) throws IOException{
         }
         
         if (validarVigencia()){
-            cadenaError += "La vigencia no debe ser 0 o negativa.\n";
+            cadenaError += "La vigencia no debe ser vacia, 0 o negativa.\n";
         }
         
         if (validarPrecio()){
-            cadenaError += "El precio no debe ser 0 o negativo.\n";
+            cadenaError += "El precio no debe ser vacio, 0 o negativo.\n";
         }
         
         if(cadenaError.length() != 0){
