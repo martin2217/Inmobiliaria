@@ -32,8 +32,10 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.JTextComponent;
@@ -739,7 +741,8 @@ private void buscarimagenes(String id) throws IOException{
         //SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
         Cliente cli = new Cliente(1);
         Propietario prop = new Propietario(1);
-        Barrio barri = new Barrio(101);
+        //Barrio barri = new Barrio(101);
+        Barrio barri = (Barrio) jComboBox3.getSelectedItem();
         Inmueble aux = new Inmueble(
                 Integer.parseInt(jLabel3.getText()),
                 cli,
@@ -775,26 +778,19 @@ private void buscarimagenes(String id) throws IOException{
                 jCheckBoxLavadero.isSelected(),
                 jCheckBoxAguaCaliente.isSelected(),
                 jTextTelefono.getText()               
-                );
-        
-        /* Inmueble aux = new Inmueble(
-                maxIdInmobiliaria(), 
-                cli, 
-                prop,                
-                barri, 
-                null, 
-                null, 
-                null, 
-                null, 
-                null, 
-                null, 
-                null, 
-                null, 
-                null, null, null, null, 
-                null, null, null, null);
-    */
-       
+                );        
         GestorAlta.altaInmueble(aux);        
+    }
+    
+    private void limpiarPanelAlta (){
+        Component [] arrayCompo = jPanel3.getComponents();
+        
+	for (Component component : arrayCompo) {
+		if(component instanceof  JTextField) ((JTextField)component).setText("");
+                if(component instanceof  JCheckBox) ((JCheckBox)component).setSelected(false);
+                if(component instanceof  JTextArea) ((JTextArea)component).setText("");
+	}
+      
     }
     
     private boolean validarVacios (){
@@ -873,8 +869,9 @@ private void buscarimagenes(String id) throws IOException{
             JOptionPane.showMessageDialog(null,cadenaError,"Error", JOptionPane.INFORMATION_MESSAGE);
         }
         if(cadenaError.length() == 0){
-            alta();
-            JOptionPane.showMessageDialog(null, "Operacion realizada exitosamente.", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+            alta();            
+            jLabel3.setText(Integer.toString(maxIdInmobiliaria()));
+            limpiarPanelAlta();
             /* ver si poner un volver a otra ventana*/
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -1032,25 +1029,7 @@ File aux;
         
         
     }
-        
- /*   private int maxIdEdificio (){
-        Session session;
-        session=ConexionUtil.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(Edificio.class);
-        criteria.add(Restrictions.isNotNull("idEdificio"));
-        criteria.setProjection(
-            Projections.projectionList()
-                .add(Projections.max("idEdificio")
-                )
-        );
-                
-        if (criteria.list().get(0) != null){               
-            return  (int) criteria.list().get(0) + 1; 
-        }
-        else            
-            return 1;                   
-    }*/  
-    
+
     private int maxIdCliente (){
         Session session;
         session=ConexionUtil.getSessionFactory().openSession();
@@ -1093,8 +1072,9 @@ File aux;
         DefaultComboBoxModel model = new DefaultComboBoxModel(cats.toArray());
         this.jComboBox2.setModel(model);            
         sess.close();
-   }      
-        private void llenarComboBarrio() {  
+   } 
+    
+    private void llenarComboBarrio() {  
             jComboBox3.removeAllItems();
             Localidad loc = (Localidad) jComboBox2.getSelectedItem();
             Session sess;
@@ -1107,7 +1087,8 @@ File aux;
             this.jComboBox3.setModel(model);
             sess.close();
    }
- private void guardarimagen(String id,int index){
+    
+    private void guardarimagen(String id,int index){
                 String ruta="C:\\imagenes\\"+id+"_0.jpg";
                File f = new File(ruta);
                int i=1;

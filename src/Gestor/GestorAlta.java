@@ -27,7 +27,8 @@ public class GestorAlta {
         session.save(casa);
         tx.commit();
         session.close();
-        JOptionPane.showMessageDialog(null,"Alta Inmueble correctamente.");
+        //JOptionPane.showMessageDialog(null,"Alta Inmueble correctamente.");
+        JOptionPane.showMessageDialog(null, "Operacion realizada exitosamente.", "Exito!", JOptionPane.INFORMATION_MESSAGE);
     }
     
 }
