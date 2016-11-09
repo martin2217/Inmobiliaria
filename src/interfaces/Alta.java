@@ -152,6 +152,9 @@ private void buscarimagenes(String id) throws IOException{
         jPanel4 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        Sacarfotos = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(1006, 582));
         setMinimumSize(new java.awt.Dimension(1006, 582));
@@ -603,7 +606,18 @@ private void buscarimagenes(String id) throws IOException{
             }
         });
 
-        jLabel23.setText("Foto1");
+        jLabel23.setText("foto");
+
+        jLabel24.setText("foto");
+
+        jLabel25.setText("foto");
+
+        Sacarfotos.setText("Sacar todas");
+        Sacarfotos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SacarfotosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -611,18 +625,35 @@ private void buscarimagenes(String id) throws IOException{
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jButton2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(153, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Sacarfotos)
+                            .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(33, 33, 33))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 319, Short.MAX_VALUE)
-                .addComponent(jButton2))
+                .addGap(22, 22, 22)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(Sacarfotos)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -835,19 +866,50 @@ File aux;
        aux=ventana.jFCFoto.getSelectedFile();
        String a=aux.getPath();
        int i=0;
-       archivos.add(aux);
+       
        try{
+                               
+                if(jLabel25.getText()=="foto"){
+                ImageIcon icon = new ImageIcon(aux.toString());
                 
+                Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel25.getWidth(),
+                        jLabel25.getHeight(), Image.SCALE_DEFAULT));
+                
+                jLabel25.setIcon(icono);
+                jLabel25.setText("no");
+                archivos.add(aux);
+                }
+                else if(jLabel23.getText()=="foto"){
+                    
                 ImageIcon icon = new ImageIcon(aux.toString());
                 
                 Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel23.getWidth(),
                         jLabel23.getHeight(), Image.SCALE_DEFAULT));
                 
                 jLabel23.setIcon(icono);
+                jLabel23.setText("no");
+                archivos.add(aux);
+           
+       }
+                else if(jLabel24.getText()=="foto"){
+                    
+                ImageIcon icon = new ImageIcon(aux.toString());
+                
+                Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel24.getWidth(),
+                        jLabel24.getHeight(), Image.SCALE_DEFAULT));
+                
+                jLabel24.setIcon(icono);
+                jLabel24.setText("no");
+                archivos.add(aux);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"Hasta 3 fotos");                
+                }
                 
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(null, "Error abriendo la imagen "+ ex);
             }
+       
             
     }                                        
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -881,6 +943,18 @@ File aux;
     private void jTextVigenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextVigenciaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextVigenciaActionPerformed
+
+    private void SacarfotosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SacarfotosActionPerformed
+        // TODO add your handling code here:
+        jLabel23.setIcon(null);
+        jLabel23.setText("foto");
+         jLabel24.setIcon(null);
+        jLabel24.setText("foto");
+         jLabel25.setIcon(null);
+        jLabel25.setText("foto");
+        for(int i=0;i<archivos.size();i++)
+        archivos.remove(i);
+    }//GEN-LAST:event_SacarfotosActionPerformed
                  
     private int maxIdInmobiliaria (){
         Session session;
@@ -1005,6 +1079,7 @@ File aux;
  
             }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Sacarfotos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1040,6 +1115,8 @@ File aux;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
