@@ -92,15 +92,21 @@ public class Inmueble  implements java.io.Serializable {
        this.montoVenta = montoVenta;
        this.fechaAlta = fechaAlta;
        this.consultas = consultas;
+              
     }
     
     // ESTE ES EL QUE USAMOS
-    public Inmueble(int idInmueble, Cliente cliente, Propietario propietario, Barrio barrio, String calle, Integer nroCalle, Integer piso, Integer depto, String tipoInmueble, Float precio, String orientacion, Integer frente, Integer fondo, Integer superficie, String estado, Integer montoReserva, Integer vigenciaReserva, Integer montoVenta, Date fechaAlta) {
+    public Inmueble(int idInmueble, Cliente cliente, Propietario propietario, 
+            Barrio barrio, String calle, Integer nroCalle, Integer piso, 
+            Integer depto, String tipoInmueble, Float precio, String orientacion, 
+            Integer frente, Integer fondo, Integer superficie, String estado, 
+            Integer montoReserva, Integer vigenciaReserva, Integer montoVenta, 
+            Date fechaAlta) {
        this.idInmueble = idInmueble;
        this.cliente = cliente;
-       this.propietario = propietario;
-       
+       this.propietario = propietario;       
        this.barrio = barrio;
+       
        this.calle = calle;
        this.nroCalle = nroCalle;
        this.piso = piso;
@@ -116,6 +122,14 @@ public class Inmueble  implements java.io.Serializable {
        this.vigenciaReserva = vigenciaReserva;
        this.montoVenta = montoVenta;
        this.fechaAlta = fechaAlta;
+       
+       // nuevos atributos.............
+       
+       
+    }
+
+    public Inmueble(int parseInt, Cliente cli, Propietario prop, Object object, Barrio barri, String text, int parseInt0, int parseInt1, int parseInt2, String toString, float parseFloat, int selectedIndex, int parseInt3, int parseInt4, int parseInt5, String alta, int parseInt6, int parseInt7, int i, Object object0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     public String getDireccion(){ 
     return this.getCalle()+this.getNroCalle();

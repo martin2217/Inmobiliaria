@@ -25,7 +25,9 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
@@ -708,10 +710,12 @@ private void buscarimagenes(String id) throws IOException{
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void alta (){
+        Date now = new Date(System.currentTimeMillis());
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
         Cliente cli = new Cliente(1);
         Propietario prop = new Propietario(1);
         Barrio barri = new Barrio(101);
-        /*Inmueble auxInmueble = new Inmueble(
+        Inmueble aux = new Inmueble(
                 Integer.parseInt(jLabel3.getText()),
                 cli,
                 prop,
@@ -727,14 +731,14 @@ private void buscarimagenes(String id) throws IOException{
                 Integer.parseInt(jTextFrente.getText()),
                 Integer.parseInt(jTextFondo.getText()),
                 Integer.parseInt(jTextSuperficie.getText()),
-                "ALTA",
+                "alta",
                 Integer.parseInt(jTextMontoReserva.getText()),
                 Integer.parseInt(jTextVigencia.getText()),
                 0,
-                null
+                date.format(now)            
                 );
-        */
-         Inmueble aux = new Inmueble(
+        
+        /* Inmueble aux = new Inmueble(
                 maxIdInmobiliaria(), 
                 cli, 
                 prop,                
@@ -749,7 +753,7 @@ private void buscarimagenes(String id) throws IOException{
                 null, 
                 null, null, null, null, 
                 null, null, null, null);
-    
+    */
        
         GestorAlta.altaInmueble(aux);        
     }
