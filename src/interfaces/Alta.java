@@ -7,17 +7,20 @@ package interfaces;
 
 //import javax.swing.JPanel;
 
-import Gestor.GestorAlta;
 import Controlador.ConexionUtil;
+
+import Gestor.*;
+
 import Modelo.Barrio;
 import Modelo.Cliente;
 
 import Modelo.Inmueble;
-import Modelo.Localidad;
 import Modelo.Propietario;
 import Modelo.Provincia;
+
 import java.awt.Component;
 import java.awt.Image;
+import java.awt.event.ItemEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -63,15 +66,13 @@ public class Alta extends javax.swing.JPanel {
     public Alta() {
         
         initComponents();
-        jLabel3.setText(Integer.toString(maxIdInmobiliaria()));
-        llenarComboProvincia();        
-        jComboBox2.removeAllItems();
-        jComboBox3.removeAllItems();   
-       try{ buscarimagenes("13");
-       }
-       catch(IOException ex){
+        jLabel3.setText(Integer.toString(maxIdInmobiliaria()));     
+        try{ 
+            buscarimagenes("13");
+        }
+        catch(IOException ex){
            
-       }
+        }
     }
 private void buscarimagenes(String id) throws IOException{
      File ruta=new File("C:\\imagenes\\");
@@ -112,7 +113,7 @@ private void buscarimagenes(String id) throws IOException{
         jLabel16 = new javax.swing.JLabel();
         jTextAntiguedad = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        comboBox_barrio = new javax.swing.JComboBox<>();
         jTextFondo = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -130,8 +131,8 @@ private void buscarimagenes(String id) throws IOException{
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        comboBox_provincia = new javax.swing.JComboBox();
+        comboBox_ciudad = new javax.swing.JComboBox<>();
         jComboBox4 = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -234,7 +235,12 @@ private void buscarimagenes(String id) throws IOException{
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel17.setText("Fondo:");
 
-        jComboBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        comboBox_barrio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        comboBox_barrio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBox_barrioActionPerformed(evt);
+            }
+        });
 
         jTextFondo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextFondo.setName("Fondo"); // NOI18N
@@ -292,22 +298,36 @@ private void buscarimagenes(String id) throws IOException{
         jLabel4.setText("Provincia");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Localidad");
+        jLabel5.setText("Ciudad");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Barrio");
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        comboBox_provincia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        comboBox_provincia.setModel(new javax.swing.DefaultComboBoxModel(new String[] {""}));
+        for(Provincia pro: GestorProvincia.get().buscarProvincia()){
+            comboBox_provincia.addItem(pro.getNombre());
+        }
+        comboBox_provincia.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboBox_provinciaItemStateChanged(evt);
+            }
+        });
+        comboBox_provincia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                comboBox_provinciaActionPerformed(evt);
             }
         });
 
-        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        comboBox_ciudad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        comboBox_ciudad.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboBox_ciudadItemStateChanged(evt);
+            }
+        });
+        comboBox_ciudad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                comboBox_ciudadActionPerformed(evt);
             }
         });
 
@@ -443,15 +463,15 @@ private void buscarimagenes(String id) throws IOException{
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(comboBox_provincia, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(49, 49, 49)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(comboBox_ciudad, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(66, 66, 66)
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(comboBox_barrio, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -539,11 +559,11 @@ private void buscarimagenes(String id) throws IOException{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBox_barrio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBox_ciudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBox_provincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -742,7 +762,7 @@ private void buscarimagenes(String id) throws IOException{
         Cliente cli = new Cliente(1);
         Propietario prop = new Propietario(1);
         //Barrio barri = new Barrio(101);
-        Barrio barri = (Barrio) jComboBox3.getSelectedItem();
+        Barrio barri = (Barrio) comboBox_barrio.getSelectedItem();
         Inmueble aux = new Inmueble(
                 Integer.parseInt(jLabel3.getText()),
                 cli,
@@ -862,13 +882,8 @@ private void buscarimagenes(String id) throws IOException{
     }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        /* el identificador de inmueble esta como defaault 00000000001 eso deberia cambiar a una consulta a la BDD que diga el ID mas grande y muestre el siguiente
-        o volar eso al carajo (lo cual me parece mejor).*/ /* <-- ver si ya se soluciono este comment */
-        
+      
         String cadenaError = "";
-        
-        /* ver si antiguedad == 0, monto == 0, */
-        /* seguro se puede pasar un switch, estoy haciendo retarded programming, despues lo transformo*/
         
         if (validarVacios()){
             cadenaError += "No debe haber campos vacios.\n";
@@ -898,20 +913,6 @@ private void buscarimagenes(String id) throws IOException{
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-
-    /*private void validarNoVacio (java.awt.event.FocusEvent evt){
-        final JTextComponent c = (JTextComponent) evt.getSource();
-        String s = c.getText().trim();
-        //texto=texto.replaceAll(" ", "")
-        if (evt.isTemporary()) {
-            return;
-        }                
-        if(s.isEmpty() || (s.length() == 0)) { 
-              getToolkit().beep();                              
-              JOptionPane.showMessageDialog(null,"No debe ser vacio");  
-          }    
-              
-    }*/
     
     private void validarSoloNumeros (java.awt.event.KeyEvent evt){
         char c=evt.getKeyChar(); 
@@ -990,15 +991,13 @@ File aux;
     }                                        
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // Carga los barrios en funcion de lo que se elija
-        // en el combo de localidad
-        llenarComboBarrio();
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    private void comboBox_ciudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_ciudadActionPerformed
+        //
+    }//GEN-LAST:event_comboBox_ciudadActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        llenarComboLocalidad();
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void comboBox_provinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_provinciaActionPerformed
+        //
+    }//GEN-LAST:event_comboBox_provinciaActionPerformed
 
     private void jTextDormitorioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextDormitorioKeyTyped
         validarSoloNumeros(evt);
@@ -1031,6 +1030,36 @@ File aux;
         for(int i=0;i<archivos.size();i++)
         archivos.remove(i);
     }//GEN-LAST:event_SacarfotosActionPerformed
+
+    private void comboBox_barrioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_barrioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBox_barrioActionPerformed
+
+    private void comboBox_ciudadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBox_ciudadItemStateChanged
+              
+        if(evt.getStateChange()== ItemEvent.SELECTED){
+            if(comboBox_ciudad.getSelectedIndex()>0){
+                comboBox_barrio.setModel(new DefaultComboBoxModel(GestorBarrio.get().buscarBarrioPorCiudad(comboBox_ciudad.getSelectedItem().toString())));
+            }
+            else{
+                comboBox_barrio.setModel(new DefaultComboBoxModel(new String[]{""}));
+            }
+        }
+    }//GEN-LAST:event_comboBox_ciudadItemStateChanged
+
+    private void comboBox_provinciaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBox_provinciaItemStateChanged
+        if(evt.getStateChange()== ItemEvent.SELECTED){
+            if(comboBox_provincia.getSelectedIndex()>0){
+                comboBox_barrio.setModel(new DefaultComboBoxModel(new String[]{""}));
+                comboBox_ciudad.setModel(new DefaultComboBoxModel(GestorLocalidad.get().buscarLocalidadesPorProvincia(comboBox_provincia.getSelectedItem().toString())));
+                
+            }
+            else{
+                comboBox_ciudad.setModel(new DefaultComboBoxModel(new String[]{""}));
+                comboBox_barrio.setModel(new DefaultComboBoxModel(new String[]{""}));
+            }
+        }
+    }//GEN-LAST:event_comboBox_provinciaItemStateChanged
                  
     private int maxIdInmobiliaria (){
         Session session;
@@ -1070,46 +1099,6 @@ File aux;
             return 1;                   
     } 
     
-    
-    private void llenarComboProvincia() {                                      
-            Session sess;
-            sess=ConexionUtil.getSessionFactory().openSession();
-            Criteria crit = sess.createCriteria(Provincia.class);
-            List<Provincia> cats = crit.list();
-            jComboBox1.removeAllItems();
-            DefaultComboBoxModel model = new DefaultComboBoxModel(cats.toArray());
-            this.jComboBox1.setModel(model);
-            sess.close();
-   }
-       
-    private void llenarComboLocalidad() {                                      
-        jComboBox2.removeAllItems();            
-        Provincia prov = (Provincia)jComboBox1.getSelectedItem();            
-        Session sess;
-        sess=ConexionUtil.getSessionFactory().openSession();            
-        Criteria crit = sess.createCriteria(Localidad.class)            
-            .add(Restrictions.eq("provincia", prov)
-            );                                                        
-        List<Localidad> cats = crit.list();            
-        DefaultComboBoxModel model = new DefaultComboBoxModel(cats.toArray());
-        this.jComboBox2.setModel(model);            
-        sess.close();
-   } 
-    
-    private void llenarComboBarrio() {  
-            jComboBox3.removeAllItems();
-            Localidad loc = (Localidad) jComboBox2.getSelectedItem();
-            Session sess;
-            sess=ConexionUtil.getSessionFactory().openSession();
-            Criteria crit = sess.createCriteria(Barrio.class)
-                    .add(Restrictions.eq("localidad", loc)
-                    );            
-            List<Barrio> cats = crit.list();
-            DefaultComboBoxModel model = new DefaultComboBoxModel(cats.toArray());
-            this.jComboBox3.setModel(model);
-            sess.close();
-   }
-    
     private void guardarimagen(String id,int index){
                 String ruta="C:\\imagenes\\"+id+"_0.jpg";
                File f = new File(ruta);
@@ -1140,6 +1129,9 @@ File aux;
             }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Sacarfotos;
+    private javax.swing.JComboBox<String> comboBox_barrio;
+    private javax.swing.JComboBox<String> comboBox_ciudad;
+    private javax.swing.JComboBox<String> comboBox_provincia;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1154,9 +1146,6 @@ File aux;
     private javax.swing.JCheckBox jCheckBoxPavimento;
     private javax.swing.JCheckBox jCheckBoxPiscina;
     private javax.swing.JCheckBox jCheckBoxPropiedadHorizontal;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JLabel jLabel1;
