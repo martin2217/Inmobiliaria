@@ -160,7 +160,7 @@ public class Consulta extends javax.swing.JPanel {
             }
         });
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filtros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 0, 18))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filtros", 0, 0, new java.awt.Font("Agency FB", 0, 18))); // NOI18N
         jPanel2.setMaximumSize(new java.awt.Dimension(218, 456));
 
         labelId.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
@@ -374,22 +374,11 @@ public class Consulta extends javax.swing.JPanel {
         textField_precio_minimo.addKeyListener(new KeyAdapter() {
 
             public void keyTyped(KeyEvent e) {
-                char tecla = e.getKeyChar();
-
-                if (!Character.isDigit(tecla)) {
-                    if ('.'==tecla){ // VER PUNTO
-                        if (banderaMin){
-                            getToolkit().beep();
-                            e.consume();
-                        }
-                        else banderaMin=true;
-                    }
-                    else{
-                        getToolkit().beep();
-                        e.consume();
-                    }
+                char keyChar = e.getKeyChar();
+                if (!Character.isDigit(keyChar)) {
+                    getToolkit().beep();
+                    e.consume();
                 }
-                // Buscar en la cadena al eliminar
             }
         });
         textField_precio_maximo.addKeyListener(new KeyAdapter() {
@@ -561,6 +550,8 @@ public class Consulta extends javax.swing.JPanel {
            i-=1;
        }
    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox comboBox_barrio;
