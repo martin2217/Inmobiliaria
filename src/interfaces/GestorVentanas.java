@@ -6,6 +6,7 @@
 package interfaces;
 
 import Controlador.Dao;
+import Modelo.Inmueble;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -43,6 +44,7 @@ public class GestorVentanas extends javax.swing.JFrame {
     private JPanel consultaInmueble;
     private JPanel altaInmueble;
     private JPanel aux;
+    private JPanel modInmueble;
     
     
     //redimensiona la ventana
@@ -79,6 +81,14 @@ public class GestorVentanas extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         altaInmueble= new Alta();
         add(altaInmueble);        
+        revalidate();
+        repaint();        
+    }
+    public void ModificacionInmueble(Inmueble inmueble){
+        this.setSize(new Dimension(1100,620));
+        this.setLocationRelativeTo(null);
+        modInmueble= new Modificacion(inmueble);
+        add(modInmueble);        
         revalidate();
         repaint();        
     }

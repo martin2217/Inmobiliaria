@@ -238,6 +238,16 @@ public GestorInmueble() {
         sesion.close();
     } 
    
+   public Inmueble loadInmueble(int id){
+       Session sesion;
+        sesion=Dao.get().getSesion();
+          sesion.beginTransaction();
+        Inmueble inmueble=(Inmueble)sesion.get(Inmueble.class,id);
+        
+        sesion.getTransaction().commit();
+        sesion.close();
+        return inmueble;
    
+   }
     
 }

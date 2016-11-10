@@ -67,12 +67,7 @@ public class Alta extends javax.swing.JPanel {
         
         initComponents();
         jLabel3.setText(Integer.toString(maxIdInmobiliaria()));     
-        try{ 
-            buscarimagenes("13");
-        }
-        catch(IOException ex){
-           
-        }
+        
     }
 private void buscarimagenes(String id) throws IOException{
      File ruta=new File("C:\\imagenes\\");

@@ -444,8 +444,22 @@ public class Consulta extends javax.swing.JPanel {
         }
 
         else{
-            // Ir a la pantalla de modificar
+               modelo = (DefaultTableModel)jTable1.getModel();
+            for(int i=0; i<modelo.getRowCount(); i++){
+                
+                if((Boolean)modelo.getValueAt(i, 1).equals(Boolean.TRUE)){
+                    Inmueble iaux;
+                    iaux=GestorInmueble.get().loadInmueble(Integer.valueOf(modelo.getValueAt(i, 0).toString()));
+                    modelo.removeRow(i);
+                    i--;
+                    GestorVentanas.get().remove(this);
+                    GestorVentanas.get().ModificacionInmueble(iaux);
+                }
+            }
+        
         }
+            // Ir a la pantalla de modificar
+        
 
     }//GEN-LAST:event_jButtonModificarInmuebleActionPerformed
 
