@@ -777,7 +777,8 @@ private void buscarimagenes(String id) throws IOException{
                 jCheckBoxPavimento.isSelected(),
                 jCheckBoxLavadero.isSelected(),
                 jCheckBoxAguaCaliente.isSelected(),
-                jTextTelefono.getText()               
+                jTextTelefono.getText(),
+                jTextObservaciones.getText()
                 );        
         GestorAlta.altaInmueble(aux);        
     }

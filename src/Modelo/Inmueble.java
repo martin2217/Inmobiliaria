@@ -56,12 +56,10 @@ public class Inmueble  implements java.io.Serializable {
      private Boolean lavadero;
      private Boolean aguaCaliente;
      private String telefono;
-     
-     
+     private String observaciones;
 
-    
-     
-
+  
+   
     public Inmueble() {
     }
 
@@ -105,7 +103,7 @@ public class Inmueble  implements java.io.Serializable {
             Date fechaAlta, Integer dormitorios, Boolean prophori, Float antiguedad,
             Integer banios, Boolean garage, Boolean patio, Boolean aguacorriente,
             Boolean piscina, Boolean cloaca, Boolean gas, Boolean pavi,
-            Boolean lava, Boolean aguacali, String tel) {
+            Boolean lava, Boolean aguacali, String tel, String obs) {
        this.idInmueble = idInmueble;
        this.cliente = cliente;
        this.propietario = propietario;       
@@ -140,7 +138,8 @@ public class Inmueble  implements java.io.Serializable {
        this.pavimento = pavi;
        this.lavadero = lava;
        this.aguaCaliente = aguacali;
-       this.telefono = tel;             
+       this.telefono = tel;
+       this.observaciones = obs;
     }
 
     public Inmueble(int parseInt, Cliente cli, Propietario prop, Object object, Barrio barri, String text, int parseInt0, int parseInt1, int parseInt2, String toString, float parseFloat, int selectedIndex, int parseInt3, int parseInt4, int parseInt5, String alta, int parseInt6, int parseInt7, int i, Object object0) {
@@ -422,6 +421,13 @@ public class Inmueble  implements java.io.Serializable {
         this.cant_dormitorios = cant_dormitorios;
     }
 
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
 
 }
 

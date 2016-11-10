@@ -114,7 +114,9 @@
             <column name="cant_dormitorios" />
         </property>
         
-        
+        <property name="observaciones" type="string">
+            <column name="observaciones" />
+        </property>
         
         
         
