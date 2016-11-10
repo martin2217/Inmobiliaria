@@ -827,7 +827,7 @@ private void buscarimagenes(String id) throws IOException{
         return mal;
     }
     
-        private boolean validarPrecio (){
+    private boolean validarPrecio (){
         String jtextprecio = jTextPrecioVenta.getText();
         boolean mal = false;
         int precio = 0;
@@ -838,6 +838,23 @@ private void buscarimagenes(String id) throws IOException{
         else{
             precio = Integer.parseInt(jtextprecio);
             if(! (precio  > 0)){
+                mal = true;
+            }
+        }
+        return mal;
+    }
+
+    private boolean montoReserva (){
+        String jtextmonto = jTextMontoReserva.getText();
+        boolean mal = false;
+        int monto = 0;
+        
+        if (jtextmonto.length() == 0){
+            mal = true;
+        }
+        else{
+            monto = Integer.parseInt(jtextmonto);
+            if(! (monto  > 0)){
                 mal = true;
             }
         }
@@ -863,6 +880,10 @@ private void buscarimagenes(String id) throws IOException{
         
         if (validarPrecio()){
             cadenaError += "El precio no debe ser vacio, 0 o negativo.\n";
+        }
+        
+        if (montoReserva()){
+            cadenaError += "La reserva no debe ser vacia, 0 o negativa.\n";
         }
         
         if(cadenaError.length() != 0){
