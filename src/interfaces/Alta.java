@@ -67,6 +67,7 @@ public class Alta extends javax.swing.JPanel {
      */
     
     List<File> archivos = new ArrayList<File>();
+    private Inmueble inmueble;
     int decallowed = 2;
     
     public Alta() {
