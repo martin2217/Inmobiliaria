@@ -1019,7 +1019,7 @@ public class Alta extends javax.swing.JPanel {
             
             try{
                 
-                if(jLabel25.getText()=="foto"){
+                if(jLabel25.getText().isEmpty()){
                     ImageIcon icon = new ImageIcon(aux.toString());
                     
                     Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel25.getWidth(),
@@ -1029,7 +1029,7 @@ public class Alta extends javax.swing.JPanel {
                     jLabel25.setText("no");
                     archivos.add(aux);
                 }
-                else if(jLabel23.getText()=="foto"){
+                else if(jLabel23.getText().isEmpty()){
                     
                     ImageIcon icon = new ImageIcon(aux.toString());
                     
@@ -1041,7 +1041,7 @@ public class Alta extends javax.swing.JPanel {
                     archivos.add(aux);
                     
                 }
-                else if(jLabel24.getText()=="foto"){
+                else if(jLabel24.getText().isEmpty()){
                     
                     ImageIcon icon = new ImageIcon(aux.toString());
                     
@@ -1090,14 +1090,36 @@ public class Alta extends javax.swing.JPanel {
 
     private void SacarfotosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SacarfotosActionPerformed
         // TODO add your handling code here:
-        jLabel23.setIcon(null);
-        jLabel23.setText("foto");
-        jLabel24.setIcon(null);
-        jLabel24.setText("foto");
-        jLabel25.setIcon(null);
-        jLabel25.setText("foto");
-        for(int i=0;i<archivos.size();i++)
-            archivos.remove(i);
+        
+            jLabel23.setIcon(null);
+            jLabel23.setText("");
+            jLabel24.setIcon(null);
+            jLabel24.setText("");
+            jLabel25.setIcon(null);
+            jLabel25.setText("");
+            boolean bandera=true;
+        if(inmueble == null){
+            for(int i=0;i<archivos.size();i++)
+            {
+                archivos.remove(i);
+                
+            }
+        }
+        
+        else{
+            for(int i=0;i<archivos.size();i++)
+            {
+                bandera=archivos.get(i).delete();
+                archivos.remove(i);
+                
+            }
+        }
+        if(!bandera)
+        {
+            JOptionPane.showMessageDialog(null,"No se elimino alguna imagen","ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
     }//GEN-LAST:event_SacarfotosActionPerformed
 
     private void comboBox_barrioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_barrioActionPerformed
@@ -1223,15 +1245,14 @@ public class Alta extends javax.swing.JPanel {
         jTextPrecioVenta.setText(String.valueOf(inmueble.getMontoVenta()));
         jTextSuperficie.setText(String.valueOf(inmueble.getSuperficie()));
         jTextTelefono.setText(inmueble.getTelefono());
-
-      try{  switch(inmueble.getVigenciaReserva()){
-            case 1: jTextVigencia.setText("Si"); break;
-            default: jTextVigencia.setText("No"); break;
-        }} catch(Exception e){ String a=e.toString();}
-        
-       /* comboBox_provincia.setSelectedItem(inmueble.getBarrio().getLocalidad().getProvincia());
+        jTextVigencia.setText(String.valueOf(inmueble.getVigenciaReserva()));
+      try{  
+      comboBox_provincia.setSelectedItem(inmueble.getBarrio().getLocalidad().getProvincia());
      comboBox_ciudad.setSelectedItem(inmueble.getBarrio().getLocalidad());
-        comboBox_barrio.setSelectedItem(inmueble.getBarrio());*/
+        comboBox_barrio.setSelectedItem(inmueble.getBarrio());
+      } catch(Exception e){ System.out.println("llenardatos "+e.toString());}
+        
+        
         
         //System.out.println(inmueble.getBarrio().getIdBarrio());
         jCheckBoxAguaCaliente.setSelected(inmueble.isAguaCaliente());
