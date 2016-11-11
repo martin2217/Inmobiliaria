@@ -30,6 +30,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -41,6 +42,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.AbstractDocument;
 import javax.swing.text.JTextComponent;
 //import javax.swing.DefaultComboBoxModel;
 import org.hibernate.Criteria;
@@ -62,27 +64,68 @@ public class Alta extends javax.swing.JPanel {
     /**
      * Creates new form Alta
      */
+    
     List<File> archivos = new ArrayList<File>();
+    
+    
     public Alta() {
-        
         initComponents();
-        jLabel3.setText(Integer.toString(maxIdInmobiliaria()));     
-        
+        inicializar2();
+        limitadoTextFields();
+        jLabel3.setText(Integer.toString(GestorInmueble.get().maxIdInmobiliaria()));
     }
-private void buscarimagenes(String id) throws IOException{
-     File ruta=new File("C:\\imagenes\\");
-     
-     FilenameFilter begin=new FilenameFilter() {
-         @Override
-         public boolean accept(File dir, String name) {
-             return name.startsWith(jLabel3.getText().trim());
-         }
-     };
-     File[] files=ruta.listFiles(begin);
-     for (File file :files){
-         System.out.println(file.getCanonicalPath());
-     }
- }
+    
+    
+    
+    private void limitadoTextFields(){
+        limitador(jTextCalle, 20);
+        limitador(jTextNumero, 10);
+        limitador(jTextPiso, 2);
+        limitador(jTextDepartamento, 5);
+        limitador(jTextPrecioVenta, 15);
+        limitador(jTextAntiguedad, 20);
+        limitador(jTextTelefono, 20);
+        limitador(jTextVigencia, 20);
+        limitador(jTextMontoReserva, 20);
+        limitador(jTextBanio, 2);
+        limitador(jTextFrente, 10);
+        limitador(jTextSuperficie, 10);
+        limitador(jTextFondo, 10);
+        limitador(jTextDormitorio, 2);
+        ((AbstractDocument)jTextObservaciones.getDocument()).setDocumentFilter(new LimitadorTextField(100));
+    }
+    
+    private void limitador(JTextField jText, int cantidad){
+        ((AbstractDocument)jText.getDocument()).setDocumentFilter(new LimitadorTextField(cantidad));
+    }
+    
+    private void inicializar2(){
+        
+        GestorProvincia.get().buscarProvincia().forEach((pro) -> {
+            comboBox_provincia.addItem(pro.getNombre());
+        });
+        String[] ciudades;
+        ciudades = GestorLocalidad.get().buscarLocalidadesPorProvincia(comboBox_provincia.getSelectedItem().toString());
+        comboBox_ciudad.setModel(new DefaultComboBoxModel(Arrays.copyOfRange(ciudades, 1, ciudades.length)));
+        String[] barrios;
+        barrios = GestorBarrio.get().buscarBarrioPorCiudad(comboBox_ciudad.getSelectedItem().toString());
+        comboBox_barrio.setModel(new DefaultComboBoxModel(Arrays.copyOfRange(barrios, 1, barrios.length)));
+    }
+    
+    private void buscarimagenes(String id) throws IOException{
+        File ruta=new File("C:\\imagenes\\");
+        
+        FilenameFilter begin=new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.startsWith(jLabel3.getText().trim());
+            }
+        };
+        File[] files=ruta.listFiles(begin);
+        for (File file :files){
+            System.out.println(file.getCanonicalPath());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -192,12 +235,17 @@ private void buscarimagenes(String id) throws IOException{
 
         jTextPrecioVenta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextPrecioVenta.setName("Precio de Venta"); // NOI18N
+        jTextPrecioVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextPrecioVentaKeyTyped(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Orientación:");
 
         jComboBox5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "norte", "sur", "este", "oeste", "noreste", "noroeste", "sureste", "suroeste" }));
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Norte", "Dur", "Este", "Oeste", "Noreste", "Noroeste", "Sureste", "Suroeste" }));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("Frente:");
@@ -226,6 +274,11 @@ private void buscarimagenes(String id) throws IOException{
 
         jTextAntiguedad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextAntiguedad.setName("Antigüedad"); // NOI18N
+        jTextAntiguedad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextAntiguedadKeyTyped(evt);
+            }
+        });
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel17.setText("Fondo:");
@@ -270,12 +323,27 @@ private void buscarimagenes(String id) throws IOException{
 
         jTextNumero.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextNumero.setName("Numero de Calle"); // NOI18N
+        jTextNumero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextNumeroKeyTyped(evt);
+            }
+        });
 
         jTextBanio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextBanio.setName("Baños"); // NOI18N
+        jTextBanio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextBanioKeyTyped(evt);
+            }
+        });
 
         jTextPiso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextPiso.setName("Piso"); // NOI18N
+        jTextPiso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextPisoKeyTyped(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Piso:");
@@ -285,6 +353,11 @@ private void buscarimagenes(String id) throws IOException{
 
         jTextDepartamento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextDepartamento.setName("Numero de Departamento"); // NOI18N
+        jTextDepartamento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextDepartamentoKeyTyped(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Tipo de inmueble:");
@@ -299,10 +372,7 @@ private void buscarimagenes(String id) throws IOException{
         jLabel6.setText("Barrio");
 
         comboBox_provincia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        comboBox_provincia.setModel(new javax.swing.DefaultComboBoxModel(new String[] {""}));
-        for(Provincia pro: GestorProvincia.get().buscarProvincia()){
-            comboBox_provincia.addItem(pro.getNombre());
-        }
+        comboBox_provincia.setModel(new javax.swing.DefaultComboBoxModel(new String[] {}));
         comboBox_provincia.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBox_provinciaItemStateChanged(evt);
@@ -327,7 +397,7 @@ private void buscarimagenes(String id) throws IOException{
         });
 
         jComboBox4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "L/local-oficina", "C/casa", "D/departamento", "T/terreno", "Q/quinta", "G/galpón" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Local", "Casa", "Departamento", "Terreno", "Quinta", "Galpón" }));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Precio de Venta:");
@@ -363,15 +433,20 @@ private void buscarimagenes(String id) throws IOException{
 
         jTextMontoReserva.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextMontoReserva.setName("Monto de la Reserva"); // NOI18N
+        jTextMontoReserva.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextMontoReservaKeyTyped(evt);
+            }
+        });
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel21.setText("Monto de Reserva");
 
         jTextVigencia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextVigencia.setName("Vigencia de la Reserva"); // NOI18N
-        jTextVigencia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextVigenciaActionPerformed(evt);
+        jTextVigencia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextVigenciaKeyTyped(evt);
             }
         });
 
@@ -648,12 +723,6 @@ private void buscarimagenes(String id) throws IOException{
             }
         });
 
-        jLabel23.setText("foto");
-
-        jLabel24.setText("foto");
-
-        jLabel25.setText("foto");
-
         Sacarfotos.setText("Sacar todas");
         Sacarfotos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -773,7 +842,7 @@ private void buscarimagenes(String id) throws IOException{
                 Integer.parseInt(jTextFrente.getText()),
                 Integer.parseInt(jTextFondo.getText()),
                 Integer.parseInt(jTextSuperficie.getText()),
-                "alta",
+                "Alta",
                 Integer.parseInt(jTextMontoReserva.getText()),
                 Integer.parseInt(jTextVigencia.getText()),
                 Integer.parseInt(jTextPrecioVenta.getText()),
@@ -801,25 +870,25 @@ private void buscarimagenes(String id) throws IOException{
     private void limpiarPanelAlta (){
         Component [] arrayCompo = jPanel3.getComponents();
         
-	for (Component component : arrayCompo) {
-		if(component instanceof  JTextField) ((JTextField)component).setText("");
-                if(component instanceof  JCheckBox) ((JCheckBox)component).setSelected(false);
-                if(component instanceof  JTextArea) ((JTextArea)component).setText("");
-	}
-      
+        for (Component component : arrayCompo) {
+            if(component instanceof  JTextField) ((JTextField)component).setText("");
+            if(component instanceof  JCheckBox) ((JCheckBox)component).setSelected(false);
+            if(component instanceof  JTextArea) ((JTextArea)component).setText("");
+        }
+        
     }
     
     private boolean validarVacios (){
         Component [] arrayCompo = jPanel3.getComponents();
         boolean vacio = false;
         
-	for (Component component : arrayCompo) {
-		if(component instanceof  JTextField){
-                    if ( ( (JTextField) component).getText().trim().length() == 0 ){
-                       vacio = true;   
-                    }
-                }                
-	}
+        for (Component component : arrayCompo) {
+            if(component instanceof  JTextField){
+                if ( ( (JTextField) component).getText().trim().length() == 0 ){
+                    vacio = true;
+                }
+            }
+        }
         return vacio;
     }
     
@@ -902,88 +971,90 @@ private void buscarimagenes(String id) throws IOException{
         }
         if(cadenaError.length() == 0){
             alta();            
-            jLabel3.setText(Integer.toString(maxIdInmobiliaria()));
+            jLabel3.setText(Integer.toString(GestorInmueble.get().maxIdInmobiliaria()));
             limpiarPanelAlta();
-            /* ver si poner un volver a otra ventana*/
+            
+            JOptionPane.showMessageDialog(null,"Inmueble cargado exitosamente","Éxito", JOptionPane.INFORMATION_MESSAGE);
+            GestorVentanas.get().remove(this);
+            GestorVentanas.get().menuVolver();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
     
     private void validarSoloNumeros (java.awt.event.KeyEvent evt){
         char c=evt.getKeyChar(); 
-        if(Character.isLetter(c)) { 
+        if(!Character.isDigit(c)) { 
               getToolkit().beep();                
-              evt.consume();                
-              JOptionPane.showMessageDialog(null,"Ingresa Solo Numeros");                
+              evt.consume();
           } 
     }
     
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-           int resultado;
-
-
-CargarFoto ventana = new CargarFoto();
-
-FileNameExtensionFilter filtro = new FileNameExtensionFilter("JPG y PNG","jpg","png");
-
-ventana.jFCFoto.setFileFilter(filtro);
-
-resultado= ventana.jFCFoto.showOpenDialog(null);
-
-
-if (JFileChooser.APPROVE_OPTION == resultado){
-File aux;
-       aux=ventana.jFCFoto.getSelectedFile();
-       String a=aux.getPath();
-       int i=0;
-       
-       try{
-                               
+        int resultado;
+        
+        
+        CargarFoto ventana = new CargarFoto();
+        
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("JPG y PNG","jpg","png");
+        
+        ventana.jFCFoto.setFileFilter(filtro);
+        
+        resultado= ventana.jFCFoto.showOpenDialog(null);
+        
+        
+        if (JFileChooser.APPROVE_OPTION == resultado){
+            File aux;
+            aux=ventana.jFCFoto.getSelectedFile();
+            String a=aux.getPath();
+            int i=0;
+            
+            try{
+                
                 if(jLabel25.getText()=="foto"){
-                ImageIcon icon = new ImageIcon(aux.toString());
-                
-                Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel25.getWidth(),
-                        jLabel25.getHeight(), Image.SCALE_DEFAULT));
-                
-                jLabel25.setIcon(icono);
-                jLabel25.setText("no");
-                archivos.add(aux);
+                    ImageIcon icon = new ImageIcon(aux.toString());
+                    
+                    Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel25.getWidth(),
+                            jLabel25.getHeight(), Image.SCALE_DEFAULT));
+                    
+                    jLabel25.setIcon(icono);
+                    jLabel25.setText("no");
+                    archivos.add(aux);
                 }
                 else if(jLabel23.getText()=="foto"){
                     
-                ImageIcon icon = new ImageIcon(aux.toString());
-                
-                Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel23.getWidth(),
-                        jLabel23.getHeight(), Image.SCALE_DEFAULT));
-                
-                jLabel23.setIcon(icono);
-                jLabel23.setText("no");
-                archivos.add(aux);
-           
-       }
+                    ImageIcon icon = new ImageIcon(aux.toString());
+                    
+                    Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel23.getWidth(),
+                            jLabel23.getHeight(), Image.SCALE_DEFAULT));
+                    
+                    jLabel23.setIcon(icono);
+                    jLabel23.setText("no");
+                    archivos.add(aux);
+                    
+                }
                 else if(jLabel24.getText()=="foto"){
                     
-                ImageIcon icon = new ImageIcon(aux.toString());
-                
-                Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel24.getWidth(),
-                        jLabel24.getHeight(), Image.SCALE_DEFAULT));
-                
-                jLabel24.setIcon(icono);
-                jLabel24.setText("no");
-                archivos.add(aux);
+                    ImageIcon icon = new ImageIcon(aux.toString());
+                    
+                    Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel24.getWidth(),
+                            jLabel24.getHeight(), Image.SCALE_DEFAULT));
+                    
+                    jLabel24.setIcon(icono);
+                    jLabel24.setText("no");
+                    archivos.add(aux);
                 }
                 else{
-                    JOptionPane.showMessageDialog(null,"Hasta 3 fotos");                
+                    JOptionPane.showMessageDialog(null,"Hasta 3 fotos");
                 }
                 
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(null, "Error abriendo la imagen "+ ex);
             }
-       
             
-    }                                        
+            
+        }                                        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void comboBox_ciudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_ciudadActionPerformed
@@ -1010,20 +1081,16 @@ File aux;
         validarSoloNumeros(evt);
     }//GEN-LAST:event_jTextFrenteKeyTyped
 
-    private void jTextVigenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextVigenciaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextVigenciaActionPerformed
-
     private void SacarfotosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SacarfotosActionPerformed
         // TODO add your handling code here:
         jLabel23.setIcon(null);
         jLabel23.setText("foto");
-         jLabel24.setIcon(null);
+        jLabel24.setIcon(null);
         jLabel24.setText("foto");
-         jLabel25.setIcon(null);
+        jLabel25.setIcon(null);
         jLabel25.setText("foto");
         for(int i=0;i<archivos.size();i++)
-        archivos.remove(i);
+            archivos.remove(i);
     }//GEN-LAST:event_SacarfotosActionPerformed
 
     private void comboBox_barrioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_barrioActionPerformed
@@ -1031,50 +1098,60 @@ File aux;
     }//GEN-LAST:event_comboBox_barrioActionPerformed
 
     private void comboBox_ciudadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBox_ciudadItemStateChanged
-              
         if(evt.getStateChange()== ItemEvent.SELECTED){
-            if(comboBox_ciudad.getSelectedIndex()>0){
-                comboBox_barrio.setModel(new DefaultComboBoxModel(GestorBarrio.get().buscarBarrioPorCiudad(comboBox_ciudad.getSelectedItem().toString())));
-            }
-            else{
-                comboBox_barrio.setModel(new DefaultComboBoxModel(new String[]{""}));
+            if(comboBox_ciudad.getSelectedIndex()>=0){
+                String[] barrios;
+                barrios = GestorBarrio.get().buscarBarrioPorCiudad(comboBox_ciudad.getSelectedItem().toString());
+                comboBox_barrio.setModel(new DefaultComboBoxModel(Arrays.copyOfRange(barrios, 1, barrios.length)));
             }
         }
     }//GEN-LAST:event_comboBox_ciudadItemStateChanged
 
     private void comboBox_provinciaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBox_provinciaItemStateChanged
         if(evt.getStateChange()== ItemEvent.SELECTED){
-            if(comboBox_provincia.getSelectedIndex()>0){
-                comboBox_barrio.setModel(new DefaultComboBoxModel(new String[]{""}));
-                comboBox_ciudad.setModel(new DefaultComboBoxModel(GestorLocalidad.get().buscarLocalidadesPorProvincia(comboBox_provincia.getSelectedItem().toString())));
-                
-            }
-            else{
-                comboBox_ciudad.setModel(new DefaultComboBoxModel(new String[]{""}));
-                comboBox_barrio.setModel(new DefaultComboBoxModel(new String[]{""}));
+            if(comboBox_provincia.getSelectedIndex()>=0){
+                String[] ciudades;
+                ciudades = GestorLocalidad.get().buscarLocalidadesPorProvincia(comboBox_provincia.getSelectedItem().toString());
+                comboBox_ciudad.setModel(new DefaultComboBoxModel(Arrays.copyOfRange(ciudades, 1, ciudades.length)));
+                String[] barrios;
+                barrios = GestorBarrio.get().buscarBarrioPorCiudad(comboBox_ciudad.getSelectedItem().toString());
+                comboBox_barrio.setModel(new DefaultComboBoxModel(Arrays.copyOfRange(barrios, 1, barrios.length)));
             }
         }
     }//GEN-LAST:event_comboBox_provinciaItemStateChanged
-                 
-    private int maxIdInmobiliaria (){
-        Session session;
-        session=ConexionUtil.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(Inmueble.class);
-        criteria.add(Restrictions.isNotNull("idInmueble"));
-        criteria.setProjection(
-            Projections.projectionList()
-                .add(Projections.max("idInmueble")
-                )
-        );
-                
-        if (criteria.list().get(0) != null){               
-            return  (int) criteria.list().get(0) + 1; 
-        }
-        else            
-            return 1;   
-        
-        
-    }
+
+    private void jTextMontoReservaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextMontoReservaKeyTyped
+        validarSoloNumeros(evt);
+    }//GEN-LAST:event_jTextMontoReservaKeyTyped
+
+    private void jTextBanioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextBanioKeyTyped
+        validarSoloNumeros(evt);
+    }//GEN-LAST:event_jTextBanioKeyTyped
+
+    private void jTextNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNumeroKeyTyped
+        validarSoloNumeros(evt);
+    }//GEN-LAST:event_jTextNumeroKeyTyped
+
+    private void jTextPisoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPisoKeyTyped
+        validarSoloNumeros(evt);
+    }//GEN-LAST:event_jTextPisoKeyTyped
+
+    private void jTextDepartamentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextDepartamentoKeyTyped
+        validarSoloNumeros(evt);
+    }//GEN-LAST:event_jTextDepartamentoKeyTyped
+
+    private void jTextPrecioVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPrecioVentaKeyTyped
+        validarSoloNumeros(evt);
+    }//GEN-LAST:event_jTextPrecioVentaKeyTyped
+
+    private void jTextAntiguedadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextAntiguedadKeyTyped
+        validarSoloNumeros(evt);
+    }//GEN-LAST:event_jTextAntiguedadKeyTyped
+
+    private void jTextVigenciaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextVigenciaKeyTyped
+        validarSoloNumeros(evt);
+    }//GEN-LAST:event_jTextVigenciaKeyTyped
+    
 
     private int maxIdCliente (){
         Session session;
@@ -1095,33 +1172,33 @@ File aux;
     } 
     
     private void guardarimagen(String id,int index){
-                String ruta="C:\\imagenes\\"+id+"_0.jpg";
-               File f = new File(ruta);
-               int i=1;
-                    while(f.exists()) {//ver si existe la ruta 
-                        ruta="C:\\imagenes\\"+id+"_"+i+".jpg";
-                        f=new File(ruta);
-                        i++;
-                    }
-                try{
-                    File destino = new File(ruta);
-                     InputStream in = new FileInputStream(archivos.get(index).getPath());
-                        OutputStream out = new FileOutputStream(destino);
-                                
-                        byte[] buf = new byte[1024];
-                        int len;
-
-                        while ((len = in.read(buf)) > 0) {
-                                out.write(buf, 0, len);
-                        }
-                
-                        in.close();
-                        out.close();
-                } catch (IOException ioe){
-                        ioe.printStackTrace();
-                }
- 
+        String ruta="C:\\imagenes\\"+id+"_0.jpg";
+        File f = new File(ruta);
+        int i=1;
+        while(f.exists()) {//ver si existe la ruta
+            ruta="C:\\imagenes\\"+id+"_"+i+".jpg";
+            f=new File(ruta);
+            i++;
+        }
+        try{
+            File destino = new File(ruta);
+            InputStream in = new FileInputStream(archivos.get(index).getPath());
+            OutputStream out = new FileOutputStream(destino);
+            
+            byte[] buf = new byte[1024];
+            int len;
+            
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
             }
+            
+            in.close();
+            out.close();
+        } catch (IOException ioe){
+            ioe.printStackTrace();
+        }
+        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Sacarfotos;
     private javax.swing.JComboBox<String> comboBox_barrio;

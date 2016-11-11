@@ -431,6 +431,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="Precio de Venta" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextPrecioVentaKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel13">
           <Properties>
@@ -447,14 +450,14 @@
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="8">
-                <StringItem index="0" value="norte"/>
-                <StringItem index="1" value="sur"/>
-                <StringItem index="2" value="este"/>
-                <StringItem index="3" value="oeste"/>
-                <StringItem index="4" value="noreste"/>
-                <StringItem index="5" value="noroeste"/>
-                <StringItem index="6" value="sureste"/>
-                <StringItem index="7" value="suroeste"/>
+                <StringItem index="0" value="Norte"/>
+                <StringItem index="1" value="Dur"/>
+                <StringItem index="2" value="Este"/>
+                <StringItem index="3" value="Oeste"/>
+                <StringItem index="4" value="Noreste"/>
+                <StringItem index="5" value="Noroeste"/>
+                <StringItem index="6" value="Sureste"/>
+                <StringItem index="7" value="Suroeste"/>
               </StringArray>
             </Property>
           </Properties>
@@ -515,6 +518,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="Antig&#xfc;edad" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextAntiguedadKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel17">
           <Properties>
@@ -609,6 +615,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="Numero de Calle" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextNumeroKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextBanio">
           <Properties>
@@ -617,6 +626,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="Ba&#xf1;os" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextBanioKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextPiso">
           <Properties>
@@ -625,6 +637,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="Piso" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextPisoKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
@@ -649,6 +664,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="Numero de Departamento" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextDepartamentoKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
@@ -688,7 +706,7 @@
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.DefaultComboBoxModel(new String[] {&quot;&quot;})" type="code"/>
+              <Connection code="new javax.swing.DefaultComboBoxModel(new String[] {})" type="code"/>
             </Property>
           </Properties>
           <Events>
@@ -697,7 +715,6 @@
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox()"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="for(Provincia pro: GestorProvincia.get().buscarProvincia()){&#xa;comboBox_provincia.addItem(pro.getNombre());&#xa;}"/>
             <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="Alta_comboBox_provincia"/>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
@@ -726,12 +743,12 @@
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="6">
-                <StringItem index="0" value="L/local-oficina"/>
-                <StringItem index="1" value="C/casa"/>
-                <StringItem index="2" value="D/departamento"/>
-                <StringItem index="3" value="T/terreno"/>
-                <StringItem index="4" value="Q/quinta"/>
-                <StringItem index="5" value="G/galp&#xf3;n"/>
+                <StringItem index="0" value="Local"/>
+                <StringItem index="1" value="Casa"/>
+                <StringItem index="2" value="Departamento"/>
+                <StringItem index="3" value="Terreno"/>
+                <StringItem index="4" value="Quinta"/>
+                <StringItem index="5" value="Galp&#xf3;n"/>
               </StringArray>
             </Property>
           </Properties>
@@ -808,6 +825,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="Monto de la Reserva" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextMontoReservaKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel21">
           <Properties>
@@ -825,7 +845,7 @@
             <Property name="name" type="java.lang.String" value="Vigencia de la Reserva" noResource="true"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextVigenciaActionPerformed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextVigenciaKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel22">
@@ -1008,19 +1028,10 @@
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel23">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="foto"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel24">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="foto"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel25">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="foto"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="Sacarfotos">
           <Properties>

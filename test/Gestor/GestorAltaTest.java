@@ -14,14 +14,23 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import Gestor.GestorInmueble;
+import Modelo.Barrio;
+import Modelo.Cliente;
+import Modelo.Propietario;
+import java.util.List;
 
 /**
  *
  * @author Martin
+ * 
+ * Prueba que un inmueble se cree (NO correctamente) --> hacer una prueba que verifique la correcta inserción del inmueble
+ * 
  */
 public class GestorAltaTest {
     
     private static SessionFactory sesion;
+    private int cantidadInmuebles;
     
     public GestorAltaTest() {
     }
@@ -39,6 +48,8 @@ public class GestorAltaTest {
     @Before
     public void setUp() {
         // Contar cantidad de inmuebles presentes en la BD, para comparar (hacer metodo, o usar el que consulta por inmuebles)
+        List<Inmueble> inmuebles = GestorInmueble.get().buscarInmuebles("", "", "", "", "", "", "", "");
+        cantidadInmuebles=inmuebles.size();
     }
     
     @After
@@ -50,18 +61,20 @@ public class GestorAltaTest {
      */
     @Test
     public void testAltaInmueble() {
+        
         System.out.println("Alta de Inmueble 1");
         
-        
         // Crear objetos propietario, barrio, cliente, etc para añadir al inmueble
-        
-        
-        /*Inmueble casa = Inmueble aux = new Inmueble(
-                Integer.parseInt(jLabel3.getText()),
+        Cliente cli = new Cliente(1);
+        Propietario prop = new Propietario(1);
+        Barrio barri = (Barrio) GestorAlta.getBarrio("CENTRO");
+        /*
+        Inmueble aux = new Inmueble(
+                GestorInmueble.get().maxIdInmobiliaria(),
                 cli,
                 prop,                
                 barri,
-                jTextCalle.getText(),
+                "Calle 1",
                 Integer.parseInt(jTextNumero.getText()),
                 Integer.parseInt(jTextPiso.getText()),
                 Integer.parseInt(jTextDepartamento.getText()),
