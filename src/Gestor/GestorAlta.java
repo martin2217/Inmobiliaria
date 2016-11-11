@@ -26,7 +26,7 @@ public class GestorAlta {
         Session session;
         session = sesion.openSession();
         Transaction tx = session.beginTransaction();
-        session.save(casa);
+        session.saveOrUpdate(casa);
         tx.commit();
         session.close();
     }

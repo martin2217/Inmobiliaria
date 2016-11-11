@@ -971,7 +971,7 @@
                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="Sacarfotos" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel24" min="-2" pref="179" max="-2" attributes="0"/>
+                              <Component id="jLabel24" min="-2" pref="180" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -988,7 +988,7 @@
                       <Component id="jLabel25" alignment="3" min="-2" pref="83" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel24" min="-2" pref="147" max="-2" attributes="0"/>
+                  <Component id="jLabel24" min="-2" pref="150" max="-2" attributes="0"/>
                   <EmptySpace pref="155" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>

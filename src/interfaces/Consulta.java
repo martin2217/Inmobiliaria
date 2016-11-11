@@ -458,7 +458,7 @@ public class Consulta extends javax.swing.JPanel {
                     modelo.removeRow(i);
                     i--;
                     GestorVentanas.get().remove(this);
-                    GestorVentanas.get().ModificacionInmueble(iaux);
+                    GestorVentanas.get().altaInmueble(iaux);
                 }
             }
         

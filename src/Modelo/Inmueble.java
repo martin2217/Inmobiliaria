@@ -36,30 +36,30 @@ public class Inmueble  implements java.io.Serializable {
     private Set consultas = new HashSet(0);
     
     // estas dos propiedades faltaban y aca las agrego
-    private Boolean estado_vendido;
-    private Integer cant_dormitorios;
-    
-    
-    
-    // estas son las propiedades agregadas de edificio a inmueble
-    private Boolean propiedadHorizontal;
-    private Float antiguedad;
-    // no va esta repetida private Integer superficie;
-    private Integer banios;
-    private Boolean garage;
-    private Boolean patio;
-    private Boolean aguaCorriente;
-    private Boolean piscina;
-    private Boolean cloacas;
-    private Boolean gasNatural;
-    private Boolean pavimento;
-    private Boolean lavadero;
-    private Boolean aguaCaliente;
-    private String telefono;
-    private String observaciones;
-    
-    
-    
+     private Boolean estado_vendido=false;
+     private Integer cant_dormitorios;
+
+   
+     
+     // estas son las propiedades agregadas de edificio a inmueble
+     private Boolean propiedadHorizontal=false;
+     private Float antiguedad;
+     // no va esta repetida private Integer superficie;
+     private Integer banios;
+     private Boolean garage=false;
+     private Boolean patio=false;
+     private Boolean aguaCorriente=false;
+     private Boolean piscina=false;
+     private Boolean cloacas=false;
+     private Boolean gasNatural=false;
+     private Boolean pavimento=false;
+     private Boolean lavadero=false;
+     private Boolean aguaCaliente=false;
+     private String telefono;
+     private String observaciones;
+
+  
+   
     public Inmueble() {
     }
     
