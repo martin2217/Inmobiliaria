@@ -138,6 +138,7 @@
          AND inm.tipoInmueble= :tipoInmueble
          AND inm.precio BETWEEN :precioMin AND :precioMax
          AND inm.estado= :estado
+         AND inm.cant_dormitorios >= :cantDormitorio
   
   ]]></query>
   
@@ -149,7 +150,7 @@
          AND inm.barrio.localidad.provincia.nombre= :nombreProvincia
          AND inm.tipoInmueble= :tipoInmueble
          AND inm.precio BETWEEN :precioMin AND :precioMax
-         
+         AND inm.cant_dormitorios >= :cantDormitorio
   ]]></query>
   
   <query name="TodosLosFiltrosSeleccionadosMenosTipoInmueble"><![CDATA[
@@ -160,7 +161,7 @@
          AND inm.barrio.localidad.provincia.nombre= :nombreProvincia
          AND inm.precio BETWEEN :precioMin AND :precioMax
          AND inm.estado= :estado
-  
+         AND inm.cant_dormitorios >= :cantDormitorio
   ]]></query>
   
    <query name="TodosLosFiltrosSeleccionadosMenosTipoInmuebleYEstado"><![CDATA[
@@ -170,7 +171,7 @@
          AND inm.barrio.localidad.nombre= :nombreLocalidad
          AND inm.barrio.localidad.provincia.nombre= :nombreProvincia
          AND inm.precio BETWEEN :precioMin AND :precioMax
-         
+         AND inm.cant_dormitorios >= :cantDormitorio
   ]]></query>
     
     
@@ -182,7 +183,7 @@
          AND inm.tipoInmueble= :tipoInmueble
          AND inm.precio BETWEEN :precioMin AND :precioMax
          AND inm.estado= :estado
-  
+         AND inm.cant_dormitorios >= :cantDormitorio
   ]]></query>
   
   
@@ -193,7 +194,7 @@
          AND inm.barrio.localidad.provincia.nombre= :nombreProvincia
          AND inm.tipoInmueble= :tipoInmueble
          AND inm.precio BETWEEN :precioMin AND :precioMax
-         
+         AND inm.cant_dormitorios >= :cantDormitorio
  
   ]]></query>
     
@@ -204,7 +205,7 @@
          AND inm.barrio.localidad.provincia.nombre= :nombreProvincia
          AND inm.precio BETWEEN :precioMin AND :precioMax
          AND inm.estado= :estado
-  
+         AND inm.cant_dormitorios >= :cantDormitorio
 
   ]]></query>
   
@@ -214,7 +215,7 @@
          WHERE inm.barrio.localidad.nombre= :nombreLocalidad
          AND inm.barrio.localidad.provincia.nombre= :nombreProvincia
          AND inm.precio BETWEEN :precioMin AND :precioMax
-          
+         AND inm.cant_dormitorios >= :cantDormitorio
   
   ]]></query>
     
@@ -225,7 +226,7 @@
          AND inm.tipoInmueble= :tipoInmueble
          AND inm.precio BETWEEN :precioMin AND :precioMax
          AND inm.estado= :estado
-  
+         AND inm.cant_dormitorios >= :cantDormitorio
   ]]></query>
       
        <query name="TodosLosFiltrosSeleccionadosMenosLocalidadETCYEstado"><![CDATA[
@@ -234,7 +235,7 @@
          WHERE inm.barrio.localidad.provincia.nombre= :nombreProvincia
          AND inm.tipoInmueble= :tipoInmueble
          AND inm.precio BETWEEN :precioMin AND :precioMax
- 
+         AND inm.cant_dormitorios >= :cantDormitorio
   ]]></query>
     
       <query name="TodosLosFiltrosSeleccionadosMenosLocalidadETCYTipoDepartamento"><![CDATA[
@@ -243,7 +244,7 @@
          WHERE inm.barrio.localidad.provincia.nombre= :nombreProvincia
          AND inm.precio BETWEEN :precioMin AND :precioMax
          AND inm.estado= :estado
-
+         AND inm.cant_dormitorios >= :cantDormitorio
   ]]></query>
     
      <query name="TodosLosFiltrosSeleccionadosMenosLocalidadETCYTipoDepartamentoYEstado"><![CDATA[
@@ -251,7 +252,7 @@
          SELECT inm FROM Inmueble inm
          WHERE inm.barrio.localidad.provincia.nombre= :nombreProvincia
          AND inm.precio BETWEEN :precioMin AND :precioMax
-       
+         AND inm.cant_dormitorios >= :cantDormitorio
 
   ]]></query>
     
@@ -261,7 +262,7 @@
          WHERE  inm.tipoInmueble= :tipoInmueble
          AND inm.precio BETWEEN :precioMin AND :precioMax
          AND inm.estado= :estado
-  
+         AND inm.cant_dormitorios >= :cantDormitorio
 
   ]]></query>
     
@@ -270,7 +271,7 @@
          SELECT inm FROM Inmueble inm
          WHERE inm.precio BETWEEN :precioMin AND :precioMax
          AND inm.estado= :estado
-
+         AND inm.cant_dormitorios >= :cantDormitorio
   ]]></query>
     
      <query name="TodosLosFiltrosSeleccionadosMenosProvinciaETCYEstado"><![CDATA[
@@ -278,14 +279,14 @@
          SELECT inm FROM Inmueble inm
          WHERE  inm.tipoInmueble= :tipoInmueble
          AND inm.precio BETWEEN :precioMin AND :precioMax
-
+         AND inm.cant_dormitorios >= :cantDormitorio
   ]]></query>
   
      <query name="TodosLosFiltrosSeleccionadosMenosProvinciaETCYTipoDepartamentoYEstado"><![CDATA[
 
          SELECT inm FROM Inmueble inm
          WHERE inm.precio BETWEEN :precioMin AND :precioMax
- 
+         AND inm.cant_dormitorios >= :cantDormitorio
   ]]></query>
     
     

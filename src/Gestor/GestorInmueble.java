@@ -6,6 +6,7 @@ package Gestor;
 import Controlador.ConexionUtil;
 import Controlador.Dao;
 import Modelo.Inmueble;
+import java.util.Iterator;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -34,12 +35,14 @@ public final class GestorInmueble {
     
     public List<Inmueble> buscarInmuebles( String provincia, String localidad, String barrio,String tipo_departamento
             , String cantidad_dormitorio ,String precio_minimo, String precio_maximo, String estado ){
-        // cantidad de dormitorios no existe en ningun ladoooooooooooooooooooooooooooooooooooooooooooooooo
         
         Query query;
         List<Inmueble> retorno_inmueble ;
         Float pre_min_query;
         Float pre_max_query;
+        Integer dormitorio;
+        if(cantidad_dormitorio.equals("")) dormitorio=0;
+        else dormitorio= Integer.parseInt(cantidad_dormitorio);
         if(precio_minimo.equals("")) pre_min_query= 0.0F;
         else pre_min_query= Float.parseFloat(precio_minimo);
         if(precio_maximo.equals("")) pre_max_query=99999999999.2F;
@@ -59,6 +62,7 @@ public final class GestorInmueble {
                             query.setParameter("estado",estado);
                             query.setParameter("precioMin", pre_min_query);
                             query.setParameter("precioMax", pre_max_query);
+                            query.setParameter("cantDormitorio", dormitorio);
                             retorno_inmueble=query.list();
                             
                         }
@@ -70,7 +74,7 @@ public final class GestorInmueble {
                             query.setParameter("nombreLocalidad", localidad);
                             query.setParameter("precioMin", pre_min_query);
                             query.setParameter("precioMax", pre_max_query);
-                            
+                            query.setParameter("cantDormitorio", dormitorio);
                             retorno_inmueble=query.list();
                         }
                     }
@@ -83,6 +87,7 @@ public final class GestorInmueble {
                             query.setParameter("precioMin", pre_min_query);
                             query.setParameter("precioMax", pre_max_query);
                             query.setParameter("estado", estado);
+                            query.setParameter("cantDormitorio", dormitorio);
                             retorno_inmueble=query.list();
                         }
                         else{
@@ -92,6 +97,7 @@ public final class GestorInmueble {
                             query.setParameter("nombreLocalidad", localidad);
                             query.setParameter("precioMin", pre_min_query);
                             query.setParameter("precioMax", pre_max_query);
+                            query.setParameter("cantDormitorio", dormitorio);
                             retorno_inmueble=query.list();
                         }
                     }
@@ -105,6 +111,7 @@ public final class GestorInmueble {
                         query.setParameter("estado",estado);
                         query.setParameter("precioMin", pre_min_query);
                         query.setParameter("precioMax", pre_max_query);
+                        query.setParameter("cantDormitorio", dormitorio);
                         retorno_inmueble=query.list();
                     }
                     else if(!tipo_departamento.equals("")){
@@ -114,6 +121,7 @@ public final class GestorInmueble {
                         query.setParameter("nombreLocalidad", localidad);
                         query.setParameter("precioMin", pre_min_query);
                         query.setParameter("precioMax", pre_max_query);
+                        query.setParameter("cantDormitorio", dormitorio);
                         retorno_inmueble=query.list();
                         
                     }
@@ -125,6 +133,7 @@ public final class GestorInmueble {
                         query.setParameter("estado",estado);
                         query.setParameter("precioMin", pre_min_query);
                         query.setParameter("precioMax", pre_max_query);
+                        query.setParameter("cantDormitorio", dormitorio);
                         retorno_inmueble=query.list();
                     }
                     
@@ -135,6 +144,7 @@ public final class GestorInmueble {
                         query.setParameter("nombreLocalidad", localidad);
                         query.setParameter("precioMin", pre_min_query);
                         query.setParameter("precioMax", pre_max_query);
+                        query.setParameter("cantDormitorio", dormitorio);
                         retorno_inmueble=query.list();
                     }
                 }
@@ -148,6 +158,7 @@ public final class GestorInmueble {
                     query.setParameter("estado",estado);
                     query.setParameter("precioMin", pre_min_query);
                     query.setParameter("precioMax", pre_max_query);
+                    query.setParameter("cantDormitorio", dormitorio);
                     retorno_inmueble=query.list();
                 }
                 else if(!tipo_departamento.equals("")){
@@ -156,6 +167,7 @@ public final class GestorInmueble {
                     query.setParameter("nombreProvincia",provincia);
                     query.setParameter("precioMin", pre_min_query);
                     query.setParameter("precioMax", pre_max_query);
+                    query.setParameter("cantDormitorio", dormitorio);
                     retorno_inmueble=query.list();
                 }
                 else if(!estado.equals("")){
@@ -165,6 +177,7 @@ public final class GestorInmueble {
                     query.setParameter("estado",estado);
                     query.setParameter("precioMin", pre_min_query);
                     query.setParameter("precioMax", pre_max_query);
+                    query.setParameter("cantDormitorio", dormitorio);
                     retorno_inmueble=query.list();
                 }
                 else{
@@ -172,6 +185,7 @@ public final class GestorInmueble {
                     query.setParameter("nombreProvincia",provincia);
                     query.setParameter("precioMin", pre_min_query);
                     query.setParameter("precioMax", pre_max_query);
+                    query.setParameter("cantDormitorio", dormitorio);
                     retorno_inmueble=query.list();
                 }
             }
@@ -184,6 +198,7 @@ public final class GestorInmueble {
                 query.setParameter("estado",estado);
                 query.setParameter("precioMin", pre_min_query);
                 query.setParameter("precioMax", pre_max_query);
+                query.setParameter("cantDormitorio", dormitorio);
                 retorno_inmueble=query.list();
             }
             else if(!tipo_departamento.equals("")){
@@ -191,6 +206,7 @@ public final class GestorInmueble {
                 query.setParameter("tipoInmueble", tipo_departamento);
                 query.setParameter("precioMin", pre_min_query);
                 query.setParameter("precioMax", pre_max_query);
+                query.setParameter("cantDormitorio", dormitorio);
                 retorno_inmueble=query.list();
             }
             else if(!estado.equals("")){
@@ -199,6 +215,7 @@ public final class GestorInmueble {
                 query.setParameter("estado",estado);
                 query.setParameter("precioMin", pre_min_query);
                 query.setParameter("precioMax", pre_max_query);
+                query.setParameter("cantDormitorio", dormitorio);
                 retorno_inmueble=query.list();
             }
             else{
@@ -206,6 +223,7 @@ public final class GestorInmueble {
                 
                 query.setParameter("precioMin", pre_min_query);
                 query.setParameter("precioMax", pre_max_query);
+                query.setParameter("cantDormitorio", dormitorio);
                 retorno_inmueble=query.list();
             }
         }
@@ -215,6 +233,19 @@ public final class GestorInmueble {
         Dao.get().cerrarConexion(Dao.get().getSesion());
         return retorno_inmuebles;
         */
+        
+        
+        Iterator <Inmueble> recorrido= retorno_inmueble.iterator();
+        Inmueble aux;
+        while(recorrido.hasNext()){
+            aux=recorrido.next();
+            if(aux.isEstado_vendido()){
+                recorrido.remove();
+            }
+            
+        }
+        
+        
         Dao.get().cerrarConexion(Dao.get().getSesion());
         return retorno_inmueble;
     }
@@ -225,6 +256,16 @@ public final class GestorInmueble {
         sesion.beginTransaction();
         Inmueble inmueble_a_borrar=(Inmueble)sesion.get(Inmueble.class,id);
         sesion.delete(inmueble_a_borrar);
+        sesion.getTransaction().commit();
+        sesion.close();
+    }
+     public void borrarInmuebleLogica(int id){ /* con este metodo borro un objeto de la base de datos debo saber su id y la clase, asi lo busco al objeto y lo borro*/
+        Session sesion;
+        sesion=Dao.get().getSesion();
+        sesion.beginTransaction();
+        Inmueble inmueble_a_borrar=(Inmueble)sesion.get(Inmueble.class,id);
+        inmueble_a_borrar.setEstado_vendido(Boolean.TRUE);
+        sesion.update(inmueble_a_borrar);
         sesion.getTransaction().commit();
         sesion.close();
     }

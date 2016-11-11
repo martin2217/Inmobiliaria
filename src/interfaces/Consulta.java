@@ -58,6 +58,11 @@ public class Consulta extends javax.swing.JPanel {
         columna.setMinWidth(0);
         columna.setPreferredWidth(0);
         
+        columna = jTable1.getColumnModel().getColumn(1);
+        columna.setMaxWidth(40);
+        columna.setMinWidth(40);
+        columna.setPreferredWidth(40);
+        
        
         
         
@@ -117,14 +122,14 @@ public class Consulta extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Id", "Seleccionado", "Propietario", "Localidad", "Dirección", "Superficie", "Precio"
+                "Id", "", "Propietario", "Localidad", "Dirección", "Superficie", "Precio", "Dormitorios"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, false, false, false, false, false
+                false, true, false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -160,7 +165,7 @@ public class Consulta extends javax.swing.JPanel {
             }
         });
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filtros", 0, 0, new java.awt.Font("Agency FB", 0, 18))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filtros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 0, 18))); // NOI18N
         jPanel2.setMaximumSize(new java.awt.Dimension(218, 456));
 
         labelId.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
@@ -500,7 +505,7 @@ public class Consulta extends javax.swing.JPanel {
             for(int i=0; i<modelo.getRowCount(); i++){
                 
                 if((Boolean)modelo.getValueAt(i, 1).equals(Boolean.TRUE)){
-                    GestorInmueble.get().borrarInmueble(Integer.valueOf(modelo.getValueAt(i, 0).toString()));
+                    GestorInmueble.get().borrarInmuebleLogica(Integer.valueOf(modelo.getValueAt(i, 0).toString()));
                     modelo.removeRow(i);
                     i--;
                 }
