@@ -15,6 +15,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import Gestor.GestorInmueble;
+import Modelo.Barrio;
+import Modelo.Cliente;
+import Modelo.Propietario;
 import java.util.List;
 
 /**
@@ -62,14 +65,16 @@ public class GestorAltaTest {
         System.out.println("Alta de Inmueble 1");
         
         // Crear objetos propietario, barrio, cliente, etc para añadir al inmueble
-        
-        
-        /*Inmueble casa = Inmueble aux = new Inmueble(
-                Integer.parseInt(jLabel3.getText()),
+        Cliente cli = new Cliente(1);
+        Propietario prop = new Propietario(1);
+        Barrio barri = (Barrio) GestorAlta.getBarrio("CENTRO");
+        /*
+        Inmueble aux = new Inmueble(
+                GestorInmueble.get().maxIdInmobiliaria(),
                 cli,
                 prop,                
                 barri,
-                jTextCalle.getText(),
+                "Calle 1",
                 Integer.parseInt(jTextNumero.getText()),
                 Integer.parseInt(jTextPiso.getText()),
                 Integer.parseInt(jTextDepartamento.getText()),

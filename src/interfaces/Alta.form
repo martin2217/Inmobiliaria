@@ -431,6 +431,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="Precio de Venta" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextPrecioVentaKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel13">
           <Properties>
@@ -515,6 +518,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="Antig&#xfc;edad" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextAntiguedadKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel17">
           <Properties>
@@ -609,6 +615,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="Numero de Calle" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextNumeroKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextBanio">
           <Properties>
@@ -617,6 +626,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="Ba&#xf1;os" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextBanioKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextPiso">
           <Properties>
@@ -625,6 +637,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="Piso" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextPisoKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
@@ -649,6 +664,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="Numero de Departamento" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextDepartamentoKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
@@ -808,6 +826,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="Monto de la Reserva" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextMontoReservaKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel21">
           <Properties>
@@ -825,7 +846,7 @@
             <Property name="name" type="java.lang.String" value="Vigencia de la Reserva" noResource="true"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextVigenciaActionPerformed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextVigenciaKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel22">
@@ -1008,19 +1029,10 @@
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel23">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="foto"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel24">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="foto"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel25">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="foto"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="Sacarfotos">
           <Properties>

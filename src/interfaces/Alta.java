@@ -66,11 +66,14 @@ public class Alta extends javax.swing.JPanel {
     
     List<File> archivos = new ArrayList<File>();
     
+    
     public Alta() {
         initComponents();
         limitadoTextFields();
-        jLabel3.setText(Integer.toString(maxIdInmobiliaria()));
+        jLabel3.setText(Integer.toString(GestorInmueble.get().maxIdInmobiliaria()));
     }
+    
+    
     
     private void limitadoTextFields(){
         limitador(jTextCalle, 20);
@@ -87,6 +90,7 @@ public class Alta extends javax.swing.JPanel {
         limitador(jTextSuperficie, 10);
         limitador(jTextFondo, 10);
         limitador(jTextDormitorio, 2);
+        ((AbstractDocument)jTextObservaciones.getDocument()).setDocumentFilter(new LimitadorTextField(100));
     }
     
     private void limitador(JTextField jText, int cantidad){
@@ -216,6 +220,11 @@ public class Alta extends javax.swing.JPanel {
 
         jTextPrecioVenta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextPrecioVenta.setName("Precio de Venta"); // NOI18N
+        jTextPrecioVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextPrecioVentaKeyTyped(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Orientación:");
@@ -250,6 +259,11 @@ public class Alta extends javax.swing.JPanel {
 
         jTextAntiguedad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextAntiguedad.setName("Antigüedad"); // NOI18N
+        jTextAntiguedad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextAntiguedadKeyTyped(evt);
+            }
+        });
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel17.setText("Fondo:");
@@ -294,12 +308,27 @@ public class Alta extends javax.swing.JPanel {
 
         jTextNumero.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextNumero.setName("Numero de Calle"); // NOI18N
+        jTextNumero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextNumeroKeyTyped(evt);
+            }
+        });
 
         jTextBanio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextBanio.setName("Baños"); // NOI18N
+        jTextBanio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextBanioKeyTyped(evt);
+            }
+        });
 
         jTextPiso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextPiso.setName("Piso"); // NOI18N
+        jTextPiso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextPisoKeyTyped(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Piso:");
@@ -309,6 +338,11 @@ public class Alta extends javax.swing.JPanel {
 
         jTextDepartamento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextDepartamento.setName("Numero de Departamento"); // NOI18N
+        jTextDepartamento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextDepartamentoKeyTyped(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Tipo de inmueble:");
@@ -387,15 +421,20 @@ public class Alta extends javax.swing.JPanel {
 
         jTextMontoReserva.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextMontoReserva.setName("Monto de la Reserva"); // NOI18N
+        jTextMontoReserva.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextMontoReservaKeyTyped(evt);
+            }
+        });
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel21.setText("Monto de Reserva");
 
         jTextVigencia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextVigencia.setName("Vigencia de la Reserva"); // NOI18N
-        jTextVigencia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextVigenciaActionPerformed(evt);
+        jTextVigencia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextVigenciaKeyTyped(evt);
             }
         });
 
@@ -672,12 +711,6 @@ public class Alta extends javax.swing.JPanel {
             }
         });
 
-        jLabel23.setText("foto");
-
-        jLabel24.setText("foto");
-
-        jLabel25.setText("foto");
-
         Sacarfotos.setText("Sacar todas");
         Sacarfotos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -797,7 +830,7 @@ public class Alta extends javax.swing.JPanel {
                 Integer.parseInt(jTextFrente.getText()),
                 Integer.parseInt(jTextFondo.getText()),
                 Integer.parseInt(jTextSuperficie.getText()),
-                "alta",
+                "Alta",
                 Integer.parseInt(jTextMontoReserva.getText()),
                 Integer.parseInt(jTextVigencia.getText()),
                 Integer.parseInt(jTextPrecioVenta.getText()),
@@ -926,9 +959,12 @@ public class Alta extends javax.swing.JPanel {
         }
         if(cadenaError.length() == 0){
             alta();            
-            jLabel3.setText(Integer.toString(maxIdInmobiliaria()));
+            jLabel3.setText(Integer.toString(GestorInmueble.get().maxIdInmobiliaria()));
             limpiarPanelAlta();
-            /* ver si poner un volver a otra ventana*/
+            
+            JOptionPane.showMessageDialog(null,"Inmueble cargado exitosamente","Éxito", JOptionPane.INFORMATION_MESSAGE);
+            GestorVentanas.get().remove(this);
+            GestorVentanas.get().menuVolver();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     
@@ -1033,10 +1069,6 @@ public class Alta extends javax.swing.JPanel {
         validarSoloNumeros(evt);
     }//GEN-LAST:event_jTextFrenteKeyTyped
 
-    private void jTextVigenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextVigenciaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextVigenciaActionPerformed
-
     private void SacarfotosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SacarfotosActionPerformed
         // TODO add your handling code here:
         jLabel23.setIcon(null);
@@ -1078,26 +1110,39 @@ public class Alta extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_comboBox_provinciaItemStateChanged
-                 
-    private int maxIdInmobiliaria (){
-        Session session;
-        session=ConexionUtil.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(Inmueble.class);
-        criteria.add(Restrictions.isNotNull("idInmueble"));
-        criteria.setProjection(
-            Projections.projectionList()
-                .add(Projections.max("idInmueble")
-                )
-        );
-                
-        if (criteria.list().get(0) != null){               
-            return  (int) criteria.list().get(0) + 1; 
-        }
-        else            
-            return 1;   
-        
-        
-    }
+
+    private void jTextMontoReservaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextMontoReservaKeyTyped
+        validarSoloNumeros(evt);
+    }//GEN-LAST:event_jTextMontoReservaKeyTyped
+
+    private void jTextBanioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextBanioKeyTyped
+        validarSoloNumeros(evt);
+    }//GEN-LAST:event_jTextBanioKeyTyped
+
+    private void jTextNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNumeroKeyTyped
+        validarSoloNumeros(evt);
+    }//GEN-LAST:event_jTextNumeroKeyTyped
+
+    private void jTextPisoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPisoKeyTyped
+        validarSoloNumeros(evt);
+    }//GEN-LAST:event_jTextPisoKeyTyped
+
+    private void jTextDepartamentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextDepartamentoKeyTyped
+        validarSoloNumeros(evt);
+    }//GEN-LAST:event_jTextDepartamentoKeyTyped
+
+    private void jTextPrecioVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPrecioVentaKeyTyped
+        validarSoloNumeros(evt);
+    }//GEN-LAST:event_jTextPrecioVentaKeyTyped
+
+    private void jTextAntiguedadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextAntiguedadKeyTyped
+        validarSoloNumeros(evt);
+    }//GEN-LAST:event_jTextAntiguedadKeyTyped
+
+    private void jTextVigenciaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextVigenciaKeyTyped
+        validarSoloNumeros(evt);
+    }//GEN-LAST:event_jTextVigenciaKeyTyped
+    
 
     private int maxIdCliente (){
         Session session;
