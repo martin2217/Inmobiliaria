@@ -28,6 +28,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -72,31 +73,97 @@ public class Modificacion extends javax.swing.JPanel {
         
             }
     private void llenarDatos(){
-        //jLabel3.setText(Integer.toString(inmueble.getIdInmueble()));
+        DecimalFormat df = new DecimalFormat("#.00");
+        jLabel3.setText(String.valueOf(inmueble.getIdInmueble()));
         jTextCalle.setText(inmueble.getCalle());
-       /* jTextPiso.setText(Integer.toString( inmueble.getPiso()));
-        jTextAntiguedad.setText(Integer.toString(inmueble.getAntiguedad()));
-        jTextBanio.setText(Integer.toString(inmueble.getBanios()));
-        jTextDepartamento.setText(Integer.toString(inmueble.getDepto()));
-        jTextDormitorio.setText(Integer.toString(inmueble.getCant_dormitorios()));
-        jTextFondo.setText(Float.toString(inmueble.getFondo()));
-        jTextFrente.setText(Float.toString(inmueble.getFrente()));
-        jTextMontoReserva.setText(Float.toString(inmueble.getMontoReserva()));
-        jTextNumero.setText(Integer.toString(inmueble.getNroCalle()));
+        jTextPiso.setText(String.valueOf( inmueble.getPiso()));
+        jTextAntiguedad.setText(String.valueOf(inmueble.getAntiguedad()));
+        jTextBanio.setText(String.valueOf(inmueble.getBanios()));
+        jTextDepartamento.setText(String.valueOf(inmueble.getDepto()));
+        jTextDormitorio.setText(String.valueOf(inmueble.getCant_dormitorios()));
+        jTextFondo.setText(String.valueOf(inmueble.getFondo()));
+        jTextFrente.setText(String.valueOf(inmueble.getFrente()));
+        jTextMontoReserva.setText(String.valueOf(inmueble.getMontoReserva()));
+        jTextNumero.setText(String.valueOf(inmueble.getNroCalle()));
         jTextObservaciones.setText(inmueble.getObservaciones());
-        jTextPrecioVenta.setText(Float.toString(inmueble.getMontoVenta()));
-        jTextSuperficie.setText(Float.toString(inmueble.getSuperficie()));
-        jTextTelefono.setText(inmueble.getTelefono());*/
-        switch(inmueble.getVigenciaReserva()){
+        jTextPrecioVenta.setText(String.valueOf(inmueble.getMontoVenta()));
+        jTextSuperficie.setText(String.valueOf(inmueble.getSuperficie()));
+        jTextTelefono.setText(inmueble.getTelefono());
+
+      try{  switch(inmueble.getVigenciaReserva()){
             case 1: jTextVigencia.setText("Si"); break;
             default: jTextVigencia.setText("No"); break;
-        }
+        }} catch(Exception e){ String a=e.toString();}
         
-       /* comboBox_provincia.setSelectedItem(inmueble.getBarrio().getLocalidad().getProvincia().getIdProvincia());
-        comboBox_barrio.setSelectedIndex(inmueble.getBarrio().getIdBarrio());
-        comboBox_ciudad.setSelectedIndex(inmueble.getBarrio().getLocalidad().getIdLocalidad());
-        */
+       /* comboBox_provincia.setSelectedItem(inmueble.getBarrio().getLocalidad().getProvincia());
+     comboBox_ciudad.setSelectedItem(inmueble.getBarrio().getLocalidad());
+        comboBox_barrio.setSelectedItem(inmueble.getBarrio());*/
+        
+        //System.out.println(inmueble.getBarrio().getIdBarrio());
+        jCheckBoxAguaCaliente.setSelected(inmueble.isAguaCaliente());
+        jCheckBoxAguaCorriente.setSelected(inmueble.isAguaCorriente());
+        jCheckBoxCloaca.setSelected(inmueble.isCloacas());
+        jCheckBoxCochera.setSelected(inmueble.isEstado_vendido());
+        jCheckBoxGaraje.setSelected(inmueble.isGarage());
+        jCheckBoxGasNatural.setSelected(inmueble.isGasNatural());
+        jCheckBoxLavadero.setSelected(inmueble.isLavadero());
+        jCheckBoxPatio.setSelected(inmueble.isPatio());
+        jCheckBoxPavimento.setSelected(inmueble.isPavimento());
+        jCheckBoxPiscina.setSelected(inmueble.isPiscina());
+        jCheckBoxPropiedadHorizontal.setSelected(inmueble.isPropiedadHorizontal());
+        try{
+            buscarimagenes(jLabel3.getText());
+        }catch(Exception ex)
+        {
+            System.out.println("error en buscar imagenes");
+        }
+        cargarimagenes();
+        
     }
+ public void cargarimagenes(){
+    try{
+                               
+                if(jLabel25.getText()=="foto"){
+                    File a=archivos.get(0);
+                ImageIcon icon = new ImageIcon(a.toURL());
+                /*icon.getImage()
+                Icon icono=new ImageIcon(a.toURL());
+                i
+                jLabel25.setIcon(icono);*/
+                int w=jLabel25.getWidth();
+                int h=jLabel25.getHeight();
+                
+                Icon icono = new ImageIcon(icon.getImage().getScaledInstance(100, 83, 30));
+                
+                jLabel25.setIcon(icono);
+                jLabel25.setText(archivos.get(0).getName());
+                
+                }
+                if(jLabel23.getText()=="foto"){
+                    
+                ImageIcon icon = new ImageIcon(archivos.get(1).toURL());
+                
+                Icon icono = new ImageIcon(icon.getImage().getScaledInstance(100,
+                        83, 30));
+                
+                jLabel23.setIcon(icono);
+                jLabel23.setText(archivos.get(1).getName());
+                
+           
+       }
+                 if(jLabel24.getText()=="foto"){
+                    
+                ImageIcon icon = new ImageIcon(archivos.get(2).toURL());
+                
+                Icon icono = new ImageIcon(icon.getImage().getScaledInstance(180,
+                        150, 30));
+                
+                jLabel24.setIcon(icono);
+                jLabel24.setText(archivos.get(2).getName());
+                
+                }
+    }catch(Exception e){System.out.println(e.toString()); }
+}
 private void buscarimagenes(String id) throws IOException{
      File ruta=new File("C:\\imagenes\\");
      
@@ -108,7 +175,7 @@ private void buscarimagenes(String id) throws IOException{
      };
      File[] files=ruta.listFiles(begin);
      for (File file :files){
-         System.out.println(file.getCanonicalPath());
+         archivos.add(file);
      }
  }
     /**
@@ -708,7 +775,7 @@ private void buscarimagenes(String id) throws IOException{
                         .addGap(10, 10, 10)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(Sacarfotos)
-                            .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(33, 33, 33))
         );
         jPanel4Layout.setVerticalGroup(
@@ -719,7 +786,7 @@ private void buscarimagenes(String id) throws IOException{
                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
