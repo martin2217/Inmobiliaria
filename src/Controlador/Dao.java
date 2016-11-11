@@ -5,8 +5,6 @@ package Controlador;
 import Modelo.Cliente;
 import Modelo.Inmueble;
 
-import javax.swing.JOptionPane;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -69,7 +67,6 @@ public  final class Dao {
         session.save(cli);
         tx.commit();
         session.close();
-        JOptionPane.showMessageDialog(null,"Insertado correctamente.");
     }
     
      
@@ -82,7 +79,6 @@ public  final class Dao {
         session.save(casa);
         tx.commit();
         session.close();
-        JOptionPane.showMessageDialog(null,"Alta Inmueble correctamente.");
     }
          /*public DefaultListModel mostrarProvincias()
     {

@@ -757,7 +757,7 @@ private void buscarimagenes(String id) throws IOException{
         Cliente cli = new Cliente(1);
         Propietario prop = new Propietario(1);
         //Barrio barri = new Barrio(101);
-        Barrio barri = (Barrio) comboBox_barrio.getSelectedItem();
+        Barrio barri = (Barrio) GestorAlta.getBarrio(comboBox_barrio.getSelectedItem().toString());
         Inmueble aux = new Inmueble(
                 Integer.parseInt(jLabel3.getText()),
                 cli,

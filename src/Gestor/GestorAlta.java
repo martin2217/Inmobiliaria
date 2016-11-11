@@ -6,8 +6,10 @@
 package Gestor;
 
 import Controlador.ConexionUtil;
+import Controlador.Dao;
+import Modelo.Barrio;
 import Modelo.Inmueble;
-import javax.swing.JOptionPane;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -27,8 +29,15 @@ public class GestorAlta {
         session.save(casa);
         tx.commit();
         session.close();
-        //JOptionPane.showMessageDialog(null,"Alta Inmueble correctamente.");
-        JOptionPane.showMessageDialog(null, "Operacion realizada exitosamente.", "Exito!", JOptionPane.INFORMATION_MESSAGE);
     }
     
+    public static Barrio getBarrio (String name){
+        Query query;
+        query= Dao.get().getSesion().
+                createQuery("from Barrio where nombre=:name");
+        query.setParameter("name", name);
+        Barrio barrio = (Barrio) query.uniqueResult();
+
+        return barrio;
+    }
 }
