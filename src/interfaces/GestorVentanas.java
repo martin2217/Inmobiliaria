@@ -84,11 +84,11 @@ public class GestorVentanas extends javax.swing.JFrame {
         revalidate();
         repaint();        
     }
-    public void ModificacionInmueble(Inmueble inmueble){
+    public void altaInmueble(Inmueble inmueble){
         this.setSize(new Dimension(1100,620));
         this.setLocationRelativeTo(null);
-        modInmueble= new Modificacion(inmueble);
-        add(modInmueble);        
+        altaInmueble= new Alta(inmueble);
+        add(altaInmueble);        
         revalidate();
         repaint();        
     }

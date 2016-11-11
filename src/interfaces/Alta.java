@@ -28,6 +28,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -75,7 +76,13 @@ public class Alta extends javax.swing.JPanel {
         jLabel3.setText(Integer.toString(GestorInmueble.get().maxIdInmobiliaria()));
     }
     
-    
+     public Alta(Inmueble inmueble) {
+        initComponents();
+        this.inmueble = inmueble;
+        inicializar2();
+        llenarDatos();
+        
+     }
     
     private void limitadoTextFields(){
         limitador(jTextCalle, 20);
@@ -123,7 +130,7 @@ public class Alta extends javax.swing.JPanel {
         };
         File[] files=ruta.listFiles(begin);
         for (File file :files){
-            System.out.println(file.getCanonicalPath());
+            archivos.add(file);
         }
     }
     /**
@@ -1217,6 +1224,100 @@ private void validarSoloNumeros (java.awt.event.KeyEvent evt){
         }
         
     }
+     private void llenarDatos(){
+        DecimalFormat df = new DecimalFormat("#.00");
+        jLabel3.setText(String.valueOf(inmueble.getIdInmueble()));
+        jTextCalle.setText(inmueble.getCalle());
+        jTextPiso.setText(String.valueOf( inmueble.getPiso()));
+        jTextAntiguedad.setText(String.valueOf(inmueble.getAntiguedad()));
+        jTextBanio.setText(String.valueOf(inmueble.getBanios()));
+        jTextDepartamento.setText(String.valueOf(inmueble.getDepto()));
+        jTextDormitorio.setText(String.valueOf(inmueble.getCant_dormitorios()));
+        jTextFondo.setText(String.valueOf(inmueble.getFondo()));
+        jTextFrente.setText(String.valueOf(inmueble.getFrente()));
+        jTextMontoReserva.setText(String.valueOf(inmueble.getMontoReserva()));
+        jTextNumero.setText(String.valueOf(inmueble.getNroCalle()));
+        jTextObservaciones.setText(inmueble.getObservaciones());
+        jTextPrecioVenta.setText(String.valueOf(inmueble.getMontoVenta()));
+        jTextSuperficie.setText(String.valueOf(inmueble.getSuperficie()));
+        jTextTelefono.setText(inmueble.getTelefono());
+
+      try{  switch(inmueble.getVigenciaReserva()){
+            case 1: jTextVigencia.setText("Si"); break;
+            default: jTextVigencia.setText("No"); break;
+        }} catch(Exception e){ String a=e.toString();}
+        
+       /* comboBox_provincia.setSelectedItem(inmueble.getBarrio().getLocalidad().getProvincia());
+     comboBox_ciudad.setSelectedItem(inmueble.getBarrio().getLocalidad());
+        comboBox_barrio.setSelectedItem(inmueble.getBarrio());*/
+        
+        //System.out.println(inmueble.getBarrio().getIdBarrio());
+        jCheckBoxAguaCaliente.setSelected(inmueble.isAguaCaliente());
+        jCheckBoxAguaCorriente.setSelected(inmueble.isAguaCorriente());
+        jCheckBoxCloaca.setSelected(inmueble.isCloacas());
+        jCheckBoxCochera.setSelected(inmueble.isEstado_vendido());
+        jCheckBoxGaraje.setSelected(inmueble.isGarage());
+        jCheckBoxGasNatural.setSelected(inmueble.isGasNatural());
+        jCheckBoxLavadero.setSelected(inmueble.isLavadero());
+        jCheckBoxPatio.setSelected(inmueble.isPatio());
+        jCheckBoxPavimento.setSelected(inmueble.isPavimento());
+        jCheckBoxPiscina.setSelected(inmueble.isPiscina());
+        jCheckBoxPropiedadHorizontal.setSelected(inmueble.isPropiedadHorizontal());
+        try{
+            buscarimagenes(jLabel3.getText());
+        }catch(Exception ex)
+        {
+            System.out.println("error en buscar imagenes");
+        }
+        cargarimagenes();
+        
+    }
+ public void cargarimagenes(){
+    try{
+                               
+                if(jLabel25.getText().isEmpty()){
+                    File a=archivos.get(0);
+                ImageIcon icon = new ImageIcon(a.toURL());
+                /*icon.getImage()
+                Icon icono=new ImageIcon(a.toURL());
+                i
+                jLabel25.setIcon(icono);*/
+                int w=jLabel25.getWidth();
+                int h=jLabel25.getHeight();
+                
+                Icon icono = new ImageIcon(icon.getImage().getScaledInstance(100, 83, 30));
+                
+                jLabel25.setIcon(icono);
+                jLabel25.setText(archivos.get(0).getName());
+                
+                }
+                if(jLabel23.getText().isEmpty()){
+                    
+                ImageIcon icon = new ImageIcon(archivos.get(1).toURL());
+                
+                Icon icono = new ImageIcon(icon.getImage().getScaledInstance(100,
+                        83, 30));
+                
+                jLabel23.setIcon(icono);
+                jLabel23.setText(archivos.get(1).getName());
+                
+           
+       }
+                 if(jLabel24.getText().isEmpty()){
+                    
+                ImageIcon icon = new ImageIcon(archivos.get(2).toURL());
+                
+                Icon icono = new ImageIcon(icon.getImage().getScaledInstance(180,
+                        150, 30));
+                
+                jLabel24.setIcon(icono);
+                jLabel24.setText(archivos.get(2).getName());
+                
+                }
+    }catch(Exception e){System.out.println(e.toString()); }
+}
+ 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Sacarfotos;
     private javax.swing.JComboBox<String> comboBox_barrio;
