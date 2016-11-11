@@ -221,7 +221,7 @@ public class Alta extends javax.swing.JPanel {
         jLabel13.setText("Orientación:");
 
         jComboBox5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "norte", "sur", "este", "oeste", "noreste", "noroeste", "sureste", "suroeste" }));
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Norte", "Dur", "Este", "Oeste", "Noreste", "Noroeste", "Sureste", "Suroeste" }));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("Frente:");
@@ -351,7 +351,7 @@ public class Alta extends javax.swing.JPanel {
         });
 
         jComboBox4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "L/local-oficina", "C/casa", "D/departamento", "T/terreno", "Q/quinta", "G/galpón" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Local", "Casa", "Departamento", "Terreno", "Quinta", "Galpón" }));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Precio de Venta:");
