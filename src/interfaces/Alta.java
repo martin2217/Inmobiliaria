@@ -41,6 +41,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.AbstractDocument;
 import javax.swing.text.JTextComponent;
 //import javax.swing.DefaultComboBoxModel;
 import org.hibernate.Criteria;
@@ -62,27 +63,50 @@ public class Alta extends javax.swing.JPanel {
     /**
      * Creates new form Alta
      */
+    
     List<File> archivos = new ArrayList<File>();
+    
     public Alta() {
-        
         initComponents();
-        jLabel3.setText(Integer.toString(maxIdInmobiliaria()));     
-        
+        limitadoTextFields();
+        jLabel3.setText(Integer.toString(maxIdInmobiliaria()));
     }
-private void buscarimagenes(String id) throws IOException{
-     File ruta=new File("C:\\imagenes\\");
-     
-     FilenameFilter begin=new FilenameFilter() {
-         @Override
-         public boolean accept(File dir, String name) {
-             return name.startsWith(jLabel3.getText().trim());
-         }
-     };
-     File[] files=ruta.listFiles(begin);
-     for (File file :files){
-         System.out.println(file.getCanonicalPath());
-     }
- }
+    
+    private void limitadoTextFields(){
+        limitador(jTextCalle, 20);
+        limitador(jTextNumero, 10);
+        limitador(jTextPiso, 2);
+        limitador(jTextDepartamento, 5);
+        limitador(jTextPrecioVenta, 15);
+        limitador(jTextAntiguedad, 20);
+        limitador(jTextTelefono, 20);
+        limitador(jTextVigencia, 20);
+        limitador(jTextMontoReserva, 20);
+        limitador(jTextBanio, 2);
+        limitador(jTextFrente, 10);
+        limitador(jTextSuperficie, 10);
+        limitador(jTextFondo, 10);
+        limitador(jTextDormitorio, 2);
+    }
+    
+    private void limitador(JTextField jText, int cantidad){
+        ((AbstractDocument)jText.getDocument()).setDocumentFilter(new LimitadorTextField(cantidad));
+    }
+    
+    private void buscarimagenes(String id) throws IOException{
+        File ruta=new File("C:\\imagenes\\");
+        
+        FilenameFilter begin=new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.startsWith(jLabel3.getText().trim());
+            }
+        };
+        File[] files=ruta.listFiles(begin);
+        for (File file :files){
+            System.out.println(file.getCanonicalPath());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -801,25 +825,25 @@ private void buscarimagenes(String id) throws IOException{
     private void limpiarPanelAlta (){
         Component [] arrayCompo = jPanel3.getComponents();
         
-	for (Component component : arrayCompo) {
-		if(component instanceof  JTextField) ((JTextField)component).setText("");
-                if(component instanceof  JCheckBox) ((JCheckBox)component).setSelected(false);
-                if(component instanceof  JTextArea) ((JTextArea)component).setText("");
-	}
-      
+        for (Component component : arrayCompo) {
+            if(component instanceof  JTextField) ((JTextField)component).setText("");
+            if(component instanceof  JCheckBox) ((JCheckBox)component).setSelected(false);
+            if(component instanceof  JTextArea) ((JTextArea)component).setText("");
+        }
+        
     }
     
     private boolean validarVacios (){
         Component [] arrayCompo = jPanel3.getComponents();
         boolean vacio = false;
         
-	for (Component component : arrayCompo) {
-		if(component instanceof  JTextField){
-                    if ( ( (JTextField) component).getText().trim().length() == 0 ){
-                       vacio = true;   
-                    }
-                }                
-	}
+        for (Component component : arrayCompo) {
+            if(component instanceof  JTextField){
+                if ( ( (JTextField) component).getText().trim().length() == 0 ){
+                    vacio = true;
+                }
+            }
+        }
         return vacio;
     }
     
@@ -907,83 +931,82 @@ private void buscarimagenes(String id) throws IOException{
             /* ver si poner un volver a otra ventana*/
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
     
     private void validarSoloNumeros (java.awt.event.KeyEvent evt){
         char c=evt.getKeyChar(); 
-        if(Character.isLetter(c)) { 
+        if(!Character.isDigit(c)) { 
               getToolkit().beep();                
-              evt.consume();                
-              JOptionPane.showMessageDialog(null,"Ingresa Solo Numeros");                
+              evt.consume();
           } 
     }
     
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-           int resultado;
-
-
-CargarFoto ventana = new CargarFoto();
-
-FileNameExtensionFilter filtro = new FileNameExtensionFilter("JPG y PNG","jpg","png");
-
-ventana.jFCFoto.setFileFilter(filtro);
-
-resultado= ventana.jFCFoto.showOpenDialog(null);
-
-
-if (JFileChooser.APPROVE_OPTION == resultado){
-File aux;
-       aux=ventana.jFCFoto.getSelectedFile();
-       String a=aux.getPath();
-       int i=0;
-       
-       try{
-                               
+        int resultado;
+        
+        
+        CargarFoto ventana = new CargarFoto();
+        
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("JPG y PNG","jpg","png");
+        
+        ventana.jFCFoto.setFileFilter(filtro);
+        
+        resultado= ventana.jFCFoto.showOpenDialog(null);
+        
+        
+        if (JFileChooser.APPROVE_OPTION == resultado){
+            File aux;
+            aux=ventana.jFCFoto.getSelectedFile();
+            String a=aux.getPath();
+            int i=0;
+            
+            try{
+                
                 if(jLabel25.getText()=="foto"){
-                ImageIcon icon = new ImageIcon(aux.toString());
-                
-                Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel25.getWidth(),
-                        jLabel25.getHeight(), Image.SCALE_DEFAULT));
-                
-                jLabel25.setIcon(icono);
-                jLabel25.setText("no");
-                archivos.add(aux);
+                    ImageIcon icon = new ImageIcon(aux.toString());
+                    
+                    Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel25.getWidth(),
+                            jLabel25.getHeight(), Image.SCALE_DEFAULT));
+                    
+                    jLabel25.setIcon(icono);
+                    jLabel25.setText("no");
+                    archivos.add(aux);
                 }
                 else if(jLabel23.getText()=="foto"){
                     
-                ImageIcon icon = new ImageIcon(aux.toString());
-                
-                Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel23.getWidth(),
-                        jLabel23.getHeight(), Image.SCALE_DEFAULT));
-                
-                jLabel23.setIcon(icono);
-                jLabel23.setText("no");
-                archivos.add(aux);
-           
-       }
+                    ImageIcon icon = new ImageIcon(aux.toString());
+                    
+                    Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel23.getWidth(),
+                            jLabel23.getHeight(), Image.SCALE_DEFAULT));
+                    
+                    jLabel23.setIcon(icono);
+                    jLabel23.setText("no");
+                    archivos.add(aux);
+                    
+                }
                 else if(jLabel24.getText()=="foto"){
                     
-                ImageIcon icon = new ImageIcon(aux.toString());
-                
-                Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel24.getWidth(),
-                        jLabel24.getHeight(), Image.SCALE_DEFAULT));
-                
-                jLabel24.setIcon(icono);
-                jLabel24.setText("no");
-                archivos.add(aux);
+                    ImageIcon icon = new ImageIcon(aux.toString());
+                    
+                    Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel24.getWidth(),
+                            jLabel24.getHeight(), Image.SCALE_DEFAULT));
+                    
+                    jLabel24.setIcon(icono);
+                    jLabel24.setText("no");
+                    archivos.add(aux);
                 }
                 else{
-                    JOptionPane.showMessageDialog(null,"Hasta 3 fotos");                
+                    JOptionPane.showMessageDialog(null,"Hasta 3 fotos");
                 }
                 
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(null, "Error abriendo la imagen "+ ex);
             }
-       
             
-    }                                        
+            
+        }                                        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void comboBox_ciudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_ciudadActionPerformed
@@ -1018,12 +1041,12 @@ File aux;
         // TODO add your handling code here:
         jLabel23.setIcon(null);
         jLabel23.setText("foto");
-         jLabel24.setIcon(null);
+        jLabel24.setIcon(null);
         jLabel24.setText("foto");
-         jLabel25.setIcon(null);
+        jLabel25.setIcon(null);
         jLabel25.setText("foto");
         for(int i=0;i<archivos.size();i++)
-        archivos.remove(i);
+            archivos.remove(i);
     }//GEN-LAST:event_SacarfotosActionPerformed
 
     private void comboBox_barrioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_barrioActionPerformed
@@ -1095,33 +1118,33 @@ File aux;
     } 
     
     private void guardarimagen(String id,int index){
-                String ruta="C:\\imagenes\\"+id+"_0.jpg";
-               File f = new File(ruta);
-               int i=1;
-                    while(f.exists()) {//ver si existe la ruta 
-                        ruta="C:\\imagenes\\"+id+"_"+i+".jpg";
-                        f=new File(ruta);
-                        i++;
-                    }
-                try{
-                    File destino = new File(ruta);
-                     InputStream in = new FileInputStream(archivos.get(index).getPath());
-                        OutputStream out = new FileOutputStream(destino);
-                                
-                        byte[] buf = new byte[1024];
-                        int len;
-
-                        while ((len = in.read(buf)) > 0) {
-                                out.write(buf, 0, len);
-                        }
-                
-                        in.close();
-                        out.close();
-                } catch (IOException ioe){
-                        ioe.printStackTrace();
-                }
- 
+        String ruta="C:\\imagenes\\"+id+"_0.jpg";
+        File f = new File(ruta);
+        int i=1;
+        while(f.exists()) {//ver si existe la ruta
+            ruta="C:\\imagenes\\"+id+"_"+i+".jpg";
+            f=new File(ruta);
+            i++;
+        }
+        try{
+            File destino = new File(ruta);
+            InputStream in = new FileInputStream(archivos.get(index).getPath());
+            OutputStream out = new FileOutputStream(destino);
+            
+            byte[] buf = new byte[1024];
+            int len;
+            
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
             }
+            
+            in.close();
+            out.close();
+        } catch (IOException ioe){
+            ioe.printStackTrace();
+        }
+        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Sacarfotos;
     private javax.swing.JComboBox<String> comboBox_barrio;
