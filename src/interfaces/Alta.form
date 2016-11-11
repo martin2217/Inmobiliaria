@@ -706,7 +706,7 @@
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.DefaultComboBoxModel(new String[] {&quot;&quot;})" type="code"/>
+              <Connection code="new javax.swing.DefaultComboBoxModel(new String[] {})" type="code"/>
             </Property>
           </Properties>
           <Events>
@@ -715,7 +715,6 @@
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox()"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="for(Provincia pro: GestorProvincia.get().buscarProvincia()){&#xa;comboBox_provincia.addItem(pro.getNombre());&#xa;}"/>
             <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="Alta_comboBox_provincia"/>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>

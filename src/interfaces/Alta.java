@@ -30,6 +30,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -69,6 +70,7 @@ public class Alta extends javax.swing.JPanel {
     
     public Alta() {
         initComponents();
+        inicializar2();
         limitadoTextFields();
         jLabel3.setText(Integer.toString(GestorInmueble.get().maxIdInmobiliaria()));
     }
@@ -95,6 +97,19 @@ public class Alta extends javax.swing.JPanel {
     
     private void limitador(JTextField jText, int cantidad){
         ((AbstractDocument)jText.getDocument()).setDocumentFilter(new LimitadorTextField(cantidad));
+    }
+    
+    private void inicializar2(){
+        
+        GestorProvincia.get().buscarProvincia().forEach((pro) -> {
+            comboBox_provincia.addItem(pro.getNombre());
+        });
+        String[] ciudades;
+        ciudades = GestorLocalidad.get().buscarLocalidadesPorProvincia(comboBox_provincia.getSelectedItem().toString());
+        comboBox_ciudad.setModel(new DefaultComboBoxModel(Arrays.copyOfRange(ciudades, 1, ciudades.length)));
+        String[] barrios;
+        barrios = GestorBarrio.get().buscarBarrioPorCiudad(comboBox_ciudad.getSelectedItem().toString());
+        comboBox_barrio.setModel(new DefaultComboBoxModel(Arrays.copyOfRange(barrios, 1, barrios.length)));
     }
     
     private void buscarimagenes(String id) throws IOException{
@@ -357,10 +372,7 @@ public class Alta extends javax.swing.JPanel {
         jLabel6.setText("Barrio");
 
         comboBox_provincia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        comboBox_provincia.setModel(new javax.swing.DefaultComboBoxModel(new String[] {""}));
-        for(Provincia pro: GestorProvincia.get().buscarProvincia()){
-            comboBox_provincia.addItem(pro.getNombre());
-        }
+        comboBox_provincia.setModel(new javax.swing.DefaultComboBoxModel(new String[] {}));
         comboBox_provincia.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBox_provinciaItemStateChanged(evt);
@@ -1086,27 +1098,24 @@ public class Alta extends javax.swing.JPanel {
     }//GEN-LAST:event_comboBox_barrioActionPerformed
 
     private void comboBox_ciudadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBox_ciudadItemStateChanged
-              
         if(evt.getStateChange()== ItemEvent.SELECTED){
-            if(comboBox_ciudad.getSelectedIndex()>0){
-                comboBox_barrio.setModel(new DefaultComboBoxModel(GestorBarrio.get().buscarBarrioPorCiudad(comboBox_ciudad.getSelectedItem().toString())));
-            }
-            else{
-                comboBox_barrio.setModel(new DefaultComboBoxModel(new String[]{""}));
+            if(comboBox_ciudad.getSelectedIndex()>=0){
+                String[] barrios;
+                barrios = GestorBarrio.get().buscarBarrioPorCiudad(comboBox_ciudad.getSelectedItem().toString());
+                comboBox_barrio.setModel(new DefaultComboBoxModel(Arrays.copyOfRange(barrios, 1, barrios.length)));
             }
         }
     }//GEN-LAST:event_comboBox_ciudadItemStateChanged
 
     private void comboBox_provinciaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBox_provinciaItemStateChanged
         if(evt.getStateChange()== ItemEvent.SELECTED){
-            if(comboBox_provincia.getSelectedIndex()>0){
-                comboBox_barrio.setModel(new DefaultComboBoxModel(new String[]{""}));
-                comboBox_ciudad.setModel(new DefaultComboBoxModel(GestorLocalidad.get().buscarLocalidadesPorProvincia(comboBox_provincia.getSelectedItem().toString())));
-                
-            }
-            else{
-                comboBox_ciudad.setModel(new DefaultComboBoxModel(new String[]{""}));
-                comboBox_barrio.setModel(new DefaultComboBoxModel(new String[]{""}));
+            if(comboBox_provincia.getSelectedIndex()>=0){
+                String[] ciudades;
+                ciudades = GestorLocalidad.get().buscarLocalidadesPorProvincia(comboBox_provincia.getSelectedItem().toString());
+                comboBox_ciudad.setModel(new DefaultComboBoxModel(Arrays.copyOfRange(ciudades, 1, ciudades.length)));
+                String[] barrios;
+                barrios = GestorBarrio.get().buscarBarrioPorCiudad(comboBox_ciudad.getSelectedItem().toString());
+                comboBox_barrio.setModel(new DefaultComboBoxModel(Arrays.copyOfRange(barrios, 1, barrios.length)));
             }
         }
     }//GEN-LAST:event_comboBox_provinciaItemStateChanged
