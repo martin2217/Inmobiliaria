@@ -7,16 +7,15 @@ package interfaces;
 
 import Gestor.*;
 import Modelo.Inmueble;
-
 import Modelo.Provincia;
-
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.text.AbstractDocument;
@@ -46,26 +45,11 @@ public class Consulta extends javax.swing.JPanel {
         GestorLocalidad.get()= new GestorLocalidad();
         */
         initComponents();
-        
+        definiendoTabla();
        // GestorInmueble.get()= new GestorInmueble();
         modelo= (DefaultTableModel)jTable1.getModel();
         
       
-        
-        
-        TableColumn columna = jTable1.getColumnModel().getColumn(0);
-        columna.setMaxWidth(0);
-        columna.setMinWidth(0);
-        columna.setPreferredWidth(0);
-        
-        columna = jTable1.getColumnModel().getColumn(1);
-        columna.setMaxWidth(40);
-        columna.setMinWidth(40);
-        columna.setPreferredWidth(40);
-        
-       
-        
-        
        
         
     }
@@ -485,7 +469,7 @@ public class Consulta extends javax.swing.JPanel {
         lista.stream().forEach((inmuebles) -> {modelo.addRow(
                         new Object[]{Integer.toString(inmuebles.getIdInmueble()),false,
                             inmuebles.getPropietario().getNombre(),inmuebles.getBarrio().getLocalidad().getNombre(),
-                            inmuebles.getDireccion(),Integer.toString(inmuebles.getSuperficie()),Float.toString(inmuebles.getPrecio())});
+                            inmuebles.getDireccion(),Integer.toString(inmuebles.getSuperficie()),Float.toString(inmuebles.getPrecio()),Integer.toString(inmuebles.getCant_dormitorios())});
                 });
        }   
     }//GEN-LAST:event_jButtonBuscarActionPerformed
@@ -570,8 +554,48 @@ public class Consulta extends javax.swing.JPanel {
        }
    }
     
+     private void definiendoTabla(){
+    DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        
+         TableColumn columna = jTable1.getColumnModel().getColumn(0);
+        columna.setMaxWidth(0);
+        columna.setMinWidth(0);
+        columna.setPreferredWidth(0);
+        
+    TableColumn columna1 = jTable1.getColumnModel().getColumn(1);
+        columna1.setMaxWidth(40);
+        columna1.setMinWidth(40);
+        columna1.setPreferredWidth(40);
+        
+        TableColumn columna2 = jTable1.getColumnModel().getColumn(2);
+        columna2.setMaxWidth(70);
+        columna2.setMinWidth(70);
+        columna2.setPreferredWidth(70);
+        
+          TableColumn columna5 = jTable1.getColumnModel().getColumn(5);
+        columna5.setMaxWidth(65);
+        columna5.setMinWidth(65);
+        columna5.setPreferredWidth(65);
+        
+          TableColumn columna6 = jTable1.getColumnModel().getColumn(6);
+        columna6.setMaxWidth(70);
+        columna6.setMinWidth(70);
+        columna6.setPreferredWidth(70);
+        
+        TableColumn columna7 = jTable1.getColumnModel().getColumn(7);
+        columna7.setMaxWidth(70);
+        columna7.setMinWidth(70);
+        columna7.setPreferredWidth(70);
+       
+       for(int i=2; i< jTable1.getColumnModel().getColumnCount(); i++){
+           
+           jTable1.getColumnModel().getColumn(i).setCellRenderer(tcr);
+           
+       }
+     }
     
-
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox comboBox_barrio;
     private javax.swing.JComboBox comboBox_ciudad;
