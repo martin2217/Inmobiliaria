@@ -250,6 +250,20 @@ public final class GestorInmueble {
         return retorno_inmueble;
     }
     
+    
+    
+    public Inmueble buscarInmueblePorId(int id){
+        Session sesion;
+        sesion=Dao.get().getSesion();
+        sesion.beginTransaction();
+        Inmueble retorno=(Inmueble)sesion.get(Inmueble.class,id);
+        sesion.getTransaction().commit();
+        sesion.close();
+        
+        
+    return retorno;
+    }
+    
     public void borrarInmueble(int id){ /* con este metodo borro un objeto de la base de datos debo saber su id y la clase, asi lo busco al objeto y lo borro*/
         Session sesion;
         sesion=Dao.get().getSesion();

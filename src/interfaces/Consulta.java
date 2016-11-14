@@ -475,23 +475,40 @@ public class Consulta extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void jButtonBajaInmuebleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajaInmuebleActionPerformed
-      
+        
         // aca elimino todos los seleccionados del modelo y de la base de datos
         
         int row = jTable1.getSelectedRow();
-
+        
         if(row == -1){
             JOptionPane.showMessageDialog(null,"Debe seleccionar un inmueble",
-                "Error", JOptionPane.INFORMATION_MESSAGE);
+                    "Error", JOptionPane.INFORMATION_MESSAGE);
         }
         else {
             modelo = (DefaultTableModel)jTable1.getModel();
             for(int i=0; i<modelo.getRowCount(); i++){
                 
                 if((Boolean)modelo.getValueAt(i, 1).equals(Boolean.TRUE)){
-                    GestorInmueble.get().borrarInmuebleLogica(Integer.valueOf(modelo.getValueAt(i, 0).toString()));
-                    modelo.removeRow(i);
-                    i--;
+                    int parametro=Integer.valueOf(modelo.getValueAt(i, 0).toString());
+                    if(GestorInmueble.get().buscarInmueblePorId(parametro).getEstado().equals("Reservado")){
+                        
+                        JOptionPane.showMessageDialog(null,"No se pueden eliminar inmuebles reservados",
+                                "Error", JOptionPane.INFORMATION_MESSAGE);
+                      
+                    }
+                    else if(GestorInmueble.get().buscarInmueblePorId(parametro).getEstado().equals("Alta")){
+                        GestorInmueble.get().borrarInmueble(parametro);
+                        modelo.removeRow(i);
+                        i--;
+                        
+                    }
+                    
+                    
+                    else{
+                        GestorInmueble.get().borrarInmuebleLogica(parametro);
+                        modelo.removeRow(i);
+                        i--;
+                    }
                 }
             }
         }
