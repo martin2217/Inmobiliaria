@@ -18,6 +18,7 @@
     <mapping resource="XML/Barrio.hbm.xml"/>
     <mapping resource="XML/Localidad.hbm.xml"/>
     <mapping resource="XML/Cliente.hbm.xml"/>
+    <mapping resource="XML/Reserva.hbm.xml"/>
    
     <mapping resource="XML/Inmueble.hbm.xml"/>
   </session-factory>

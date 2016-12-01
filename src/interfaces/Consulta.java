@@ -63,7 +63,7 @@ public class Consulta extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButtonModificarInmueble = new javax.swing.JButton();
+        jButtonAniadirCatalogo = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButtonBajaInmueble = new javax.swing.JButton();
@@ -87,16 +87,19 @@ public class Consulta extends javax.swing.JPanel {
         labelId3 = new javax.swing.JLabel();
         comboBox_estado = new javax.swing.JComboBox();
         label5 = new javax.swing.JLabel();
+        jButtonModificarInmueble1 = new javax.swing.JButton();
+        jButtonReservarInmueble1 = new javax.swing.JButton();
+        jButtonReservarInmueble2 = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setPreferredSize(new java.awt.Dimension(800, 600));
 
-        jButtonModificarInmueble.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
-        jButtonModificarInmueble.setText("Modificar");
-        jButtonModificarInmueble.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAniadirCatalogo.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
+        jButtonAniadirCatalogo.setText("Añadir ");
+        jButtonAniadirCatalogo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonModificarInmuebleActionPerformed(evt);
+                jButtonAniadirCatalogoActionPerformed(evt);
             }
         });
 
@@ -285,7 +288,7 @@ public class Consulta extends javax.swing.JPanel {
                                         .addGap(77, 77, 77)
                                         .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(0, 10, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(label4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -345,9 +348,9 @@ public class Consulta extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboBox_estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonBuscar)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         textField_dormitorio.addKeyListener(new KeyAdapter() {
@@ -381,49 +384,94 @@ public class Consulta extends javax.swing.JPanel {
             }
         });
 
+        jButtonModificarInmueble1.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
+        jButtonModificarInmueble1.setText("Modificar");
+        jButtonModificarInmueble1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarInmueble1ActionPerformed(evt);
+            }
+        });
+
+        jButtonReservarInmueble1.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
+        jButtonReservarInmueble1.setText("Generar Catalogo");
+        jButtonReservarInmueble1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReservarInmueble1ActionPerformed(evt);
+            }
+        });
+
+        jButtonReservarInmueble2.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
+        jButtonReservarInmueble2.setText("Reservar");
+        jButtonReservarInmueble2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReservarInmueble2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButtonAniadirCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(167, 167, 167)
-                        .addComponent(jButtonBajaInmueble, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonModificarInmueble, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonBajaInmueble)
+                        .addGap(20, 20, 20)
+                        .addComponent(jButtonModificarInmueble1)
+                        .addGap(20, 20, 20)
+                        .addComponent(jButtonReservarInmueble2)
+                        .addGap(20, 20, 20)
+                        .addComponent(jButtonReservarInmueble1)))
+                .addGap(45, 45, 45))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonAniadirCatalogo, jButtonAtras, jButtonBajaInmueble, jButtonModificarInmueble1, jButtonReservarInmueble1, jButtonReservarInmueble2});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(72, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonAtras)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButtonModificarInmueble)
-                                .addComponent(jButtonBajaInmueble))))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(72, 72, 72))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                        .addComponent(jButtonAniadirCatalogo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAtras)
+                    .addComponent(jButtonBajaInmueble)
+                    .addComponent(jButtonModificarInmueble1)
+                    .addComponent(jButtonReservarInmueble2)
+                    .addComponent(jButtonReservarInmueble1))
+                .addGap(24, 24, 24))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonAniadirCatalogo, jButtonAtras, jButtonBajaInmueble, jButtonModificarInmueble1, jButtonReservarInmueble1, jButtonReservarInmueble2});
+
     }// </editor-fold>//GEN-END:initComponents
 
     
     
     
     
-    private void jButtonModificarInmuebleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarInmuebleActionPerformed
+    private void jButtonAniadirCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAniadirCatalogoActionPerformed
 
         int row = jTable1.getSelectedRow();
 
@@ -450,7 +498,7 @@ public class Consulta extends javax.swing.JPanel {
             // Ir a la pantalla de modificar
         
 
-    }//GEN-LAST:event_jButtonModificarInmuebleActionPerformed
+    }//GEN-LAST:event_jButtonAniadirCatalogoActionPerformed
 
     private void jButtonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtrasActionPerformed
         GestorVentanas.get().remove(this);
@@ -558,6 +606,18 @@ public class Consulta extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBox_provinciaActionPerformed
 
+    private void jButtonModificarInmueble1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarInmueble1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonModificarInmueble1ActionPerformed
+
+    private void jButtonReservarInmueble1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservarInmueble1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonReservarInmueble1ActionPerformed
+
+    private void jButtonReservarInmueble2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservarInmueble2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonReservarInmueble2ActionPerformed
+
     
     
     private void errorFiltros(){
@@ -619,10 +679,13 @@ public class Consulta extends javax.swing.JPanel {
     private javax.swing.JComboBox comboBox_estado;
     private javax.swing.JComboBox comboBox_provincia;
     private javax.swing.JComboBox comboBox_tipo_depto;
+    private javax.swing.JButton jButtonAniadirCatalogo;
     private javax.swing.JButton jButtonAtras;
     private javax.swing.JButton jButtonBajaInmueble;
     private javax.swing.JButton jButtonBuscar;
-    private javax.swing.JButton jButtonModificarInmueble;
+    private javax.swing.JButton jButtonModificarInmueble1;
+    private javax.swing.JButton jButtonReservarInmueble1;
+    private javax.swing.JButton jButtonReservarInmueble2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
