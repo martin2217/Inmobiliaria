@@ -606,36 +606,42 @@ public class Consulta extends javax.swing.JPanel {
         
         
         
-          if(fila == -1){
+        if(fila == -1){
             JOptionPane.showMessageDialog(null,"Debe seleccionar un inmueble",
                     "Error", JOptionPane.INFORMATION_MESSAGE);
         }
-          else{
-        
-              modelo = (DefaultTableModel) jTable1.getModel();
-              int bandera=0;
-              int parametro_inmueble=0;
-              for(int i=0;i<modelo.getRowCount(); i++){
-                   if(modelo.getValueAt(i, 1).equals(Boolean.TRUE)){
-                   bandera++;
-                   parametro_inmueble= Integer.valueOf(modelo.getValueAt(i, 0).toString());
-                   }
-              
-              }
-              
-              if(bandera>1) JOptionPane.showMessageDialog(null,"Debe seleccionar solamente un inmueble", "Error", JOptionPane.INFORMATION_MESSAGE);
-              
-              else{
-              
-                  GestorReserva.get().actualizarEstado(parametro_inmueble);
-                  LimpiarTabla();
-              
-              
-              }
-              
+        else{
+            
+            modelo = (DefaultTableModel) jTable1.getModel();
+            int bandera=0;
+            int parametro_inmueble=0;
+            for(int i=0;i<modelo.getRowCount(); i++){
+                if(modelo.getValueAt(i, 1).equals(Boolean.TRUE)){
+                    bandera++;
+                    parametro_inmueble= Integer.valueOf(modelo.getValueAt(i, 0).toString());
+                }
+                
+            }
+            
+            if(bandera>1) JOptionPane.showMessageDialog(null,"Debe seleccionar solamente un inenmueble", "Error", JOptionPane.INFORMATION_MESSAGE);
+            
+            else{
+                // falta validar los campos
+                String importe_reserva = JOptionPane.showInputDialog("Ingrese el importe");if(importe_reserva!=null){
+                    String vigencia= JOptionPane.showInputDialog("Ingrese la vigencia"); if(vigencia!=null) {
+                        if(importe_reserva.equals("")||vigencia.equals("")){JOptionPane.showMessageDialog(null,"Debe completar ambos campos",
+                                "Error", JOptionPane.INFORMATION_MESSAGE);}
+                        else{
+                            GestorReserva.get().actualizarEstado(parametro_inmueble,importe_reserva,vigencia);
+                            LimpiarTabla();
+                        }
+                    }
+                    
+                }
+                
             }
     }//GEN-LAST:event_jButtonReservarInmueble2ActionPerformed
-
+    }
     
     
     private void errorFiltros(){
