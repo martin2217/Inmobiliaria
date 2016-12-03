@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Reportes;
-
+/*
 
 import Modelo.ListaCatalogo;
 import java.util.ArrayList;
@@ -20,13 +20,13 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
-
+*/
 
 /**
  *
  * @author germa
  */
-public class Reportes {
+/*public class Reportes {
     
     public static void imprimirCatalogo () throws JRException{
         List lista = new ArrayList();
@@ -48,4 +48,4 @@ public class Reportes {
         JasperViewer.viewReport(jprint, false);
     }
     
-}
+} */
