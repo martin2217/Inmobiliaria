@@ -57,9 +57,8 @@ public class Inmueble  implements java.io.Serializable {
      private Boolean aguaCaliente=false;
      private String telefono;
      private String observaciones;
-
-  
-   
+     
+      
     public Inmueble() {
     }
     
