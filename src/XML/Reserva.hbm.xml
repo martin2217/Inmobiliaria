@@ -5,7 +5,7 @@
 <hibernate-mapping>
     <class name="Modelo.Reserva" table="reserva" catalog="inmobiliaria">
         <id name="idReserva" type="int">
-            <column name="id_reserva" />
+            <column name="id_reserva" not-null="true" />
             <generator class="assigned" />
         </id>
          <property name="importe" type="java.lang.Float">
@@ -17,10 +17,10 @@
         <property name="fecha_reservado" type="date">
             <column name="fecha_reservado" length="10" />
         </property>
-        <many-to-one name="cliente" class="Modelo.Cliente" update="false" insert="false" fetch="select">
+        <many-to-one name="cliente" class="Modelo.Cliente" update="false"  fetch="select">
             <column name="id_cliente" not-null="true" />
         </many-to-one>
-        <many-to-one name="inmueble" class="Modelo.Inmueble" update="false" insert="false" fetch="select">
+        <many-to-one name="inmueble" class="Modelo.Inmueble" update="false"  fetch="select">
             <column name="id_inmueble" not-null="true" />
         </many-to-one>
     
