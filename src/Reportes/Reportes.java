@@ -14,6 +14,7 @@ import java.util.Map;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -27,7 +28,7 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class Reportes {
     
-    public static void imprimirCatalogo (){
+    public static void imprimirCatalogo () throws JRException{
         List lista = new ArrayList();
         
         for(int i=0;i<5;i++)
@@ -36,11 +37,15 @@ public class Reportes {
             lista.add(inmueble_aux);
         }
         
-        JasperReport reporte = (JasperReport)JRLoader.loadObject("catalogo.jasper");
+        JasperReport reporte;
+        //reporte = (JasperReport)JRLoader.loadObject("catalogo.jasper");
+       
+        reporte = JasperCompileManager.compileReport("catalogo.jasper");
              
         Map parametro = new HashMap();        
         //parametro.put("cliente", "el que sea");
-        JasperPrint jprint =  new JasperFillManager(reporte, parametro, new JRBeanCollectionDataSource(lista) );
+        JasperPrint jprint = JasperFillManager.fillReport(reporte, parametro, new JRBeanCollectionDataSource(lista) );
+        JasperViewer.viewReport(jprint, false);
     }
     
 }
