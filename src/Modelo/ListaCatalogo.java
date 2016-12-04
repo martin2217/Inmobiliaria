@@ -5,6 +5,8 @@
  */
 package Modelo;
 
+import java.awt.Image;
+
 
 /**
  *
@@ -32,7 +34,9 @@ public class ListaCatalogo {
     private String pavimento;
     private String lavadero;
     private String aguaCaliente;
-    private String telefono;     
+    private String telefono; 
+    //si son mas imagenes no se como seria ???
+    private Image imagen;
 
     public ListaCatalogo(String provincia, String localidad, String barrio, String tipoInmueble, String precio, String orientacion, String superficie, String garage, String patio, String aguaCorriente, String cloaca, String gasNatural, String pavimento) {
         this.provincia = provincia;
