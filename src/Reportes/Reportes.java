@@ -25,11 +25,13 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author: todo el grupo
  */
+
 public class Reportes {
 
 private static JasperReport report;
 private static JasperPrint reportFilled;
 private static JasperViewer viewer;    
+
     
     public static void imprimirCatalogo (){
         try {
@@ -51,6 +53,7 @@ private static JasperViewer viewer;
         }
     }
     
+
     public static void verVisor()
     {
     viewer = new JasperViewer(reportFilled, false);
