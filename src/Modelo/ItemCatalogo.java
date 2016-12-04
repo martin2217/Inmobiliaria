@@ -10,7 +10,7 @@ package Modelo;
  *
  * @author germa
  */
-public class ListaCatalogo {
+public class ItemCatalogo {
         
     private String idInmueble;   
     private String provincia;
@@ -34,7 +34,7 @@ public class ListaCatalogo {
     private String aguaCaliente;
     private String telefono;     
 
-    public ListaCatalogo(String provincia, String localidad, String barrio, String tipoInmueble, String precio, String orientacion, String superficie, String garage, String patio, String aguaCorriente, String cloaca, String gasNatural, String pavimento) {
+    public ItemCatalogo(String provincia, String localidad, String barrio, String tipoInmueble, String precio, String orientacion, String superficie, String garage, String patio, String aguaCorriente, String cloaca, String gasNatural, String pavimento) {
         this.provincia = provincia;
         this.localidad = localidad;
         this.barrio = barrio;

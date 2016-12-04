@@ -5,7 +5,7 @@
  */
 package Reportes;
 
-import Modelo.ListaCatalogo;
+import Modelo.ItemCatalogo;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +39,7 @@ private static JasperViewer viewer;
             
             for(int i=0;i<5;i++)
             {
-                ListaCatalogo inmueble_aux = new ListaCatalogo("Santa fe_" + i, "Santa fe", "San Telmo", "Depto", "120.000", "Sur", "120", "SI", "SI", "SI", "SI", "SI", "SI");
+                ItemCatalogo inmueble_aux = new ItemCatalogo("Santa fe_" + i, "Santa fe", "San Telmo", "Depto", "120.000", "Sur", "120", "SI", "SI", "SI", "SI", "SI", "SI");
                 lista.add(inmueble_aux);
             }                            
             HashMap<String, Object> parametros = new HashMap<String, Object>();
@@ -69,9 +69,9 @@ private static JasperViewer viewer;
             for(int i=0;i<5;i++)
             {
                 //Falta el temita de las fotos que es de sonia
-                //hay que referenciar las fotos en la clase LISTACATALOGO.JAVA
+                //hay que referenciar las fotos en la clase ITEMCATALOGO.JAVA
                 
-                ListaCatalogo inmueble_aux = new ListaCatalogo("Santa fe_" + i, "Santa fe_" + i, "San Telmo_" + i, "Depto", "120.000", "Sur_" + i, "120", "SI", "SI", "SI", "SI", "SI", "SI");
+                ItemCatalogo inmueble_aux = new ItemCatalogo("Santa fe_" + i, "Santa fe_" + i, "San Telmo_" + i, "Depto", "120.000", "Sur_" + i, "120", "SI", "SI", "SI", "SI", "SI", "SI");
                 lista.add(inmueble_aux);
             }
             report = (JasperReport) JRLoader.loadObjectFromFile(ruta);
