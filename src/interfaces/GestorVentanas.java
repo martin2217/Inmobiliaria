@@ -87,7 +87,7 @@ public class GestorVentanas extends javax.swing.JFrame {
     }
     
     public void altaInmueble(){
-        this.setSize(new Dimension(1100,620));
+        this.setSize(new Dimension(1056,601));
         this.setLocationRelativeTo(null);
         altaInmueble= new Alta();
         add(altaInmueble);        
@@ -95,7 +95,7 @@ public class GestorVentanas extends javax.swing.JFrame {
         repaint();        
     }
     public void altaInmueble(Inmueble inmueble){
-        this.setSize(new Dimension(1100,620));
+        this.setSize(new Dimension(1056,601));
         this.setLocationRelativeTo(null);
         altaInmueble= new Alta(inmueble);
         add(altaInmueble);        

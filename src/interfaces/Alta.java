@@ -210,8 +210,8 @@ public class Alta extends javax.swing.JPanel {
         Sacarfotos = new javax.swing.JButton();
         jLabel27 = new javax.swing.JLabel();
 
-        setMaximumSize(new java.awt.Dimension(1006, 582));
-        setMinimumSize(new java.awt.Dimension(1006, 582));
+        setMaximumSize(new java.awt.Dimension(1056, 601));
+        setMinimumSize(new java.awt.Dimension(1056, 601));
         setLayout(null);
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
