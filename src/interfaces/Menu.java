@@ -46,7 +46,7 @@ public class Menu extends javax.swing.JPanel {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Iteración 1");
         add(jLabel3);
-        jLabel3.setBounds(-6, 249, 810, 24);
+        jLabel3.setBounds(-6, 249, 810, 22);
 
         jButton2.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         jButton2.setText("Consulta Inmueble");
@@ -56,29 +56,29 @@ public class Menu extends javax.swing.JPanel {
             }
         });
         add(jButton2);
-        jButton2.setBounds(300, 318, 200, 33);
+        jButton2.setBounds(300, 318, 200, 31);
 
         jLabel4.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Iteración 2");
         add(jLabel4);
-        jLabel4.setBounds(-2, 367, 800, 24);
+        jLabel4.setBounds(-2, 367, 800, 22);
 
         jButton3.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
-        jButton3.setLabel("Catalogo");
+        jButton3.setText("PRUEBA de Catálogo");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
         add(jButton3);
-        jButton3.setBounds(300, 395, 200, 33);
+        jButton3.setBounds(300, 395, 200, 31);
 
         jButton4.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         jButton4.setText("----");
         jButton4.setEnabled(false);
         add(jButton4);
-        jButton4.setBounds(300, 436, 200, 33);
+        jButton4.setBounds(300, 436, 200, 31);
 
         jButton5.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         jButton5.setText("Alta Inmueble");
@@ -88,7 +88,7 @@ public class Menu extends javax.swing.JPanel {
             }
         });
         add(jButton5);
-        jButton5.setBounds(300, 277, 200, 33);
+        jButton5.setBounds(300, 277, 200, 31);
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/img_menu.jpg"))); // NOI18N
         add(jLabel9);
