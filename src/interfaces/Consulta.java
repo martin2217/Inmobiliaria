@@ -88,6 +88,7 @@ public class Consulta extends javax.swing.JPanel {
         jButtonAniadir = new javax.swing.JButton();
         jButtonReservarInmueble1 = new javax.swing.JButton();
         jButtonReservarInmueble2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(800, 600));
@@ -275,11 +276,11 @@ public class Consulta extends javax.swing.JPanel {
                         .addComponent(comboBox_barrio, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(labelId)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                         .addComponent(textField_dormitorio, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(label5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addComponent(comboBox_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(label4)
@@ -383,7 +384,7 @@ public class Consulta extends javax.swing.JPanel {
         });
 
         add(jPanel2);
-        jPanel2.setBounds(20, 80, 209, 447);
+        jPanel2.setBounds(20, 80, 210, 447);
 
         jButtonAniadir.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         jButtonAniadir.setText("Añadir a Catálogo");
@@ -393,7 +394,7 @@ public class Consulta extends javax.swing.JPanel {
             }
         });
         add(jButtonAniadir);
-        jButtonAniadir.setBounds(628, 485, 133, 38);
+        jButtonAniadir.setBounds(607, 485, 140, 38);
 
         jButtonReservarInmueble1.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         jButtonReservarInmueble1.setText("Generar Catálogo");
@@ -414,6 +415,13 @@ public class Consulta extends javax.swing.JPanel {
         });
         add(jButtonReservarInmueble2);
         jButtonReservarInmueble2.setBounds(475, 541, 133, 38);
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Consulta de Inmueble");
+        add(jLabel2);
+        jLabel2.setBounds(6, 6, 200, 30);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/img_general.jpg"))); // NOI18N
         add(jLabel1);
@@ -691,6 +699,7 @@ public class Consulta extends javax.swing.JPanel {
     private javax.swing.JButton jButtonReservarInmueble1;
     private javax.swing.JButton jButtonReservarInmueble2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
