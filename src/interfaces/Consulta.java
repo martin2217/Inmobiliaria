@@ -11,13 +11,18 @@ import Modelo.Provincia;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import javax.swing.text.AbstractDocument;
 
 /**
@@ -26,23 +31,24 @@ import javax.swing.text.AbstractDocument;
  */
 public class Consulta extends javax.swing.JPanel {
     
-    
+    // No usados?
     boolean banderaMin=false;
     boolean banderaMax=false;
+    
     DefaultTableModel modelo;
+    List<Inmueble> listaInmuebles;
+    List<Inmueble> listaCatalogo;
    
     /**
      * Creates new form Alta
      */
     public Consulta() {
-    
+        
+        listaCatalogo= new ArrayList<>();
+        
         initComponents();
         definiendoTabla();
-       // GestorInmueble.get()= new GestorInmueble();
         modelo= (DefaultTableModel)jTable1.getModel();
-        
-      
-       
         
     }
 
@@ -101,14 +107,14 @@ public class Consulta extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Id", "", "Propietario", "Localidad", "Dirección", "Superficie", "Precio", "Dormitorios"
+                "Id", "", "Propietario", "Localidad", "Dirección", "Superf.", "Precio", "Dormitorios"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, false, false, false, false, false, true
+                false, true, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -123,6 +129,7 @@ public class Consulta extends javax.swing.JPanel {
         columna.setMaxWidth(0);
         columna.setMinWidth(0);
         columna.setPreferredWidth(0);
+        jTable1.setDragEnabled(true);
         jTable1.setFocusable(false);
         jTable1.getTableHeader().setResizingAllowed(false);
         jTable1.getTableHeader().setReorderingAllowed(false);
@@ -169,11 +176,6 @@ public class Consulta extends javax.swing.JPanel {
         comboBox_provincia.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBox_provinciaItemStateChanged(evt);
-            }
-        });
-        comboBox_provincia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBox_provinciaActionPerformed(evt);
             }
         });
 
@@ -257,32 +259,21 @@ public class Consulta extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(label2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(comboBox_ciudad, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(label3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(comboBox_barrio, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(comboBox_barrio, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(labelId)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(textField_dormitorio, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(textField_dormitorio, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(label1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comboBox_provincia, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(77, 77, 77)
-                                .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(label5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                        .addComponent(comboBox_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(label4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(comboBox_tipo_depto, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addComponent(comboBox_tipo_depto, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -294,12 +285,19 @@ public class Consulta extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(textField_precio_maximo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(labelId2))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(label5)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label2)
+                            .addComponent(label1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(comboBox_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(comboBox_provincia, 0, 126, Short.MAX_VALUE)
+                            .addComponent(comboBox_ciudad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,7 +335,7 @@ public class Consulta extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboBox_estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonBuscar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -374,7 +372,7 @@ public class Consulta extends javax.swing.JPanel {
         });
 
         jButtonAniadir.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
-        jButtonAniadir.setText("Añadir");
+        jButtonAniadir.setText("Añadir a Catálogo");
         jButtonAniadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAniadirActionPerformed(evt);
@@ -382,7 +380,7 @@ public class Consulta extends javax.swing.JPanel {
         });
 
         jButtonReservarInmueble1.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
-        jButtonReservarInmueble1.setText("Generar Catalogo");
+        jButtonReservarInmueble1.setText("Generar Catálogo");
         jButtonReservarInmueble1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonReservarInmueble1ActionPerformed(evt);
@@ -408,24 +406,22 @@ public class Consulta extends javax.swing.JPanel {
                         .addComponent(jButtonAniadir))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonBajaInmueble)
-                                .addGap(22, 22, 22)
-                                .addComponent(jButtonModificarInmueble, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonReservarInmueble2)
-                                .addGap(20, 20, 20)
-                                .addComponent(jButtonReservarInmueble1)))))
+                        .addComponent(jButtonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                        .addComponent(jButtonBajaInmueble)
+                        .addGap(22, 22, 22)
+                        .addComponent(jButtonModificarInmueble, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonReservarInmueble2)
+                        .addGap(20, 20, 20)
+                        .addComponent(jButtonReservarInmueble1)))
                 .addGap(45, 45, 45))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonAniadir, jButtonAtras, jButtonBajaInmueble, jButtonModificarInmueble, jButtonReservarInmueble1, jButtonReservarInmueble2});
@@ -437,7 +433,7 @@ public class Consulta extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jButtonAniadir)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -460,14 +456,20 @@ public class Consulta extends javax.swing.JPanel {
     private void jButtonModificarInmuebleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarInmuebleActionPerformed
 
         int row = jTable1.getSelectedRow();
-
+        
         if(row == -1){
             JOptionPane.showMessageDialog(null,"Debe seleccionar un inmueble",
                 "Error", JOptionPane.INFORMATION_MESSAGE);
         }
-
+        
+        else if(jTable1.getSelectedRowCount()>1){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar sólo un inmueble",
+                "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
         else{
-               modelo = (DefaultTableModel)jTable1.getModel();
+            modelo = (DefaultTableModel)jTable1.getModel();
+            
             for(int i=0; i<modelo.getRowCount(); i++){
                 
                 if((Boolean)modelo.getValueAt(i, 1).equals(Boolean.TRUE)){
@@ -479,11 +481,9 @@ public class Consulta extends javax.swing.JPanel {
                     GestorVentanas.get().altaInmueble(iaux);
                 }
             }
-        
         }
-            // Ir a la pantalla de modificar
+        // Ir a la pantalla de modificar
         
-
     }//GEN-LAST:event_jButtonModificarInmuebleActionPerformed
 
     private void jButtonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtrasActionPerformed
@@ -494,18 +494,19 @@ public class Consulta extends javax.swing.JPanel {
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         LimpiarTabla();
         
-        List<Inmueble> lista= GestorInmueble.get().buscarInmuebles(comboBox_provincia.getSelectedItem().toString(),
+        listaInmuebles= GestorInmueble.get().buscarInmuebles(comboBox_provincia.getSelectedItem().toString(),
                 comboBox_ciudad.getSelectedItem().toString(),comboBox_barrio.getSelectedItem().toString(),
                 comboBox_tipo_depto.getSelectedItem().toString(), textField_dormitorio.getText(),
                 textField_precio_minimo.getText(), textField_precio_maximo.getText(),comboBox_estado.getSelectedItem().toString());
-       if(lista.isEmpty()) JOptionPane.showMessageDialog(null,"No se han encontrado resultados","Aviso", JOptionPane.WHEN_IN_FOCUSED_WINDOW);
-       else{
-        lista.stream().forEach((inmuebles) -> {modelo.addRow(
+        if(listaInmuebles.isEmpty())
+            JOptionPane.showMessageDialog(null,"No se han encontrado resultados","Aviso", JOptionPane.WHEN_IN_FOCUSED_WINDOW);
+        else{
+            listaInmuebles.stream().forEach((inmuebles) -> {modelo.addRow(
                         new Object[]{Integer.toString(inmuebles.getIdInmueble()),false,
                             inmuebles.getPropietario().getNombre(),inmuebles.getBarrio().getLocalidad().getNombre(),
                             inmuebles.getDireccion(),Integer.toString(inmuebles.getSuperficie()),Float.toString(inmuebles.getPrecio()),Integer.toString(inmuebles.getCant_dormitorios())});
                 });
-       }   
+       }
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void jButtonBajaInmuebleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajaInmuebleActionPerformed
@@ -534,10 +535,7 @@ public class Consulta extends javax.swing.JPanel {
                         GestorInmueble.get().borrarInmueble(parametro);
                         modelo.removeRow(i);
                         i--;
-                        
                     }
-                    
-                    
                     else{
                         GestorInmueble.get().borrarInmuebleLogica(parametro);
                         modelo.removeRow(i);
@@ -562,7 +560,6 @@ public class Consulta extends javax.swing.JPanel {
             if(comboBox_provincia.getSelectedIndex()>0){
                 comboBox_barrio.setModel(new DefaultComboBoxModel(new String[]{""}));
                 comboBox_ciudad.setModel(new DefaultComboBoxModel(GestorLocalidad.get().buscarLocalidadesPorProvincia(comboBox_provincia.getSelectedItem().toString())));
-                
             }
             else{
                 comboBox_ciudad.setModel(new DefaultComboBoxModel(new String[]{""}));
@@ -588,10 +585,6 @@ public class Consulta extends javax.swing.JPanel {
         
     }//GEN-LAST:event_comboBox_ciudadItemStateChanged
 
-    private void comboBox_provinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_provinciaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboBox_provinciaActionPerformed
-
     private void jButtonAniadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAniadirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAniadirActionPerformed
@@ -604,14 +597,12 @@ public class Consulta extends javax.swing.JPanel {
   
         int fila = jTable1.getSelectedRow();
         
-        
-        
         if(fila == -1){
             JOptionPane.showMessageDialog(null,"Debe seleccionar un inmueble",
                     "Error", JOptionPane.INFORMATION_MESSAGE);
         }
+        
         else{
-            
             modelo = (DefaultTableModel) jTable1.getModel();
             int bandera=0;
             int parametro_inmueble=0;
@@ -620,29 +611,32 @@ public class Consulta extends javax.swing.JPanel {
                     bandera++;
                     parametro_inmueble= Integer.valueOf(modelo.getValueAt(i, 0).toString());
                 }
-                
             }
             
-            if(bandera>1) JOptionPane.showMessageDialog(null,"Debe seleccionar solamente un inenmueble", "Error", JOptionPane.INFORMATION_MESSAGE);
+            if(bandera>1)
+                JOptionPane.showMessageDialog(null,"Debe seleccionar solamente un inenmueble",
+                        "Error", JOptionPane.INFORMATION_MESSAGE);
             
             else{
                 // falta validar los campos
-                String importe_reserva = JOptionPane.showInputDialog("Ingrese el importe");if(importe_reserva!=null){
-                    String vigencia= JOptionPane.showInputDialog("Ingrese la vigencia"); if(vigencia!=null) {
-                        if(importe_reserva.equals("")||vigencia.equals("")){JOptionPane.showMessageDialog(null,"Debe completar ambos campos",
-                                "Error", JOptionPane.INFORMATION_MESSAGE);}
+                String importe_reserva = JOptionPane.showInputDialog("Ingrese el importe");
+                
+                if(importe_reserva!=null){
+                    String vigencia= JOptionPane.showInputDialog("Ingrese la vigencia");
+                    if(vigencia!=null) {
+                        if(importe_reserva.equals("")||vigencia.equals("")){
+                            JOptionPane.showMessageDialog(null, "Debe completar ambos campos",
+                                    "Error", JOptionPane.INFORMATION_MESSAGE);
+                        }
                         else{
                             GestorReserva.get().actualizarEstado(parametro_inmueble,importe_reserva,vigencia);
                             LimpiarTabla();
                         }
                     }
-                    
                 }
-                
             }
+        }
     }//GEN-LAST:event_jButtonReservarInmueble2ActionPerformed
-    }
-    
     
     private void errorFiltros(){
         JOptionPane.showMessageDialog(null, "Ingrese un filtro de busqueda", "", JOptionPane.INFORMATION_MESSAGE);
@@ -655,31 +649,41 @@ public class Consulta extends javax.swing.JPanel {
        }
    }
     
-     private void definiendoTabla(){
-    DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+    private void definiendoTabla(){
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         
-         TableColumn columna = jTable1.getColumnModel().getColumn(0);
+        TableColumn columna = jTable1.getColumnModel().getColumn(0);
         columna.setMaxWidth(0);
         columna.setMinWidth(0);
         columna.setPreferredWidth(0);
         
-    TableColumn columna1 = jTable1.getColumnModel().getColumn(1);
-        columna1.setMaxWidth(40);
-        columna1.setMinWidth(40);
-        columna1.setPreferredWidth(40);
+        TableColumn columna1 = jTable1.getColumnModel().getColumn(1);
+        columna1.setMaxWidth(35);
+        columna1.setMinWidth(35);
+        columna1.setPreferredWidth(35);
         
         TableColumn columna2 = jTable1.getColumnModel().getColumn(2);
-        columna2.setMaxWidth(70);
+        columna2.setMaxWidth(80);
         columna2.setMinWidth(70);
-        columna2.setPreferredWidth(70);
+        columna2.setPreferredWidth(80);
         
-          TableColumn columna5 = jTable1.getColumnModel().getColumn(5);
-        columna5.setMaxWidth(65);
-        columna5.setMinWidth(65);
-        columna5.setPreferredWidth(65);
+        TableColumn columna3 = jTable1.getColumnModel().getColumn(3);
+        columna3.setMaxWidth(130);
+        columna3.setMinWidth(100);
+        columna3.setPreferredWidth(100);
         
-          TableColumn columna6 = jTable1.getColumnModel().getColumn(6);
+        TableColumn columna4 = jTable1.getColumnModel().getColumn(4);
+        columna4.setMaxWidth(150);
+        columna4.setMinWidth(100);
+        columna4.setPreferredWidth(120);
+        
+        TableColumn columna5 = jTable1.getColumnModel().getColumn(5);
+        columna5.setMaxWidth(55);
+        columna5.setMinWidth(55);
+        columna5.setPreferredWidth(55);
+        
+        TableColumn columna6 = jTable1.getColumnModel().getColumn(6);
         columna6.setMaxWidth(70);
         columna6.setMinWidth(70);
         columna6.setPreferredWidth(70);
@@ -688,13 +692,18 @@ public class Consulta extends javax.swing.JPanel {
         columna7.setMaxWidth(70);
         columna7.setMinWidth(70);
         columna7.setPreferredWidth(70);
-       
-       for(int i=2; i< jTable1.getColumnModel().getColumnCount(); i++){
-           
-           jTable1.getColumnModel().getColumn(i).setCellRenderer(tcr);
-           
-       }
-     }
+        
+        for(int i=2; i< jTable1.getColumnModel().getColumnCount(); i++){
+            jTable1.getColumnModel().getColumn(i).setCellRenderer(tcr);
+        }
+        
+        jTable1.setRowHeight(20);
+        
+        // Para hacer el ordenamiento por columnas
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
+        jTable1.setRowSorter(sorter);
+        
+        }
     
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
