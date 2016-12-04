@@ -219,21 +219,21 @@ public class Alta extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Alta de Inmueble");
         add(jLabel1);
-        jLabel1.setBounds(6, 6, 155, 22);
+        jLabel1.setBounds(6, 6, 155, 30);
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Identificador de Inmueble:");
         add(jLabel2);
-        jLabel2.setBounds(10, 30, 159, 17);
+        jLabel2.setBounds(10, 30, 159, 30);
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("000000001");
         add(jLabel3);
-        jLabel3.setBounds(180, 30, 124, 17);
+        jLabel3.setBounds(180, 30, 124, 30);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Guardar");
