@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5896614f-c03d-48ac-a125-b66495e3659c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Cliente" class="java.lang.String"/>
+	<parameter name="Telefono" class="java.lang.String"/>
+	<field name="provincia" class="java.lang.String"/>
+	<field name="localidad" class="java.lang.String"/>
+	<field name="barrio" class="java.lang.String"/>
+	<field name="tipoInmueble" class="java.lang.String"/>
+	<field name="precio" class="java.lang.String"/>
+	<field name="orientacion" class="java.lang.String"/>
+	<field name="superficie" class="java.lang.String"/>
+	<field name="patio" class="java.lang.String"/>
+	<field name="garage" class="java.lang.String"/>
+	<field name="gasNatural" class="java.lang.String"/>
+	<field name="cloaca" class="java.lang.String"/>
+	<field name="aguaCorriente" class="java.lang.String"/>
+	<field name="pavimento" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="100" height="20" uuid="d4d4b014-6f15-47dd-bb91-231cfe37b5ca"/>
+				<text><![CDATA[Metodos Agiles 2016]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="371" y="30" width="184" height="20" uuid="8aa9fcf8-8ec4-4b7a-9cee-d36662cbf02a"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="83" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="36" width="309" height="20" uuid="cef53b63-6fb6-4c12-9bca-5c89fd3e67b5"/>
+				<textFieldExpression><![CDATA["Cliente: " + $P{Cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="57" width="308" height="20" uuid="40b62ac9-e62a-410c-8144-09624ea2ddf2"/>
+				<textFieldExpression><![CDATA["Teléfono: " + $P{Telefono}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="5" width="555" height="1" uuid="85784df0-49b5-4ace-aa17-de43b1347d63"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="10" width="169" height="20" forecolor="#FF0033" uuid="7aeaa6aa-3d3c-49ed-9ce9-a85eac8b02a0"/>
+				<textElement textAlignment="Justified">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Catálogo de inmuebles]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="12" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="6" width="555" height="1" uuid="7c566d66-bb9e-4340-ad78-bbc05e428267"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="151" splitType="Stretch">
+			<textField>
+				<reportElement x="163" y="5" width="177" height="20" uuid="a757581b-714f-4776-a51b-66c0f99961b9"/>
+				<textFieldExpression><![CDATA["Provincia: " + $F{provincia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="163" y="25" width="177" height="20" uuid="30e84b82-c608-459f-ba13-a09643c589df"/>
+				<textFieldExpression><![CDATA["Localidad: " + $F{localidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="163" y="45" width="177" height="20" uuid="f923bb0e-5409-4fe1-bae5-2d46c3a9a59a"/>
+				<textFieldExpression><![CDATA["Barrio: " + $F{barrio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="163" y="64" width="177" height="20" uuid="140a3c2f-d062-4fb9-917a-2dd885a28237"/>
+				<textFieldExpression><![CDATA["Tipo Inmueble: " + $F{tipoInmueble}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="163" y="84" width="177" height="20" uuid="263fcc8e-acb2-4cf1-bb9f-e3458b9c1bfe"/>
+				<textFieldExpression><![CDATA["Precio: " + $F{precio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="164" y="104" width="176" height="20" uuid="485e6cca-82e6-4f6e-a56b-323a9f768131"/>
+				<textFieldExpression><![CDATA["Orientación: " + $F{orientacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="163" y="124" width="177" height="20" uuid="3d263714-a821-461d-96fc-f42c32a829e5"/>
+				<textFieldExpression><![CDATA["Superficie: " + $F{superficie}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="7" width="140" height="20" uuid="57021d52-ddae-4fb2-9c66-b59336ce76a9"/>
+				<textFieldExpression><![CDATA["Patio: " + $F{patio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="27" width="140" height="20" uuid="1f2b4697-5b53-4679-811f-1025cce5af44"/>
+				<textFieldExpression><![CDATA["Garage: "  +$F{garage}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="47" width="140" height="20" uuid="b5c1d1c6-4a36-43ce-ad5b-0ffbe4b0c519"/>
+				<textFieldExpression><![CDATA["Gas Natural: " + $F{gasNatural}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="361" y="67" width="138" height="20" uuid="e5cc6176-1306-4a8c-b715-15817f9331b7"/>
+				<textFieldExpression><![CDATA["Cloaca: " + $F{cloaca}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="361" y="87" width="138" height="20" uuid="1cd1af68-4dab-450c-af42-b0725b0c7fe8"/>
+				<textFieldExpression><![CDATA["Agua Corriente: " + $F{aguaCorriente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="361" y="107" width="138" height="20" uuid="12a114d6-201f-4095-bf04-85744459985c"/>
+				<textFieldExpression><![CDATA["Pavimento: " + $F{pavimento}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="147" width="555" height="1" uuid="5cc9b8c0-2372-4f5a-bce4-d23cc22b1666"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="16" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="417" y="8" width="98" height="20" uuid="1d98b25e-1462-485d-9c73-88f7c0e42ba8"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página: "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="8" width="40" height="20" uuid="9d00459c-5918-4c9a-b075-29b1bc123c1a"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="20" splitType="Stretch"/>
+	</summary>
+</jasperReport>

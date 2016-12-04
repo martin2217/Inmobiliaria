@@ -5,9 +5,6 @@
  */
 package Modelo;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  *
@@ -15,17 +12,17 @@ import java.util.Set;
  */
 public class ListaCatalogo {
         
-    private Integer idInmueble;   
+    private String idInmueble;   
     private String provincia;
     private String localidad;
     private String barrio;   
     private String tipoInmueble;
-    private Float precio;    
+    private String precio;    
     private String orientacion;    
-    private Integer superficie;    
-    private Integer montoReserva;
-    private Integer cant_dormitorios;
-    private Integer banio;
+    private String superficie;    
+    private String montoReserva;
+    private String cant_dormitorios;
+    private String banio;
     private String garage;
     private String patio;
     private String aguaCorriente;
@@ -37,7 +34,7 @@ public class ListaCatalogo {
     private String aguaCaliente;
     private String telefono;     
 
-    public ListaCatalogo(String provincia, String localidad, String barrio, String tipoInmueble, Float precio, String orientacion, Integer superficie, String garage, String patio, String aguaCorriente, String cloaca, String gasNatural, String pavimento) {
+    public ListaCatalogo(String provincia, String localidad, String barrio, String tipoInmueble, String precio, String orientacion, String superficie, String garage, String patio, String aguaCorriente, String cloaca, String gasNatural, String pavimento) {
         this.provincia = provincia;
         this.localidad = localidad;
         this.barrio = barrio;
@@ -54,11 +51,11 @@ public class ListaCatalogo {
     }
 
     
-    public Integer getIdInmueble() {
+    public String getIdInmueble() {
         return idInmueble;
     }
 
-    public void setIdInmueble(Integer idInmueble) {
+    public void setIdInmueble(String idInmueble) {
         this.idInmueble = idInmueble;
     }
 
@@ -94,11 +91,11 @@ public class ListaCatalogo {
         this.tipoInmueble = tipoInmueble;
     }
 
-    public Float getPrecio() {
+    public String getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Float precio) {
+    public void setPrecio(String precio) {
         this.precio = precio;
     }
 
@@ -110,35 +107,35 @@ public class ListaCatalogo {
         this.orientacion = orientacion;
     }
 
-    public Integer getSuperficie() {
+    public String getSuperficie() {
         return superficie;
     }
 
-    public void setSuperficie(Integer superficie) {
+    public void setSuperficie(String superficie) {
         this.superficie = superficie;
     }
 
-    public Integer getMontoReserva() {
+    public String getMontoReserva() {
         return montoReserva;
     }
 
-    public void setMontoReserva(Integer montoReserva) {
+    public void setMontoReserva(String montoReserva) {
         this.montoReserva = montoReserva;
     }
 
-    public Integer getCant_dormitorios() {
+    public String getCant_dormitorios() {
         return cant_dormitorios;
     }
 
-    public void setCant_dormitorios(Integer cant_dormitorios) {
+    public void setCant_dormitorios(String cant_dormitorios) {
         this.cant_dormitorios = cant_dormitorios;
     }
 
-    public Integer getBanio() {
+    public String getBanio() {
         return banio;
     }
 
-    public void setBanio(Integer banio) {
+    public void setBanio(String banio) {
         this.banio = banio;
     }
 
