@@ -88,10 +88,12 @@ public class Consulta extends javax.swing.JPanel {
         jButtonAniadir = new javax.swing.JButton();
         jButtonReservarInmueble1 = new javax.swing.JButton();
         jButtonReservarInmueble2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setPreferredSize(new java.awt.Dimension(800, 600));
+        setLayout(null);
 
         jButtonModificarInmueble.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         jButtonModificarInmueble.setText("Modificar");
@@ -100,6 +102,8 @@ public class Consulta extends javax.swing.JPanel {
                 jButtonModificarInmuebleActionPerformed(evt);
             }
         });
+        add(jButtonModificarInmueble);
+        jButtonModificarInmueble.setBounds(324, 541, 133, 38);
 
         jTable1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -135,6 +139,9 @@ public class Consulta extends javax.swing.JPanel {
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
+        add(jScrollPane1);
+        jScrollPane1.setBounds(240, 80, 530, 400);
+
         jButtonBajaInmueble.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         jButtonBajaInmueble.setText("Eliminar");
         jButtonBajaInmueble.addActionListener(new java.awt.event.ActionListener() {
@@ -142,6 +149,8 @@ public class Consulta extends javax.swing.JPanel {
                 jButtonBajaInmuebleActionPerformed(evt);
             }
         });
+        add(jButtonBajaInmueble);
+        jButtonBajaInmueble.setBounds(169, 541, 133, 38);
 
         jButtonAtras.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         jButtonAtras.setText("Atras");
@@ -150,6 +159,8 @@ public class Consulta extends javax.swing.JPanel {
                 jButtonAtrasActionPerformed(evt);
             }
         });
+        add(jButtonAtras);
+        jButtonAtras.setBounds(30, 541, 133, 38);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filtros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 0, 18))); // NOI18N
         jPanel2.setMaximumSize(new java.awt.Dimension(218, 456));
@@ -264,7 +275,7 @@ public class Consulta extends javax.swing.JPanel {
                         .addComponent(comboBox_barrio, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(labelId)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                         .addComponent(textField_dormitorio, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(label5)
@@ -371,6 +382,9 @@ public class Consulta extends javax.swing.JPanel {
             }
         });
 
+        add(jPanel2);
+        jPanel2.setBounds(20, 80, 209, 447);
+
         jButtonAniadir.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         jButtonAniadir.setText("Añadir a Catálogo");
         jButtonAniadir.addActionListener(new java.awt.event.ActionListener() {
@@ -378,6 +392,8 @@ public class Consulta extends javax.swing.JPanel {
                 jButtonAniadirActionPerformed(evt);
             }
         });
+        add(jButtonAniadir);
+        jButtonAniadir.setBounds(628, 485, 133, 38);
 
         jButtonReservarInmueble1.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         jButtonReservarInmueble1.setText("Generar Catálogo");
@@ -386,6 +402,8 @@ public class Consulta extends javax.swing.JPanel {
                 jButtonReservarInmueble1ActionPerformed(evt);
             }
         });
+        add(jButtonReservarInmueble1);
+        jButtonReservarInmueble1.setBounds(628, 541, 133, 38);
 
         jButtonReservarInmueble2.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         jButtonReservarInmueble2.setText("Reservar");
@@ -394,59 +412,12 @@ public class Consulta extends javax.swing.JPanel {
                 jButtonReservarInmueble2ActionPerformed(evt);
             }
         });
+        add(jButtonReservarInmueble2);
+        jButtonReservarInmueble2.setBounds(475, 541, 133, 38);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonAniadir))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jButtonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                        .addComponent(jButtonBajaInmueble)
-                        .addGap(22, 22, 22)
-                        .addComponent(jButtonModificarInmueble, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonReservarInmueble2)
-                        .addGap(20, 20, 20)
-                        .addComponent(jButtonReservarInmueble1)))
-                .addGap(45, 45, 45))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonAniadir, jButtonAtras, jButtonBajaInmueble, jButtonModificarInmueble, jButtonReservarInmueble1, jButtonReservarInmueble2});
-
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(jButtonAniadir)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonAtras)
-                    .addComponent(jButtonBajaInmueble)
-                    .addComponent(jButtonReservarInmueble2)
-                    .addComponent(jButtonReservarInmueble1)
-                    .addComponent(jButtonModificarInmueble))
-                .addGap(24, 24, 24))
-        );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonAniadir, jButtonAtras, jButtonBajaInmueble, jButtonModificarInmueble, jButtonReservarInmueble1, jButtonReservarInmueble2});
-
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/img_general.jpg"))); // NOI18N
+        add(jLabel1);
+        jLabel1.setBounds(1, -4, 800, 610);
     }// </editor-fold>//GEN-END:initComponents
 
     
@@ -719,6 +690,7 @@ public class Consulta extends javax.swing.JPanel {
     private javax.swing.JButton jButtonModificarInmueble;
     private javax.swing.JButton jButtonReservarInmueble1;
     private javax.swing.JButton jButtonReservarInmueble2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
