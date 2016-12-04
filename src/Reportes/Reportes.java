@@ -7,19 +7,15 @@ package Reportes;
 
 
 import Modelo.ListaCatalogo;
-import java.io.File;
-import static java.sql.JDBCType.NULL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
@@ -28,54 +24,59 @@ import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
- * @author germa
+ * @author: todo el grupo
  */
 public class Reportes {
+
+private static JasperReport report;
+private static JasperPrint reportFilled;
+private static JasperViewer viewer;    
     
     public static void imprimirCatalogo (){
         try {
-            
-            //JDialog viewer = new JDialog(new JFrame(), "Reporte", true);
             List lista = new ArrayList();
             
             for(int i=0;i<5;i++)
             {
-                ListaCatalogo inmueble_aux = new ListaCatalogo("Santa fe", "Santa fe", "San Telmo", "Depto", "120.000", "Sur", "120", "SI", "SI", "SI", "SI", "SI", "SI");
+                ListaCatalogo inmueble_aux = new ListaCatalogo("Santa fe_" + i, "Santa fe", "San Telmo", "Depto", "120.000", "Sur", "120", "SI", "SI", "SI", "SI", "SI", "SI");
                 lista.add(inmueble_aux);
-            }
-            
-            //String fileName = System.getProperty("user.dir") + "\\src\\Reportes\\catologo.jasper";
-            //JOptionPane.showMessageDialog(null,fileName,"Éxito", JOptionPane.INFORMATION_MESSAGE);
-            
-            JasperReport report;
-            //reporte = (JasperReport) JRLoader.loadObject("miReporte2.jasper");
-            //JasperPrint jprint= JasperFillManager.fillReport(reporte, null,new JRBeanCollectionDataSource(lista));
-            //JasperViewer.viewReport(jprint, false);
-            
-            //JasperPrint print = JasperFillManager.fillReport("C:\\Users\\germa\\OneDrive\\Documentos\\NetBeansProjects\\Inmobiliaria\\src\\Reportes\\miReporte2.jasper", null, new JRBeanCollectionDataSource(lista) );            
-            //JasperExportManager.exportReportToPdfFile(print, "C:\\Users\\germa\\OneDrive\\Documentos\\NetBeansProjects\\Inmobiliaria\\src\\Reportes\\miReporte2.jasper");
-            //JasperPrint print = JasperFillManager.fillReport(fileName.trim().toUpperCase(), null, new JRBeanCollectionDataSource(lista) );
-            //JasperExportManager.exportReportToPdfFile(print, fileName.trim().toUpperCase());
-            
-            
-            report = (JasperReport) JRLoader.loadObjectFromFile("./src/Reportes/miReporte3.jasper");
-            Map parametro = new HashMap();
-            parametro.put("cliente", "el que sea");
-            JasperPrint reportFilled = JasperFillManager.fillReport(report, parametro, new JRBeanCollectionDataSource(lista));
-            
-            JasperViewer.viewReport(reportFilled, true);
-            
-            
-            
-            //JasperViewer ver = new JasperViewer(jprint);
-            //viewer.setSize(1000, 700);
-            //viewer.setLocationRelativeTo(null);                       
-            //viewer.getContentPane().add(jviewer);            
-            //ver.setVisible(true);
+            }                            
+            HashMap<String, Object> parametros = new HashMap<String, Object>();
+            parametros.put("Cliente", "Pogliani, Germán");
+            parametros.put("Telefono","0342 - 155 024 405");            
+            report = (JasperReport) JRLoader.loadObjectFromFile("./src/Reportes/miReporte3.jasper");            
+            reportFilled = JasperFillManager.fillReport(report, parametros, new JRBeanCollectionDataSource(lista));                                    
             
         } catch (JRException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
+    public static void verVisor()
+    {
+    viewer = new JasperViewer(reportFilled, false);
+    viewer.setTitle("Catálogo de Inmuebles");
+    viewer.setVisible(true);
+    }
+    
+    
+    public static void crearCatalogo(String ruta, Map parametros){
+        try
+        {
+            List lista = new ArrayList();            
+            for(int i=0;i<5;i++)
+            {
+                //Falta el temita de las fotos que es de sonia
+                //hay que referenciar las fotos en la clase LISTACATALOGO.JAVA
+                
+                ListaCatalogo inmueble_aux = new ListaCatalogo("Santa fe_" + i, "Santa fe_" + i, "San Telmo_" + i, "Depto", "120.000", "Sur_" + i, "120", "SI", "SI", "SI", "SI", "SI", "SI");
+                lista.add(inmueble_aux);
+            }
+            report = (JasperReport) JRLoader.loadObjectFromFile(ruta);
+            reportFilled = JasperFillManager.fillReport(report, parametros, new JRBeanCollectionDataSource(lista));
+        } catch (JRException e)
+        {
+            Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
 }
