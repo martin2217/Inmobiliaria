@@ -35,7 +35,7 @@ public final class GestorReserva {
     
     
     
-    public void actualizarEstado(int id){
+    public void actualizarEstado(int id,String importe,String vigencia){
         
         // falta agregar la fecha y no se que mas, tambien hay q ver por el tema de la tabla para que solo saque al q reservo
         Reserva nueva_reserva = new Reserva();
@@ -58,6 +58,8 @@ public final class GestorReserva {
         nueva_reserva.setCliente(inmueble_a_actualizar_estado.getCliente());
         nueva_reserva.setInmueble(inmueble_a_actualizar_estado);
         nueva_reserva.setFecha_reservado(new Date());
+        nueva_reserva.setPrecio_fecha_reservado(Float.valueOf(importe));
+        nueva_reserva.setVigencia(Integer.valueOf(vigencia));
         sesion1.save(nueva_reserva);
         sesion1.getTransaction().commit();
         sesion1.close();

@@ -35,9 +35,19 @@ public class GestorVentanas extends javax.swing.JFrame {
      */
     private GestorVentanas() {
         initComponents();
+        
+        /*
+         * Para cambiar como se ve el programa, implementarloo
+         * 
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            ex.printStackTrace();
+        }*/
+        
         this.setSize(new Dimension(800,620));
         this.setMinimumSize(new Dimension(800,620));
-          Dao.get().getSesion();
+        Dao.get().getSesion();
     }
     
     private JPanel menu;

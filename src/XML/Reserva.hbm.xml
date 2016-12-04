@@ -8,7 +8,7 @@
             <column name="id_reserva" not-null="true" />
             <generator class="assigned" />
         </id>
-         <property name="importe" type="java.lang.Float">
+         <property name="precio_fecha_reservado" type="java.lang.Float">
             <column name="importe"  />
         </property>
          <property name="vigencia" type="java.lang.Integer">

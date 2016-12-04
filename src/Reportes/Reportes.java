@@ -5,7 +5,6 @@
  */
 package Reportes;
 
-
 import Modelo.ListaCatalogo;
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -151,7 +151,7 @@ public class Inmueble  implements java.io.Serializable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     public String getDireccion(){ 
-    return "C: "+this.getCalle()+" "+"Nº: "+this.getNroCalle();
+    return this.getCalle()+" "+this.getNroCalle();
     }
 
     public Boolean isEstado_vendido() {
