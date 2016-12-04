@@ -39,10 +39,12 @@ private static JasperViewer viewer;
             
             for(int i=0;i<5;i++)
             {
-                ItemCatalogo inmueble_aux = new ItemCatalogo("Santa fe_" + i, "Santa fe", "San Telmo", "Depto", "120.000", "Sur", "120", "SI", "SI", "SI", "SI", "SI", "SI");
+                
+                ItemCatalogo inmueble_aux = new ItemCatalogo("Santa fe_" + i, "Santa fe", "San Telmo", "Depto", "120.000", "Sur", "120", "SI", "SI", "SI", "SI", "SI", "SI",i+"_1");
                 lista.add(inmueble_aux);
-            }                            
-            HashMap<String, Object> parametros = new HashMap<String, Object>();
+            }      
+            
+            HashMap<String, Object> parametros = new HashMap<>();
             parametros.put("Cliente", "Pogliani, Germán");
             parametros.put("Telefono","0342 - 155 024 405");            
             report = (JasperReport) JRLoader.loadObjectFromFile("./src/Reportes/miReporte3.jasper");            
@@ -72,7 +74,7 @@ private static JasperViewer viewer;
                 //Falta el temita de las fotos que es de sonia
                 //hay que referenciar las fotos en la clase ITEMCATALOGO.JAVA
                 
-                ItemCatalogo inmueble_aux = new ItemCatalogo("Santa fe_" + i, "Santa fe_" + i, "San Telmo_" + i, "Depto", "120.000", "Sur_" + i, "120", "SI", "SI", "SI", "SI", "SI", "SI");
+                ItemCatalogo inmueble_aux = new ItemCatalogo("Santa fe_" + i, "Santa fe_" + i, "San Telmo_" + i, "Depto", "120.000", "Sur_" + i, "120", "SI", "SI", "SI", "SI", "SI", "SI",i+"_1");
                 lista.add(inmueble_aux);
             }
             report = (JasperReport) JRLoader.loadObjectFromFile(ruta);

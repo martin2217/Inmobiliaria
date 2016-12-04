@@ -30,11 +30,21 @@ public class ItemCatalogo {
     private String cloaca;
     private String gasNatural;
     private String pavimento;
+    private String foto;
     private String lavadero;
     private String aguaCaliente;
     private String telefono;     
+    
 
-    public ItemCatalogo(String provincia, String localidad, String barrio, String tipoInmueble, String precio, String orientacion, String superficie, String garage, String patio, String aguaCorriente, String cloaca, String gasNatural, String pavimento) {
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public ItemCatalogo(String provincia, String localidad, String barrio, String tipoInmueble, String precio, String orientacion, String superficie, String garage, String patio, String aguaCorriente, String cloaca, String gasNatural, String pavimento,String foto) {
         this.provincia = provincia;
         this.localidad = localidad;
         this.barrio = barrio;
@@ -48,6 +58,8 @@ public class ItemCatalogo {
         this.cloaca = cloaca;
         this.gasNatural = gasNatural;
         this.pavimento = pavimento;
+        this.foto=foto;
+        
     }
 
     
