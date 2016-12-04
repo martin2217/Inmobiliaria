@@ -46,7 +46,7 @@ public class Menu extends javax.swing.JPanel {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Iteración 1");
         add(jLabel3);
-        jLabel3.setBounds(-6, 249, 810, 22);
+        jLabel3.setBounds(-6, 249, 810, 24);
 
         jButton2.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         jButton2.setText("Consulta Inmueble");
@@ -56,25 +56,29 @@ public class Menu extends javax.swing.JPanel {
             }
         });
         add(jButton2);
-        jButton2.setBounds(300, 318, 200, 31);
+        jButton2.setBounds(300, 318, 200, 33);
 
         jLabel4.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Iteración 2");
         add(jLabel4);
-        jLabel4.setBounds(-2, 367, 800, 22);
+        jLabel4.setBounds(-2, 367, 800, 24);
 
         jButton3.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
-        jButton3.setText("----");
-        jButton3.setEnabled(false);
+        jButton3.setLabel("Catalogo");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         add(jButton3);
-        jButton3.setBounds(300, 395, 200, 31);
+        jButton3.setBounds(300, 395, 200, 33);
 
         jButton4.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         jButton4.setText("----");
         jButton4.setEnabled(false);
         add(jButton4);
-        jButton4.setBounds(300, 436, 200, 31);
+        jButton4.setBounds(300, 436, 200, 33);
 
         jButton5.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         jButton5.setText("Alta Inmueble");
@@ -84,7 +88,7 @@ public class Menu extends javax.swing.JPanel {
             }
         });
         add(jButton5);
-        jButton5.setBounds(300, 277, 200, 31);
+        jButton5.setBounds(300, 277, 200, 33);
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/img_menu.jpg"))); // NOI18N
         add(jLabel9);
@@ -102,6 +106,11 @@ public class Menu extends javax.swing.JPanel {
         this.setVisible(false);
         GestorVentanas.get().consultaInmueble();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        Reportes.Reportes.imprimirCatalogo();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
