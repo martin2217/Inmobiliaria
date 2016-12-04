@@ -61,8 +61,9 @@ private static JasperViewer viewer;
     viewer.setVisible(true);
     }
     
-    
-    public static void crearCatalogo(String ruta, Map parametros){
+    //este metodo sirve para lanzar el catalogo en donde items son todos 
+    //los registros devueltos por la consulta. Items reemplazaria a lista.
+    public static void crearCatalogo(String ruta, Map parametros, List items){
         try
         {
             List lista = new ArrayList();            
