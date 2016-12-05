@@ -32,7 +32,7 @@ private static JasperReport report;
 private static JasperPrint reportFilled;
 private static JasperViewer viewer;    
 
-    
+    //setea los datos del reporte.
     public static void imprimirCatalogo (){
         try {
             List lista = new ArrayList();
@@ -55,12 +55,12 @@ private static JasperViewer viewer;
         }
     }
     
-
+    //muestra el reporte 
     public static void verVisor()
     {
-    viewer = new JasperViewer(reportFilled, false);
-    viewer.setTitle("Catálogo de Inmuebles");
-    viewer.setVisible(true);
+        viewer = new JasperViewer(reportFilled, false);
+        viewer.setTitle("Catálogo de Inmuebles");
+        viewer.setVisible(true);
     }
     
     //este metodo sirve para lanzar el catalogo en donde items son todos 
