@@ -13,6 +13,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.RowSorter;
@@ -608,7 +611,11 @@ public class Consulta extends javax.swing.JPanel {
                                     "Error", JOptionPane.INFORMATION_MESSAGE);
                         }
                         else{
-                            GestorReserva.get().actualizarEstado(parametro_inmueble,importe_reserva,vigencia);
+                            try {
+                                GestorReserva.get().actualizarEstado(parametro_inmueble,importe_reserva,vigencia);
+                            } catch (MessagingException ex) {
+                                Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                             LimpiarTabla();
                         }
                     }

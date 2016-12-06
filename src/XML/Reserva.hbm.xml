@@ -17,10 +17,10 @@
         <property name="fecha_reservado" type="date">
             <column name="fecha_reservado" length="10" />
         </property>
-        <many-to-one name="cliente" class="Modelo.Cliente" update="false"  fetch="select">
+        <many-to-one name="cliente" class="Modelo.Cliente"  lazy="false" fetch="select">
             <column name="id_cliente" not-null="true" />
         </many-to-one>
-        <many-to-one name="inmueble" class="Modelo.Inmueble" update="false"  fetch="select">
+        <many-to-one name="inmueble" class="Modelo.Inmueble"  lazy="false"  fetch="select">
             <column name="id_inmueble" not-null="true" />
         </many-to-one>
     

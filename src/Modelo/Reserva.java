@@ -23,8 +23,7 @@ public class Reserva implements java.io.Serializable {
     private int idReserva;
     private Cliente cliente;
     private Inmueble inmueble;
-  
-    
+
     public Reserva(){}
 
     public Float getImporte() {
