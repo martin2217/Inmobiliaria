@@ -56,7 +56,7 @@ public class Menu extends javax.swing.JPanel {
             }
         });
         add(jButton2);
-        jButton2.setBounds(300, 318, 200, 31);
+        jButton2.setBounds(300, 318, 200, 38);
 
         jLabel4.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -72,13 +72,17 @@ public class Menu extends javax.swing.JPanel {
             }
         });
         add(jButton3);
-        jButton3.setBounds(300, 395, 200, 31);
+        jButton3.setBounds(300, 395, 200, 38);
 
         jButton4.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
-        jButton4.setText("----");
-        jButton4.setEnabled(false);
+        jButton4.setText("PRUEBA de Reserva PDF");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         add(jButton4);
-        jButton4.setBounds(300, 436, 200, 31);
+        jButton4.setBounds(300, 436, 200, 38);
 
         jButton5.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         jButton5.setText("Alta Inmueble");
@@ -88,7 +92,7 @@ public class Menu extends javax.swing.JPanel {
             }
         });
         add(jButton5);
-        jButton5.setBounds(300, 277, 200, 31);
+        jButton5.setBounds(300, 277, 200, 38);
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/img_menu.jpg"))); // NOI18N
         add(jLabel9);
@@ -110,8 +114,14 @@ public class Menu extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         Reportes.Reportes.imprimirCatalogo();
-        Reportes.Reportes.verVisor();
+        Reportes.Reportes.verVisor("Catalogo de Inmueble");
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        Reportes.Reportes.imprimirReserva();
+        Reportes.Reportes.verVisor("Catalogo de Inmueble");
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

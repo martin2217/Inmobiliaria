@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="becf95dd-91e4-4999-9949-224fe08f4c6f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="cliente" class="java.lang.Object"/>
+	<field name="inmueble" class="java.lang.String"/>
+	<field name="importe" class="java.lang.String"/>
+	<field name="fecha_reservado" class="java.lang.String"/>
+	<field name="precio_fecha_reservado" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="78" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="f02c88ea-46d7-46c7-aeed-e167ae035417"/>
+				<text><![CDATA[Metodos Agiles 2016]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="8" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="14" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="6" width="555" height="1" uuid="d23b31ca-444f-47eb-9ca5-8e943103951b"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="318" height="20" uuid="64e5a31f-cdb0-460e-9ba1-74c6c733f87d"/>
+				<textFieldExpression><![CDATA["Reserva a nombre de: "+$F{cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="20" width="318" height="20" uuid="c2294037-3ee9-440b-b122-9e138dcf00dc"/>
+				<textFieldExpression><![CDATA["Inmueble reservado: "+$F{inmueble}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="40" width="318" height="20" uuid="843db66b-af4b-4209-8214-06a710c28430"/>
+				<textFieldExpression><![CDATA["Importe entregado: "+$F{importe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="60" width="318" height="20" uuid="a3393dcd-3ce1-4376-9378-2bf8b77ef5f3"/>
+				<textFieldExpression><![CDATA["Fecha de Reserva: "+$F{fecha_reservado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="80" width="318" height="20" uuid="c92c7600-634d-473c-be87-117cdc97d4b9"/>
+				<textFieldExpression><![CDATA["Por el precio al dia de reserva: "+$F{precio_fecha_reservado}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="113" width="555" height="1" uuid="cf0194a0-98ec-463c-a7e4-f109f33a3948"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="10" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="455" y="34" width="100" height="20" uuid="2893a57a-d46a-4531-84c8-8c61ae1fb0d3"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="34" width="246" height="20" uuid="537b133e-a204-4adb-b08e-91bf4cbc9f03"/>
+				<text><![CDATA[Inmobiliaria UTN FRSF]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
