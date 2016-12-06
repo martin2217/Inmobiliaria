@@ -6,6 +6,7 @@
 package Reportes;
 
 import Modelo.ItemCatalogo;
+import Modelo.ItemReserva;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,11 +56,29 @@ private static JasperViewer viewer;
         }
     }
     
+    public static void imprimirReserva (){
+        try {                
+            List lista = new ArrayList();
+            
+            ItemReserva reserva = new ItemReserva("2500","3 dias","21/04/99","5000","4","pepito","marbella");
+            lista.add(reserva);
+            
+            HashMap<String, Object> parametros = new HashMap<>();
+            parametros.put("Cliente", "Pogliani, Germán");
+            parametros.put("Telefono","0342 - 155 024 405");            
+            report = (JasperReport) JRLoader.loadObjectFromFile("./src/Reportes/miReporte4.jasper");            
+            reportFilled = JasperFillManager.fillReport(report, parametros, new JRBeanCollectionDataSource(lista));                                    
+            
+        } catch (JRException ex) {
+            Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     //muestra el reporte 
-    public static void verVisor()
+    public static void verVisor(String titulo)
     {
         viewer = new JasperViewer(reportFilled, false);
-        viewer.setTitle("Catálogo de Inmuebles");
+        viewer.setTitle(titulo);
         viewer.setVisible(true);
     }
     
@@ -84,4 +103,24 @@ private static JasperViewer viewer;
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+    
+    //este metodo sirve para lanzar la reserva en donde items son todos
+    //los registros devueltos por la consulta. Items reemplazaria a lista.
+    
+    /*public static void crearReserva(String ruta, Map parametros, List items){
+        try
+        {
+            List lista = new ArrayList();            
+            for(int i=0;i<5;i++)
+            {                
+                ItemReserva inmueble_aux = new ItemCatalogo("Santa fe_" + i, "Santa fe_" + i, "San Telmo_" + i, "Depto", "120.000", "Sur_" + i, "120", "SI", "SI", "SI", "SI", "SI", "SI",i+"_1");
+                lista.add(inmueble_aux);
+            }
+            report = (JasperReport) JRLoader.loadObjectFromFile(ruta);
+            reportFilled = JasperFillManager.fillReport(report, parametros, new JRBeanCollectionDataSource(lista));
+        } catch (JRException e)
+        {
+            Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }*/
 }
