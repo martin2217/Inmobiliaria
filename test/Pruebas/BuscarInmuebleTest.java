@@ -15,6 +15,18 @@ import static org.junit.Assert.*;
 
 
 public class BuscarInmuebleTest {
+    
+        private String provincia;
+        private String localidad;
+        private String barrio;
+        private String tipo_departamento;
+        private String cantidad_dormitorio;
+        private String precio_minimo;
+        private String precio_maximo;
+        private String estado;
+        private GestorInmueble instance;
+        private List<Inmueble> expResult;
+    
       private static SessionFactory sesion;
       
       
@@ -24,6 +36,8 @@ public class BuscarInmuebleTest {
     
    @BeforeClass
     public static void setUpClass() {
+        
+        
         sesion = ConexionUtil.getSessionFactory();
     }
     
@@ -34,7 +48,19 @@ public class BuscarInmuebleTest {
     
     @Before
     public void setUp() {
-
+        
+        
+       //Datos de prueba
+        provincia = "";
+        localidad = "";
+        barrio = "";
+        tipo_departamento = "";
+        cantidad_dormitorio = "";
+        precio_minimo = "";
+        precio_maximo = "";
+        estado = "";
+        instance = new GestorInmueble();
+        expResult = null;
     }
     
     @After
@@ -48,17 +74,6 @@ public class BuscarInmuebleTest {
     public void testBuscarInmuebles() {
         System.out.println("buscarInmuebles");
         
-        //Datos de prueba
-        String provincia = "";
-        String localidad = "";
-        String barrio = "";
-        String tipo_departamento = "";
-        String cantidad_dormitorio = "";
-        String precio_minimo = "";
-        String precio_maximo = "";
-        String estado = "";
-        GestorInmueble instance = new GestorInmueble();
-        List<Inmueble> expResult = null;
         
         //Metodo de prueba
         List<Inmueble> result = instance.buscarInmuebles(provincia, localidad, barrio, tipo_departamento, cantidad_dormitorio, precio_minimo, precio_maximo, estado);
