@@ -5,6 +5,7 @@
  */
 package Reportes;
 
+import Modelo.Reserva;
 import Modelo.ItemCatalogo;
 import Modelo.ItemReserva;
 import java.util.ArrayList;
@@ -16,8 +17,11 @@ import java.util.logging.Logger;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRExporter;
+import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
@@ -123,4 +127,44 @@ private static JasperViewer viewer;
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, e);
         }
     }*/
+    
+    public static void generarPDF (Reserva auxReserva)
+    {
+    try {
+        List lista = new ArrayList();
+        String auxNomCliente = auxReserva.getCliente().getApellido() + ", " + auxReserva.getCliente().getNombre();
+        String auxNomReporte = "reportePDF_" + String.valueOf(auxReserva.getIdReserva()) + ".pdf";
+        String auxStringFile = "C\\reporte\\" + auxNomReporte;
+        
+        ItemReserva auxItem = new ItemReserva(
+                auxReserva.getImporte().toString(), 
+                auxReserva.getVigencia().toString(),
+                auxReserva.getFecha_reservado().toString(),
+                auxReserva.getPrecio_fecha_reservado().toString(),
+                String.valueOf(auxReserva.getIdReserva()),
+                auxNomCliente,
+                String.valueOf(auxReserva.getInmueble().getIdInmueble()));
+        
+        //++++++++++++++++++++++++++++++++++++
+        //convertir auxReserva a ItemReserva
+        
+        
+        //++++++++++++++++++++++++++++++++++++
+        lista.add(auxItem);        
+        HashMap<String, Object> parametros = new HashMap<>();
+        parametros.put("Cliente", auxNomCliente);
+        parametros.put("Telefono",auxReserva.getCliente().getTelefono());  
+        
+        report = (JasperReport) JRLoader.loadObjectFromFile("./src/Reportes/miReporte4.jasper");
+        reportFilled = JasperFillManager.fillReport(report, parametros, new JRBeanCollectionDataSource(lista));
+        
+        
+        JRExporter exporter = new JRPdfExporter();
+        exporter.setParameter(JRExporterParameter.JASPER_PRINT, reportFilled);
+        exporter.setParameter(JRExporterParameter.OUTPUT_FILE, new java.io.File(auxStringFile));
+        exporter.exportReport();
+    } catch (JRException ex) {
+        Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }
 }
