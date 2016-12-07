@@ -167,4 +167,18 @@ private static JasperViewer viewer;
         Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
     }
     }
+    public static void imprimirCatalogo (List<ItemCatalogo> lista,String cliente,String telefono){
+        try {
+                 
+            
+            HashMap<String, Object> parametros = new HashMap<>();
+            parametros.put("Cliente", cliente);
+            parametros.put("Telefono",telefono);            
+            report = (JasperReport) JRLoader.loadObjectFromFile("./src/Reportes/miReporte3.jasper");            
+            reportFilled = JasperFillManager.fillReport(report, parametros, new JRBeanCollectionDataSource(lista));                                    
+            
+        } catch (JRException ex) {
+            Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex) ;
+        }
+    }
 }

@@ -143,6 +143,50 @@ public class Inmueble  implements java.io.Serializable {
        this.observaciones = obs;
     }
 
+    public Boolean getEstado_vendido() {
+        return estado_vendido;
+    }
+
+    public Boolean getPropiedadHorizontal() {
+        return propiedadHorizontal;
+    }
+
+    public Boolean getGarage() {
+        return garage;
+    }
+
+    public Boolean getPatio() {
+        return patio;
+    }
+
+    public Boolean getAguaCorriente() {
+        return aguaCorriente;
+    }
+
+    public Boolean getPiscina() {
+        return piscina;
+    }
+
+    public Boolean getCloacas() {
+        return cloacas;
+    }
+
+    public Boolean getGasNatural() {
+        return gasNatural;
+    }
+
+    public Boolean getPavimento() {
+        return pavimento;
+    }
+
+    public Boolean getLavadero() {
+        return lavadero;
+    }
+
+    public Boolean getAguaCaliente() {
+        return aguaCaliente;
+    }
+
     public Inmueble(int parseInt, Cliente cli, Propietario prop, Object object, Barrio barri, String text, int parseInt0, int parseInt1, int parseInt2, String toString, float parseFloat, int selectedIndex, int parseInt3, int parseInt4, int parseInt5, String alta, int parseInt6, int parseInt7, int i, Object object0) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
