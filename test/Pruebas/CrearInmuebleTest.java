@@ -2,6 +2,7 @@ package Pruebas;
 
 
 import Gestor.GestorAlta;
+import Gestor.GestorInmueble;
 
 import Modelo.Inmueble;
 import Modelo.Barrio;
@@ -19,11 +20,12 @@ import static org.junit.Assert.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 
 
 
-public class AltaInmuebleTest {
+public class CrearInmuebleTest {
     
   
         private Integer idInmuebleTest1;
@@ -62,9 +64,20 @@ public class AltaInmuebleTest {
         private String observaciones;
         
         private Inmueble inmuebleTest1;
+        
+        private String provincia;
+        private String localidad;
+        private String barrio;
+        private String tipo_departamento;
+        private String cantidad_dormitorio;
+        private String precio_minimo;
+        private String precio_maximo;
+        private String estado1;
+        private GestorInmueble instance;
+        private List<Inmueble> expResult;
     
     
-    public AltaInmuebleTest() {
+    public CrearInmuebleTest() {
     }
     
     @BeforeClass
@@ -78,8 +91,9 @@ public class AltaInmuebleTest {
     @Before
     public void setUp() throws ParseException {
         
+        
         //DATOS DE PRUEBA
-        idInmuebleTest1 = 7;
+        idInmuebleTest1 = 999;
         clienteTest1 = new Cliente(1);
         propietarioTest1 = new Propietario(1);
         barrioTest1 = (Barrio) GestorAlta.getBarrio("Centro");
@@ -122,21 +136,19 @@ public class AltaInmuebleTest {
                         montoVenta,fechaAlta,cant_dormitorios,propiedadHorizontal, antiguedad,banios,garage,
                         patio,aguaCorriente,piscina,cloacas,gasNatural,pavimento,lavadero,aguaCaliente,telefono,observaciones);
     
-        // Dando alta del inmueble
-        GestorAlta.altaInmueble(inmuebleTest1);
+        
+        //METODO A PROBAR        
+        //GestorAlta.altaInmueble(inmuebleTest1);
         
     }
     
     @After
     public void tearDown() {
-        
     }
 
 
     @Test
     public void testCampos1(){
-        
-        
         //CONDICIONES DE PRUEBA
         assertNotNull(inmuebleTest1.getIdInmueble());
         assertSame(idInmuebleTest1,inmuebleTest1.getIdInmueble());
@@ -170,20 +182,46 @@ public class AltaInmuebleTest {
         assertEquals(montoVenta,inmuebleTest1.getMontoVenta());
         assertEquals(fechaAlta,inmuebleTest1.getFechaAlta());
         assertEquals(cant_dormitorios,inmuebleTest1.getCant_dormitorios());
-        assertEquals(propiedadHorizontal,inmuebleTest1.isPropiedadHorizontal());
+        assertEquals(propiedadHorizontal,inmuebleTest1.getPropiedadHorizontal());
         assertEquals(antiguedad,inmuebleTest1.getAntiguedad());
         assertEquals(banios,inmuebleTest1.getBanios());
-        assertEquals(garage,inmuebleTest1.isGarage());
-        assertEquals(patio,inmuebleTest1.isPatio());
-        assertEquals(aguaCorriente,inmuebleTest1.isAguaCorriente());
+        assertEquals(garage,inmuebleTest1.getGarage());
+        assertEquals(patio,inmuebleTest1.getPatio());
+        assertEquals(aguaCorriente,inmuebleTest1.getAguaCorriente());
         assertEquals(piscina,inmuebleTest1.getPiscina());
         assertEquals(cloacas,inmuebleTest1.getCloacas());
         assertEquals(gasNatural,inmuebleTest1.getGasNatural());
         assertEquals(pavimento,inmuebleTest1.getPavimento());
         assertEquals(lavadero,inmuebleTest1.getLavadero());
-        assertEquals(aguaCaliente,inmuebleTest1.isAguaCaliente());
+        assertEquals(aguaCaliente,inmuebleTest1.getAguaCaliente());
         assertEquals(telefono,inmuebleTest1.getTelefono());
         assertEquals(observaciones,inmuebleTest1.getObservaciones());
+    }
+    
+    @Test
+    public void testIntegrador4(){
+        
+        // Prueba que se ingrese el inmueble a la base de datos
+        // (independientemente de que se ingrese correctamente)
+        instance = new GestorInmueble();
+        
+        // Se buscan todos los inmuebles
+        List<Inmueble> result1 = instance.buscarInmuebles("", "","",
+                "", "", "", "", "");
+        
+        // Dando alta del inmueble en BD
+        GestorAlta.altaInmueble(inmuebleTest1);
+        
+        // Se buscan todos los inmuebles
+        List<Inmueble> result2 = instance.buscarInmuebles("", "","",
+                "", "", "", "", "");
+        
+        // Comparación de cantidades
+        assertEquals(result1.size()+1, result2.size());
+        
+        // Borrado fisico del inmueble
+        instance.borrarInmueble(idInmuebleTest1);
+        
     }
     
 }

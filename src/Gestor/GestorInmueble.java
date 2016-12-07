@@ -23,12 +23,10 @@ public final class GestorInmueble {
     //private V() {}
     
     public static GestorInmueble get(){
-        
         return SELF;
     }
     
     public GestorInmueble() {
-        
         
     }
     
@@ -237,7 +235,6 @@ public final class GestorInmueble {
             if(aux.isEstado_vendido()){
                 recorrido.remove();
             }
-            
         }
         
         Dao.get().cerrarConexion(Dao.get().getSesion());

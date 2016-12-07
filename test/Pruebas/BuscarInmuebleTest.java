@@ -66,26 +66,19 @@ public class BuscarInmuebleTest {
     public void tearDown() {
     }
 
-  
-
-
     @Test
     public void testBuscarInmuebles() {
         System.out.println("buscarInmuebles");
         
-        
         //Metodo de prueba
-        List<Inmueble> result = instance.buscarInmuebles(provincia, localidad, barrio, tipo_departamento, cantidad_dormitorio, precio_minimo, precio_maximo, estado);
-        
+        List<Inmueble> result = instance.buscarInmuebles(provincia, localidad,barrio,
+                tipo_departamento, cantidad_dormitorio, precio_minimo, precio_maximo, estado);
         
         //Condiciones de prueba
         assertNotEquals(expResult, result);
         
         assertEquals(result.size(),instance.maxIdInmobiliaria()-1);
         
-        
-       
-       
     }
     
 }

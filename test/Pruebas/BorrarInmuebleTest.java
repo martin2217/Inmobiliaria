@@ -50,14 +50,10 @@ public class BorrarInmuebleTest {
         //Datos de prueba
         int idInmuebleTest = 4;
        
-        
-        
-        
         GestorInmueble instance = new GestorInmueble();
 
         //Método a probar
         instance.borrarInmueble(idInmuebleTest);
-        
         
         
         Inmueble inmuebleBorrado = instance.buscarInmueblePorId(idInmuebleTest);

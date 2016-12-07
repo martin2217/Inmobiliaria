@@ -452,7 +452,6 @@ public class Inmueble  implements java.io.Serializable {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-   
 
     public void setEstado_vendido(boolean estado_vendido) {
         this.estado_vendido = estado_vendido;

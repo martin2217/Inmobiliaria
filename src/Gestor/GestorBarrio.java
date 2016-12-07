@@ -19,19 +19,14 @@ public   class GestorBarrio {
 
       // Forma de SINGLETON
     private static final GestorBarrio SELF = new GestorBarrio();
-    //private V() {}
+    
     public static GestorBarrio get(){
-        
-          
         return SELF;
     }
     
-    
     public GestorBarrio() {
-  
     
     }
-    
     
     public String[] buscarBarrioPorCiudad(String localidad){
         
@@ -47,15 +42,7 @@ public   class GestorBarrio {
             i++;
         }
         
-        
         return retorno;
-        
-        
-        
-        
-        
     }
-    
-    
     
 }

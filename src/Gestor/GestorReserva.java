@@ -23,10 +23,8 @@ public final class GestorReserva  extends Thread{
     
      // Forma de SINGLETON
     private static final GestorReserva SELF = new GestorReserva();
-   
     
     public static GestorReserva get(){
-        
         return SELF;
     }
     

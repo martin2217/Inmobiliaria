@@ -22,7 +22,6 @@ public class GestorProvincia {
     //private V() {}
     public static GestorProvincia get(){
         
-          
         return SELF;
     }
     public GestorProvincia() {
@@ -30,9 +29,9 @@ public class GestorProvincia {
     }
     
     public List<Provincia> buscarProvincia(){
-    
-     List<Provincia> retorno_provincia= Dao.get().getSesion().createCriteria(Provincia.class).list();
-       
+        
+        List<Provincia> retorno_provincia= Dao.get().getSesion().createCriteria(Provincia.class).list();
+        
         Dao.get().cerrarConexion(Dao.get().getSesion());
         return retorno_provincia;
     }
