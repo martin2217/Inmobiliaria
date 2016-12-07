@@ -72,8 +72,8 @@ public class Consulta extends javax.swing.JPanel {
         comboBox_estado = new javax.swing.JComboBox();
         label5 = new javax.swing.JLabel();
         jButtonAniadir = new javax.swing.JButton();
-        jButtonReservarInmueble1 = new javax.swing.JButton();
-        jButtonReservarInmueble2 = new javax.swing.JButton();
+        jButtonGenerarCatalogo = new javax.swing.JButton();
+        jButtonReservarInmueble = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -382,25 +382,25 @@ public class Consulta extends javax.swing.JPanel {
         add(jButtonAniadir);
         jButtonAniadir.setBounds(607, 485, 140, 38);
 
-        jButtonReservarInmueble1.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
-        jButtonReservarInmueble1.setText("Generar Catálogo");
-        jButtonReservarInmueble1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonGenerarCatalogo.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
+        jButtonGenerarCatalogo.setText("Generar Catálogo");
+        jButtonGenerarCatalogo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonReservarInmueble1ActionPerformed(evt);
+                jButtonGenerarCatalogoActionPerformed(evt);
             }
         });
-        add(jButtonReservarInmueble1);
-        jButtonReservarInmueble1.setBounds(628, 541, 133, 38);
+        add(jButtonGenerarCatalogo);
+        jButtonGenerarCatalogo.setBounds(628, 541, 133, 38);
 
-        jButtonReservarInmueble2.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
-        jButtonReservarInmueble2.setText("Reservar");
-        jButtonReservarInmueble2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonReservarInmueble.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
+        jButtonReservarInmueble.setText("Reservar");
+        jButtonReservarInmueble.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonReservarInmueble2ActionPerformed(evt);
+                jButtonReservarInmuebleActionPerformed(evt);
             }
         });
-        add(jButtonReservarInmueble2);
-        jButtonReservarInmueble2.setBounds(475, 541, 133, 38);
+        add(jButtonReservarInmueble);
+        jButtonReservarInmueble.setBounds(475, 541, 133, 38);
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
@@ -593,7 +593,7 @@ public class Consulta extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButtonAniadirActionPerformed
 
-    private void jButtonReservarInmueble1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservarInmueble1ActionPerformed
+    private void jButtonGenerarCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerarCatalogoActionPerformed
      if(!listaItemCatalogo.isEmpty()){
              
             Reportes.Reportes.imprimirCatalogo(listaItemCatalogo,"cliente","011");
@@ -603,9 +603,9 @@ public class Consulta extends javax.swing.JPanel {
                     "Error", JOptionPane.INFORMATION_MESSAGE);
         
          
-    }//GEN-LAST:event_jButtonReservarInmueble1ActionPerformed
+    }//GEN-LAST:event_jButtonGenerarCatalogoActionPerformed
 
-    private void jButtonReservarInmueble2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservarInmueble2ActionPerformed
+    private void jButtonReservarInmuebleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservarInmuebleActionPerformed
         
         modelo = (DefaultTableModel) jTable1.getModel();
         int bandera=0;
@@ -651,7 +651,7 @@ public class Consulta extends javax.swing.JPanel {
             }
             
         }
-    }//GEN-LAST:event_jButtonReservarInmueble2ActionPerformed
+    }//GEN-LAST:event_jButtonReservarInmuebleActionPerformed
 
     private void LimpiarTabla(){
        for (int i = 0; i < jTable1.getRowCount(); i++) {
@@ -728,9 +728,9 @@ public class Consulta extends javax.swing.JPanel {
     private javax.swing.JButton jButtonAtras;
     private javax.swing.JButton jButtonBajaInmueble;
     private javax.swing.JButton jButtonBuscar;
+    private javax.swing.JButton jButtonGenerarCatalogo;
     private javax.swing.JButton jButtonModificarInmueble;
-    private javax.swing.JButton jButtonReservarInmueble1;
-    private javax.swing.JButton jButtonReservarInmueble2;
+    private javax.swing.JButton jButtonReservarInmueble;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;

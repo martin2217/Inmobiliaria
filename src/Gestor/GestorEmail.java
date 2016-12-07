@@ -28,36 +28,39 @@ import javax.mail.internet.MimeMultipart;
  */
 public class GestorEmail extends Thread{
     int id_reserva;
-     String Mensage = "";
+    String Mensage = "";
     String To = "";
     String Subject = "";
     private Multipart multiParte;
-
+    
     public GestorEmail(int id){
-    id_reserva=id;
+        id_reserva=id;
     }
     
+    @Override
+    // implementamos el metodo run() para poder lanzar otro hilo de ejecucion
     public void run(){
-    
-    
+        
         try {
             
-            
             Reserva reserva = GestorReserva.get().buscarRerserva(id_reserva);
+            // configuramos el correo
             Properties props = new Properties();
             props.put("mail.smtp.auth", "true");
             props.put("mail.smtp.starttls.enable", "true");
             props.put("mail.smtp.host", "smtp.gmail.com");
             props.put("mail.smtp.port", "587");
             
-            javax.mail.Session session = javax.mail.Session.getInstance(props,new javax.mail.Authenticator() {
-                
+            // nos logueamos
+            javax.mail.Session session;
+            session = javax.mail.Session.getInstance(props,new javax.mail.Authenticator() {     
+                @Override
                 protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
                     return new javax.mail.PasswordAuthentication("InmobiliariaUTN.FRSF@gmail.com","inmobiliariatp");
                 }
             });
             
-            //Se recoge la información y se envía el email
+          // completamos el mensaje la direccion de correo y el asunto
             Mensage ="Sr/Sra "+reserva.getCliente().getNombre()+" "+reserva.getCliente().getApellido()
                     +" se ha realizado exitosamente su reserva. \n\nMuchas gracias por depositar su confianza en nosotros.\n\n Saludos"
                     + " Atte: Inmobiliaria UTN-FRSF";
@@ -71,11 +74,12 @@ public class GestorEmail extends Thread{
                 adjunto.setDataHandler(
                         
                         // aca esta la direccion de donde se encuentra el archivo
-                        
+                        // buscamos el archivo adjunto, creamos el tipo de dato y lo inicializamos
                         new DataHandler(new FileDataSource("C:\\Users\\Pc\\Desktop\\perfil.jpg")));
             } catch (MessagingException ex) {
                 Logger.getLogger(GestorEmail.class.getName()).log(Level.SEVERE, null, ex);
             }
+           // seteamos los datos al mensaje 
             adjunto.setFileName("Comprobante");
             texto.setText(Mensage);
             multiParte = new MimeMultipart();
@@ -84,7 +88,7 @@ public class GestorEmail extends Thread{
             
             
             try {
-                
+                // configuramos el mensaje y lo enviamos
                 Message message = new MimeMessage(session);
                 message.setFrom(new InternetAddress("InmobiliariaUTN.FRSF@gmail.com"));
                 message.setRecipients(Message.RecipientType.TO,
@@ -97,13 +101,10 @@ public class GestorEmail extends Thread{
             }
             
             
-            
-            System.out.println("El email se ha enviado correctamenteeeeeeeeeeeeeeee");
-            
         } catch (MessagingException ex) {
             Logger.getLogger(GestorEmail.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+        
     }
     
 }

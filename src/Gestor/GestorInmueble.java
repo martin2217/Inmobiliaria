@@ -41,6 +41,8 @@ public final class GestorInmueble {
         Float pre_min_query;
         Float pre_max_query;
         Integer dormitorio;
+        /* verificamos la cantidad de dormitorios y los precios minimo y maximos, si no son ingresado
+           les seteamos un valor por defecto */
         if(cantidad_dormitorio.equals("")) dormitorio=0;
         else dormitorio= Integer.parseInt(cantidad_dormitorio);
         if(precio_minimo.equals("")) pre_min_query= 0.0F;
@@ -48,7 +50,7 @@ public final class GestorInmueble {
         if(precio_maximo.equals("")) pre_max_query=99999999999.2F;
         else pre_max_query= Float.parseFloat(precio_maximo);
         
-        
+        /*verificamos las distintas combinaciones que se pueden dar con los filtros de busqueda */
         if(!provincia.equals("")){
             if(!localidad.equals("")){
                 if(!barrio.equals("")){
@@ -227,14 +229,7 @@ public final class GestorInmueble {
                 retorno_inmueble=query.list();
             }
         }
-        
-        /*  List<Inmueble> retorno_inmuebles= Dao.get().getSesion().createCriteria(Inmueble.class).list();
-        
-        Dao.get().cerrarConexion(Dao.get().getSesion());
-        return retorno_inmuebles;
-        */
-        
-        
+        // eliminamos los que han sido logicamente del sistema
         Iterator <Inmueble> recorrido= retorno_inmueble.iterator();
         Inmueble aux;
         while(recorrido.hasNext()){
@@ -245,13 +240,12 @@ public final class GestorInmueble {
             
         }
         
-        
         Dao.get().cerrarConexion(Dao.get().getSesion());
         return retorno_inmueble;
     }
     
     
-    
+   
     public Inmueble buscarInmueblePorId(int id){
         Session sesion;
         sesion=Dao.get().getSesion();
@@ -259,12 +253,11 @@ public final class GestorInmueble {
         Inmueble retorno=(Inmueble)sesion.get(Inmueble.class,id);
         sesion.getTransaction().commit();
         sesion.close();
-        
-        
-    return retorno;
+        return retorno;
     }
     
-    public void borrarInmueble(int id){ /* con este metodo borro un objeto de la base de datos debo saber su id y la clase, asi lo busco al objeto y lo borro*/
+    /* con este metodo borro un objeto de la base de datos debo saber su id y la clase, asi lo busco al objeto y lo borro*/
+    public void borrarInmueble(int id){ 
         Session sesion;
         sesion=Dao.get().getSesion();
         sesion.beginTransaction();
@@ -273,7 +266,8 @@ public final class GestorInmueble {
         sesion.getTransaction().commit();
         sesion.close();
     }
-     public void borrarInmuebleLogica(int id){ /* con este metodo borro un objeto de la base de datos debo saber su id y la clase, asi lo busco al objeto y lo borro*/
+    /* con este metodo borro un objeto de la base de datos debo saber su id y la clase, asi lo busco al objeto y lo borro*/
+     public void borrarInmuebleLogica(int id){ 
         Session sesion;
         sesion=Dao.get().getSesion();
         sesion.beginTransaction();
@@ -283,35 +277,24 @@ public final class GestorInmueble {
         sesion.getTransaction().commit();
         sesion.close();
     }
-    
-    public Inmueble loadInmueble(int id){
-        Session sesion;
-        sesion=Dao.get().getSesion();
-        sesion.beginTransaction();
-        Inmueble inmueble=(Inmueble)sesion.get(Inmueble.class,id);
-        
-        sesion.getTransaction().commit();
-        sesion.close();
-        return inmueble;
-    }
-    
-    public int maxIdInmobiliaria (){
-        Session session;
-        session=ConexionUtil.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(Inmueble.class);
-        criteria.add(Restrictions.isNotNull("idInmueble"));
-        criteria.setProjection(
-                Projections.projectionList()
-                        .add(Projections.max("idInmueble")
-                        )
-        );
-        
-        if (criteria.list().get(0) != null){
-            return  (int) criteria.list().get(0) + 1;
-        }
-        else
-            return 1;
-        
-    }
+    // obtenemos el id para el proximo objeto
+     public int maxIdInmobiliaria (){
+         Session session;
+         session=ConexionUtil.getSessionFactory().openSession();
+         Criteria criteria = session.createCriteria(Inmueble.class);
+         criteria.add(Restrictions.isNotNull("idInmueble"));
+         criteria.setProjection(
+                 Projections.projectionList()
+                         .add(Projections.max("idInmueble")
+                         )
+         );
+         
+         if (criteria.list().get(0) != null){
+             return  (int) criteria.list().get(0) + 1;
+         }
+         else
+             return 1;
+         
+     }
     
 }
