@@ -1,6 +1,7 @@
 package Pruebas;
 
 
+import Controlador.ConexionUtil;
 import Gestor.GestorAlta;
 import Gestor.GestorInmueble;
 
@@ -21,6 +22,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import org.hibernate.SessionFactory;
 
 
 
@@ -28,7 +30,7 @@ import java.util.List;
 public class CrearInmuebleTest {
     
   
-        private Integer idInmuebleTest1;
+        private int idInmuebleTest1;
         private Cliente clienteTest1;
         private Propietario propietarioTest1;
         private Barrio barrioTest1;
@@ -76,16 +78,19 @@ public class CrearInmuebleTest {
         private GestorInmueble instance;
         private List<Inmueble> expResult;
     
+         private static SessionFactory sesion;
     
     public CrearInmuebleTest() {
     }
     
     @BeforeClass
     public static void setUpClass() {
+        sesion = ConexionUtil.getSessionFactory();
     }
     
     @AfterClass
     public static void tearDownClass() {
+        sesion.close();
     }
     
     @Before
@@ -151,7 +156,7 @@ public class CrearInmuebleTest {
     public void testCampos1(){
         //CONDICIONES DE PRUEBA
         assertNotNull(inmuebleTest1.getIdInmueble());
-        assertSame(idInmuebleTest1,inmuebleTest1.getIdInmueble());
+        assertEquals(idInmuebleTest1,inmuebleTest1.getIdInmueble());
         assertNotNull(inmuebleTest1.getCliente());
         assertEquals(clienteTest1,inmuebleTest1.getCliente());
         assertEquals(propietarioTest1,inmuebleTest1.getPropietario());

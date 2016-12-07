@@ -58,20 +58,20 @@ import org.hibernate.criterion.Restrictions;
  * @author germa
  */
 
-public class Modificacion extends javax.swing.JPanel {
+public class ModificacionNoUsado extends javax.swing.JPanel {
 
     /**
      * Creates new form Alta
      */
     List<File> archivos = new ArrayList<File>();
     private Inmueble inmueble;
-    public Modificacion(Inmueble inmueble) {
+    public ModificacionNoUsado(Inmueble inmueble) {
         
         initComponents();
         this.inmueble=inmueble;
         llenarDatos();
-        
-            }
+    }
+    
     private void llenarDatos(){
         DecimalFormat df = new DecimalFormat("#.00");
         jLabel3.setText(String.valueOf(inmueble.getIdInmueble()));
@@ -89,14 +89,14 @@ public class Modificacion extends javax.swing.JPanel {
         jTextPrecioVenta.setText(String.valueOf(inmueble.getMontoVenta()));
         jTextSuperficie.setText(String.valueOf(inmueble.getSuperficie()));
         jTextTelefono.setText(inmueble.getTelefono());
-
-      try{  switch(inmueble.getVigenciaReserva()){
+        
+        try{  switch(inmueble.getVigenciaReserva()){
             case 1: jTextVigencia.setText("Si"); break;
             default: jTextVigencia.setText("No"); break;
         }} catch(Exception e){ String a=e.toString();}
         
-       /* comboBox_provincia.setSelectedItem(inmueble.getBarrio().getLocalidad().getProvincia());
-     comboBox_ciudad.setSelectedItem(inmueble.getBarrio().getLocalidad());
+        /* comboBox_provincia.setSelectedItem(inmueble.getBarrio().getLocalidad().getProvincia());
+        comboBox_ciudad.setSelectedItem(inmueble.getBarrio().getLocalidad());
         comboBox_barrio.setSelectedItem(inmueble.getBarrio());*/
         
         //System.out.println(inmueble.getBarrio().getIdBarrio());
@@ -120,11 +120,12 @@ public class Modificacion extends javax.swing.JPanel {
         cargarimagenes();
         
     }
- public void cargarimagenes(){
-    try{
-                               
-                if(jLabel25.getText()=="foto"){
-                    File a=archivos.get(0);
+    
+    public void cargarimagenes(){
+        
+        try{
+            if(jLabel25.getText()=="foto"){
+                File a=archivos.get(0);
                 ImageIcon icon = new ImageIcon(a.toURL());
                 /*icon.getImage()
                 Icon icono=new ImageIcon(a.toURL());
@@ -137,10 +138,10 @@ public class Modificacion extends javax.swing.JPanel {
                 
                 jLabel25.setIcon(icono);
                 jLabel25.setText(archivos.get(0).getName());
+            }
+            
+            if(jLabel23.getText()=="foto"){
                 
-                }
-                if(jLabel23.getText()=="foto"){
-                    
                 ImageIcon icon = new ImageIcon(archivos.get(1).toURL());
                 
                 Icon icono = new ImageIcon(icon.getImage().getScaledInstance(100,
@@ -148,11 +149,10 @@ public class Modificacion extends javax.swing.JPanel {
                 
                 jLabel23.setIcon(icono);
                 jLabel23.setText(archivos.get(1).getName());
+            }
+            
+            if(jLabel24.getText()=="foto"){
                 
-           
-       }
-                 if(jLabel24.getText()=="foto"){
-                    
                 ImageIcon icon = new ImageIcon(archivos.get(2).toURL());
                 
                 Icon icono = new ImageIcon(icon.getImage().getScaledInstance(180,
@@ -161,23 +161,26 @@ public class Modificacion extends javax.swing.JPanel {
                 jLabel24.setIcon(icono);
                 jLabel24.setText(archivos.get(2).getName());
                 
-                }
-    }catch(Exception e){System.out.println(e.toString()); }
-}
-private void buscarimagenes(String id) throws IOException{
-     File ruta=new File("C:\\imagenes\\");
-     
-     FilenameFilter begin=new FilenameFilter() {
-         @Override
-         public boolean accept(File dir, String name) {
-             return name.startsWith(jLabel3.getText().trim());
-         }
-     };
-     File[] files=ruta.listFiles(begin);
-     for (File file :files){
-         archivos.add(file);
-     }
- }
+            }
+        }catch(Exception e){
+            System.out.println(e.toString());
+        }
+    }
+    
+    private void buscarimagenes(String id) throws IOException{
+        File ruta=new File("C:\\imagenes\\");
+        
+        FilenameFilter begin=new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.startsWith(jLabel3.getText().trim());
+            }
+        };
+        File[] files=ruta.listFiles(begin);
+        for (File file :files){
+            archivos.add(file);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -747,7 +750,7 @@ private void buscarimagenes(String id) throws IOException{
         );
 
         add(jPanel3);
-        jPanel3.setBounds(6, 63, 771, 486);
+        jPanel3.setBounds(6, 63, 751, 456);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fotos", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
@@ -809,7 +812,7 @@ private void buscarimagenes(String id) throws IOException{
         );
 
         add(jPanel4);
-        jPanel4.setBounds(789, 63, 261, 471);
+        jPanel4.setBounds(789, 63, 265, 462);
 
         jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/img_general2.jpg"))); // NOI18N
         add(jLabel27);
@@ -822,7 +825,7 @@ private void buscarimagenes(String id) throws IOException{
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void alta (){
-        java.util.Date d = new java.util.Date();  
+        java.util.Date d = new java.util.Date();
         java.sql.Date date2 = new java.sql.Date(d.getTime());
         //Date now = new Date(System.currentTimeMillis());
         //SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
@@ -833,7 +836,7 @@ private void buscarimagenes(String id) throws IOException{
         Inmueble aux = new Inmueble(
                 Integer.parseInt(jLabel3.getText()),
                 cli,
-                prop,                
+                prop,
                 barri,
                 jTextCalle.getText(),
                 Integer.parseInt(jTextNumero.getText()),
@@ -849,7 +852,7 @@ private void buscarimagenes(String id) throws IOException{
                 Integer.parseInt(jTextMontoReserva.getText()),
                 Integer.parseInt(jTextVigencia.getText()),
                 Integer.parseInt(jTextPrecioVenta.getText()),
-                date2, 
+                date2,
                 //se cargan los campos que se agregaron a inmuebles.
                 Integer.parseInt(jTextDormitorio.getText()),
                 jCheckBoxPropiedadHorizontal.isSelected(),
@@ -866,8 +869,8 @@ private void buscarimagenes(String id) throws IOException{
                 jCheckBoxAguaCaliente.isSelected(),
                 jTextTelefono.getText(),
                 jTextObservaciones.getText()
-                );        
-        GestorAlta.altaInmueble(aux);        
+        );
+        GestorAlta.altaInmueble(aux);
     }
     
     private void limpiarPanelAlta (){
@@ -878,20 +881,19 @@ private void buscarimagenes(String id) throws IOException{
                 if(component instanceof  JCheckBox) ((JCheckBox)component).setSelected(false);
                 if(component instanceof  JTextArea) ((JTextArea)component).setText("");
 	}
-      
     }
     
     private boolean validarVacios (){
         Component [] arrayCompo = jPanel3.getComponents();
         boolean vacio = false;
         
-	for (Component component : arrayCompo) {
-		if(component instanceof  JTextField){
-                    if ( ( (JTextField) component).getText().trim().length() == 0 ){
-                       vacio = true;   
-                    }
-                }                
-	}
+        for (Component component : arrayCompo) {
+            if(component instanceof  JTextField){
+                if ( ( (JTextField) component).getText().trim().length() == 0 ){
+                    vacio = true;
+                }
+            }
+        }
         return vacio;
     }
     
@@ -993,69 +995,68 @@ private void buscarimagenes(String id) throws IOException{
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-           int resultado;
-
-
-CargarFoto ventana = new CargarFoto();
-
-FileNameExtensionFilter filtro = new FileNameExtensionFilter("JPG y PNG","jpg","png");
-
-ventana.jFCFoto.setFileFilter(filtro);
-
-resultado= ventana.jFCFoto.showOpenDialog(null);
-
-
-if (JFileChooser.APPROVE_OPTION == resultado){
-File aux;
-       aux=ventana.jFCFoto.getSelectedFile();
-       String a=aux.getPath();
-       int i=0;
-       
-       try{
-                               
-                if(jLabel25.getText()=="foto"){
-                ImageIcon icon = new ImageIcon(aux.toString());
+        int resultado;
+        
+        
+        CargarFoto ventana = new CargarFoto();
+        
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("JPG y PNG","jpg","png");
+        
+        ventana.jFCFoto.setFileFilter(filtro);
+        
+        resultado= ventana.jFCFoto.showOpenDialog(null);
+        
+        
+        if (JFileChooser.APPROVE_OPTION == resultado){
+            File aux;
+            aux=ventana.jFCFoto.getSelectedFile();
+            String a=aux.getPath();
+            int i=0;
+            
+            try{
                 
-                Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel25.getWidth(),
-                        jLabel25.getHeight(), Image.SCALE_DEFAULT));
-                
-                jLabel25.setIcon(icono);
-                jLabel25.setText("no");
-                archivos.add(aux);
+                if("foto".equals(jLabel25.getText())){
+                    ImageIcon icon = new ImageIcon(aux.toString());
+                    
+                    Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel25.getWidth(),
+                            jLabel25.getHeight(), Image.SCALE_DEFAULT));
+                    
+                    jLabel25.setIcon(icono);
+                    jLabel25.setText("no");
+                    archivos.add(aux);
                 }
-                else if(jLabel23.getText()=="foto"){
+                else if("foto".equals(jLabel23.getText())){
                     
-                ImageIcon icon = new ImageIcon(aux.toString());
-                
-                Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel23.getWidth(),
-                        jLabel23.getHeight(), Image.SCALE_DEFAULT));
-                
-                jLabel23.setIcon(icono);
-                jLabel23.setText("no");
-                archivos.add(aux);
-           
-       }
-                else if(jLabel24.getText()=="foto"){
+                    ImageIcon icon = new ImageIcon(aux.toString());
                     
-                ImageIcon icon = new ImageIcon(aux.toString());
-                
-                Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel24.getWidth(),
-                        jLabel24.getHeight(), Image.SCALE_DEFAULT));
-                
-                jLabel24.setIcon(icono);
-                jLabel24.setText("no");
-                archivos.add(aux);
+                    Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel23.getWidth(),
+                            jLabel23.getHeight(), Image.SCALE_DEFAULT));
+                    
+                    jLabel23.setIcon(icono);
+                    jLabel23.setText("no");
+                    archivos.add(aux);
+                    
+                }
+                else if("foto".equals(jLabel24.getText())){
+                    
+                    ImageIcon icon = new ImageIcon(aux.toString());
+                    
+                    Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel24.getWidth(),
+                            jLabel24.getHeight(), Image.SCALE_DEFAULT));
+                    
+                    jLabel24.setIcon(icono);
+                    jLabel24.setText("no");
+                    archivos.add(aux);
                 }
                 else{
-                    JOptionPane.showMessageDialog(null,"Hasta 3 fotos");                
+                    JOptionPane.showMessageDialog(null,"Máximo de 3 fotos");
                 }
                 
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(null, "Error abriendo la imagen "+ ex);
             }
-       
             
-    }                                        
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void comboBox_ciudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_ciudadActionPerformed

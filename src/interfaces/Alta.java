@@ -1065,7 +1065,6 @@ private void validarSoloNumeros (java.awt.event.KeyEvent evt){
                 JOptionPane.showMessageDialog(null, "Error abriendo la imagen "+ ex);
             }
             
-            
         }                                        
     }//GEN-LAST:event_jButton2ActionPerformed
 

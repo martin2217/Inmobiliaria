@@ -492,39 +492,37 @@ public class Consulta extends javax.swing.JPanel {
     private void jButtonBajaInmuebleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajaInmuebleActionPerformed
        
         int bandera=0;
-       
-            modelo = (DefaultTableModel)jTable1.getModel();
-           // obtenemos que checkbox han sido seleccionados
-            for(int i=0; i<modelo.getRowCount(); i++){
-                
-                if((Boolean)modelo.getValueAt(i, 1).equals(Boolean.TRUE)){
-                    bandera++;
-                    int parametro=Integer.valueOf(modelo.getValueAt(i, 0).toString());
-                   // verificamos cual es el estado del inmueble para ver si puede o no ser eliminado
-                    switch (GestorInmueble.get().buscarInmueblePorId(parametro).getEstado()) {
-                        case "Reservado":
-                            JOptionPane.showMessageDialog(null,"No se pueden eliminar inmuebles reservados",
-                                    "Error", JOptionPane.INFORMATION_MESSAGE);
-                            break;
-                        case "Alta":
-                            GestorInmueble.get().borrarInmueble(parametro);
-                            modelo.removeRow(i);
-                            i--;
-                            break;
-                        default:
-                            GestorInmueble.get().borrarInmuebleLogica(parametro);
-                            modelo.removeRow(i);
-                            i--;
-                            break;
-                    }
-                
+        
+        modelo = (DefaultTableModel)jTable1.getModel();
+        // obtenemos que checkbox han sido seleccionados
+        for(int i=0; i<modelo.getRowCount(); i++){
+            
+            if((Boolean)modelo.getValueAt(i, 1).equals(Boolean.TRUE)){
+                bandera++;
+                int parametro=Integer.valueOf(modelo.getValueAt(i, 0).toString());
+                // verificamos cual es el estado del inmueble para ver si puede o no ser eliminado
+                switch (GestorInmueble.get().buscarInmueblePorId(parametro).getEstado()) {
+                    case "Reservado":
+                        JOptionPane.showMessageDialog(null,"No se pueden eliminar inmuebles reservados",
+                                "Error", JOptionPane.INFORMATION_MESSAGE);
+                        break;
+                    case "Alta":
+                        GestorInmueble.get().borrarInmueble(parametro);
+                        modelo.removeRow(i);
+                        i--;
+                        break;
+                    default:
+                        GestorInmueble.get().borrarInmuebleLogica(parametro);
+                        modelo.removeRow(i);
+                        i--;
+                        break;
+                }
             }
-            
-            
-    }//GEN-LAST:event_jButtonBajaInmuebleActionPerformed
-    if(bandera==0) {JOptionPane.showMessageDialog(null,"Debe seleccionar un inmueble",
+            if(bandera==0) {JOptionPane.showMessageDialog(null,"Debe seleccionar un inmueble",
                     "Error", JOptionPane.INFORMATION_MESSAGE); }
-    }
+        }
+    }//GEN-LAST:event_jButtonBajaInmuebleActionPerformed
+    
     private void comboBox_tipo_deptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_tipo_deptoActionPerformed
 
     }//GEN-LAST:event_comboBox_tipo_deptoActionPerformed
@@ -551,7 +549,6 @@ public class Consulta extends javax.swing.JPanel {
     }//GEN-LAST:event_comboBox_barrioItemStateChanged
 
     private void comboBox_ciudadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBox_ciudadItemStateChanged
-      
         if(evt.getStateChange()== ItemEvent.SELECTED){
             if(comboBox_ciudad.getSelectedIndex()>0){
                 comboBox_barrio.setModel(new DefaultComboBoxModel(GestorBarrio.get().buscarBarrioPorCiudad(comboBox_ciudad.getSelectedItem().toString())));
@@ -560,18 +557,15 @@ public class Consulta extends javax.swing.JPanel {
                 comboBox_barrio.setModel(new DefaultComboBoxModel(new String[]{""}));
             }
         }
-        
     }//GEN-LAST:event_comboBox_ciudadItemStateChanged
 
     private void jButtonAniadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAniadirActionPerformed
-            int row = jTable1.getSelectedRow();
+        int row = jTable1.getSelectedRow();
         
         if(row == -1){
             JOptionPane.showMessageDialog(null,"Debe seleccionar un inmueble",
                 "Error", JOptionPane.INFORMATION_MESSAGE);
         }
-        
-       
         
         else{
             modelo = (DefaultTableModel)jTable1.getModel();
@@ -583,9 +577,9 @@ public class Consulta extends javax.swing.JPanel {
                     Inmueble iaux;
                     iaux=listaInmuebles.get(i);
                     if(!existeEnCatalogo(iaux)){
-                    modelo.removeRow(i);
-                   i--;
-                    listaItemCatalogo.add(new ItemCatalogo(iaux));
+                        modelo.removeRow(i);
+                        i--;
+                        listaItemCatalogo.add(new ItemCatalogo(iaux));
                     }
                     
                 }
@@ -594,15 +588,14 @@ public class Consulta extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonAniadirActionPerformed
 
     private void jButtonGenerarCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerarCatalogoActionPerformed
-     if(!listaItemCatalogo.isEmpty()){
-             
+        if(!listaItemCatalogo.isEmpty()){
             Reportes.Reportes.imprimirCatalogo(listaItemCatalogo,"cliente","011");
             Reportes.Reportes.verVisor("titulo");
         }
-         JOptionPane.showMessageDialog(null,"Debe agregar algun inmueble al catalogo",
+        else {
+            JOptionPane.showMessageDialog(null,"Debe agregar algun inmueble al catalogo",
                     "Error", JOptionPane.INFORMATION_MESSAGE);
-        
-         
+        }
     }//GEN-LAST:event_jButtonGenerarCatalogoActionPerformed
 
     private void jButtonReservarInmuebleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservarInmuebleActionPerformed
@@ -640,16 +633,13 @@ public class Consulta extends javax.swing.JPanel {
                             GestorReserva.get().actualizarEstado(parametro_inmueble,importe_reserva,vigencia);
                         } catch (MessagingException ex) {
                             Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        catch (NumberFormatException ex) {
+                        } catch (NumberFormatException ex) {
                             JOptionPane.showMessageDialog(null, "Valor Invalido",
                                     "Error", JOptionPane.INFORMATION_MESSAGE);
                         }
-                        
                     }
                 }
             }
-            
         }
     }//GEN-LAST:event_jButtonReservarInmuebleActionPerformed
 

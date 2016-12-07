@@ -28,7 +28,7 @@ import javax.mail.internet.MimeMultipart;
  */
 public class GestorEmail extends Thread{
     int id_reserva;
-    String Mensage = "";
+    String Mensaje = "";
     String To = "";
     String Subject = "";
     private Multipart multiParte;
@@ -56,14 +56,20 @@ public class GestorEmail extends Thread{
             session = javax.mail.Session.getInstance(props,new javax.mail.Authenticator() {     
                 @Override
                 protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-                    return new javax.mail.PasswordAuthentication("InmobiliariaUTN.FRSF@gmail.com","inmobiliariatp");
+                    return new javax.mail.PasswordAuthentication("InmobiliariaUTN.FRSF@gmail.com",
+                            "inmobiliariatp");
                 }
             });
             
-          // completamos el mensaje la direccion de correo y el asunto
-            Mensage ="Sr/Sra "+reserva.getCliente().getNombre()+" "+reserva.getCliente().getApellido()
-                    +" se ha realizado exitosamente su reserva. \n\nMuchas gracias por depositar su confianza en nosotros.\n\n Saludos"
-                    + " Atte: Inmobiliaria UTN-FRSF";
+            // completamos el mensaje la direccion de correo y el asunto
+            StringBuilder msj = new StringBuilder("Sr/Sra ");
+            msj.append(reserva.getCliente().getNombre()); msj.append(" ");
+            msj.append(reserva.getCliente().getApellido());
+            msj.append(" se ha realizado exitosamente su reserva. \n\n");
+            msj.append("Muchas gracias por depositar su confianza en nosotros.\n\n Saludos");
+            msj.append(" Atte: Inmobiliaria UTN-FRSF");
+            Mensaje=msj.toString();
+            
             To =reserva.getCliente().getEmail();
             // aca esta para crear la ruta
             //string parametro= "C:\\Users\\Pc\\Desktop\\"+;
@@ -81,7 +87,7 @@ public class GestorEmail extends Thread{
             }
            // seteamos los datos al mensaje 
             adjunto.setFileName("Comprobante");
-            texto.setText(Mensage);
+            texto.setText(Mensaje);
             multiParte = new MimeMultipart();
             multiParte.addBodyPart(adjunto);
             multiParte.addBodyPart(texto);
