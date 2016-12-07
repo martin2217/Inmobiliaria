@@ -494,18 +494,14 @@ public class Consulta extends javax.swing.JPanel {
     private void jButtonBajaInmuebleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajaInmuebleActionPerformed
         
         // aca elimino todos los seleccionados del modelo y de la base de datos
+        int bandera=0;
+      
         
-        int row = jTable1.getSelectedRow();
-        
-        if(row == -1){
-            JOptionPane.showMessageDialog(null,"Debe seleccionar un inmueble",
-                    "Error", JOptionPane.INFORMATION_MESSAGE);
-        }
-        else {
             modelo = (DefaultTableModel)jTable1.getModel();
             for(int i=0; i<modelo.getRowCount(); i++){
                 
                 if((Boolean)modelo.getValueAt(i, 1).equals(Boolean.TRUE)){
+                    bandera++;
                     int parametro=Integer.valueOf(modelo.getValueAt(i, 0).toString());
                     if(GestorInmueble.get().buscarInmueblePorId(parametro).getEstado().equals("Reservado")){
                         
@@ -525,8 +521,9 @@ public class Consulta extends javax.swing.JPanel {
                     }
                 }
             }
-        }
         
+        if(bandera==0) {JOptionPane.showMessageDialog(null,"Debe seleccionar un inmueble",
+                    "Error", JOptionPane.INFORMATION_MESSAGE); }
     }//GEN-LAST:event_jButtonBajaInmuebleActionPerformed
 
     private void comboBox_tipo_deptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_tipo_deptoActionPerformed
@@ -579,32 +576,30 @@ public class Consulta extends javax.swing.JPanel {
   
         int fila = jTable1.getSelectedRow();
         
-        if(fila == -1){
-            JOptionPane.showMessageDialog(null,"Debe seleccionar un inmueble",
-                    "Error", JOptionPane.INFORMATION_MESSAGE);
-        }
+     
         
-        else{
+       
             modelo = (DefaultTableModel) jTable1.getModel();
             int bandera=0;
             int parametro_inmueble=0;
             for(int i=0;i<modelo.getRowCount(); i++){
                 if(modelo.getValueAt(i, 1).equals(Boolean.TRUE)){
+                    
                     bandera++;
                     parametro_inmueble= Integer.valueOf(modelo.getValueAt(i, 0).toString());
                 }
             }
             
-            if(bandera>1)
-                JOptionPane.showMessageDialog(null,"Debe seleccionar solamente un inenmueble",
+            if(bandera>1 || bandera<1)
+                JOptionPane.showMessageDialog(null,"Seleccione un inmueble",
                         "Error", JOptionPane.INFORMATION_MESSAGE);
             
             else{
-                // falta validar los campos
+            
                 String importe_reserva = JOptionPane.showInputDialog("Ingrese el importe");
                 
                 if(importe_reserva!=null){
-                    String vigencia= JOptionPane.showInputDialog("Ingrese la vigencia");
+                    String vigencia= JOptionPane.showInputDialog("Ingrese los dias de vigencia");
                     if(vigencia!=null) {
                         if(importe_reserva.equals("")||vigencia.equals("")){
                             JOptionPane.showMessageDialog(null, "Debe completar ambos campos",
@@ -612,15 +607,20 @@ public class Consulta extends javax.swing.JPanel {
                         }
                         else{
                             try {
+                                LimpiarTabla();
                                 GestorReserva.get().actualizarEstado(parametro_inmueble,importe_reserva,vigencia);
                             } catch (MessagingException ex) {
                                 Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                            LimpiarTabla();
+                            catch (NumberFormatException ex) {
+                                 JOptionPane.showMessageDialog(null, "Valor Invalido",
+                                    "Error", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                            
                         }
                     }
                 }
-            }
+           
         }
     }//GEN-LAST:event_jButtonReservarInmueble2ActionPerformed
     

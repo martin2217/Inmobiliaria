@@ -34,7 +34,7 @@ import org.hibernate.criterion.Restrictions;
  * 
  * 
  */
-public final class GestorReserva {
+public final class GestorReserva  extends Thread{
 
     
     String Mensage = "";
@@ -60,11 +60,10 @@ public final class GestorReserva {
     
     
     
-    public void actualizarEstado(int id,String importe,String vigencia) throws MessagingException{
+    public void actualizarEstado(int id,String importe,String vigencia) throws MessagingException {
         
-        // falta agregar la fecha y no se que mas, tambien hay q ver por el tema de la tabla para que solo saque al q reservo
         Reserva nueva_reserva = new Reserva();
-        int id_reserva;
+        int  id_reserva= maxIdReserva();
         //actualizo el campo reserva del inmueble
         Session sesion;
         sesion=Dao.get().getSesion();
@@ -73,34 +72,32 @@ public final class GestorReserva {
         
         Inmueble inmueble_a_actualizar_estado=(Inmueble)sesion.get(Inmueble.class,id);
         
-        
         inmueble_a_actualizar_estado.setEstado("Reservado");
         sesion.update(inmueble_a_actualizar_estado);
-        sesion.getTransaction().commit();
-        sesion.close();
-        
+     
         // seteo y guardo la reserva
-        Session sesion1;
-        sesion1= Dao.get().getSesion();
-        sesion1.beginTransaction();
-        id_reserva= maxIdReserva();
+        
+       
         nueva_reserva.setIdReserva(id_reserva);
         nueva_reserva.setCliente(inmueble_a_actualizar_estado.getCliente());
         nueva_reserva.setInmueble(inmueble_a_actualizar_estado);
         nueva_reserva.setFecha_reservado(new Date());
         nueva_reserva.setPrecio_fecha_reservado(Float.valueOf(importe));
         nueva_reserva.setVigencia(Integer.valueOf(vigencia));       
-        sesion1.save(nueva_reserva);
-        sesion1.getTransaction().commit();
-        sesion1.close();
-        enviarEmail(id_reserva);
+        sesion.save(nueva_reserva);
+        sesion.getTransaction().commit();
+        sesion.close();
+        GestorEmail nuevo = new GestorEmail(id_reserva);
+        nuevo.start();
+
+    // enviarEmail(id_reserva);
         
     
     }
     
+    // refactorizamos esto, utilizando otro hilo ya que demoraba demasiado
     
-    
-    public void enviarEmail(int id_reserva) throws MessagingException{
+ /*   public void enviarEmail(int id_reserva) throws MessagingException{
         
         Reserva reserva = buscarRerserva(id_reserva);
         Properties props = new Properties();
@@ -117,7 +114,9 @@ public final class GestorReserva {
         });
         
         //Se recoge la información y se envía el email
-        Mensage = "holaaaaaaaaaaaaaaaaa";
+        Mensage ="Sr/Sra "+reserva.getCliente().getNombre()+" "+reserva.getCliente().getApellido()
+                +" se ha realizado exitosamente su reserva. \n\nMuchas gracias por depositar su confianza en nosotros.\n\n Saludos"
+                + " Atte: Inmobiliaria UTN-FRSF";
         To =reserva.getCliente().getEmail();
         // aca esta para crear la ruta
         //string parametro= "C:\\Users\\Pc\\Desktop\\"+;
@@ -152,7 +151,7 @@ public final class GestorReserva {
     
     
     
-    }
+    }*/
     public int maxIdReserva (){
         Session session;
         session=ConexionUtil.getSessionFactory().openSession();
@@ -173,7 +172,7 @@ public final class GestorReserva {
     }
     
     
-    private Reserva buscarRerserva(int id_reserva){
+    public Reserva buscarRerserva(int id_reserva){
     
       
         Session sesion;
