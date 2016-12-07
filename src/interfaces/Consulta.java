@@ -7,6 +7,7 @@ package interfaces;
 
 import Gestor.*;
 import Modelo.Inmueble;
+import Modelo.ItemCatalogo;
 import Modelo.Provincia;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyAdapter;
@@ -41,14 +42,14 @@ public class Consulta extends javax.swing.JPanel {
     DefaultTableModel modelo;
     List<Inmueble> listaInmuebles;
     List<Inmueble> listaCatalogo;
-   
+   List<ItemCatalogo> listaItemCatalogo;
     /**
      * Creates new form Alta
      */
     public Consulta() {
         
         listaCatalogo= new ArrayList<>();
-        
+        listaItemCatalogo=new ArrayList<>();
         initComponents();
         definiendoTabla();
         modelo= (DefaultTableModel)jTable1.getModel();
@@ -436,8 +437,7 @@ public class Consulta extends javax.swing.JPanel {
     
     
     private void jButtonModificarInmuebleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarInmuebleActionPerformed
-
-        int row = jTable1.getSelectedRow();
+int row = jTable1.getSelectedRow();
         
         if(row == -1){
             JOptionPane.showMessageDialog(null,"Debe seleccionar un inmueble",
@@ -456,18 +456,32 @@ public class Consulta extends javax.swing.JPanel {
                 
                 if((Boolean)modelo.getValueAt(i, 1).equals(Boolean.TRUE)){
                     Inmueble iaux;
-                    iaux=GestorInmueble.get().loadInmueble(Integer.valueOf(modelo.getValueAt(i, 0).toString()));
+                    iaux=listaInmuebles.get(i);
+                    
                     modelo.removeRow(i);
                     i--;
                     GestorVentanas.get().remove(this);
                     GestorVentanas.get().altaInmueble(iaux);
+                    
                 }
             }
         }
         // Ir a la pantalla de modificar
-        
+       
     }//GEN-LAST:event_jButtonModificarInmuebleActionPerformed
-
+public boolean existeEnCatalogo(Inmueble in){
+    int i;
+   for(i=0;i<listaItemCatalogo.size() ;i++){
+       int a=Integer.parseInt(listaItemCatalogo.get(i).getIdInmueble());
+       int b=in.getIdInmueble();
+         if(a==b){
+         
+             return true;
+        }
+         
+               }
+    return false;
+}
     private void jButtonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtrasActionPerformed
         GestorVentanas.get().remove(this);
         GestorVentanas.get().menuVolver();
@@ -496,7 +510,13 @@ public class Consulta extends javax.swing.JPanel {
         // aca elimino todos los seleccionados del modelo y de la base de datos
         int bandera=0;
       
+        int row = jTable1.getSelectedRow();
         
+        if(row == -1){
+            JOptionPane.showMessageDialog(null,"Debe seleccionar un inmueble",
+                    "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else {
             modelo = (DefaultTableModel)jTable1.getModel();
             for(int i=0; i<modelo.getRowCount(); i++){
                 
@@ -565,11 +585,45 @@ public class Consulta extends javax.swing.JPanel {
     }//GEN-LAST:event_comboBox_ciudadItemStateChanged
 
     private void jButtonAniadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAniadirActionPerformed
-        // TODO add your handling code here:
+            int row = jTable1.getSelectedRow();
+        
+        if(row == -1){
+            JOptionPane.showMessageDialog(null,"Debe seleccionar un inmueble",
+                "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+       
+        
+        else{
+            modelo = (DefaultTableModel)jTable1.getModel();
+            
+            for(int i=0; i<modelo.getRowCount(); i++){
+                
+                if((Boolean)modelo.getValueAt(i, 1).equals(Boolean.TRUE)){
+                    //JOptionPane.showMessageDialog(null,listaInmuebles.size(),"Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    Inmueble iaux;
+                    iaux=listaInmuebles.get(i);
+                    if(!existeEnCatalogo(iaux)){
+                    modelo.removeRow(i);
+                   i--;
+                    listaItemCatalogo.add(new ItemCatalogo(iaux));
+                    }
+                    
+                }
+            }
+        }
     }//GEN-LAST:event_jButtonAniadirActionPerformed
 
     private void jButtonReservarInmueble1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservarInmueble1ActionPerformed
-        // TODO add your handling code here:
+     if(!listaItemCatalogo.isEmpty()){
+             
+            Reportes.Reportes.imprimirCatalogo(listaItemCatalogo,"cliente","011");
+            Reportes.Reportes.verVisor("titulo");
+        }
+         JOptionPane.showMessageDialog(null,"Debe agregar algun inmueble al catalogo",
+                    "Error", JOptionPane.INFORMATION_MESSAGE);
+        
+         
     }//GEN-LAST:event_jButtonReservarInmueble1ActionPerformed
 
     private void jButtonReservarInmueble2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservarInmueble2ActionPerformed

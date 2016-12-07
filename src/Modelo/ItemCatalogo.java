@@ -5,6 +5,10 @@
  */
 package Modelo;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
+
 
 /**
  *
@@ -61,7 +65,40 @@ public class ItemCatalogo {
         this.foto=foto;
         
     }
-
+public ItemCatalogo(Inmueble i){
+         this.provincia = i.getBarrio().getLocalidad().getProvincia().getNombre();
+        this.localidad = i.getBarrio().getLocalidad().getNombre();
+        this.barrio = i.getBarrio().getNombre();
+        this.tipoInmueble = i.getTipoInmueble();
+        this.precio = i.getPrecio().toString();
+        this.orientacion = i.getOrientacion();
+        this.superficie = i.getSuperficie().toString();
+        this.garage = ((i.getGarage())? "Si":"No");
+        this.patio = ((i.getPatio())? "Si":"No");
+        this.aguaCorriente = ((i.getAguaCorriente())? "Si":"No");
+        this.cloaca = ((i.getCloacas())? "Si":"No");
+        this.gasNatural = ((i.getGasNatural())? "Si":"No");
+        this.pavimento = ((i.getPavimento())? "Si":"No");
+        try {
+            
+            this.foto=buscarimagenes(i.getIdInmueble());
+        }catch(Exception e){
+            this.foto=String.valueOf(i.getIdInmueble())+"_0.jpg";
+        }
+     }
+     private String buscarimagenes(int  id) throws IOException{
+         String i=String.valueOf(id);
+        File ruta=new File("C:\\imagenes\\");
+        
+        FilenameFilter begin=new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.startsWith(i);
+            }
+        };
+        File[] files=ruta.listFiles(begin);
+      return files[0].getName();
+    }
     
     public String getIdInmueble() {
         return idInmueble;
