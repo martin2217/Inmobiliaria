@@ -146,7 +146,7 @@ public class Alta extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jTextPrecioVenta = new javax.swing.JTextField();
@@ -203,7 +203,7 @@ public class Alta extends javax.swing.JPanel {
         jTextTelefono = new javax.swing.JTextField();
         jCheckBoxAguaCorriente = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btnCargarFoto = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
@@ -235,15 +235,15 @@ public class Alta extends javax.swing.JPanel {
         add(jLabel3);
         jLabel3.setBounds(180, 30, 124, 30);
 
-        jButton1.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
-        add(jButton1);
-        jButton1.setBounds(910, 550, 128, 34);
+        add(btnGuardar);
+        btnGuardar.setBounds(910, 550, 128, 34);
 
         jButton3.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
         jButton3.setText("Volver");
@@ -746,11 +746,11 @@ public class Alta extends javax.swing.JPanel {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fotos", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 18))); // NOI18N
 
-        jButton2.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
-        jButton2.setText("Cargar Foto");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnCargarFoto.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
+        btnCargarFoto.setText("Cargar Foto");
+        btnCargarFoto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnCargarFotoActionPerformed(evt);
             }
         });
 
@@ -768,7 +768,7 @@ public class Alta extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2)
+                .addComponent(btnCargarFoto)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -795,12 +795,12 @@ public class Alta extends javax.swing.JPanel {
                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(btnCargarFoto)
                     .addComponent(Sacarfotos)))
         );
 
         add(jPanel4);
-        jPanel4.setBounds(781, 70, 260, 468);
+        jPanel4.setBounds(781, 70, 260, 463);
 
         jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/img_general2.jpg"))); // NOI18N
         add(jLabel27);
@@ -819,8 +819,8 @@ public class Alta extends javax.swing.JPanel {
         //SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
         Cliente cli = new Cliente(1);
         Propietario prop = new Propietario(1);
-        //Barrio barri = new Barrio(101);
-        Barrio barri = (Barrio) GestorAlta.getBarrio(comboBox_barrio.getSelectedItem().toString());
+        Barrio barri = (Barrio) GestorAlta.getBarrio(
+                comboBox_barrio.getSelectedItem().toString());
         Inmueble aux = new Inmueble(
                 Integer.parseInt(jLabel3.getText()),
                 cli,
@@ -939,56 +939,58 @@ public class Alta extends javax.swing.JPanel {
         return mal;
     }
     
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      
-        String cadenaError = "";
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        
+        StringBuilder aux= new StringBuilder("");
+        String cadenaError;
         
         if (validarVacios()){
-            cadenaError += "No debe haber campos vacios.\n";
+            aux.append("No debe haber campos vacios.\n");
         }
-        
         if (validarVigencia()){
-            cadenaError += "La vigencia no debe ser vacia, 0 o negativa.\n";
+            aux.append("La vigencia no debe ser vacia, 0 o negativa.\n");
         }
-        
         if (validarPrecio()){
-            cadenaError += "El precio no debe ser vacio, 0 o negativo.\n";
+            aux.append("El precio no debe ser vacio, 0 o negativo.\n");
+        }
+        if (montoReserva()){
+            aux.append("La reserva no debe ser vacia, 0 o negativa.\n");
         }
         
-        if (montoReserva()){
-            cadenaError += "La reserva no debe ser vacia, 0 o negativa.\n";
-        }
+        cadenaError=aux.toString();
         
         if(cadenaError.length() != 0){
             getToolkit().beep();
-            JOptionPane.showMessageDialog(null,cadenaError,"Error", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null,cadenaError,"Error",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
         if(cadenaError.length() == 0){
             alta();            
             jLabel3.setText(Integer.toString(GestorInmueble.get().maxIdInmobiliaria()));
             limpiarPanelAlta();
             
-            JOptionPane.showMessageDialog(null,"Inmueble cargado exitosamente","Éxito", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Inmueble cargado exitosamente","Éxito",
+                    JOptionPane.INFORMATION_MESSAGE);
             GestorVentanas.get().remove(this);
             GestorVentanas.get().menuVolver();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
     
     
-private void validarSoloNumeros (java.awt.event.KeyEvent evt){
-        char c=evt.getKeyChar(); 
-        if(!Character.isDigit(c)) { 
-              getToolkit().beep();                
-              evt.consume();
-          } 
+    private void validarSoloNumeros (java.awt.event.KeyEvent evt){
+        char c=evt.getKeyChar();
+        if(!Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
     }
     
     private void validarSoloDecimal (java.awt.event.KeyEvent evt, JTextField text){
-        char c=evt.getKeyChar(); 
-        if(!Character.isDigit(c) && evt.getKeyChar()!='.') { 
-              getToolkit().beep();                
-              evt.consume();
-          }
+        char c=evt.getKeyChar();
+        if(!Character.isDigit(c) && evt.getKeyChar()!='.') {
+            getToolkit().beep();
+            evt.consume();
+        }
         if (evt.getKeyChar()=='.' && text.getText().contains(".")){
             getToolkit().beep();
             evt.consume();
@@ -1002,57 +1004,43 @@ private void validarSoloNumeros (java.awt.event.KeyEvent evt){
     }
     
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+    private void btnCargarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarFotoActionPerformed
+        // Metodo de cargar foto
         int resultado;
-        
         
         CargarFoto ventana = new CargarFoto();
         
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("JPG y PNG","jpg","png");
-        
         ventana.jFCFoto.setFileFilter(filtro);
-        
         resultado= ventana.jFCFoto.showOpenDialog(null);
-        
         
         if (JFileChooser.APPROVE_OPTION == resultado){
             File aux;
             aux=ventana.jFCFoto.getSelectedFile();
             String a=aux.getPath();
             int i=0;
-            
             try{
-                
                 if(jLabel25.getText().isEmpty()){
                     ImageIcon icon = new ImageIcon(aux.toString());
-                    
-                    Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel25.getWidth(),
-                            jLabel25.getHeight(), Image.SCALE_DEFAULT));
-                    
+                    Icon icono = new ImageIcon(icon.getImage().getScaledInstance(
+                        jLabel25.getWidth(), jLabel25.getHeight(), Image.SCALE_DEFAULT));
                     jLabel25.setIcon(icono);
                     jLabel25.setText("no");
                     archivos.add(aux);
                 }
                 else if(jLabel23.getText().isEmpty()){
-                    
                     ImageIcon icon = new ImageIcon(aux.toString());
-                    
-                    Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel23.getWidth(),
-                            jLabel23.getHeight(), Image.SCALE_DEFAULT));
-                    
+                    Icon icono = new ImageIcon(icon.getImage().getScaledInstance(
+                        jLabel23.getWidth(), jLabel23.getHeight(), Image.SCALE_DEFAULT));
                     jLabel23.setIcon(icono);
                     jLabel23.setText("no");
                     archivos.add(aux);
                     
                 }
                 else if(jLabel24.getText().isEmpty()){
-                    
                     ImageIcon icon = new ImageIcon(aux.toString());
-                    
-                    Icon icono = new ImageIcon(icon.getImage().getScaledInstance(jLabel24.getWidth(),
-                            jLabel24.getHeight(), Image.SCALE_DEFAULT));
-                    
+                    Icon icono = new ImageIcon(icon.getImage().getScaledInstance(
+                        jLabel24.getWidth(), jLabel24.getHeight(), Image.SCALE_DEFAULT));
                     jLabel24.setIcon(icono);
                     jLabel24.setText("no");
                     archivos.add(aux);
@@ -1060,13 +1048,11 @@ private void validarSoloNumeros (java.awt.event.KeyEvent evt){
                 else{
                     JOptionPane.showMessageDialog(null,"Hasta 3 fotos");
                 }
-                
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(null, "Error abriendo la imagen "+ ex);
             }
-            
         }                                        
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnCargarFotoActionPerformed
 
     private void comboBox_ciudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_ciudadActionPerformed
         //
@@ -1093,36 +1079,30 @@ private void validarSoloNumeros (java.awt.event.KeyEvent evt){
     }//GEN-LAST:event_jTextFrenteKeyTyped
 
     private void SacarfotosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SacarfotosActionPerformed
-        // TODO add your handling code here:
         
-            jLabel23.setIcon(null);
-            jLabel23.setText("");
-            jLabel24.setIcon(null);
-            jLabel24.setText("");
-            jLabel25.setIcon(null);
-            jLabel25.setText("");
-            boolean bandera=true;
+        jLabel23.setIcon(null);
+        jLabel23.setText("");
+        jLabel24.setIcon(null);
+        jLabel24.setText("");
+        jLabel25.setIcon(null);
+        jLabel25.setText("");
+        boolean bandera=true;
+        
         if(inmueble == null){
-            for(int i=0;i<archivos.size();i++)
-            {
+            for(int i=0;i<archivos.size();i++){
                 archivos.remove(i);
-                
             }
         }
         
         else{
-            for(int i=0;i<archivos.size();i++)
-            {
+            for(int i=0;i<archivos.size();i++){
                 bandera=archivos.get(i).delete();
                 archivos.remove(i);
-                
             }
         }
-        if(!bandera)
-        {
+        if(!bandera){
             JOptionPane.showMessageDialog(null,"No se elimino alguna imagen","ERROR", JOptionPane.ERROR_MESSAGE);
         }
-        
         
     }//GEN-LAST:event_SacarfotosActionPerformed
 
@@ -1230,9 +1210,9 @@ private void validarSoloNumeros (java.awt.event.KeyEvent evt){
         } catch (IOException ioe){
             ioe.printStackTrace();
         }
-        
     }
-     private void llenarDatos(){
+    
+    private void llenarDatos(){
         DecimalFormat df = new DecimalFormat("#.00");
         jLabel3.setText(String.valueOf(inmueble.getIdInmueble()));
         jTextCalle.setText(inmueble.getCalle());
@@ -1250,13 +1230,13 @@ private void validarSoloNumeros (java.awt.event.KeyEvent evt){
         jTextSuperficie.setText(String.valueOf(inmueble.getSuperficie()));
         jTextTelefono.setText(inmueble.getTelefono());
         jTextVigencia.setText(String.valueOf(inmueble.getVigenciaReserva()));
-      try{  
-      comboBox_provincia.setSelectedItem(inmueble.getBarrio().getLocalidad().getProvincia());
-     comboBox_ciudad.setSelectedItem(inmueble.getBarrio().getLocalidad());
-        comboBox_barrio.setSelectedItem(inmueble.getBarrio());
-      } catch(Exception e){ System.out.println("llenardatos "+e.toString());}
-        
-        
+        try{
+            comboBox_provincia.setSelectedItem(inmueble.getBarrio().getLocalidad().getProvincia());
+            comboBox_ciudad.setSelectedItem(inmueble.getBarrio().getLocalidad());
+            comboBox_barrio.setSelectedItem(inmueble.getBarrio());
+        } catch(Exception e){
+            System.out.println("llenardatos "+e.toString());
+        }
         
         //System.out.println(inmueble.getBarrio().getIdBarrio());
         jCheckBoxAguaCaliente.setSelected(inmueble.isAguaCaliente());
@@ -1272,18 +1252,16 @@ private void validarSoloNumeros (java.awt.event.KeyEvent evt){
         jCheckBoxPropiedadHorizontal.setSelected(inmueble.isPropiedadHorizontal());
         try{
             buscarimagenes(jLabel3.getText());
-        }catch(Exception ex)
-        {
+        } catch(Exception ex){
             System.out.println("error en buscar imagenes");
         }
         cargarimagenes();
-        
     }
- public void cargarimagenes(){
-    try{
-                               
-                if(jLabel25.getText().isEmpty()){
-                    File a=archivos.get(0);
+    
+    public void cargarimagenes(){
+        try{
+            if(jLabel25.getText().isEmpty()){
+                File a=archivos.get(0);
                 ImageIcon icon = new ImageIcon(a.toURL());
                 /*icon.getImage()
                 Icon icono=new ImageIcon(a.toURL());
@@ -1297,9 +1275,9 @@ private void validarSoloNumeros (java.awt.event.KeyEvent evt){
                 jLabel25.setIcon(icono);
                 jLabel25.setText(archivos.get(0).getName());
                 
-                }
-                if(jLabel23.getText().isEmpty()){
-                    
+            }
+            if(jLabel23.getText().isEmpty()){
+                
                 ImageIcon icon = new ImageIcon(archivos.get(1).toURL());
                 
                 Icon icono = new ImageIcon(icon.getImage().getScaledInstance(100,
@@ -1308,10 +1286,10 @@ private void validarSoloNumeros (java.awt.event.KeyEvent evt){
                 jLabel23.setIcon(icono);
                 jLabel23.setText(archivos.get(1).getName());
                 
-           
-       }
-                 if(jLabel24.getText().isEmpty()){
-                    
+                
+            }
+            if(jLabel24.getText().isEmpty()){
+                
                 ImageIcon icon = new ImageIcon(archivos.get(2).toURL());
                 
                 Icon icono = new ImageIcon(icon.getImage().getScaledInstance(180,
@@ -1320,18 +1298,20 @@ private void validarSoloNumeros (java.awt.event.KeyEvent evt){
                 jLabel24.setIcon(icono);
                 jLabel24.setText(archivos.get(2).getName());
                 
-                }
-    }catch(Exception e){System.out.println(e.toString()); }
-}
+            }
+        }catch(Exception e){
+            System.out.println(e.toString());
+        }
+    }
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Sacarfotos;
+    private javax.swing.JButton btnCargarFoto;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<String> comboBox_barrio;
     private javax.swing.JComboBox<String> comboBox_ciudad;
     private javax.swing.JComboBox<String> comboBox_provincia;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBoxAguaCaliente;
     private javax.swing.JCheckBox jCheckBoxAguaCorriente;

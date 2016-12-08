@@ -512,7 +512,7 @@ public class Consulta extends javax.swing.JPanel {
                         i--;
                         break;
                     default:
-                        GestorInmueble.get().borrarInmuebleLogica(parametro);
+                        GestorInmueble.get().borrarInmuebleLogico(parametro);
                         modelo.removeRow(i);
                         i--;
                         break;

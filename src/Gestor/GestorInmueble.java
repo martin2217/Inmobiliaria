@@ -241,8 +241,6 @@ public final class GestorInmueble {
         return retorno_inmueble;
     }
     
-    
-   
     public Inmueble buscarInmueblePorId(int id){
         Session sesion;
         sesion=Dao.get().getSesion();
@@ -252,7 +250,6 @@ public final class GestorInmueble {
         sesion.close();
         return retorno;
     }
-    
     /* con este metodo borro un objeto de la base de datos debo saber su id y la clase, asi lo busco al objeto y lo borro*/
     public void borrarInmueble(int id){ 
         Session sesion;
@@ -264,7 +261,7 @@ public final class GestorInmueble {
         sesion.close();
     }
     /* con este metodo borro un objeto de la base de datos debo saber su id y la clase, asi lo busco al objeto y lo borro*/
-     public void borrarInmuebleLogica(int id){ 
+     public void borrarInmuebleLogico(int id){ 
         Session sesion;
         sesion=Dao.get().getSesion();
         sesion.beginTransaction();
@@ -285,13 +282,10 @@ public final class GestorInmueble {
                          .add(Projections.max("idInmueble")
                          )
          );
-         
          if (criteria.list().get(0) != null){
              return  (int) criteria.list().get(0) + 1;
          }
          else
              return 1;
-         
      }
-    
 }
