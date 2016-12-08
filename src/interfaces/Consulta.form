@@ -326,7 +326,6 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox()"/>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="for(Provincia pro: GestorProvincia.get().buscarProvincia()){&#xa;comboBox_provincia.addItem(pro.getNombre());&#xa;}"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="/*String[] listaNombresDeportes = gestor.GestorCD.getListaDeportes();&#xa;String[] listaND= new String[listaNombresDeportes.length+1];&#xa;listaND[0]=&quot;&quot;;&#xa;for(int j=0; j&lt;listaNombresDeportes.length; j++){&#xa;    listaND[j+1]=listaNombresDeportes[j];&#xa;}&#xa;Arrays.sort(listaND);*/"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JComboBox" name="comboBox_ciudad">

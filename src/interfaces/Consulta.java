@@ -26,11 +26,11 @@ import javax.swing.text.AbstractDocument;
 
 public class Consulta extends javax.swing.JPanel {
     
-   
+    
     DefaultTableModel modelo;
     List<Inmueble> listaInmuebles;
     List<Inmueble> listaCatalogo;
-   List<ItemCatalogo> listaItemCatalogo;
+    List<ItemCatalogo> listaItemCatalogo;
     
     public Consulta() {
         
@@ -90,7 +90,7 @@ public class Consulta extends javax.swing.JPanel {
             }
         });
         add(jButtonModificarInmueble);
-        jButtonModificarInmueble.setBounds(324, 541, 133, 38);
+        jButtonModificarInmueble.setBounds(324, 541, 133, 31);
 
         jTable1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -137,7 +137,7 @@ public class Consulta extends javax.swing.JPanel {
             }
         });
         add(jButtonBajaInmueble);
-        jButtonBajaInmueble.setBounds(169, 541, 133, 38);
+        jButtonBajaInmueble.setBounds(169, 541, 133, 31);
 
         jButtonAtras.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         jButtonAtras.setText("Atras");
@@ -147,7 +147,7 @@ public class Consulta extends javax.swing.JPanel {
             }
         });
         add(jButtonAtras);
-        jButtonAtras.setBounds(30, 541, 133, 38);
+        jButtonAtras.setBounds(30, 541, 133, 31);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filtros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 0, 18))); // NOI18N
         jPanel2.setMaximumSize(new java.awt.Dimension(218, 456));
@@ -159,13 +159,6 @@ public class Consulta extends javax.swing.JPanel {
         textField_dormitorio.setToolTipText("Ingrese solo números");
         ((AbstractDocument)textField_dormitorio.getDocument()).setDocumentFilter(new LimitadorTextField(2));
 
-        /*String[] listaNombresDeportes = gestor.GestorCD.getListaDeportes();
-        String[] listaND= new String[listaNombresDeportes.length+1];
-        listaND[0]="";
-        for(int j=0; j<listaNombresDeportes.length; j++){
-            listaND[j+1]=listaNombresDeportes[j];
-        }
-        Arrays.sort(listaND);*/
         comboBox_provincia.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         comboBox_provincia.setModel(new javax.swing.DefaultComboBoxModel(new String[] {""}));
         for(Provincia pro: GestorProvincia.get().buscarProvincia()){
@@ -370,7 +363,7 @@ public class Consulta extends javax.swing.JPanel {
         });
 
         add(jPanel2);
-        jPanel2.setBounds(20, 80, 210, 447);
+        jPanel2.setBounds(20, 80, 210, 430);
 
         jButtonAniadir.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         jButtonAniadir.setText("Añadir a Catálogo");
@@ -380,7 +373,7 @@ public class Consulta extends javax.swing.JPanel {
             }
         });
         add(jButtonAniadir);
-        jButtonAniadir.setBounds(607, 485, 140, 38);
+        jButtonAniadir.setBounds(607, 485, 140, 31);
 
         jButtonGenerarCatalogo.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         jButtonGenerarCatalogo.setText("Generar Catálogo");
@@ -390,7 +383,7 @@ public class Consulta extends javax.swing.JPanel {
             }
         });
         add(jButtonGenerarCatalogo);
-        jButtonGenerarCatalogo.setBounds(628, 541, 133, 38);
+        jButtonGenerarCatalogo.setBounds(628, 541, 133, 31);
 
         jButtonReservarInmueble.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         jButtonReservarInmueble.setText("Reservar");
@@ -400,7 +393,7 @@ public class Consulta extends javax.swing.JPanel {
             }
         });
         add(jButtonReservarInmueble);
-        jButtonReservarInmueble.setBounds(475, 541, 133, 38);
+        jButtonReservarInmueble.setBounds(475, 541, 133, 31);
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
@@ -443,24 +436,22 @@ public class Consulta extends javax.swing.JPanel {
                     modelo.removeRow(i);
                     i--;
                     GestorVentanas.get().remove(this);
+                    // Ir a la pantalla de modificar
                     GestorVentanas.get().altaInmueble(iaux);
-                    
                 }
             }
         }
-        // Ir a la pantalla de modificar
-        
     }//GEN-LAST:event_jButtonModificarInmuebleActionPerformed
+    
     public boolean existeEnCatalogo(Inmueble in){
-        int i;
+        int i, a;
+        int b=in.getIdInmueble();
+        
         for(i=0;i<listaItemCatalogo.size() ;i++){
-            int a=Integer.parseInt(listaItemCatalogo.get(i).getIdInmueble());
-            int b=in.getIdInmueble();
+            a=Integer.parseInt(listaItemCatalogo.get(i).getIdInmueble());
             if(a==b){
-                
                 return true;
             }
-            
         }
         return false;
     }
@@ -476,15 +467,18 @@ public class Consulta extends javax.swing.JPanel {
         listaInmuebles= GestorInmueble.get().buscarInmuebles(comboBox_provincia.getSelectedItem().toString(),
                 comboBox_ciudad.getSelectedItem().toString(),comboBox_barrio.getSelectedItem().toString(),
                 comboBox_tipo_depto.getSelectedItem().toString(), textField_dormitorio.getText(),
-                textField_precio_minimo.getText(), textField_precio_maximo.getText(),comboBox_estado.getSelectedItem().toString());
+                textField_precio_minimo.getText(), textField_precio_maximo.getText(),
+                comboBox_estado.getSelectedItem().toString());
         if(listaInmuebles.isEmpty())
-            JOptionPane.showMessageDialog(null,"No se han encontrado resultados","Aviso", JOptionPane.WHEN_IN_FOCUSED_WINDOW);
+            JOptionPane.showMessageDialog(null,"No se han encontrado resultados","Aviso",
+                    JOptionPane.WHEN_IN_FOCUSED_WINDOW);
         else{
             // los cargamos en la tabla  perteneciente a la interfaz para que sean visualizados
             listaInmuebles.stream().forEach((inmuebles) -> {modelo.addRow(
                     new Object[]{Integer.toString(inmuebles.getIdInmueble()),false,
                         inmuebles.getPropietario().getNombre(),inmuebles.getBarrio().getLocalidad().getNombre(),
-                        inmuebles.getDireccion(),Integer.toString(inmuebles.getSuperficie()),Float.toString(inmuebles.getPrecio()),Integer.toString(inmuebles.getCant_dormitorios())});
+                        inmuebles.getDireccion(),Integer.toString(inmuebles.getSuperficie()),
+                        Float.toString(inmuebles.getPrecio()),Integer.toString(inmuebles.getCant_dormitorios())});
             });
         }
     }//GEN-LAST:event_jButtonBuscarActionPerformed
@@ -571,7 +565,6 @@ public class Consulta extends javax.swing.JPanel {
             modelo = (DefaultTableModel)jTable1.getModel();
             
             for(int i=0; i<modelo.getRowCount(); i++){
-                
                 if((Boolean)modelo.getValueAt(i, 1).equals(Boolean.TRUE)){
                     //JOptionPane.showMessageDialog(null,listaInmuebles.size(),"Éxito", JOptionPane.INFORMATION_MESSAGE);
                     Inmueble iaux;
@@ -581,7 +574,6 @@ public class Consulta extends javax.swing.JPanel {
                         i--;
                         listaItemCatalogo.add(new ItemCatalogo(iaux));
                     }
-                    
                 }
             }
         }
@@ -606,7 +598,6 @@ public class Consulta extends javax.swing.JPanel {
         // obtenemos los check seleccionados
         for(int i=0;i<modelo.getRowCount(); i++){
             if(modelo.getValueAt(i, 1).equals(Boolean.TRUE)){
-                
                 bandera++;
                 parametro_inmueble= Integer.valueOf(modelo.getValueAt(i, 0).toString());
             }
@@ -630,7 +621,8 @@ public class Consulta extends javax.swing.JPanel {
                     else{
                         try {
                             LimpiarTabla();
-                            GestorReserva.get().actualizarEstado(parametro_inmueble,importe_reserva,vigencia);
+                            GestorReserva.get().actualizarEstado(parametro_inmueble,
+                                    importe_reserva,vigencia);
                         } catch (MessagingException ex) {
                             Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
                         } catch (NumberFormatException ex) {

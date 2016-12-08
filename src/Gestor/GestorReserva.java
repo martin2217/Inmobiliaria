@@ -32,7 +32,7 @@ public final class GestorReserva  extends Thread{
     }
     
     public void actualizarEstado(int id,String importe,String vigencia) throws MessagingException {
-        
+        // Creación de reserva y actualización de estado
         Reserva nueva_reserva = new Reserva();
         int  id_reserva= maxIdReserva();
         
@@ -56,11 +56,9 @@ public final class GestorReserva  extends Thread{
         sesion.save(nueva_reserva);
         sesion.getTransaction().commit();
         sesion.close();
-        // hiniciamos otro hilo de ejecucion el cual envia el email de confirmacion
+        // Iniciamos otro hilo de ejecucion el cual envia el email de confirmacion
         GestorEmail nuevo = new GestorEmail(id_reserva);
         nuevo.start();
-        
-        
     }
     
     // obtenemos el id para el proximo objeto Reserva

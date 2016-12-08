@@ -128,54 +128,54 @@ private static JasperViewer viewer;
         }
     }*/
     
-    public static void generarPDF (Reserva auxReserva)
-    {
-    try {
-        List lista = new ArrayList();
-        String auxNomCliente = auxReserva.getCliente().getApellido() + ", " + auxReserva.getCliente().getNombre();
-        String auxNomReporte = "reportePDF_" + String.valueOf(auxReserva.getIdReserva()) + ".pdf";
-        String auxStringFile = "C\\reporte\\" + auxNomReporte;
-        
-        ItemReserva auxItem = new ItemReserva(
-                auxReserva.getImporte().toString(), 
-                auxReserva.getVigencia().toString(),
-                auxReserva.getFecha_reservado().toString(),
-                auxReserva.getPrecio_fecha_reservado().toString(),
-                String.valueOf(auxReserva.getIdReserva()),
-                auxNomCliente,
-                String.valueOf(auxReserva.getInmueble().getIdInmueble()));
-        
-        //++++++++++++++++++++++++++++++++++++
-        //convertir auxReserva a ItemReserva
-        
-        
-        //++++++++++++++++++++++++++++++++++++
-        lista.add(auxItem);        
-        HashMap<String, Object> parametros = new HashMap<>();
-        parametros.put("Cliente", auxNomCliente);
-        parametros.put("Telefono",auxReserva.getCliente().getTelefono());  
-        
-        report = (JasperReport) JRLoader.loadObjectFromFile("./src/Reportes/miReporte4.jasper");
-        reportFilled = JasperFillManager.fillReport(report, parametros, new JRBeanCollectionDataSource(lista));
-        
-        
-        JRExporter exporter = new JRPdfExporter();
-        exporter.setParameter(JRExporterParameter.JASPER_PRINT, reportFilled);
-        exporter.setParameter(JRExporterParameter.OUTPUT_FILE, new java.io.File(auxStringFile));
-        exporter.exportReport();
-    } catch (JRException ex) {
-        Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
+    public static void generarPDF (Reserva auxReserva){
+        try {
+            List lista = new ArrayList();
+            String auxNomCliente = auxReserva.getCliente().getApellido() + ", " + auxReserva.getCliente().getNombre();
+            String auxNomReporte = "reportePDF_" + String.valueOf(auxReserva.getIdReserva()) + ".pdf";
+            String auxStringFile = "C\\reporte\\" + auxNomReporte;
+            
+            ItemReserva auxItem = new ItemReserva(
+                    auxReserva.getImporte().toString(),
+                    auxReserva.getVigencia().toString(),
+                    auxReserva.getFecha_reservado().toString(),
+                    auxReserva.getPrecio_fecha_reservado().toString(),
+                    String.valueOf(auxReserva.getIdReserva()),
+                    auxNomCliente,
+                    String.valueOf(auxReserva.getInmueble().getIdInmueble()));
+            
+            //++++++++++++++++++++++++++++++++++++
+            //convertir auxReserva a ItemReserva
+            
+            
+            //++++++++++++++++++++++++++++++++++++
+            lista.add(auxItem);
+            HashMap<String, Object> parametros = new HashMap<>();
+            parametros.put("Cliente", auxNomCliente);
+            parametros.put("Telefono",auxReserva.getCliente().getTelefono());
+            
+            report = (JasperReport) JRLoader.loadObjectFromFile("./src/Reportes/miReporte4.jasper");
+            reportFilled = JasperFillManager.fillReport(report,
+                    parametros, new JRBeanCollectionDataSource(lista));
+            
+            
+            JRExporter exporter = new JRPdfExporter();
+            exporter.setParameter(JRExporterParameter.JASPER_PRINT, reportFilled);
+            exporter.setParameter(JRExporterParameter.OUTPUT_FILE, new java.io.File(auxStringFile));
+            exporter.exportReport();
+        } catch (JRException ex) {
+            Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    }
+    
     public static void imprimirCatalogo (List<ItemCatalogo> lista,String cliente,String telefono){
         try {
-                 
-            
             HashMap<String, Object> parametros = new HashMap<>();
             parametros.put("Cliente", cliente);
             parametros.put("Telefono",telefono);            
             report = (JasperReport) JRLoader.loadObjectFromFile("./src/Reportes/miReporte3.jasper");            
-            reportFilled = JasperFillManager.fillReport(report, parametros, new JRBeanCollectionDataSource(lista));                                    
+            reportFilled = JasperFillManager.fillReport(report,
+                    parametros, new JRBeanCollectionDataSource(lista));                                    
             
         } catch (JRException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex) ;
