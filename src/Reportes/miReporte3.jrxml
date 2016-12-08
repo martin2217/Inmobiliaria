@@ -125,7 +125,7 @@
 			</line>
 			<image onErrorType="Icon" evaluationTime="Auto">
 				<reportElement x="0" y="0" width="150" height="150" uuid="d9e2b2bf-1733-4d30-8b93-04e033e338d5"/>
-				<imageExpression><![CDATA["c:\\imagenes\\"+$F{foto}+".jpg"]]></imageExpression>
+				<imageExpression class="java.net.URL"><![CDATA["c:\\imagenes\\"+$F{foto}+".jpg"]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement x="362" y="127" width="138" height="20" uuid="c10142ad-d502-465c-aa7b-c5fbdf67a2d4"/>
